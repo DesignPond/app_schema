@@ -1,4 +1,4 @@
-## App schema website with latavel
+## App schema website with laravel
 
 Project with phpunit and codeception
 
