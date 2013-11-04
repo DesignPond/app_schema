@@ -11,7 +11,13 @@
 |
 */
 
+
+
 Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::get('schemas', 'SchemaController@index');
+
+App::bind('Schema\Repositories\SchemaRepositoryInterface', 'Schema\Repositories\DbSchemaRepository');

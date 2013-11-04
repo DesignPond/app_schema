@@ -1,6 +1,6 @@
 <?php
 
-use  Schema\Repositories\SchemaRepositoryInterface
+use  Schema\Repositories\SchemaRepositoryInterface;
 
 class SchemaController extends BaseController {
 	
@@ -19,7 +19,10 @@ class SchemaController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('schemas.index');
+
+        $catList  = $this->schema->getAll();
+		
+	    return View::make('schemas.home')->with(array('categories'=> $catList)); 
 	}
 
 	/**
