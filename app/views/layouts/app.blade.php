@@ -97,6 +97,7 @@
                     </div>
                     <div class="span6">
                         <h3>Login</h3>
+                        
                         <ul class="errors">
 							 @foreach($errors->all() as $message)
 							 <li>{{ $message }}</li>
@@ -105,12 +106,16 @@
     		
 						{{ Form::open(array('url' => 'newProject', 'class' => 'form-horizontal')) }}
 						<div class="form-group">
-						{{ Form::label('email', 'Email') }}
-						{{ Form::text('email', '' , array('class' => 'form-control')) }}
+						{{ Form::label('email', 'Email', array( 'class' => 'col-sm-2 control-label' ) ) }}
+							<div class="col-sm-10">
+							{{ Form::text('email', '' , array('class' => 'form-control')) }}
+							</div>
 						</div>
 						<div class="form-group">
-						{{ Form::label('password', 'Mot de passe') }}
-						{{ Form::password('password', '' , array('class' => 'form-control')) }}
+						{{ Form::label('password', 'Mot de passe', array( 'class' => 'col-sm-2 control-label' )) }}
+							<div class="col-sm-10">
+							{{ Form::password('password', '' , array('class' => 'form-control')) }}
+							</div>
 						</div>
 						{{ Form::submit('Envoyer', array('class' => 'btn')) }}
 						{{ Form::close() }}
