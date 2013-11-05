@@ -4,18 +4,20 @@ use Categorie;
 
 class DbCategorie implements CategorieInterface {
 	
-	protected $categorie;
-	
 	public function __construct(){
 
 	}
 	
 	public function getAll(){
 		
+		return Categorie::all();
+				
 	}
 	
 	public function find($id){
-		
+
+		return Categorie::findOrFail($id);
+				
 	}
 	
 }

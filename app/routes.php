@@ -16,10 +16,22 @@
 Route::get('/', function()
 {
 	//return View::make('hello');
-	
-	 return Subtheme::first()->theme;
+	 $Carbon = new Carbon\Carbon();
+	 $date   = $Carbon->create(1975, 12, 25, 14, 15, 16);
+	 
+	 $day    = $date->format('d');  
+	 $month  = $date->format('M'); 
+	 
+	 return $month;
 });
 
-Route::get('schemas', 'SchemaController@index');
+Route::group(array('prefix' => 'schemas'), function()
+{
+
+	Route::get('categories', 'SchemaController@index');
+	Route::get('projets/{id}', 'SchemaController@projets');
+
+});
 
 App::bind('Schema\Repositories\Projet\ProjetInterface', 'Schema\Repositories\Projet\DbProjet');
+App::bind('Schema\Repositories\Categorie\CategorieInterface', 'Schema\Repositories\Categorie\DbCategorie');

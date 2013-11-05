@@ -1,14 +1,16 @@
 <?php
 
 use  Schema\Repositories\Projet\ProjetInterface;
+use  Schema\Repositories\Categorie\CategorieInterface;
 
 class SchemaController extends BaseController {
 	
 	protected $projet;
 	
-	public function __construct(ProjetInterface $projet){
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie){
 		
-		$this->projet = $projet;		
+		$this->projet = $projet;
+		$this->categorie = $categorie;		
 	}
 	
 	/**
@@ -19,9 +21,17 @@ class SchemaController extends BaseController {
 	public function index()
 	{
 
-        $catList  = $this->projet->getAll();
+        $categories  = $this->categorie->getAll();
 		
-	    return View::make('schemas.home')->with(array('categories'=> $catList)); 
+	    return View::make('schemas.home')->with(array('categories'=> $categories)); 
+	}
+	
+	public function projets($id){
+		
+		$projets  = $this->projet->getAll();
+		
+	    return View::make('schemas.projets')->with(array('projets'=> $projets)); 
+
 	}
 
 	/**

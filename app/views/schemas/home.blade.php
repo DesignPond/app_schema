@@ -1,21 +1,18 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
 	
-     <section class="row">
-    		<h2>Catégories</h2>
-	    	<div class="col-lg-6">	
-				<div class="list-group">
-				@if ( !empty($categories) )
-						@foreach($categories as $categorie)
-					        <a href="" class="list-group-item">    
-					        	{{ $categorie->titre }}
-					        </a>
-					    @endforeach
-				    @endif
-				</div>
-			</div>
-	    	
-    </section>
+	<h3>Derniers Projets</h3>
+    <ul class="bloglist-small">
+	@if ( !empty($categories) )
+		@foreach($categories as $categorie) 
+		
+        <li>
+            <a href="<?php echo action('SchemaController@projets', array('id' => $categorie->id ) ); ?>">{{ $categorie->titre }}</a>
+        </li>
+        
+  		@endforeach
+	@endif      
+    </ul>
 	
 @stop
