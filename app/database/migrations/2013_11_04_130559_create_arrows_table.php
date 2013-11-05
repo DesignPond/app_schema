@@ -14,7 +14,7 @@ class CreateArrowsTable extends Migration {
 	{
 		Schema::create('arrows', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('refSchema');
+			$table->integer('refProjet');
 			$table->string('topCoord_arrow');
 			$table->string('leftCoord_arrow');
 			$table->string('no_arrow');

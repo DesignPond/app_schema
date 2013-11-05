@@ -1,8 +1,8 @@
 <?php
 
-class Schemas extends Eloquent {
+class Projet extends Eloquent {
 
-	protected $guarded   = array('id');
+	protected $guarded = array('id');
 
 	public static $rules = array(
 		'titre'     => 'required',

@@ -1,14 +1,14 @@
 <?php
 
-use  Schema\Repositories\SchemaRepositoryInterface;
+use  Schema\Repositories\Projet\ProjetInterface;
 
 class SchemaController extends BaseController {
 	
 	protected $schema;
 	
-	public function __construct(SchemaRepositoryInterface $schema){
+	public function __construct(ProjetInterface $projet){
 		
-		$this->schema = $schema;
+		$this->projet = $projet;
 		
 	}
 	
@@ -20,7 +20,7 @@ class SchemaController extends BaseController {
 	public function index()
 	{
 
-        $catList  = $this->schema->getAll();
+        $catList  = $this->projet->getAll();
 		
 	    return View::make('schemas.home')->with(array('categories'=> $catList)); 
 	}

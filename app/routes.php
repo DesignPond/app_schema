@@ -20,4 +20,4 @@ Route::get('/', function()
 
 Route::get('schemas', 'SchemaController@index');
 
-App::bind('Schema\Repositories\SchemaRepositoryInterface', 'Schema\Repositories\DbSchemaRepository');
+App::bind('Schema\Repositories\Projet\ProjetInterface', 'Schema\Repositories\Projet\DbProjet');

@@ -1,18 +1,18 @@
 <?php namespace Schema\Repositories;
 
-use Schemas;
+use Projets;
 
 class DbSchemaRepository implements SchemaRepositoryInterface{
 	
 	public function getAll(){
 		
-		return Schemas::all();
+		return Projets::all();
 			
 	}
 	
 	public function find($id){
 		
-		return Schemas::findOrFail($id);
+		return Projets::findOrFail($id);
 				
 	}
 }
