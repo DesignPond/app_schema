@@ -4,12 +4,11 @@ use  Schema\Repositories\Projet\ProjetInterface;
 
 class SchemaController extends BaseController {
 	
-	protected $schema;
+	protected $projet;
 	
 	public function __construct(ProjetInterface $projet){
 		
-		$this->projet = $projet;
-		
+		$this->projet = $projet;		
 	}
 	
 	/**

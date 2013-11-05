@@ -1,0 +1,459 @@
+
+/* ===== Primary Styles ========================================================
+   Author:
+   ========================================================================== */
+   
+body{
+	background:#fff;
+}
+	
+.divRelative{
+	position:relative;
+	z-index:30;
+}
+
+#main{
+	position: relative;
+}
+
+#loader{
+	width: 100%;
+	position: absolute;
+	top: -10px;
+	display: block;
+	height: 32px;
+	text-align: center;
+	line-height: 32px;
+	background:url("../images/loader.gif") center center no-repeat;
+}
+
+#menuButtons{
+	display: none;
+	position: relative;	
+}
+
+header{
+	margin-top: 40px;
+	height: 60px;
+}
+
+#mainHeader{
+	margin-bottom: 20px;
+}
+
+input{
+	margin-bottom: 20px;
+}
+
+#emptyProjet{
+	display: none;
+}
+
+#all{
+	position:relative;
+	display:none;
+	z-index:10;
+	width: 100%;
+	height: auto;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+#content{
+	width:100%;
+	height:100%;
+	border-top:1px solid #ddd;
+	border-bottom:8px solid #dedede;
+	z-index: 20;
+	position: relative;
+	display:block;
+	background: #e6e6e6;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+#handle{
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 100%;
+	display: block;
+	height: 8px;
+}
+
+#handle i{
+	position: relative;
+	width: 8px;
+	color: #767676;
+	display: block;
+	height: 8px;
+	margin: 0 auto;
+}
+	
+.colors{
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:30;
+	background: #f1f1f1;
+	border:1px solid #ddd;
+	height: 35px;
+}
+
+.colors p {
+	float: left;
+	padding:0 10px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0;
+}
+
+#buttons{
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:30;
+}
+
+.box{
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	background-color:#FFF;
+	position:relative;
+	width:120px;
+	height:120px;
+	position:absolute;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color:#FFF;
+	z-index:55;
+}
+
+.box-hover{
+/*
+	-webkit-box-shadow: 1px 1px 1px 1px #999;
+	box-shadow: 1px 1px 1px 1px #999; 
+
+	border:1px solid #fff;*/
+	cursor: pointer;
+}
+
+#trash{
+	width:46px;
+	height:46px;
+	display:block;
+	position:absolute;
+	top:5px;
+	right:5px;
+	z-index:21;
+}
+
+.trash{
+	background:url("../images/trash.png") no-repeat;
+}
+
+.trash-highlight{
+	background:url("../images/trash-on.png") no-repeat;
+}
+
+/* =============================================================================
+  	 Selects
+   ========================================================================== */
+#theme-label, #subtheme-label{
+	display: none;
+}
+
+/* =============================================================================
+  	 colorpicker
+   ========================================================================== */
+	
+.simpleColorContainer{
+	width: auto;
+	height: 35px;
+	float: left;
+}
+
+.simpleColorDisplay{
+	float: left;
+	border: none;
+}
+
+.simpleColorChooser{
+	background: #ddd;
+}
+
+.simpleColorContainer input{
+	float: left;
+	display: block;
+	width: 90px;
+	height: 35px;
+	border: none;
+	font-size: 20px;
+	color: #333333;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	background-color: #fafafa;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+	background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+	background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
+	background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+	background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+	background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+	background-repeat: no-repeat;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+	border: 1px solid #ccc;
+	border-bottom-color: #bbb;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-webkit-border-radius: 4px;
+	border-radius: 4px; 
+	cursor: pointer;
+	*margin-left: .3em;
+}
+
+
+/* =============================================================================
+  	 arrows
+   ========================================================================== */
+
+p.arrows {
+	width: 27px; 
+	height: 27px; 
+	z-index: 1000;
+	color: #585858;
+	position: absolute;
+    cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+
+p.arrow-hover{
+/*
+	text-shadow: 1px 1px 1px #999999;
+	filter: dropshadow(color=#999999, offx=1, offy=1); 
+*/
+	color:#fff;
+}
+	
+p.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left:15px solid transparent;
+	border-right: 15px solid transparent;
+	border-top: 15px solid #585858;
+	position:absolute;
+	cursor:pointer;
+	z-index:54;
+	margin-top:5px;
+	margin-left:5px;
+}
+
+p.arrow-right {	
+	width: 0; 
+	height: 0; 
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-left: 15px solid #585858;
+	position:absolute;
+	cursor:pointer;
+	z-index:60;
+	margin-top:5px;
+	margin-left:5px;
+}
+
+
+p.arrow-up {	
+	width: 0; 
+	height: 0; 
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid #585858;
+	position:absolute;
+	cursor:pointer;
+	z-index:60;
+	margin-top:5px;
+	margin-left:5px;
+}
+
+p.arrow-left {	
+	width: 0; 
+	height: 0; 
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent; 
+	border-right:15px solid #585858; 
+	position:absolute;
+	cursor:pointer;
+	z-index:60;
+	margin-top:5px;
+	margin-left:5px;
+}
+
+.button{
+	padding: 3px 20px 5px 20px;
+/*
+	margin-bottom: 20px;
+	display: block;
+	float: left;
+	margin-right: 10px;
+	font-size: 13px;
+	line-height: 18px;
+	color: #585858;
+	text-align: center;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	background-color: #fafafa;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+	background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+	background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6);
+	background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+	background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+	background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+	background-repeat: no-repeat;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+	border: 1px solid #ccc;
+	border-bottom-color: #bbb;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-webkit-border-radius: 4px;
+	border-radius: 4px; 
+	cursor: pointer;
+	*margin-left: .3em;
+	position: relative;
+*/
+}
+
+.buttonOk{
+	padding: 1px 5px;
+}
+
+
+/* =============================================================================
+  	 Buttons elements
+   ========================================================================== */
+
+.button span.car{
+	background: none repeat scroll 0 0 #000000;
+    border-radius: 1px 1px 1px 1px;
+    display: block;
+    height: 15px;
+    left: 13px;
+    position: absolute;
+    top: 7px;
+    width: 15px;
+}
+
+.button span{
+	position: absolute;
+	left:15px;
+	top: 5px;
+	width: 0; 
+	height: 0; 
+}
+
+.button span.down{
+	border-left:8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 8px solid #000;
+	margin-top: 5px;
+} 
+
+.button span.left{
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent; 
+	border-right:8px solid #000; 
+	margin-left: 3px;
+} 
+
+.button span.right{
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 8px solid #000;
+	margin-left: 3px;
+} 
+
+.button span.up{
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid #000;
+	margin-top: 4px;
+} 
+
+
+/* =============================================================================
+  	 wysiwyg
+   ========================================================================== */
+
+
+	
+.box div.inner{
+    color: #FFFFFF;
+    line-height: 16px;
+    padding:8px 10px 0px 10px;
+    position: relative;
+    font-size: 14px;
+}
+
+	
+a.Txt{
+	color:#fff;
+	height:20px;
+	width:auto;
+	display:block;
+	background:#39F;
+	position:relative;
+	z-index:100;
+}
+	
+.box span.textarea {
+	margin:0;
+	z-index:1000;
+	height:auto;
+	min-width: 400px;
+	padding:1% 1%;
+	position:absolute;
+	top:0px;
+	left: 0px;
+	display: none;
+	background:rgba(0,0,0,0.85);
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+		
+.box span textarea{
+	border:none;
+	width: 100%;
+}
+.box span textarea p{
+	margin:0;
+}
+	
+.box span button{
+    background: none repeat scroll 0 0 #4a4a4a;
+    border-radius: 0 0 0 0;
+    margin-top: 0px;
+    margin-bottom: 0;
+    width: 100%;
+    border: none;
+    color: #fff;
+}
+
+
+/* =============================================================================
+   Misc
+   ========================================================================== */
+   
+hr 
+{     
+  display: block;     
+  height: 0;     
+  margin: 0;     
+  _margin: -7px 0;     
+  padding: 0;     
+  border: 0;  
+  clear: both;   
+  visibility: hidden; 
+} 
+

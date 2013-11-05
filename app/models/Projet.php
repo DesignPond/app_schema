@@ -11,4 +11,14 @@ class Projet extends Eloquent {
 		'refTheme'  => 'required'
 	);
 	
+	public function categorie()
+    {
+        return $this->hasOne('Categorie', 'categorie');
+    }
+    
+    public function theme()
+    {
+        return $this->hasOne('Theme', 'refTheme');
+    }
+	
 }

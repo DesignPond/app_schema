@@ -6,13 +6,13 @@
     		<h2>Catégories</h2>
 	    	<div class="col-lg-6">	
 				<div class="list-group">
-				<?php
-				if(!empty($catList)){
-					echo '<pre>';
-					print_r($catList);
-					echo '</pre>';
-				}
-				?>
+				@if ( !empty($categories) )
+						@foreach($categories as $categorie)
+					        <a href="" class="list-group-item">    
+					        	{{ $categorie->titre }}
+					        </a>
+					    @endforeach
+				    @endif
 				</div>
 			</div>
 	    	
