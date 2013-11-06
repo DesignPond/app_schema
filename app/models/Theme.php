@@ -8,7 +8,12 @@ class Theme extends Eloquent {
 		
 	public function categorie()
     {
-        return $this->hasOne('Categorie', 'id');
+        return $this->hasOne('Categorie', 'refCategorie');
+    }
+    
+    public function subtheme()
+    {
+        return $this->hasMany('Subtheme','refTheme');
     }
     
 }

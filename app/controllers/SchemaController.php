@@ -2,6 +2,7 @@
 
 use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
+use  Schema\Repositories\Theme\ThemeInterface;
 
 class SchemaController extends BaseController {
 	
@@ -9,11 +10,15 @@ class SchemaController extends BaseController {
 	
 	protected $categorie;
 	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie){
+	protected $theme;
+	
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme){
 		
 		$this->projet = $projet;
 		
-		$this->categorie = $categorie;		
+		$this->categorie = $categorie;
+		
+		$this->theme = $theme;		
 	}
 	
 	/**
@@ -40,8 +45,9 @@ class SchemaController extends BaseController {
 	public function categories(){
 	
 		$categories = $this->categorie->getAll();
+		$themes     = $this->theme->themeAndSubthemeByCategory();
 		
-	    return View::make('schemas.categories')->with(array('categories'=> $categories)); 
+	    return View::make('schemas.categories')->with(array('categories'=> $categories , 'themes' => $themes )); 
 	}
 
 	/**

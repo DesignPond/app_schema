@@ -33,7 +33,15 @@
 	                        <i class="icon-legal circle"></i>
 	                        <div class="text">
 	                            <h3>{{ link_to('schemas/categorie/'.$categorie->id, $categorie->titre ) }} </h3>
-	                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.
+
+	                            <ul>
+	                            	@if ( isset($themes[$categorie->id]) )
+	                            		@foreach( $themes[$categorie->id] as $id => $theme) 	 
+											<li><a href="">{{ $theme['titre'] }}</a></li>
+			                            @endforeach
+			                        @endif 
+	                            </ul>		
+								
 	                        </div>
 	                    </div>
 	                </div>

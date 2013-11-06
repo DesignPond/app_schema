@@ -10,7 +10,7 @@ class DbCategorie implements CategorieInterface {
 	
 	public function getAll(){
 		
-		return Categorie::all();
+		return Categorie::with(array('theme'))->get();
 				
 	}
 	

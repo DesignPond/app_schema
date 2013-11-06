@@ -17,17 +17,51 @@ Route::get('/', function()
 {
 	//return View::make('hello');
 	
-	 $projets = Projet::with(array('theme','subtheme'))->get();
+	 $themes = Theme::with(array('subtheme'))->get()->toArray();
 	 
-
-	 foreach($projets as $projet) 
+	 $themesByCategories = array();
+	 
+	 if( !empty($themes) )
 	 {
-	 	echo '<pre>';
-	 	print_r($projet->theme->titre) ;
-	 	echo '</pre>';
+		 foreach($themes as $theme)
+		 {
+
+			 $themesByCategories[$theme['refCategorie']][$theme['id']]['titre'] = $theme['titre'];
+			 $subthemes = array();
+			 
+			 if( isset($theme['subtheme']) )
+			 {
+				  foreach($theme['subtheme'] as $subtheme)
+				  {
+					  $subthemes[$subtheme['id']] = $subtheme['titre'];
+				  }
+				  
+				  $themesByCategories[$theme['refCategorie']][$theme['id']]['subtheme'][] = $subthemes;
+			 }  
+		 }
 	 }
 	 
-	 
+	 echo '<pre>';
+	 print_r($themesByCategories);
+	 echo '</pre>';
+
+/*
+	
+	 foreach($categories as $categorie) 
+	 {
+	 	
+	 	foreach($categorie->theme as $theme)
+	 	{
+		 	echo '<pre>';
+		 	//print_r($projet->theme->titre) ;
+	 		print_r($theme->titre);
+	 		echo '</pre>';
+	 	}
+	 	
+	 }
+*/
+
+
 	 
 });
 
@@ -50,3 +84,5 @@ Route::group(array('prefix' => 'schemas'), function()
 
 App::bind('Schema\Repositories\Projet\ProjetInterface', 'Schema\Repositories\Projet\DbProjet');
 App::bind('Schema\Repositories\Categorie\CategorieInterface', 'Schema\Repositories\Categorie\DbCategorie');
+App::bind('Schema\Repositories\Theme\ThemeInterface', 'Schema\Repositories\Theme\DbTheme');
+

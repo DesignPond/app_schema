@@ -8,12 +8,12 @@ class Subtheme extends Eloquent {
 	
 	public function categorie()
     {
-        return $this->hasOne('Categorie', 'id');
+        return $this->hasOne('Categorie', 'refCategorie');
     }
     
 	public function theme()
     {
-        return $this->hasOne('Theme', 'id');
+        return $this->hasOne('Theme', 'refTheme');
     }
 	
 }
