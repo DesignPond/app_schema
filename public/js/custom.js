@@ -157,88 +157,10 @@ jQuery(document).ready(function() {
 	return false;
 	});
 		
-		
-	// --------------------------------------------------
-	// flexslider
-	// --------------------------------------------------
 
-	  jQuery('.project-carousel.flexslider').flexslider({
-		animation: "slide",
-		animationLoop: true,
-		slideshow: false,
-		itemWidth: 180,
-		itemMargin: 0,
-		minItems: 2,
-		maxItems: 4
-	  });
-	  
-	  jQuery('.testi-slider.flexslider').flexslider({
-		animation: "fade"
-	  });
-	  
-	  
-	  jQuery('.teaser-slider.flexslider').flexslider({
-		animation: "fade",
-        controlNav: false,
-		directionNav: false,
-		slideshowSpeed: 2000,
-		animationSpeed: 500
-	  });
-	  
-	  jQuery('.project-carousel-3-col.flexslider').flexslider({
-		animation: "slide",
-		animationLoop: true,
-		slideshow: false,
-		itemWidth: 180,
-		itemMargin: 0,
-		minItems: 1,
-		maxItems: 3
-	  });
-	  
-	  jQuery('.logo-carousel.flexslider').flexslider({
-		animation: "slide",
-		animationLoop: true,
-		slideshow: true,
-		itemWidth: 120,
-		itemMargin: 0,
-		minItems: 1,
-		maxItems: 6
-	  });
-	  
-	  
 	  
 	});
 	
-
-	
-	jQuery('.next-slider').click(function () {
-    jQuery('.flexslider.pf-carousel').flexslider("next");
-	});
-	
-	jQuery('.prev-slider').click(function () {
-    jQuery('.flexslider.pf-carousel').flexslider("prev");
-	});
-	
-	
-	
-	// responsive slides
-	
-  jQuery(function () {
-      // Slideshow 4
-      jQuery(".pic_slider").responsiveSlides({
-        auto: false,
-        pager: false,
-        nav: true,
-        speed: 500,
-        namespace: "callbacks",
-        before: function () {
-          jQuery('.events').append("<li>before event fired.</li>");
-        },
-        after: function () {
-          jQuery('.events').append("<li>after event fired.</li>");
-        }
-      });
-    });
 	
 	// --------------------------------------------------
 	// tabs

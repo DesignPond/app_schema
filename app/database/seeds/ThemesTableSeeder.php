@@ -12,7 +12,10 @@ class ThemesTableSeeder extends Seeder {
 			array( 'titre' => 'Compétence', 'refCategorie' => '1'),
 			array( 'titre' => 'Parties', 'refCategorie' => '1'),
 			array( 'titre' => 'Forme', 'refCategorie' => '1'),
-			array( 'titre' => 'Délais', 'refCategorie' => '1')
+			array( 'titre' => 'Délais', 'refCategorie' => '1'),
+			array( 'titre' => 'Assurance accident' , 'refCategorie'=> '2'),
+			array( 'titre' => 'Assurance maladie' , 'refCategorie'=> '2'),
+			array( 'titre' => 'Assurance invalidité', 'refCategorie' => '2')
 		);
 
 		// Uncomment the below to run the seeder

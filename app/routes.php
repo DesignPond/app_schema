@@ -18,32 +18,6 @@ Route::get('/', function()
 	//return View::make('hello');
 	
 	 $themes = Theme::with(array('subtheme'))->get()->toArray();
-	 
-	 $themesByCategories = array();
-	 
-	 if( !empty($themes) )
-	 {
-		 foreach($themes as $theme)
-		 {
-
-			 $themesByCategories[$theme['refCategorie']][$theme['id']]['titre'] = $theme['titre'];
-			 $subthemes = array();
-			 
-			 if( isset($theme['subtheme']) )
-			 {
-				  foreach($theme['subtheme'] as $subtheme)
-				  {
-					  $subthemes[$subtheme['id']] = $subtheme['titre'];
-				  }
-				  
-				  $themesByCategories[$theme['refCategorie']][$theme['id']]['subtheme'][] = $subthemes;
-			 }  
-		 }
-	 }
-	 
-	 echo '<pre>';
-	 print_r($themesByCategories);
-	 echo '</pre>';
 
 /*
 	

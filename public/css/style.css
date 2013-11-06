@@ -223,6 +223,15 @@ h5 {
             background-color: #333333;
         }
 
+    .feature-box-small-icon .text ul{
+        margin: 15px 0 0 0;
+        list-style: none;
+    }
+    
+	    .feature-box-small-icon .text ul li{
+	        
+	    }
+
     .feature-box-small-icon h3 {
         line-height: normal;
         margin-bottom: 5px;
