@@ -90,12 +90,12 @@
 	        <!-- content -->
 	        <div class="container main-container">
                 <div class="row">
-                    <div class="span6">
+                    <div class="span8">
                     
                     	@yield('content')
                     	
                     </div>
-                    <div class="span6">
+                    <div class="span4 login-frontpage">
                         <h3>Login</h3>
                         
                         <ul class="errors">
@@ -103,23 +103,22 @@
 							 <li>{{ $message }}</li>
 							 @endforeach
 						 </ul>
-    		
-						{{ Form::open(array('url' => 'newProject', 'class' => 'form-horizontal')) }}
-						<div class="form-group">
-						{{ Form::label('email', 'Email', array( 'class' => 'col-sm-2 control-label' ) ) }}
-							<div class="col-sm-10">
-							{{ Form::text('email', '' , array('class' => 'form-control')) }}
-							</div>
-						</div>
-						<div class="form-group">
-						{{ Form::label('password', 'Mot de passe', array( 'class' => 'col-sm-2 control-label' )) }}
-							<div class="col-sm-10">
-							{{ Form::password('password', '' , array('class' => 'form-control')) }}
-							</div>
-						</div>
-						{{ Form::submit('Envoyer', array('class' => 'btn')) }}
-						{{ Form::close() }}
+						 
+						  <div class="contact_form_holder">	
+						  					  
+								{{ Form::open(array('url' => 'newProject', 'class' => 'form-login')) }}
 
+								{{ Form::label('email', 'Email', array( 'class' => '' ) ) }}							
+								{{ Form::text('email', '' , array('class' => '')) }}
+
+								{{ Form::label('password', 'Mot de passe', array( 'class' => '' )) }}
+								{{ Form::password('password', '' , array('class' => '')) }}
+								
+								{{ Form::submit('Envoyer', array('class' => 'btn btn-inverse')) }}
+								<p class="clear"></p>
+								{{ Form::close() }}
+								
+						  </div>
                     </div>
 
                 </div>

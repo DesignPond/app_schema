@@ -373,6 +373,41 @@ h5 {
     display: none;
 }
 
+/* -------------------------------------------------- */
+/* Login form */
+/* -------------------------------------------------- */
+
+.login-frontpage{
+	padding: 10px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.form-login{
+	background: #F86E4E;
+	width: 90%;
+	padding: 20px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px; 
+}
+
+.form-login label{
+	width: 35%;
+	display: inline-block;
+	color: #fff;
+}
+
+.form-login input[type="text"], .form-login input[type="password"]{
+	width: 55%;
+	display: inline-block;
+}
+
+.form-login input[type="submit"]{
+	margin: 10px 5% 0 0;
+	float: right;
+}
+
 
 /* -------------------------------------------------- */
 /* footer */
@@ -1482,7 +1517,18 @@ hr {
         border: none;
         margin: 20px 0 20px 0;
     }
+    
+    hr.hidden {
+        border: none;
+        margin: 0;
+        clear: both;
+    }
 
+.clear{
+    margin: 0;
+    clear: both;
+    display: block;
+}
 
 /* -------------------------------------------------- */
 /* lazyload jquery */
