@@ -87,8 +87,25 @@
 		    </div>
 		    <!-- subheader close -->
 
+			<!-- content begin -->
+	        <div id="content">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="span12">
+	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt 
+	                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+	                        ea commodo consequat. Duis aute irure dolor in reprehenderit  mollit anim id est laborum.                	  </p>
+	                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+	                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt accusantium 
+	                        doloremque laudantium, totam um fugiat quo voluptas nulla pariatur. </p>                   
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <!-- content close -->
+        
 	        <!-- content -->
-	        <div class="container main-container">
+	        <div class="container">
                 <div class="row">
                     <div class="span8">
                     
@@ -124,6 +141,32 @@
                 </div>
 	        </div>
             <!--  content close -->
+            
+            <!-- footer begin -->
+	        <footer>
+	            <div class="subfooter">
+	                <div class="container">
+	                    <div class="row">
+	                        <div class="span4">
+	                            &copy; Copyright 2013 - Droit en Schéma                     
+	                        </div>
+	                        <div class="span4">
+	                            Faculté de droit - Avenue du 1er-Mars 26 - 2000 Neuchâtel                    
+	                        </div>
+	                        <div class="span4">
+	                            <nav>
+	                                <ul>
+	                                    <li><a href="#">Home</a></li>
+	                                    <li><a href="#">Schémas</a></li>
+	                                    <li><a href="#">Contact</a></li>
+	                                </ul>
+	                            </nav>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </footer>
+	        <!-- footer close -->
             
 		</div>
 	</body>
