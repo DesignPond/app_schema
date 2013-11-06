@@ -16,20 +16,35 @@
 Route::get('/', function()
 {
 	//return View::make('hello');
-	 $Carbon = new Carbon\Carbon();
-	 $date   = $Carbon->create(1975, 12, 25, 14, 15, 16);
+	
+	 $projets = Projet::with(array('theme','subtheme'))->get();
 	 
-	 $day    = $date->format('d');  
-	 $month  = $date->format('M'); 
+
+	 foreach($projets as $projet) 
+	 {
+	 	echo '<pre>';
+	 	print_r($projet->theme->titre) ;
+	 	echo '</pre>';
+	 }
 	 
-	 return $month;
+	 
+	 
 });
+
+
+Route::post('login', array( 'uses' => 'SessionController@store') );
+Route::get('logout', 'SessionController@destroy');
+
+Route::resource('login', 'SessionController');
 
 Route::group(array('prefix' => 'schemas'), function()
 {
 
-	Route::get('categories', 'SchemaController@index');
+	Route::get('/', 'SchemaController@index');
 	Route::get('projets/{id}', 'SchemaController@projets');
+	Route::get('categories', 'SchemaController@categories');
+	
+	Route::get('contact', 'SchemaController@contact');
 
 });
 

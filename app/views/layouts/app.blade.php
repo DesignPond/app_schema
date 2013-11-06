@@ -56,91 +56,26 @@
 	
 	                <!-- mainmenu begin -->
 	                <ul id="mainmenu">
-	                    <li><a href="index.html">Accueil</a></li>
-	                    <li><a href="#">Schémas</a>
+	                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
+	                    <li>{{ link_to('schemas/categories/', 'Catégories' ) }}
 	                        <ul>
 	                            <li><a href="carousel.html">Procédure civile</a></li>
 	                            <li><a href="carousel.html">Assurances sociales</a></li>
 	                        </ul>
 	                    </li>
-	                    <li><a href="contact.html">Contact</a></li>
+	                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
 	                </ul>
 	                <!-- mainmenu close -->
 	
 	            </div>
 	        </header>
 	        <!-- header close -->
-	        
-		    <!-- subheader begin -->
-		    <div id="subheader">
-		        <div class="container">
-		            <div class="row">
-		                <div class="span12">
-		                    <h1>Accueil</h1>
-		                    <span>Schémas des procédures civiles</span>
-		                    <ul class="crumb">
-		                        <li><a href="index.html">Accueil</a></li>
-		                    </ul>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
-		    <!-- subheader close -->
-
-			<!-- content begin -->
-	        <div id="content">
-	            <div class="container">
-	                <div class="row">
-	                    <div class="span12">
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt 
-	                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-	                        ea commodo consequat. Duis aute irure dolor in reprehenderit  mollit anim id est laborum.                	  </p>
-	                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-	                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt accusantium 
-	                        doloremque laudantium, totam um fugiat quo voluptas nulla pariatur. </p>                   
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	        <!-- content close -->
         
 	        <!-- content -->
-	        <div class="container">
-                <div class="row">
-                    <div class="span8">
-                    
-                    	@yield('content')
-                    	
-                    </div>
-                    <div class="span4 login-frontpage">
-                        <h3>Login</h3>
-                        
-                        <ul class="errors">
-							 @foreach($errors->all() as $message)
-							 <li>{{ $message }}</li>
-							 @endforeach
-						 </ul>
-						 
-						  <div class="contact_form_holder">	
-						  					  
-								{{ Form::open(array('url' => 'newProject', 'class' => 'form-login')) }}
-
-								{{ Form::label('email', 'Email', array( 'class' => '' ) ) }}							
-								{{ Form::text('email', '' , array('class' => '')) }}
-
-								{{ Form::label('password', 'Mot de passe', array( 'class' => '' )) }}
-								{{ Form::password('password', '' , array('class' => '')) }}
-								
-								{{ Form::submit('Envoyer', array('class' => 'btn btn-inverse')) }}
-								<p class="clear"></p>
-								{{ Form::close() }}
-								
-						  </div>
-                    </div>
-
-                </div>
-	        </div>
-            <!--  content close -->
+	        
+	        @yield('content')
+	        
+	        <!--  content close -->
             
             <!-- footer begin -->
 	        <footer>
@@ -156,9 +91,9 @@
 	                        <div class="span4">
 	                            <nav>
 	                                <ul>
-	                                    <li><a href="#">Home</a></li>
-	                                    <li><a href="#">Schémas</a></li>
-	                                    <li><a href="#">Contact</a></li>
+	                                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
+	                                    <li>{{ link_to('schemas/categories/', 'Catégories' ) }}</li>
+	                                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
 	                                </ul>
 	                            </nav>
 	                        </div>

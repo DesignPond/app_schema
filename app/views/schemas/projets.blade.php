@@ -2,33 +2,89 @@
 
 @section('content')
 	
-	<h3>Derniers Projets</h3>
-    <ul class="bloglist-small">
 	@if ( !empty($projets) )
 		@foreach($projets as $projet) 
 		
-		<?php
 		
-			 $Carbon = new Carbon\Carbon();
-			 $date   = $Carbon->createFromFormat('Y-m-d H:i:s', $projet->created_at);
-			 
-			 $day    = $date->format('d');  
-			 $month  = $date->format('M'); 
-		?>  
-		
-        <li>
-            <div class="date-box">
-                <span class="day">{{ $day }}</span>
-                <span class="month">{{ $month }}</span>
-            </div>
-            <div class="txt">
-                <h5><a href="css/#">{{ $projet->titre }}</a></h5>
-                <span class="read">{{ $projet->description }}</span>
-                <span class="info">{{ $projet->auteur }} <a href="css/#">Voir</a></span>
-            </div>
-        </li>
-        
-  		@endforeach
+		@endforeach
 	@endif  
-	</ul>
+	
+            <div class="span12">
+            
+            <div class="row">
+                <!-- feature box begin -->
+                <div class="feature-box-small-icon span4">
+                    <div class="inner">
+                        <i class="icon-twitter circle dark"></i>
+                        <div class="text">
+                            <h3>Twitter Bootstrap</h3>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.
+                        </div>
+                    </div>
+                </div>
+                <!-- feature box close -->
+
+                <!-- feature box begin -->
+                <div class="feature-box-small-icon span4">
+                    <div class="inner">
+                        <i class="icon-mail-forward circle dark"></i>
+                        <div class="text">
+                            <h3>Revolution Slider</h3>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.
+                        </div>
+                    </div>
+                </div>
+                <!-- feature box close -->
+
+                <!-- feature box begin -->
+                <div class="feature-box-small-icon span4">
+                    <div class="inner">
+                        <i class="icon-thumbs-up circle dark"></i>
+                        <div class="text">
+                            <h3>Font Awesome</h3>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.
+                        </div>
+                    </div>
+                </div>
+                <!-- feature box close -->
+
+
+                <!-- feature box begin -->
+                <div class="feature-box-small-icon span4">
+                    <div class="inner">
+                        <i class="icon-resize-full circle"></i>
+                        <div class="text">
+                            <h3>Responsive Design</h3>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.
+                        </div>
+                    </div>
+                </div>
+                <!-- feature box close -->
+
+                <!-- feature box begin -->
+                <div class="feature-box-small-icon span4">
+                    <div class="inner">
+                        <i class="icon-wrench circle"></i>
+                        <div class="text">
+                            <h3>Easy To Custom</h3>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.
+                        </div>
+                    </div>
+                </div>
+                <!-- feature box close -->
+
+                <!-- feature box begin -->
+                <div class="feature-box-small-icon span4">
+                    <div class="inner">
+                        <i class="icon-dashboard circle"></i>
+                        <div class="text">
+                            <h3>Fast Load</h3>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.
+                        </div>
+                    </div>
+                </div>
+                <!-- feature box close -->
+            </div>
+
+					
 @stop

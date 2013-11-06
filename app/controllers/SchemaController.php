@@ -7,9 +7,12 @@ class SchemaController extends BaseController {
 	
 	protected $projet;
 	
+	protected $categorie;
+	
 	public function __construct(ProjetInterface $projet, CategorieInterface $categorie){
 		
 		$this->projet = $projet;
+		
 		$this->categorie = $categorie;		
 	}
 	
@@ -21,17 +24,24 @@ class SchemaController extends BaseController {
 	public function index()
 	{
 
-        $categories  = $this->categorie->getAll();
+        $projets  = $this->projet->getLast(2);
 		
-	    return View::make('schemas.home')->with(array('categories'=> $categories)); 
+	    return View::make('schemas.home')->with(array('projets'=> $projets)); 
 	}
 	
-	public function projets($id){
+	public function projet($id){
 		
-		$projets  = $this->projet->getAll();
+		$projet = $this->projet->find($id);
 		
-	    return View::make('schemas.projets')->with(array('projets'=> $projets)); 
+	    return View::make('schemas.projet')->with(array('projets'=> $projets)); 
 
+	}
+	
+	public function categories(){
+	
+		$categories = $this->categorie->getAll();
+		
+	    return View::make('schemas.categories')->with(array('categories'=> $categories)); 
 	}
 
 	/**

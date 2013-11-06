@@ -1,6 +1,7 @@
 <?php namespace Schema\Repositories\Projet;
 
 use Projet;
+use Theme;
 
 class DbProjet implements ProjetInterface {
 	
@@ -11,7 +12,7 @@ class DbProjet implements ProjetInterface {
 	
 	public function getAll(){
 		
-		return Projet::all();
+		return Projet::with(array('theme','subtheme'))->get();
 			
 	}
 	
@@ -19,6 +20,12 @@ class DbProjet implements ProjetInterface {
 		
 		return Projet::findOrFail($id);
 				
+	}
+	
+	public function getLast($nbr){
+	
+		return Projet::with(array('theme','subtheme'))->take($nbr)->skip(0)->get();
+		
 	}
 	
 }

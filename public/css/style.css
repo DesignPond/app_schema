@@ -229,6 +229,10 @@ h5 {
         font-size: 20px;
         font-weight: bold;
     }
+    
+    	.feature-box-small-icon h3 a{
+	        color: #000;
+	    }
 
     .feature-box-small-icon .inner {
         padding: 20px;
