@@ -17,8 +17,12 @@ Route::get('/', function()
 {
 	//return View::make('hello');
 	
-	 $themes = Theme::with(array('subtheme'))->get()->toArray();
-
+	 $themes = Theme::where('id', '=', 1)->with(array('subtheme'))->get()->first()->toArray();
+	 
+	 echo '<pre>';
+	 print_r($themes['subtheme']);
+	 echo '</pre>';
+	 
 /*
 	
 	 foreach($categories as $categorie) 
@@ -50,7 +54,11 @@ Route::group(array('prefix' => 'schemas'), function()
 
 	Route::get('/', 'SchemaController@index');
 	Route::get('projets/{id}', 'SchemaController@projets');
+	
 	Route::get('categories', 'SchemaController@categories');
+	
+	Route::resource('categorie', 'CategorieController');
+	Route::resource('theme', 'ThemeController');
 	
 	Route::get('contact', 'SchemaController@contact');
 

@@ -37,7 +37,7 @@
 	                            <ul>
 	                            	@if ( isset($themes[$categorie->id]) )
 	                            		@foreach( $themes[$categorie->id] as $id => $theme) 	 
-											<li>{{ link_to('schemas/categorie/'.$id, $theme['titre'] ) }}</li>
+											<li>{{ link_to('schemas/theme/'.$id, $theme['titre'] ) }}</li>
 			                            @endforeach
 			                        @endif 
 	                            </ul>		

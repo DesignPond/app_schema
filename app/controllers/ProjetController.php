@@ -1,26 +1,7 @@
 <?php
 
-use  Schema\Repositories\Projet\ProjetInterface;
-use  Schema\Repositories\Categorie\CategorieInterface;
-use  Schema\Repositories\Theme\ThemeInterface;
+class ProjetController extends BaseController {
 
-class SchemaController extends BaseController {
-	
-	protected $projet;
-	
-	protected $categorie;
-	
-	protected $theme;
-	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme){
-		
-		$this->projet = $projet;
-		
-		$this->categorie = $categorie;
-		
-		$this->theme = $theme;		
-	}
-	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -28,18 +9,7 @@ class SchemaController extends BaseController {
 	 */
 	public function index()
 	{
-
-        $projets  = $this->projet->getLast(2);
-		
-	    return View::make('schemas.home')->with(array('projets'=> $projets)); 
-	}
-	
-	public function projet($id){
-		
-		$projet = $this->projet->find($id);
-		
-	    return View::make('schemas.projet')->with(array('projets'=> $projets)); 
-
+        return View::make('projets.index');
 	}
 
 	/**
@@ -49,7 +19,7 @@ class SchemaController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('schemas.create');
+        return View::make('projets.create');
 	}
 
 	/**
@@ -70,7 +40,7 @@ class SchemaController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('schemas.show');
+        return View::make('projets.show');
 	}
 
 	/**
@@ -81,7 +51,7 @@ class SchemaController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('schemas.edit');
+        return View::make('projets.edit');
 	}
 
 	/**

@@ -9,6 +9,7 @@ class SubthemesTableSeeder extends Seeder {
 
 		$subthemes = array(
 			array( 'titre' => 'Sources', 'refCategorie' => '1', 'refTheme' => '1' ),
+			array( 'titre' => 'Champ d\'application', 'refCategorie' => '1', 'refTheme' => '1' ),
 			array( 'titre' => 'Instances cantonales uniques', 'refCategorie' => '1', 'refTheme' => '2' ),
 			array( 'titre' => 'La représentation', 'refCategorie' => '1', 'refTheme' => '3' ),
 			array( 'titre' => 'Les citations', 'refCategorie' => '1', 'refTheme' => '4' ),

@@ -7,6 +7,11 @@
 /* -------------------------------------------------- */
 /* body */
 /* -------------------------------------------------- */
+
+html, body {
+  height: 100%;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
@@ -95,6 +100,21 @@ body {
         background-image: url(../images/bg-pattern/p20.png);
     }
 
+
+#wrapper{
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -105px; 
+}
+
+#wrapper:after {
+  content: "";
+  display: block;
+}
+#wrapper:after {
+  /* .push must be the same height as footer */
+  height: 0px; 
+}
 
 /* -------------------------------------------------- */
 /* dropcap */
@@ -425,7 +445,7 @@ h5 {
 /* footer */
 /* -------------------------------------------------- */
 footer {
-
+	height: 60px;
 }
 
     footer h3 {

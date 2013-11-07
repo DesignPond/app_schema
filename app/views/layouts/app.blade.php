@@ -51,14 +51,14 @@
 	            <div class="container">
 	                <div id="logo">
 	                    <div class="inner">
-	                        <a href="index.html"></a>
+	                        {{ link_to('schemas/', '' ) }}
 	                    </div>
 	                </div>
 	
 	                <!-- mainmenu begin -->
 	                <ul id="mainmenu">
 	                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
-	                    <li>{{ link_to('schemas/categories/', 'Catégories' ) }}
+	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}
 	                        <ul>
 	                            <li><a href="carousel.html">Procédure civile</a></li>
 	                            <li><a href="carousel.html">Assurances sociales</a></li>
@@ -78,32 +78,32 @@
 	        
 	        <!--  content close -->
             
-            <!-- footer begin -->
-	        <footer>
-	            <div class="subfooter">
-	                <div class="container">
-	                    <div class="row">
-	                        <div class="span4">
-	                            &copy; Copyright 2013 - Droit en Schéma                     
-	                        </div>
-	                        <div class="span4">
-	                            Faculté de droit - Avenue du 1er-Mars 26 - 2000 Neuchâtel                    
-	                        </div>
-	                        <div class="span4">
-	                            <nav>
-	                                <ul>
-	                                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
-	                                    <li>{{ link_to('schemas/categories/', 'Catégories' ) }}</li>
-	                                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
-	                                </ul>
-	                            </nav>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </footer>
-	        <!-- footer close -->
-            
 		</div>
+            
+        <!-- footer begin -->
+        <footer>
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row">
+                        <div class="span4">
+                            &copy; Copyright 2013 - Droit en Schéma                     
+                        </div>
+                        <div class="span4">
+                            Faculté de droit - Avenue du 1er-Mars 26 - 2000 Neuchâtel                    
+                        </div>
+                        <div class="span4">
+                            <nav>
+                                <ul>
+                                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
+                                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}</li>
+                                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
 	</body>
 </html>

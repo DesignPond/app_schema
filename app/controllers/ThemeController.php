@@ -4,7 +4,7 @@ use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
 
-class SchemaController extends BaseController {
+class ThemeController extends BaseController {
 	
 	protected $projet;
 	
@@ -28,18 +28,7 @@ class SchemaController extends BaseController {
 	 */
 	public function index()
 	{
-
-        $projets  = $this->projet->getLast(2);
-		
-	    return View::make('schemas.home')->with(array('projets'=> $projets)); 
-	}
-	
-	public function projet($id){
-		
-		$projet = $this->projet->find($id);
-		
-	    return View::make('schemas.projet')->with(array('projets'=> $projets)); 
-
+        return View::make('themes.index');
 	}
 
 	/**
@@ -49,7 +38,7 @@ class SchemaController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('schemas.create');
+        return View::make('themes.create');
 	}
 
 	/**
@@ -70,7 +59,10 @@ class SchemaController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('schemas.show');
+		$theme    = $this->theme->themeWithProjects($id);
+		$subtheme = $this->theme->subthemes($id);
+		
+	    return View::make('schemas.theme')->with(array('theme' => $theme , 'subtheme' => $subtheme)); 
 	}
 
 	/**
@@ -81,7 +73,7 @@ class SchemaController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('schemas.edit');
+        return View::make('themes.edit');
 	}
 
 	/**

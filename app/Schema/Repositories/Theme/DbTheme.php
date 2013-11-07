@@ -29,7 +29,6 @@ class DbTheme implements ThemeInterface {
 		 {
 			 foreach($themes as $theme)
 			 {
-	
 				 $themesByCategories[$theme['refCategorie']][$theme['id']]['titre'] = $theme['titre'];
 				 $subthemes = array();
 				 
@@ -46,6 +45,20 @@ class DbTheme implements ThemeInterface {
 		 }
 		 
 		 return $themesByCategories;	 
+	}
+	
+	public function themeWithProjects($id){
+    
+    	return Theme::where('refCategorie', '=', $id)->with(array('subtheme','projet'))->get()->toArray();
+    	
+	}
+	
+	public function subthemes($id){
+	
+    	$themes = Theme::where('id', '=', 1)->with(array('subtheme'))->get()->first()->toArray();
+	 
+		return $themes['subtheme'];
+    	
 	}
 	
 }

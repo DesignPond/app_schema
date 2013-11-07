@@ -86,7 +86,7 @@
 						{{ Form::label('password', 'Mot de passe', array( 'class' => '' )) }}
 						{{ Form::password('password', '' , array('class' => '')) }}
 						
-						{{ Form::submit('Envoyer', array('class' => 'btn btn-inverse')) }}
+						{{ Form::submit('Envoyer', array('class' => 'btn')) }}
 						<p class="clear"></p>
 						{{ Form::close() }}
 						

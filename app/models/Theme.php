@@ -16,4 +16,9 @@ class Theme extends Eloquent {
         return $this->hasMany('Subtheme','refTheme');
     }
     
+    public function projet()
+    {
+        return $this->hasMany('Projet','refTheme');
+    }
+    
 }

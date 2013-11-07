@@ -4,10 +4,10 @@ use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
 
-class SchemaController extends BaseController {
-	
+class CategorieController extends BaseController {
+
 	protected $projet;
-	
+		
 	protected $categorie;
 	
 	protected $theme;
@@ -28,18 +28,10 @@ class SchemaController extends BaseController {
 	 */
 	public function index()
 	{
-
-        $projets  = $this->projet->getLast(2);
+        $categories = $this->categorie->getAll();
+		$themes     = $this->theme->themeAndSubthemeByCategory();
 		
-	    return View::make('schemas.home')->with(array('projets'=> $projets)); 
-	}
-	
-	public function projet($id){
-		
-		$projet = $this->projet->find($id);
-		
-	    return View::make('schemas.projet')->with(array('projets'=> $projets)); 
-
+	    return View::make('schemas.categories')->with(array('categories'=> $categories , 'themes' => $themes )); 
 	}
 
 	/**
@@ -49,7 +41,7 @@ class SchemaController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('schemas.create');
+        return View::make('categories.create');
 	}
 
 	/**
@@ -70,7 +62,7 @@ class SchemaController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('schemas.show');
+        return View::make('categories.show');
 	}
 
 	/**
@@ -81,7 +73,7 @@ class SchemaController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('schemas.edit');
+        return View::make('categories.edit');
 	}
 
 	/**
