@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+<?php  $custom = new Custom; ?>
 	
 <!-- subheader begin -->
 <div id="subheader">
@@ -8,7 +10,7 @@
         <div class="row">
             <div class="span12">
                 <h1>Thème</h1>
-                <span>{{ $theme[0]['titre'] }}</span>
+                <span>{{ $projets[0]['titre'] }}</span>
                 <ul class="crumb">
                     <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
                     <li class="sep">/</li>
@@ -25,19 +27,56 @@
     <div class="container">
         <div class="row"> 
 	
-			<?php
-				echo '<pre>';
-				print_r($subtheme);
-				echo '</pre>';
-			?>
-			
-			 @foreach($theme as $message)
+				<!-- content begin -->
+		        <div id="content">
+		            <div class="container">
+		                <div class="row">
+		                    <div class="span12">	                  
+		                        <ul id="filters">
+		                        	<li><a href="#" data-filter="*" class="selected">Tous</a></li>
+		                        	@if ( !empty($subthemes) )
+										@foreach($subthemes as $subtheme) 
+										
+										<li><a href="#" data-filter=".{{ $custom->makeSlug($subtheme) }}">{{ $subtheme }}</a></li>	
+		
+										@endforeach
+									@endif 
+		                        </ul>
+		                    </div>
+		                </div>
 
-			 	<pre>
-					{{ print_r( $message) }}
-			 	</pre>
+		                <div class="row">
+		                    <div id="gallery" class="gallery">
 
-			 @endforeach
+		                    @if ( !empty($projets[0]['projet']) )
+								@foreach($projets[0]['projet'] as $projet) 
+										
+		                        <!-- gallery item -->
+		                        <div class="span3 item {{ $custom->makeSlug($subthemes[$projet['refSubtheme']]) }}">
+		                            <div class="picframe">
+		                                <span class="overlay">
+		                                    <span class="info-area">
+		                                        <a class="img-icon-url" href="project-single.html"></a>
+		                                        <a class="img-icon-zoom" href="images/portfolio/pf%20(1).jpg" data-type="prettyPhoto[gallery]" title=""></a>
+		                                    </span>
+		                                    <span class="pf_text">
+		                                        <span class="project-name">{{ $projet['titre'] }}</span>
+		                                        <span>{{ $projet['auteur'] }}</span>
+		                                    </span>
+		                                </span>
+										<img src="{{ asset('images/pf.jpg') }}" data-original="{{ asset('images/pf.jpg') }}" alt="" />
+		                            </div>
+		                        </div>
+		                        <!-- close gallery item -->
+		                        
+								@endforeach
+							@endif 
+							
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <!-- content close -->
 			 	
 		</div>
 	</div>

@@ -59,10 +59,10 @@ class ThemeController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$theme    = $this->theme->themeWithProjects($id);
+		$projets  = $this->theme->projectsByTheme($id);
 		$subtheme = $this->theme->subthemes($id);
 		
-	    return View::make('schemas.theme')->with(array('theme' => $theme , 'subtheme' => $subtheme)); 
+	    return View::make('schemas.theme')->with(array('projets' => $projets , 'subthemes' => $subtheme)); 
 	}
 
 	/**

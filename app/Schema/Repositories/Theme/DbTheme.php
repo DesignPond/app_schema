@@ -1,6 +1,7 @@
 <?php namespace Schema\Repositories\Theme;
 
 use Theme;
+use Subtheme;
 
 class DbTheme implements ThemeInterface {
 	
@@ -47,17 +48,17 @@ class DbTheme implements ThemeInterface {
 		 return $themesByCategories;	 
 	}
 	
-	public function themeWithProjects($id){
+	public function projectsByTheme($id){
     
-    	return Theme::where('refCategorie', '=', $id)->with(array('subtheme','projet'))->get()->toArray();
+    	return Theme::where('id', '=', $id)->with(array('projet'))->get()->toArray();
     	
 	}
 	
 	public function subthemes($id){
 	
-    	$themes = Theme::where('id', '=', 1)->with(array('subtheme'))->get()->first()->toArray();
-	 
-		return $themes['subtheme'];
+    	$subthemes = Subtheme::where('refTheme', '=', $id)->get()->lists('titre', 'id');
+		
+		return $subthemes;
     	
 	}
 	
