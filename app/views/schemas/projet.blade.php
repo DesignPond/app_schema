@@ -21,6 +21,22 @@
                         	<span><i class="icon-comment"></i><a href="#">10 Commentaires</a></span> 
                         </div>
                         
+                        <div id="controls" class="row">
+	                         <div id="colors" class="span3">
+	                         	<p>Couleur</p><input id="colorPicker" class='simple_color' value='#a5128e'/>
+	                         </div>
+	                         <div id="shapes" class="span6">
+				                <button class="btn"  id="add"><span class="car"></span>Ajouter</button>
+								<button data-position="down"  class="btn arrow"><span class="down"></span>Bas</button>
+						        <button data-position="left"  class="btn arrow"><span class="left"></span>Gauche</button>
+						        <button data-position="right" class="btn arrow"><span class="right"></span>Droite</button>
+						        <button data-position="up"    class="btn arrow"><span class="up"></span>Haut</button>
+				            </div>
+				            <div class="span3">
+				            	<button type="button" class="btn btn-primary save">Terminer</button>
+				             </div>
+                        </div>
+                        
                         <div id="application"></div>
                        
                     </div>

@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
 	  }
 	});
 	
-	
+	$('.simple_color').simpleColor();
 	
 	
 	window.onresize = function(event) {

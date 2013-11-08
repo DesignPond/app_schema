@@ -17,6 +17,7 @@
    	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="<?php echo asset('js/bootstrap.min.js');?>"></script>
     <script src="<?php echo asset('js/jquery.prettyPhoto.js');?>"></script>
+    <script src="<?php echo asset('js/jquery.simple-color.js');?>"></script>
     <script src="<?php echo asset('js/easing.js');?>"></script>
     <script src="<?php echo asset('js/jquery.ui.totop.js');?>"></script>
     <script src="<?php echo asset('js/jquery.isotope.min.js');?>"></script>
