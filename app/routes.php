@@ -53,14 +53,11 @@ Route::group(array('prefix' => 'schemas'), function()
 {
 
 	Route::get('/', 'SchemaController@index');
-	Route::get('projets/{id}', 'SchemaController@projets');
-	
-	Route::get('categories', 'SchemaController@categories');
+	Route::get('contact', 'SchemaController@contact');	
 	
 	Route::resource('categorie', 'CategorieController');
 	Route::resource('theme', 'ThemeController');
-	
-	Route::get('contact', 'SchemaController@contact');
+	Route::resource('projet', 'ProjetController');
 
 });
 

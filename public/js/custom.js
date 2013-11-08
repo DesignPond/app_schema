@@ -98,11 +98,11 @@ jQuery(document).ready(function() {
 	jQuery('.overlay').fadeTo(1, 0);
 	jQuery(".item .picframe").hover(
 	function() {
-	 jQuery(this).parent().find(".overlay").width(jQuery(this).find("img").css("width"));
-	 jQuery(this).parent().find(".overlay").height(jQuery(this).find("img").css("height"));
+	 jQuery(this).parent().find(".overlay").width(jQuery(this).find("span.itemColor img").css("width"));
+	 jQuery(this).parent().find(".overlay").height(jQuery(this).find("span.itemColor img").css("height"));
 	 jQuery(this).parent().find(".overlay").fadeTo(150, 1);
-	 picheight = jQuery(this).find("img").css("height");
-	 newheight = (picheight.substring(0, picheight.length - 2)/2)-48;
+	 picheight = jQuery(this).find("span.itemColor img").css("height");
+	 newheight = (picheight.substring(0, picheight.length - 2)/2)-18;
 	 //alert(newheight);
 	 jQuery(this).parent().find(".info-area").animate({'margin-top': newheight},'fast');
 

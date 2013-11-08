@@ -18,12 +18,12 @@ class Projet extends Eloquent {
     
     public function theme()
     {
-        return $this->hasOne('Theme', 'refTheme');
+        return $this->hasOne('Theme', 'id');
     }
     
     public function subtheme()
     {
-        return $this->hasOne('Subtheme', 'refSubtheme');
+        return $this->hasOne('Subtheme', 'id');
     }
 	
 }

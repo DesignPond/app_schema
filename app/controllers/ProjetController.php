@@ -1,7 +1,25 @@
 <?php
 
+use  Schema\Repositories\Projet\ProjetInterface;
+use  Schema\Repositories\Categorie\CategorieInterface;
+use  Schema\Repositories\Theme\ThemeInterface;
+
 class ProjetController extends BaseController {
 
+	protected $projet;
+	
+	protected $categorie;
+	
+	protected $theme;
+	
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme){
+		
+		$this->projet = $projet;
+		
+		$this->categorie = $categorie;
+		
+		$this->theme = $theme;		
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -40,7 +58,9 @@ class ProjetController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('projets.show');
+		$projet  = $this->projet->find($id);
+
+        return View::make('schemas.projet')->with( array('projet' => $projet ));
 	}
 
 	/**

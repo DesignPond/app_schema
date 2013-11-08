@@ -15,4 +15,30 @@ class Custom {
 	     return $str;  
 	}
 	
+	public function limit_words($string, $word_limit){
+	
+		$words = explode(" ",$string);
+		$new = implode(" ",array_splice($words,0,$word_limit));
+		if( !empty($new) ){
+			$new = $new.'...';
+		}
+		return $new;
+	}
+	
+	
+	public function if_exist(&$argument, $default="") {
+	
+	   if(!isset($argument)) 
+	   {
+	       $argument = $default;
+	       
+	       return $argument;
+	   }
+	   
+	   $argument = trim($argument);
+	   
+	   return $argument;
+	}
+ 
+	
 }
