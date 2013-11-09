@@ -26,7 +26,7 @@
 						<?php
 						
 							 $Carbon = new Carbon\Carbon();
-							 $date   = $Carbon->createFromFormat('Y-m-d H:i:s', $projet->created_at);
+							 $date   = $Carbon->createFromFormat('Y-m-d H:i:s', $projet['created_at']);
 							 
 							 $day    = $date->format('d');  
 							 $month  = $date->format('M'); 
@@ -38,10 +38,11 @@
 				                <span class="month">{{ $month }}</span>
 				            </div>
 				            <div class="txt">
-				                <h5>{{ link_to('schemas/projet/'.$projet->id.'#projet/'.$projet->id , $projet->titre ) }}</h5>
-				                <span class="read">{{ $projet->description }}</span>
+				                <h5>{{ link_to('schemas/projet/'.$projet['id'].'#projet/'.$projet['id'] , $projet['titre'] ) }}</h5>
+				                <span class="read">{{ $projet['description'] }}</span>
 				                <span class="info">
-				                	<strong>{{ $projet->theme->titre }}</strong> | {{ $projet->auteur }} | {{ link_to('schemas/projet/'.$projet->id.'#projet/'.$projet->id , 'Voir le schéma' ) }} 
+				                	<strong>{{ $projet['theme']['titre'] }}</strong> | 
+				                	{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }} | {{ link_to('schemas/projet/'.$projet['id'].'#projet/'.$projet['id'] , 'Voir le schéma' ) }} 
 				                </span>
 				            </div>
 				        </li>

@@ -12,19 +12,19 @@ class DbProjet implements ProjetInterface {
 	
 	public function getAll(){
 		
-		return Projet::with(array('theme','subtheme'))->get();
+		return Projet::with( array('theme','subtheme','user') )->get();
 			
 	}
 	
 	public function find($id){
 		
-		return Projet::findOrFail($id);
+		return Projet::with( array('user') )->findOrFail($id);
 				
 	}
 	
 	public function getLast($nbr){
 	
-		return Projet::with(array('theme','subtheme'))->take($nbr)->skip(0)->get();
+		return Projet::with( array('theme','subtheme','user') )->take($nbr)->skip(0)->get()->toArray();
 		
 	}
 	

@@ -17,13 +17,13 @@ Route::get('/', function()
 {
 	//return View::make('hello');
 	
-	 $themes = Theme::where('id', '=', 1)->with(array('subtheme'))->get()->first()->toArray();
-	 
+	$user =  Projet::with( array('user') )->findOrFail(1)->toArray();
+ 
 	 echo '<pre>';
-	 print_r($themes['subtheme']);
+	 print_r( $user );
 	 echo '</pre>';	 
-/*
-	 foreach($categories as $categorie) 
+
+/*		 foreach($categories as $categorie) 
 	 {
 	 	foreach($categorie->theme as $theme)
 	 	{

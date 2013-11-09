@@ -45,7 +45,7 @@
 										<span class="itemColor" style="background:{{ $projets[0]['couleur'] }};">
 											<img src="{{ asset('images/pf2.png') }}" data-original="{{ asset('images/pf2.png') }}" alt="" /></span>
 										<h4>{{ link_to('schemas/projet/'.$projet['id'].'#projet/'.$projet['id'], $projet['titre']) }}</h4>
-				                        <div class="auteur">{{ $projet['auteur'] }}</div>
+				                        <div class="auteur">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}}</div>
 				                        <div class="description">{{ $custom->limit_words($projet['description'], 15) }}</div>
 		                            </div>
 		                        </div>

@@ -16,7 +16,7 @@ class CreateProjetsTable extends Migration {
 			$table->increments('id');
 			$table->string('titre');
 			$table->text('description');
-			$table->string('auteur');
+			$table->integer('user_id');
 			$table->integer('categorie');
 			$table->integer('refTheme');
 			$table->integer('refSubtheme');

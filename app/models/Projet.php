@@ -25,5 +25,10 @@ class Projet extends Eloquent {
     {
         return $this->hasOne('Subtheme', 'id');
     }
+    
+    public function user()
+    {
+        return $this->hasOne('User', 'id');
+    }
 	
 }
