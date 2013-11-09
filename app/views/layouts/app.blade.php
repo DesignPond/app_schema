@@ -70,12 +70,7 @@
 	                <!-- mainmenu begin -->
 	                <ul id="mainmenu">
 	                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
-	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}
-	                        <ul>
-	                            <li><a href="carousel.html">Procédure civile</a></li>
-	                            <li><a href="carousel.html">Assurances sociales</a></li>
-	                        </ul>
-	                    </li>
+	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}</li>
 	                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
 	                </ul>
 	                <!-- mainmenu close -->
@@ -99,7 +94,8 @@
 			                    <ul class="crumb">
 			                    
 			                    	@if ( Auth::check() )
-									    <li><a href=""><i class="icon-user"></i> {{ Auth::user()->email }}</a></li>
+									    <li><i class="icon-user"></i> {{ Auth::user()->email }}</li>
+									    <li> | <a href="">Logout</a></li>
 									@endif 
 			                       
 			                    </ul>

@@ -21,27 +21,30 @@ Route::get('/', function()
 	 
 	 echo '<pre>';
 	 print_r($themes['subtheme']);
-	 echo '</pre>';
-	 
+	 echo '</pre>';	 
 /*
-	
 	 foreach($categories as $categorie) 
 	 {
-	 	
 	 	foreach($categorie->theme as $theme)
 	 	{
 		 	echo '<pre>';
 		 	//print_r($projet->theme->titre) ;
 	 		print_r($theme->titre);
 	 		echo '</pre>';
-	 	}
-	 	
+	 	}	 	
 	 }
 */
-
-
 	 
 });
+
+
+View::composer('layouts.app', function($view){
+
+    $menus = Categorie::lists('titre', 'id');
+
+    $view->with('menus', $menus);
+});
+
 
 
 Route::post('login', array( 'uses' => 'SessionController@store') );

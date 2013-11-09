@@ -38,7 +38,16 @@ class SchemaController extends BaseController {
 		);
 		
 	    return View::make('schemas.home')->with( $data );
-
+	}
+	
+	public function contact(){
+	
+	    $data = array(
+        	'titre'     => 'Contact',
+			'soustitre' => 'Une question? Une demande?'
+		);
+		
+    	return View::make('schemas.contact')->with( $data );
 	}
 
 	/**

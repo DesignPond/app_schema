@@ -61,6 +61,7 @@ define([
 				apparrowview.render();
 				
 				$("#loader").fadeOut(800);
+				$("#controls").fadeIn(800);
 				
 			}
 		});

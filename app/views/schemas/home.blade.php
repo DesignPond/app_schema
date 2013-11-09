@@ -41,7 +41,7 @@
 				                <h5>{{ link_to('schemas/projet/'.$projet->id.'#projet/'.$projet->id , $projet->titre ) }}</h5>
 				                <span class="read">{{ $projet->description }}</span>
 				                <span class="info">
-				                	<strong>{{ $projet->theme->titre }}</strong> | {{ $projet->auteur }} | {{ link_to('schemas/projet/'.$projet->id , 'Voir le schéma' ) }} 
+				                	<strong>{{ $projet->theme->titre }}</strong> | {{ $projet->auteur }} | {{ link_to('schemas/projet/'.$projet->id.'#projet/'.$projet->id , 'Voir le schéma' ) }} 
 				                </span>
 				            </div>
 				        </li>

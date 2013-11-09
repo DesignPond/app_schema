@@ -465,6 +465,7 @@ h5 {
 	height: 40px;
 	display: block;
 	margin-top: 25px;
+	display: none;
 }
 
 #controls .btn{

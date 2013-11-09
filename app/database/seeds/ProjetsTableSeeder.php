@@ -25,7 +25,7 @@ class ProjetsTableSeeder extends Seeder {
 				'auteur'     => 'Jane Doe',
 				'categorie'  => '1',
 				'refTheme'   => '3',
-				'refSubtheme'=> '2',
+				'refSubtheme'=> '6',
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
 			),
@@ -75,7 +75,7 @@ class ProjetsTableSeeder extends Seeder {
 				'auteur'     => 'Cindy Leschaud',
 				'categorie'  => '1',
 				'refTheme'   => '2',
-				'refSubtheme'=> '4',
+				'refSubtheme'=> '6',
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
 			),
@@ -95,7 +95,7 @@ class ProjetsTableSeeder extends Seeder {
 				'auteur'     => 'Jane Doe',
 				'categorie'  => '1',
 				'refTheme'   => '3',
-				'refSubtheme'=> '2',
+				'refSubtheme'=> '5',
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
 			),
