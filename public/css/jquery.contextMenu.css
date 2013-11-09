@@ -16,6 +16,7 @@
     margin:0; 
     padding:0;
     
+    padding-top: 5px;
     min-width: 120px;
     max-width: 260px;
     display: inline-block;
@@ -50,6 +51,7 @@
 .context-menu-item span{
     padding-left: 10px;
     font-family: arial;
+    color: #474747;
 }
 
 .context-menu-separator {

@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="<?php echo asset('css/main.css');?>" type="text/css" id="main-css">
     <link rel="stylesheet" href="<?php echo asset('css/smoothness/jquery-ui-1.10.3.custom.css'); ?>" type="text/css" media="screen" />
     <link rel="stylesheet" href="<?php echo asset('css/jquery.contextMenu.css'); ?>">
-    <link rel="stylesheet" href="<?php echo asset('css/redactor/redactor.css'); ?>">
+    <link rel="stylesheet" href="<?php echo asset('js/vendor/redactor/redactor.css'); ?>">
     
     <!-- Javascript Files
     ================================================== -->
    	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-   	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+   	<script src="<?php echo asset('js/jquery-ui.js');?>"></script>
     <script src="<?php echo asset('js/bootstrap.min.js');?>"></script>
     <script src="<?php echo asset('js/jquery.prettyPhoto.js');?>"></script>
     <script src="<?php echo asset('js/jquery.simple-color.js');?>"></script>
