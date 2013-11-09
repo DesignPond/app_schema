@@ -373,7 +373,7 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 				$('#content-application').css('height', big+h+60 );
 				// Show the div when all is loaded
 				$("#menuButtons").fadeIn(400);
-				$("#all").fadeIn(400);
+				$("#application").fadeIn(400);
 			}
 		});
 		

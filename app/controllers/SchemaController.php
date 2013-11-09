@@ -30,15 +30,14 @@ class SchemaController extends BaseController {
 	{
 
         $projets  = $this->projet->getLast(2);
+        
+        $data = array(
+        	'titre'     => 'Accueil',
+			'soustitre' => 'Schémas des procédures civiles',
+			'projets'   => $projets 
+		);
 		
-	    return View::make('schemas.home')->with(array('projets'=> $projets)); 
-	}
-	
-	public function projet($id){
-		
-		$projet = $this->projet->find($id);
-		
-	    return View::make('schemas.projet')->with(array('projets'=> $projets)); 
+	    return View::make('schemas.home')->with( $data );
 
 	}
 

@@ -9,7 +9,7 @@ class SessionController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('sessions.index');
+        return View::make('session.login');
 	}
 
 	/**
@@ -29,12 +29,20 @@ class SessionController extends BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		
-		if ( Auth::attempt( array( 'email' => $input['email'], 'password' => $input['password']) ) )
-		{
-			return Redirect::intended('schemas');
-		}
+        $user = array(
+            'email'    => Input::get('email'),
+            'password' => Input::get('password')
+        );
+        
+        if (Auth::attempt($user)) {
+            return Redirect::to('schemas')
+                ->with('flash_notice', 'You are successfully logged in.');
+        }
+        
+        // authentication failure! lets go back to the login page
+        return Redirect::to('login')
+            ->with('flash_error', 'Your email/password combination was incorrect.')
+            ->withInput();
 	}
 
 	/**
@@ -57,28 +65,6 @@ class SessionController extends BaseController {
 	public function edit($id)
 	{
         return View::make('sessions.edit');
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }

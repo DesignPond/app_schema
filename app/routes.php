@@ -45,6 +45,7 @@ Route::get('/', function()
 
 
 Route::post('login', array( 'uses' => 'SessionController@store') );
+Route::get('login', 'SessionController@index');
 Route::get('logout', 'SessionController@destroy');
 
 Route::group(array('prefix' => 'schemas'), function()

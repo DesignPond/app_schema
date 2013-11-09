@@ -83,6 +83,35 @@
 	            </div>
 	        </header>
 	        <!-- header close -->
+	        
+	        	        
+	       <?php  if( Request::segment(2) != 'projet'){  ?>  	        
+		    
+		    @section('sidebar')
+			 	
+			    <!-- subheader begin -->
+			    <div id="subheader">
+			        <div class="container">
+			            <div class="row">
+			                <div class="span12">
+			                    <h1>{{ $titre }}</h1>
+			                    <span>{{ $soustitre }}</span>
+			                    <ul class="crumb">
+			                    
+			                    	@if ( Auth::check() )
+									    <li><a href=""><i class="icon-user"></i> {{ Auth::user()->email }}</a></li>
+									@endif 
+			                       
+			                    </ul>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			    <!-- subheader close -->
+   
+			@show
+			
+			<?php } ?>
         
 	        <!-- content -->
 	        
@@ -91,6 +120,7 @@
 	        <!--  content close -->
             
 		</div>
+		<!--  wrapper close -->
             
         <!-- footer begin -->
         <footer>

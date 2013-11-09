@@ -4,25 +4,6 @@
 
 <?php  $custom = new Custom; ?>
 	
-<!-- subheader begin -->
-<div id="subheader">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <h1>Thème</h1>
-                <span>{{ $projets[0]['titre'] }}</span>
-                <ul class="crumb">
-                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
-                    <li class="sep">/</li>
-                    <li>Catégorie</li>
-                    <li>Thème</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- subheader close -->
-	
 <div id="content">
     <div class="container">
         <div class="row"> 
@@ -58,12 +39,12 @@
 		                            <div class="picframe">
 		                                <span class="overlay">
 		                                    <span class="info-area">
-		                                        <a class="img-icon-zoom" href="{{ url('schemas/projet/'.$projet['id']) }}" data-type="prettyPhoto[gallery]" title=""></a>
+		                                        <a class="img-icon-zoom" href="{{ url('schemas/projet/'.$projet['id'].'#projet/'.$projet['id']) }}" data-type="prettyPhoto[gallery]" title=""></a>
 		                                    </span>
 		                                </span>
 										<span class="itemColor" style="background:{{ $projets[0]['couleur'] }};">
 											<img src="{{ asset('images/pf2.png') }}" data-original="{{ asset('images/pf2.png') }}" alt="" /></span>
-										<h4>{{ link_to('schemas/projet/'.$projet['id'], $projet['titre']) }}</h4>
+										<h4>{{ link_to('schemas/projet/'.$projet['id'].'#projet/'.$projet['id'], $projet['titre']) }}</h4>
 				                        <div class="auteur">{{ $projet['auteur'] }}</div>
 				                        <div class="description">{{ $custom->limit_words($projet['description'], 15) }}</div>
 		                            </div>

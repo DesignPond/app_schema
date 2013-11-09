@@ -447,7 +447,7 @@ h5 {
 #application{
 	background: #eee;
 	overflow-x: hidden;
-	display: block;
+	display: none;
 	min-height: 150px;
 	margin-top: 20px;
 	height: auto;
@@ -2565,7 +2565,10 @@ address span {
         text-decoration: none;
         padding: 0 2px 0 2px;
     }
-
+	
+	    .crumb li i{
+	        margin-top: 3px;
+	    }
 
 /* -------------------------------------------------- */
 /* tabs */

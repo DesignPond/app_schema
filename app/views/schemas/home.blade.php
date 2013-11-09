@@ -1,22 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <!-- subheader begin -->
-    <div id="subheader">
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <h1>Accueil</h1>
-                    <span>Schémas des procédures civiles</span>
-                    <ul class="crumb">
-                        <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- subheader close -->
 	
 	<div id="content">
         <div class="container">
@@ -24,7 +8,7 @@
                 <div class="span12">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt 
                     ut labore et <strong>dolore magna aliqua</strong>. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-                    ea commodo consequat. Duis aute irure <strong>dolor in reprehenderit  mollit</strong> anim id est laborum.</p>                 
+                    ea commodo consequat. Duis aute irure <strong>dolor in reprehenderit  mollit</strong> anim id est laborum.</p>               
                 </div>
             </div>
         </div>
@@ -54,7 +38,7 @@
 				                <span class="month">{{ $month }}</span>
 				            </div>
 				            <div class="txt">
-				                <h5>{{ link_to('schemas/projet/'.$projet->id , $projet->titre ) }}</h5>
+				                <h5>{{ link_to('schemas/projet/'.$projet->id.'#projet/'.$projet->id , $projet->titre ) }}</h5>
 				                <span class="read">{{ $projet->description }}</span>
 				                <span class="info">
 				                	<strong>{{ $projet->theme->titre }}</strong> | {{ $projet->auteur }} | {{ link_to('schemas/projet/'.$projet->id , 'Voir le schéma' ) }} 
