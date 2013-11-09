@@ -8,6 +8,7 @@ define(["jquery", "backbone","models/arrow"],
 				//This is our Boxes collection and holds our Boxes models
 				model: Arrow,
 				parse: function(response) {
+					console.log(response);
 				    return response.items;
 				},
 				initialize: function (models, options) {

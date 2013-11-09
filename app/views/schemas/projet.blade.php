@@ -37,7 +37,14 @@
 				             </div>
                         </div>
                         
-                        <div id="application"></div>
+                        <div id="application">
+                        
+	                        <p id="emptyProjet">Le projet est vide</p>
+						   	<div id="content-application">
+							  	<div id="handle"><i class="icon-double-angle-down"></i></div>
+						   	</div>	
+	                        	
+                        </div>
                        
                     </div>
                 </div>

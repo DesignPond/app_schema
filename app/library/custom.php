@@ -25,7 +25,6 @@ class Custom {
 		return $new;
 	}
 	
-	
 	public function if_exist(&$argument, $default="") {
 	
 	   if(!isset($argument)) 
@@ -39,6 +38,5 @@ class Custom {
 	   
 	   return $argument;
 	}
- 
 	
 }

@@ -47,8 +47,6 @@ Route::get('/', function()
 Route::post('login', array( 'uses' => 'SessionController@store') );
 Route::get('logout', 'SessionController@destroy');
 
-Route::resource('login', 'SessionController');
-
 Route::group(array('prefix' => 'schemas'), function()
 {
 
@@ -59,6 +57,17 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::resource('theme', 'ThemeController');
 	Route::resource('projet', 'ProjetController');
 
+});
+
+Route::group(array('prefix' => 'api/v1'), function()
+{
+
+	Route::get('theme/projet/{id}', 'ThemeController@projet');
+    Route::get('boxe/projet/{id}', 'BoxeController@refProject');
+    Route::resource('boxe', 'BoxeController');
+    Route::get('arrow/projet/{id}', 'ArrowController@refProject');
+    Route::resource('arrow', 'ArrowController');
+    
 });
 
 App::bind('Schema\Repositories\Projet\ProjetInterface', 'Schema\Repositories\Projet\DbProjet');

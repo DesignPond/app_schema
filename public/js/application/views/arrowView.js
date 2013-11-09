@@ -18,7 +18,7 @@ define(["jquery", "backbone"],
 				var self     = this;		
 				//The parameter passed is a reference to the model that was added
 				var colorPicker = $("#colorPicker").val();
-				var nbr         = $("#content > div.arrows").size();
+				var nbr         = $("#content-application > div.arrows").size();
 				var newNbr      = nbr + 1;
 				var position    = this.model.get('position');
 				

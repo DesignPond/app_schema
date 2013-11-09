@@ -5,7 +5,7 @@ define(["jquery", "backbone","views/arrowView" ,"models/arrow","models/arrowColl
    
 		// Arrows view
 		AppArrowView = Backbone.View.extend({
-			el: $("#content"),
+			el: $("#content-application"),
 			initialize: function (options) {
 				
 				// Keep this as the main view

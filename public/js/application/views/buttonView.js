@@ -4,7 +4,7 @@ define(["jquery", "backbone"],
    {
 	 	// Menu view
 		ButtonsView = Backbone.View.extend({
-			el: $("#menuButtons"),
+			el: $("#controls"),
 			initialize: function (options) {
 				this.vent = options.vent;
 			},

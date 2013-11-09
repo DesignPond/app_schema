@@ -49,11 +49,12 @@ jQuery(document).ready(function() {
 	  }
 	});
 	
-	$('.simple_color').simpleColor();
+	//jQuery('.simple_color').simpleColor();
+	jQuery( "#content-application" ).resizable({ });
 	
 	
 	window.onresize = function(event) {
-		jQuery('#gallery').isotope('reLayout');
+		//jQuery('#gallery').isotope('reLayout');
   	};
 	
 	

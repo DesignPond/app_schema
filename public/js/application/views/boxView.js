@@ -76,11 +76,11 @@ define(["jquery", "backbone"],
 								
 								var boxOffset   = boxPosition + boxHeight + 2;
 								
-								var posContent = $('#content').height();
+								var posContent = $('#content-application').height();
 								
 								if(boxOffset > posContent){
 									var newPos = posContent + 40;
-									$('#content').css('height', newPos);
+									$('#content-application').css('height', newPos);
 								}
 							},
 							stop: function() 
@@ -88,7 +88,7 @@ define(["jquery", "backbone"],
 								self.update($(this));
 							} 
 						})
-						.resizable({grid: 10 , containment: $('#content'), stop: function() { self.update($(this)) } })
+						.resizable({grid: 10 , containment: $('#content-application'), stop: function() { self.update($(this)) } })
 						.append(elements);
 				
 				return this;		

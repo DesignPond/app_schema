@@ -11,10 +11,14 @@
     <!-- CSS Files
     ================================================== -->
     <link rel="stylesheet" href="<?php echo asset('css/main.css');?>" type="text/css" id="main-css">
+    <link rel="stylesheet" href="<?php echo asset('css/smoothness/jquery-ui-1.10.3.custom.css'); ?>" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo asset('css/jquery.contextMenu.css'); ?>">
+    <link rel="stylesheet" href="<?php echo asset('css/redactor/redactor.css'); ?>">
     
     <!-- Javascript Files
     ================================================== -->
    	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+   	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="<?php echo asset('js/bootstrap.min.js');?>"></script>
     <script src="<?php echo asset('js/jquery.prettyPhoto.js');?>"></script>
     <script src="<?php echo asset('js/jquery.simple-color.js');?>"></script>
@@ -26,6 +30,13 @@
     <script src="<?php echo asset('js/jquery.lazyload.js');?>"></script>
     <script src="<?php echo asset('js/custom.js');?>"></script>
     <script src="<?php echo asset('js/vendor/history.js');?>"></script>
+    <script src="<?php echo asset('js/vendor/redactor/fontsize.js');?>"></script>
+    <script src="<?php echo asset('js/vendor/redactor/fontcolor.js');?>"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+
+    <!-- Require and backbone Files
+    ================================================== -->    
+    <script data-main="<?php echo asset('js/application/bootstrap'); ?>" src="<?php echo asset('js/require.js'); ?>"></script>
 	
 	</head>
 	<body>

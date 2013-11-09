@@ -46,9 +46,16 @@ class ThemeController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		//
+	public function projet($id){
+		
+		$ref   = Projet::find($id);
+		$theme = $ref->refTheme;
+		
+		return Response::json(array(
+        	'error' => false,
+			'items' => array('id' => $theme)
+			),
+		200 );	
 	}
 
 	/**

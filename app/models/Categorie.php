@@ -3,6 +3,7 @@
 class Categorie extends Eloquent {
 
 	protected $guarded = array('id');
+	public $timestamps = false;
 
 	public static $rules = array( 'titre' => 'required' );
 	

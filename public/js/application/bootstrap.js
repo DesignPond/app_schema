@@ -1,4 +1,4 @@
-var url  = location.protocol + "//" + location.host+"/public/";	
+var url  = location.protocol + "//" + location.host+"/";	
 
 require.config({
     paths: {

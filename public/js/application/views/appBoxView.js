@@ -6,7 +6,7 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
    		var base_url = location.protocol + "//" + location.host+"/";
    		
 	  	AppBoxView = Backbone.View.extend({
-			el: $("#content"),
+			el: $("#content-application"),
 			initialize: function (options) {
 				
 				// Keep this as the main view
@@ -130,10 +130,10 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 								self.collection.remove(model);
 								box.remove();
 								
-								var nbr  = $("#content > div.box").size();
+								var nbr  = $("#content-application > div.box").size();
 								if( nbr === 0 ){
 									$('#emptyProjet').show();
-									$('#content').css('height', 60 );
+									$('#content-application').css('height', 60 );
 								}
 							}
 						},
@@ -221,13 +221,13 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 				// Keep view reference
 				var self   = this;
 				
-				var nbr    = $("#content > div.box").size();		
+				var nbr    = $("#content-application > div.box").size();		
 				var newNbr = nbr + 1;
 				
 				if( newNbr == 1 )
 				{
 					 $('#emptyProjet').hide(); 
-					 $('#content').css('height', 210 );
+					 $('#content-application').css('height', 210 );
 				}
 				
 				// Get color choosen and create new box model with it 
@@ -370,7 +370,7 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 					 } 
 				});
 	
-				$('#content').css('height', big+h+60 );
+				$('#content-application').css('height', big+h+60 );
 				// Show the div when all is loaded
 				$("#menuButtons").fadeIn(400);
 				$("#all").fadeIn(400);

@@ -14,8 +14,6 @@ define([
 			},
 			initialize: function(options){
 			
-				// Find the current categorie for the colors
-				$( "#content" ).resizable({handles:'s'});		
 		    },
 			projet: function(id) {
 
@@ -49,9 +47,6 @@ define([
 				   },
 				   url: base_url+'theme/projet/'+id
 				});
-				
-								
-				//$('.simple_color').simpleColor();
 				
 				// extend events to pass them from views to views
 				var vent = _.extend({}, Backbone.Events);
