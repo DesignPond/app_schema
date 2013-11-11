@@ -61,6 +61,8 @@ Route::group(array('prefix' => 'schemas'), function()
 	
 	Route::resource('categorie', 'CategorieController');
 	Route::resource('theme', 'ThemeController');
+	Route::get('theme/drop_theme/{id}', 'ThemeController@drop_theme');
+	Route::get('theme/drop_subtheme/{id}', 'ThemeController@drop_subtheme');
 	Route::resource('projet', 'ProjetController');
 
 });

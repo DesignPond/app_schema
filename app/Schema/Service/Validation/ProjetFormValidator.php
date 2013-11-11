@@ -8,7 +8,6 @@ class ProjetFormValidator extends AbstractLaravelValidator {
 	
 	protected $rules = array(
 		'titre'     => 'required',
-		'user_id'   => 'required',
 		'categorie' => 'required',
 		'refTheme'  => 'required'
 	);
@@ -18,6 +17,7 @@ class ProjetFormValidator extends AbstractLaravelValidator {
 	*/
 	
 	protected $messages = array(
+		'titre.required'     => 'Le titre est requis',
 		'user_id.exists'     => 'That user does not exist',
 		'categorie.required' => 'La catégorie principale est requise',
 		'refTheme.required'  => 'Le thème est requis'

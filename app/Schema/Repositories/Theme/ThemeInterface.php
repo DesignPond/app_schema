@@ -8,6 +8,7 @@ interface ThemeInterface {
 	public function subthemes($id);
 	public function droplist_theme();
 	public function droplist_subtheme();
-	
+	public function drop_theme_by_categorie($id);
+	public function drop_subtheme_by_categorie($id);	
 }
 

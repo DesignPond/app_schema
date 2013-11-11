@@ -66,5 +66,21 @@ class DbTheme implements ThemeInterface {
 		return Subtheme::lists('titre','id');
 	}
 	
+	public function drop_theme_by_categorie($id){
+		
+		$themeList = Theme::where('refCategorie', '=', $id)->get();
+		$themes    = $themeList->lists('titre','id');
+		
+		return $themes;
+	}
+	
+	public function drop_subtheme_by_categorie($id){
+		
+		$subthemeList = Subtheme::where('refTheme', '=', $id)->get();
+		$subthemes    = $subthemeList->lists('titre','id');
+		
+		return $subthemes;
+	}
+	
 }
 

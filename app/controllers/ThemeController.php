@@ -40,6 +40,27 @@ class ThemeController extends BaseController {
 	{
         return View::make('themes.create');
 	}
+	
+	public function drop_theme($id = NULL){
+		
+		$themes = $this->theme->drop_theme_by_categorie($id);
+		$themes = array_add($themes, '0', 'Choix');
+		
+		ksort($themes);
+		
+		return Response::json($themes, 200 );
+	}
+	
+			
+	public function drop_subtheme($id){
+
+		$subthemes = $this->theme->drop_subtheme_by_categorie($id);
+		$subthemes = array_add($subthemes, '0', 'Choix');
+		
+		ksort($subthemes);
+		
+		return Response::json($subthemes, 200 );
+	}
 
 	/**
 	 * Store a newly created resource in storage.

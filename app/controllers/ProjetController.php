@@ -24,6 +24,7 @@ class ProjetController extends BaseController {
 		$this->theme = $theme;
 		
 		$this->validator = $validator;
+
 	}
 	/**
 	 * Display a listing of the resource.
@@ -42,9 +43,20 @@ class ProjetController extends BaseController {
 	 */
 	public function create()
 	{
+		
+		$categories = array();
+		$themes     = array();
+		$subthemes  = array();
+		
 		$categories = $this->categorie->droplist();
+		$categories = array_add($categories, '0', 'Choix');
+			ksort($categories);
 		$themes     = $this->theme->droplist_theme();
+		$themes     = array_add($themes, '0', 'Choix');
+			ksort($themes); 
 		$subthemes  = $this->theme->droplist_subtheme();
+		$subthemes  = array_add($subthemes, '0', 'Choix');
+			 ksort($subthemes); 
 		
 		$data = array(
         	'titre'      => 'Schéma',
@@ -65,25 +77,13 @@ class ProjetController extends BaseController {
 	 */
 	public function store()
 	{
-		if( $this->validator->with( Input::all() )->passes() ){
+		if( $this->validator->with( Input::all() )->passes() )
+		{
 			
 		}
 		else
-		{
-		
-			$categories = $this->categorie->droplist();
-			$themes     = $this->theme->droplist_theme();
-			$subthemes  = $this->theme->droplist_subtheme();
-		
-			$data = array(
-	        	'titre'      => 'Schéma',
-				'soustitre'  => 'Créer un nouveau schéma',
-				'categories' => $categories,
-				'themes'     => $themes ,
-				'subthemes'  => $subthemes
-			);
-			
-	        return View::make('schemas.create')->with( $data )->withInput( Input::all() )->withErrors( $this->validator->errors() );
+		{	
+			return Redirect::to('schemas/projet/create')->withErrors($this->validator->errors())->withInput(Input::all() ); 
 		}
 	}
 

@@ -1,71 +1,74 @@
-(function ($) {
+jQuery(document).ready(function() {
 	
 	// The url to the application
-	var base = location.protocol + "//" + location.host+"/api/v1/";
-	
-	// By default hide the selects theme ans subtheme	
-	$("body").on("change", "#categorie", function(){
+	var base_url = location.protocol + "//" + location.host+"/schemas/";
 
-		var $select = $( "#theme" );	
+	// By default hide the selects theme ans subtheme	
+	jQuery("body").on("change", "#categorie", function(){
+
+		var $select = jQuery( "#theme" );	
+		
 		// Grab choosen categories
-		var cat = $(this).val();
+		var cat = jQuery(this).val();
 		
 		if(cat)
 		{
-			$.ajax({
+			jQuery.ajax({
 				 dataType: 'json',
 				 success: function(data) 
 				 {
+				 		$select.empty();
 				 		// array for options
 				 		var items = [];
 				 		// Loop over ajax data response
-						$.each(data.themes, function(key, val) {
+						jQuery.each(data, function(key, val) {
 							items.push('<option value="' + key + '">' + val + '</option>');
 						});
 						// Join all html, append to select and show the select
 						var all = items.join('');
 						$select.append(all);
-						$( "#theme-label" ).show();	
+						jQuery( "#theme-label" ).show();	
 				 },
-				 url: base_url + 'theme/drop/'+ cat
+				 url: base_url + 'theme/drop_theme/'+ cat
 			});
 		}
 	});
 	
-	$("body").on("change", "#theme", function(){
+	jQuery("body").on("change", "#theme", function(){
 		
-		var $select = $( "#subtheme" ).empty();	
+		var $select = jQuery( "#subtheme" ).empty();	
 		// Grab choosen categories
-		var theme = $(this).find(":selected").val();
+		var theme = jQuery(this).find(":selected").val();
 
 		if(theme)
 		{
-			$.ajax({
+			jQuery.ajax({
 				 dataType: 'json',
 				 success: function(data) 
 				 {
+				 		$select.empty();
 				 		// array for options
 				 		var items = [];
 				 		// Loop over ajax data response
-						$.each(data.subthemes, function(key, val) {
+						jQuery.each(data, function(key, val) {
 							items.push('<option value="' + key + '">' + val + '</option>');
 						});
 						// Join all html, append to select and show the select
 						var all = items.join('');
 						$select.append(all);
-						$( "#subtheme-label" ).show();	
+						jQuery( "#subtheme-label" ).show();	
 				 },
-				 url: base + 'subtheme/drop/'+ theme
+				 url: base_url + 'theme/drop_subtheme/'+ theme
 			});
 		}
 	});
 	
-	var valueCat = $( "#categorie" ).find(":selected").val();
+	var valueCat = jQuery( "#categorie" ).find(":selected").val();
 	
-	if(valueCat){
+	if(valueCat && (valueCat != 0) ){
 		console.log('value!');
-		$( "#categorie" ).trigger('change');
+		jQuery( "#categorie" ).trigger('change');
 	}
 	
 	
-})(jQuery);
+});

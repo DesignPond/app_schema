@@ -2760,7 +2760,22 @@ address span {
     margin-bottom: 30px;
 }
 
+/* -------------------------------------------------- */
+/* Error messages */
+/* -------------------------------------------------- */
 
+.errors{
+	list-style: none;
+	margin-left: 0;
+}
+
+.errors li{
+	color: #b30e0e;
+}
+
+.errors li i{
+	margin-top: 3px;
+}
 
 /* -------------------------------------------------- */
 /* R E S P O N S I V E */
