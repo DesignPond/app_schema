@@ -3,6 +3,7 @@
 use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
+use  Schema\Service\Validation\ProjetFormValidator;
 
 class ProjetController extends BaseController {
 
@@ -12,13 +13,17 @@ class ProjetController extends BaseController {
 	
 	protected $theme;
 	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme){
+	protected $validator;
+	
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, ProjetFormValidator $validator ){
 		
 		$this->projet = $projet;
 		
 		$this->categorie = $categorie;
 		
-		$this->theme = $theme;		
+		$this->theme = $theme;
+		
+		$this->validator = $validator;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -46,7 +51,8 @@ class ProjetController extends BaseController {
 			'soustitre'  => 'Créer un nouveau schéma',
 			'categories' => $categories,
 			'themes'     => $themes ,
-			'subthemes'  => $subthemes 
+			'subthemes'  => $subthemes,
+			'input'      => Input::old() 
 		);
 		
         return View::make('schemas.create')->with( $data );
@@ -59,7 +65,26 @@ class ProjetController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		if( $this->validator->with( Input::all() )->passes() ){
+			
+		}
+		else
+		{
+		
+			$categories = $this->categorie->droplist();
+			$themes     = $this->theme->droplist_theme();
+			$subthemes  = $this->theme->droplist_subtheme();
+		
+			$data = array(
+	        	'titre'      => 'Schéma',
+				'soustitre'  => 'Créer un nouveau schéma',
+				'categories' => $categories,
+				'themes'     => $themes ,
+				'subthemes'  => $subthemes
+			);
+			
+	        return View::make('schemas.create')->with( $data )->withInput( Input::all() )->withErrors( $this->validator->errors() );
+		}
 	}
 
 	/**
