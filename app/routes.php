@@ -17,10 +17,12 @@ Route::get('/', function()
 {
 	//return View::make('hello');
 	
-	$user =  Projet::with( array('user') )->findOrFail(1)->toArray();
+	//$user =  Projet::with( array('user') )->findOrFail(1)->toArray();
+	
+	$projet = Projet::where('refTheme', '=', 1)->with(array('user'))->get()->toArray();
  
 	 echo '<pre>';
-	 print_r( $user );
+	 print_r( $projet );
 	 echo '</pre>';	 
 
 /*		 foreach($categories as $categorie) 

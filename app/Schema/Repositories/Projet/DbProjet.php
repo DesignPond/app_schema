@@ -18,7 +18,7 @@ class DbProjet implements ProjetInterface {
 	
 	public function find($id){
 		
-		return Projet::with( array('user') )->findOrFail($id);
+		return Projet::with( array('user') )->findOrFail($id)->toArray();
 				
 	}
 	
@@ -26,6 +26,11 @@ class DbProjet implements ProjetInterface {
 	
 		return Projet::with( array('theme','subtheme','user') )->take($nbr)->skip(0)->get()->toArray();
 		
+	}
+		
+	public function projectsByTheme($refTheme){
+    	
+    	return Projet::where('refTheme', '=', $refTheme)->with(array('user'))->get()->toArray();
 	}
 	
 }

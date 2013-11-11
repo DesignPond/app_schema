@@ -48,12 +48,6 @@ class DbTheme implements ThemeInterface {
 		 return $themesByCategories;	 
 	}
 	
-	public function projectsByTheme($id){
-    
-    	return Theme::where('id', '=', $id)->with(array('projet'))->get()->toArray();
-    	
-	}
-	
 	public function subthemes($id){
 	
     	$subthemes = Subtheme::where('refTheme', '=', $id)->get()->lists('titre', 'id');

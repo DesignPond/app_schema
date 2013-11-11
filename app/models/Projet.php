@@ -13,7 +13,7 @@ class Projet extends Eloquent {
 	
 	public function categorie()
     {
-        return $this->hasOne('Categorie', 'categorie');
+        return $this->hasOne('Categorie', 'id');
     }
     
     public function theme()
@@ -28,7 +28,7 @@ class Projet extends Eloquent {
     
     public function user()
     {
-        return $this->hasOne('User', 'id');
+        return $this->belongsTo('User');
     }
 	
 }

@@ -9,17 +9,17 @@ class Theme extends Eloquent {
 		
 	public function categorie()
     {
-        return $this->hasOne('Categorie', 'refCategorie');
+        return $this->belongsTo('Categorie', 'id');
     }
     
     public function subtheme()
     {
-        return $this->hasMany('Subtheme','refTheme');
+        return $this->hasMany('Subtheme','id');
     }
     
     public function projet()
     {
-        return $this->hasMany('Projet','refTheme');
+        return $this->belongsToMany('Projet','id');
     }
     
 }

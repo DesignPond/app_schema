@@ -75,7 +75,7 @@ class ProjetsTableSeeder extends Seeder {
 				'user_id'     => '1',
 				'categorie'  => '1',
 				'refTheme'   => '2',
-				'refSubtheme'=> '6',
+				'refSubtheme'=> '4',
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
 			),

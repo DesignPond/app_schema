@@ -50,7 +50,7 @@ jQuery(document).ready(function() {
 	});
 	
 	//jQuery('.simple_color').simpleColor();
-	jQuery( "#content-application" ).resizable({ });
+	jQuery( "#content-application" ).resizable({ handles: "n,s" });
 	
 	
 	window.onresize = function(event) {

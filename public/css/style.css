@@ -446,7 +446,6 @@ h5 {
 
 #application{
 	background: #eee;
-	overflow-x: hidden;
 	display: none;
 	min-height: 150px;
 	margin-top: 20px;

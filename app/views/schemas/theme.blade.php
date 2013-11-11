@@ -31,21 +31,21 @@
 		                <div class="row">
 		                    <div id="gallery" class="gallery">
 
-		                    @if ( !empty($projets[0]['projet']) )
-								@foreach($projets[0]['projet'] as $projet) 
+		                    @if ( !empty($projets) )
+								@foreach($projets as $projet) 
 			                    
 		                        <!-- gallery item -->
 		                        <div class="span3 item {{ $custom->makeSlug( $custom->if_exist($subthemes[$projet['refSubtheme']])) }}">
 		                            <div class="picframe">
 		                                <span class="overlay">
 		                                    <span class="info-area">
-		                                        <a class="img-icon-zoom" href="{{ url('schemas/projet/'.$projet['id'].'#projet/'.$projet['id']) }}" data-type="prettyPhoto[gallery]" title=""></a>
+		                                       <a class="img-icon-zoom" href="{{ url('schemas/projet/'.$projet['id'].'#projet/'.$projet['id']) }}" title=""></a>
 		                                    </span>
 		                                </span>
-										<span class="itemColor" style="background:{{ $projets[0]['couleur'] }};">
+										<span class="itemColor" style="background:{{ $couleur }};">
 											<img src="{{ asset('images/pf2.png') }}" data-original="{{ asset('images/pf2.png') }}" alt="" /></span>
 										<h4>{{ link_to('schemas/projet/'.$projet['id'].'#projet/'.$projet['id'], $projet['titre']) }}</h4>
-				                        <div class="auteur">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}}</div>
+				                        <div class="auteur">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}</div>
 				                        <div class="description">{{ $custom->limit_words($projet['description'], 15) }}</div>
 		                            </div>
 		                        </div>
