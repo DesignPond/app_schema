@@ -77,13 +77,13 @@ class ProjetController extends BaseController {
 	 */
 	public function store()
 	{
-		if( $this->validator->with( Input::all() )->passes() )
+		if( $this->projet->create( Input::all() )  )
 		{
-		
+			
 		}
 		else
 		{	
-			return Redirect::to('schemas/projet/create')->withErrors($this->validator->errors())->withInput(Input::all() ); 
+			return Redirect::to('schemas/projet/create')->withErrors($this->projet->errors())->withInput(Input::all() ); 
 		}
 	}
 

@@ -51,7 +51,6 @@ class EloquentProjet implements ProjetFormInterface {
 		$projet->save();	
 		
 		return true;
-		
 	}
 
 }

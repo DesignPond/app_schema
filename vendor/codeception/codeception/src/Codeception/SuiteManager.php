@@ -65,7 +65,7 @@ class SuiteManager {
 
     protected function createSuite($name) {
         $suiteClass = $this->settings['suite_class'];
-        if (!class_exists($suiteClass)) throw new \Codeception\Exception\Configuration("Suite class not found");
+        if (!class_exists($suiteClass)) throw new \Codeception\Exception\Configuration("Suite class $suiteClass not found");
         $suite = new $suiteClass;
         if ($this->settings['namespace']) $name = $this->settings['namespace'] . ".$name";
         $suite->setName($name);
@@ -193,22 +193,39 @@ class SuiteManager {
         if (!\PHPUnit_Framework_TestSuite::isTestMethod($method) and (strpos($method->name,'should')!==0)) return;
         $test = \PHPUnit_Framework_TestSuite::createTest($class, $method->name);
 
+        if ($test instanceof \PHPUnit_Framework_TestSuite_DataProvider) {
+            foreach ($test->tests() as $t) {
+                $this->injectDispatcherAndGuyClass($t);
+                if ($test instanceof TestCase\Test) {
+                    $groups = \PHPUnit_Util_Test::getGroups($class->name, $method->name);
+                    $t->getScenario()->groups($groups);
+                }
+            }
+            return $test;
+        }
+        $this->injectDispatcherAndGuyClass($test);
+
         if ($test instanceof TestCase\Test) {
-            $guy = $this->settings['namespace']
-                ? $this->settings['namespace'] . '\\' . $this->settings['class_name']
-                : $this->settings['class_name'];
-
-
-            $test->setBootstrap($this->settings['bootstrap']);
-            $test->setDispatcher($this->dispatcher);
-            $test->setGuyClass($guy);
-
             $groups = \PHPUnit_Util_Test::getGroups($class->name, $method->name);
             $test->getScenario()->groups($groups);
         } else {
             if ($this->settings['bootstrap']) require_once $this->settings['bootstrap'];
         }
         return $test;
+    }
+
+    protected function injectDispatcherAndGuyClass($test)
+    {
+        if (!$test instanceof TestCase\Test) return;
+        $guy = $this->settings['namespace']
+            ? $this->settings['namespace'] . '\\' . $this->settings['class_name']
+            : $this->settings['class_name'];
+
+
+        $test->setBootstrap($this->settings['bootstrap']);
+        $test->setDispatcher($this->dispatcher);
+        $test->setGuyClass($guy);
+
     }
 
     protected function createTestFromCestMethod($cestInstance, $methodName, $file, $guy)

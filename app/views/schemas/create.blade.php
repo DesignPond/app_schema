@@ -24,7 +24,7 @@
 						{{ Form::label('titre', 'Titre *' , array('class' => 'span2 ')) }}
 						{{ Form::text('titre', '' , array('class' => 'span3 required')) }}
 						</div>
-						{{ Form::hidden('auteur' , Auth::user()->id) }}
+						{{ Form::hidden('user_id' , Auth::user()->id) }}
 						<div class="row">
 						{{ Form::label('description', 'Description', array('class' => 'span2')) }}
 						{{ Form::textarea('description', '', array('class' => 'span3 required redactor')) }}

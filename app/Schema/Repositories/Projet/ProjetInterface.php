@@ -6,6 +6,9 @@ interface ProjetInterface {
 	public function find($id);
 	public function getLast($nbr);
 	public function projectsByTheme($id);
+	
+	public function create(array $data);
+	public function update(array $data);
 
 }
 

@@ -23,78 +23,78 @@ class HttpCommandExecutor implements WebDriverCommandExecutor {
    *   http://code.google.com/p/selenium/wiki/JsonWireProtocol#Command_Reference
    */
   private static $commands = array(
-    'acceptAlert' =>       array('method' => 'POST', 'url' => '/session/:sessionId/accept_alert'),
-    'addCookie' =>         array('method' => 'POST', 'url' => '/session/:sessionId/cookie'),
-    'clear' =>             array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/clear'),
-    'clickElement' =>      array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/click'),
-    'closeCurrentWindow' => array('method' => 'DELETE', 'url' => '/session/:sessionId/window'),
-    'deleteAllCookies' =>  array('method' => 'DELETE',  'url' => '/session/:sessionId/cookie'),
-    'deleteCookie' =>      array('method' => 'DELETE',  'url' => '/session/:sessionId/cookie/:name'),
-    'dismissAlert' =>       array('method' => 'POST',   'url' => '/session/:sessionId/dismiss_alert'),
-    'elementEquals' => array('method' => 'GET', 'url' => '/session/:sessionId/element/:id/equals/:other'),
-    'elementFindElement' => array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/element'),
-    'elementFindElements' => array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/elements'),
-    'executeScript' =>     array('method' => 'POST', 'url' => '/session/:sessionId/execute'),
-    'findElement' =>       array('method' => 'POST', 'url' => '/session/:sessionId/element'),
-    'findElements' =>      array('method' => 'POST', 'url' => '/session/:sessionId/elements'),
-    'focusFrame' =>       array('method' => 'POST',  'url' => '/session/:sessionId/frame'),
-    'focusWindow' =>       array('method' => 'POST',  'url' => '/session/:sessionId/window'),
-    'get' =>               array('method' => 'POST', 'url' => '/session/:sessionId/url'),
-    'getActiveElement' =>  array('method' => 'POST', 'url' => '/session/:sessionId/element/active'),
-    'getAlertText' =>       array('method' => 'GET', 'url' => '/session/:sessionId/alert_text'),
-    'getAllCookies' =>      array('method' => 'GET',  'url' => '/session/:sessionId/cookie'),
-    'getAvailableLogTypes' => array('method' => 'GET', 'url' => '/session/:sessionId/log/types'),
-    'getCurrentURL' =>     array('method' => 'GET',  'url' => '/session/:sessionId/url'),
+    'acceptAlert' =>            array('method' => 'POST', 'url' => '/session/:sessionId/accept_alert'),
+    'addCookie' =>              array('method' => 'POST', 'url' => '/session/:sessionId/cookie'),
+    'clear' =>                  array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/clear'),
+    'clickElement' =>           array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/click'),
+    'closeCurrentWindow' =>     array('method' => 'DELETE', 'url' => '/session/:sessionId/window'),
+    'deleteAllCookies' =>       array('method' => 'DELETE',  'url' => '/session/:sessionId/cookie'),
+    'deleteCookie' =>           array('method' => 'DELETE',  'url' => '/session/:sessionId/cookie/:name'),
+    'dismissAlert' =>           array('method' => 'POST',   'url' => '/session/:sessionId/dismiss_alert'),
+    'elementEquals' =>          array('method' => 'GET', 'url' => '/session/:sessionId/element/:id/equals/:other'),
+    'elementFindElement' =>     array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/element'),
+    'elementFindElements' =>    array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/elements'),
+    'executeScript' =>          array('method' => 'POST', 'url' => '/session/:sessionId/execute'),
+    'findElement' =>            array('method' => 'POST', 'url' => '/session/:sessionId/element'),
+    'findElements' =>           array('method' => 'POST', 'url' => '/session/:sessionId/elements'),
+    'focusFrame' =>             array('method' => 'POST',  'url' => '/session/:sessionId/frame'),
+    'focusWindow' =>            array('method' => 'POST',  'url' => '/session/:sessionId/window'),
+    'get' =>                    array('method' => 'POST', 'url' => '/session/:sessionId/url'),
+    'getActiveElement' =>       array('method' => 'POST', 'url' => '/session/:sessionId/element/active'),
+    'getAlertText' =>           array('method' => 'GET', 'url' => '/session/:sessionId/alert_text'),
+    'getAllCookies' =>          array('method' => 'GET',  'url' => '/session/:sessionId/cookie'),
+    'getAvailableLogTypes' =>   array('method' => 'GET', 'url' => '/session/:sessionId/log/types'),
+    'getCurrentURL' =>          array('method' => 'GET',  'url' => '/session/:sessionId/url'),
     'getCurrentWindowHandle' => array('method' => 'GET',  'url' => '/session/:sessionId/window_handle'),
-    'getElementAttribute' => array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/attribute/:name'),
-    'getElementCSSValue' => array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/css/:propertyName'),
-    'getElementLocation' => array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/location'),
+    'getElementAttribute' =>    array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/attribute/:name'),
+    'getElementCSSValue' =>     array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/css/:propertyName'),
+    'getElementLocation' =>     array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/location'),
     'getElementLocationOnceScrolledIntoView' => array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/location_in_view'),
-    'getElementSize' =>    array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/size'),
-    'getElementTagName' => array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/name'),
-    'getElementText' =>    array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/text'),
-    'getLog' => array('method' => 'POST', 'url' => '/session/:sessionId/log'),
-    'getPageSource' =>     array('method' => 'GET',  'url' => '/session/:sessionId/source'),
-    'getScreenOrientation' => array('method' => 'GET',  'url' => '/session/:sessionId/orientation'),
-    'getSession' =>        array('method' => 'GET',  'url' => '/session/:sessionId'),
-    'getTitle' =>          array('method' => 'GET',  'url' => '/session/:sessionId/title'),
-    'getWindowHandles' => array('method' => 'GET',  'url' => '/session/:sessionId/window_handles'),
-    'getWindowPosition' => array('method' => 'GET',  'url' => '/session/:sessionId/window/:windowHandle/position'),
-    'getWindowSize' =>     array('method' => 'GET',  'url' => '/session/:sessionId/window/:windowHandle/size'),
-    'goBack' =>            array('method' => 'POST',  'url' => '/session/:sessionId/back'),
-    'goForward' =>         array('method' => 'POST',  'url' => '/session/:sessionId/forward'),
-    'isElementDisplayed'=> array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/displayed'),
-    'isElementEnabled'=>   array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/enabled'),
-    'isElementSelected'=>  array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/selected'),
-    'maximizeWindow' =>    array('method' => 'POST', 'url' => '/session/:sessionId/window/:windowHandle/maximize'),
-    'mouseButtonDown' =>   array('method' => 'POST', 'url' => '/session/:sessionId/buttondown'),
-    'mouseButtonUp' =>     array('method' => 'POST', 'url' => '/session/:sessionId/buttonup'),
-    'mouseClick' =>        array('method' => 'POST', 'url' => '/session/:sessionId/click'),
-    'mouseDoubleClick' =>  array('method' => 'POST', 'url' => '/session/:sessionId/doubleclick'),
-    'mouseMoveTo' =>       array('method' => 'POST', 'url' => '/session/:sessionId/moveto'),
-    'newSession' =>        array('method' => 'POST', 'url' => '/session'),
-    'quit' =>              array('method' => 'DELETE', 'url' => '/session/:sessionId'),
-    'refreshPage' =>       array('method' => 'POST', 'url' => '/session/:sessionId/refresh'),
-    'sendFile' =>          array('method' => 'POST', 'url' => '/session/:sessionId/file'), // undocumented
-    'sendKeys' =>          array('method' => 'POST', 'url' => '/session/:sessionId/keys'),
-    'sendKeysToAlert' =>    array('method' => 'POST', 'url' => '/session/:sessionId/alert_text'),
-    'sendKeysToElement' => array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/value'),
+    'getElementSize' =>         array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/size'),
+    'getElementTagName' =>      array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/name'),
+    'getElementText' =>         array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/text'),
+    'getLog' =>      array('method' => 'POST', 'url' => '/session/:sessionId/log'),
+    'getPageSource' =>          array('method' => 'GET',  'url' => '/session/:sessionId/source'),
+    'getScreenOrientation' =>   array('method' => 'GET',  'url' => '/session/:sessionId/orientation'),
+    'getSession' =>             array('method' => 'GET',  'url' => '/session/:sessionId'),
+    'getTitle' =>               array('method' => 'GET',  'url' => '/session/:sessionId/title'),
+    'getWindowHandles' =>       array('method' => 'GET',  'url' => '/session/:sessionId/window_handles'),
+    'getWindowPosition' =>      array('method' => 'GET',  'url' => '/session/:sessionId/window/:windowHandle/position'),
+    'getWindowSize' =>          array('method' => 'GET',  'url' => '/session/:sessionId/window/:windowHandle/size'),
+    'goBack' =>                 array('method' => 'POST',  'url' => '/session/:sessionId/back'),
+    'goForward' =>              array('method' => 'POST',  'url' => '/session/:sessionId/forward'),
+    'isElementDisplayed'=>      array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/displayed'),
+    'isElementEnabled'=>        array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/enabled'),
+    'isElementSelected'=>       array('method' => 'GET',  'url' => '/session/:sessionId/element/:id/selected'),
+    'maximizeWindow' =>         array('method' => 'POST', 'url' => '/session/:sessionId/window/:windowHandle/maximize'),
+    'mouseButtonDown' =>        array('method' => 'POST', 'url' => '/session/:sessionId/buttondown'),
+    'mouseButtonUp' =>          array('method' => 'POST', 'url' => '/session/:sessionId/buttonup'),
+    'mouseClick' =>             array('method' => 'POST', 'url' => '/session/:sessionId/click'),
+    'mouseDoubleClick' =>       array('method' => 'POST', 'url' => '/session/:sessionId/doubleclick'),
+    'mouseMoveTo' =>            array('method' => 'POST', 'url' => '/session/:sessionId/moveto'),
+    'newSession' =>             array('method' => 'POST', 'url' => '/session'),
+    'quit' =>                   array('method' => 'DELETE', 'url' => '/session/:sessionId'),
+    'refreshPage' =>            array('method' => 'POST', 'url' => '/session/:sessionId/refresh'),
+    'sendFile' =>               array('method' => 'POST', 'url' => '/session/:sessionId/file'), // undocumented
+    'sendKeys' =>               array('method' => 'POST', 'url' => '/session/:sessionId/keys'),
+    'sendKeysToAlert' =>        array('method' => 'POST', 'url' => '/session/:sessionId/alert_text'),
+    'sendKeysToElement' =>      array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/value'),
     'setImplicitWaitTimeout' => array('method' => 'POST', 'url' => '/session/:sessionId/timeouts/implicit_wait'),
-    'setScreenOrientation' => array('method' => 'POST', 'url' => '/session/:sessionId/orientation'),
-    'setPageLoadTimeout' => array('method' => 'POST', 'url' => '/session/:sessionId/timeouts'),
-    'setScriptTimeout' =>  array('method' => 'POST', 'url' => '/session/:sessionId/timeouts/async_script'),
-    'setWindowPosition' => array('method' => 'POST', 'url' => '/session/:sessionId/window/:windowHandle/position'),
-    'setWindowSize' =>     array('method' => 'POST', 'url' => '/session/:sessionId/window/:windowHandle/size'),
-    'submitElement' =>     array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/submit'),
-    'takeScreenshot' =>    array('method' => 'GET',  'url' => '/session/:sessionId/screenshot'),
-    'touchTap'             => array('method' => 'POST', 'url' => '/session/:sessionId/touch/click'),
-    'touchDown'              => array('method' => 'POST', 'url' => '/session/:sessionId/touch/down'),
-    'touchDoubleTap'       => array('method' => 'POST', 'url' => '/session/:sessionId/touch/doubleclick'),
-    'touchFlick'             => array('method' => 'POST', 'url' => '/session/:sessionId/touch/flick'),
-    'touchLongPress'         => array('method' => 'POST', 'url' => '/session/:sessionId/touch/longclick'),
-    'touchMove'              => array('method' => 'POST', 'url' => '/session/:sessionId/touch/move'),
-    'touchScroll'            => array('method' => 'POST', 'url' => '/session/:sessionId/touch/scroll'),
-    'touchUp'                => array('method' => 'POST', 'url' => '/session/:sessionId/touch/up'),
+    'setScreenOrientation' =>   array('method' => 'POST', 'url' => '/session/:sessionId/orientation'),
+    'setPageLoadTimeout' =>     array('method' => 'POST', 'url' => '/session/:sessionId/timeouts'),
+    'setScriptTimeout' =>       array('method' => 'POST', 'url' => '/session/:sessionId/timeouts/async_script'),
+    'setWindowPosition' =>      array('method' => 'POST', 'url' => '/session/:sessionId/window/:windowHandle/position'),
+    'setWindowSize' =>          array('method' => 'POST', 'url' => '/session/:sessionId/window/:windowHandle/size'),
+    'submitElement' =>          array('method' => 'POST', 'url' => '/session/:sessionId/element/:id/submit'),
+    'takeScreenshot' =>         array('method' => 'GET',  'url' => '/session/:sessionId/screenshot'),
+    'touchTap' =>               array('method' => 'POST', 'url' => '/session/:sessionId/touch/click'),
+    'touchDown' =>              array('method' => 'POST', 'url' => '/session/:sessionId/touch/down'),
+    'touchDoubleTap' =>         array('method' => 'POST', 'url' => '/session/:sessionId/touch/doubleclick'),
+    'touchFlick' =>             array('method' => 'POST', 'url' => '/session/:sessionId/touch/flick'),
+    'touchLongPress' =>         array('method' => 'POST', 'url' => '/session/:sessionId/touch/longclick'),
+    'touchMove' =>              array('method' => 'POST', 'url' => '/session/:sessionId/touch/move'),
+    'touchScroll' =>            array('method' => 'POST', 'url' => '/session/:sessionId/touch/scroll'),
+    'touchUp' =>                array('method' => 'POST', 'url' => '/session/:sessionId/touch/up'),
   );
 
   protected $url;
@@ -126,24 +126,30 @@ class HttpCommandExecutor implements WebDriverCommandExecutor {
    *   name       : the name of the command
    *   parameters : the parameters of the command required
    *
+   * @param command An array that contains
+   *                  url        : the url of the remote server
+   *                  sessionId  : the session id if needed
+   *                  name       : the name of the command
+   *                  parameters : the parameters of the command required
+   * @param curl_opts An array of curl options.
+   *
    * @return array The response of the command.
    */
-  public static function remoteExecute($command) {
+  public static function remoteExecute($command, $curl_opts = array()) {
     if (!isset(self::$commands[$command['name']])) {
       throw new Exception($command['name']." is not a valid command.");
     }
     $raw = self::$commands[$command['name']];
-    $extra_opts = array();
 
     if ($command['name'] == 'newSession') {
-      $extra_opts[CURLOPT_FOLLOWLOCATION] = true;
+      $curl_opts[CURLOPT_FOLLOWLOCATION] = true;
     }
 
     return self::curl(
       $raw['method'],
       sprintf("%s%s", $command['url'], $raw['url']),
       $command,
-      $extra_opts
+      $curl_opts
     );
   }
 
@@ -221,7 +227,7 @@ class HttpCommandExecutor implements WebDriverCommandExecutor {
       if ($params && is_array($params)) {
         $msg .= sprintf(' with params: %s', json_encode($params));
       }
-      throw new WebDriverCurlException($msg . "\n\n" . $error);
+      WebDriverException::throwException(-1, $msg . "\n\n" . $error, array());
     }
     curl_close($curl);
 
@@ -233,8 +239,8 @@ class HttpCommandExecutor implements WebDriverCommandExecutor {
     }
 
     $message = null;
-    if (is_array($results) && array_key_exists('message', $results)) {
-      $message = $results['message'];
+    if (is_array($value) && array_key_exists('message', $value)) {
+      $message = $value['message'];
     }
 
     $sessionId = null;

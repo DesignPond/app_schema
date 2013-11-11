@@ -82,3 +82,8 @@ App::bind('Schema\Repositories\Projet\ProjetInterface', 'Schema\Repositories\Pro
 App::bind('Schema\Repositories\Projet\ProjetFormInterface', 'Schema\Service\Form\Projet\ProjetForm');
 App::bind('Schema\Repositories\Categorie\CategorieInterface', 'Schema\Repositories\Categorie\DbCategorie');
 App::bind('Schema\Repositories\Theme\ThemeInterface', 'Schema\Repositories\Theme\DbTheme');
+
+App::bind('Schema\Repositories\Projet\ProjetInterface', function()
+{
+   return new Schema\Repositories\Projet\DbProjet( new Projet );
+});
