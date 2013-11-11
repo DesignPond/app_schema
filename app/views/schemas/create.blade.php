@@ -21,23 +21,20 @@
 						{{ Form::open(array( 'url' => 'schemas/projet', 'class' => '')) }}
 			
 						<div class="row">
-						{{ Form::label('titre', 'Titre' , array('class' => 'span2 ')) }}
+						{{ Form::label('titre', 'Titre *' , array('class' => 'span2 ')) }}
 						{{ Form::text('titre', '' , array('class' => 'span3 required')) }}
 						</div>
-						<div class="row">
-						{{ Form::label('auteur', 'Auteur', array('class' => 'span2')) }}
-						{{ Form::text('auteur', '' , array('class' => 'span3 required')) }}
-						</div>
+						{{ Form::hidden('auteur' , Auth::user()->id) }}
 						<div class="row">
 						{{ Form::label('description', 'Description', array('class' => 'span2')) }}
 						{{ Form::textarea('description', '', array('class' => 'span3 required redactor')) }}
 						</div>
 						<div class="row">
-						{{ Form::label('Catégorie', '' , array('class' => 'span2')) }}
+						{{ Form::label('Catégorie *', '' , array('class' => 'span2')) }}
 						{{ Form::select('categorie', $categories ,'' , array('class' => 'span3 required')) }}
 						</div>	
 						<div class="row">
-						{{ Form::label('Thème', '' , array('class' => 'span2')) }}
+						{{ Form::label('Thème *', '' , array('class' => 'span2')) }}
 						{{ Form::select('refTheme', $themes, '' , array('class' => 'span3 required', 'id' => 'theme' )) }}
 						</div>	
 						<div class="row">
