@@ -56,5 +56,15 @@ class DbTheme implements ThemeInterface {
     	
 	}
 	
+	public function droplist_theme(){
+		
+		return Theme::lists('titre','id');
+	}
+	
+	public function droplist_subtheme(){
+	
+		return Subtheme::lists('titre','id');
+	}
+	
 }
 

@@ -309,7 +309,7 @@ h5 {
         line-height: 35px;
         text-decoration: none;
         color: #555;
-        width: 80px;
+        min-width: 80px;
         border-left: solid 1px #eee;
         text-align: center;
     }
@@ -439,6 +439,16 @@ h5 {
 		margin: 10px 5% 0 0;
 		float: right;
 	}
+
+
+/* -------------------------------------------------- */
+/*  Form */
+/* -------------------------------------------------- */
+
+.form_holder{
+	width: 600px;
+	margin: 0 auto;
+}
 
 /* -------------------------------------------------- */
 /* application */

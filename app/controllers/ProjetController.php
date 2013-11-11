@@ -37,7 +37,19 @@ class ProjetController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('projets.create');
+		$categories = $this->categorie->droplist();
+		$themes     = $this->theme->droplist_theme();
+		$subthemes  = $this->theme->droplist_subtheme();
+		
+		$data = array(
+        	'titre'      => 'Schéma',
+			'soustitre'  => 'Créer un nouveau schéma',
+			'categories' => $categories,
+			'themes'     => $themes ,
+			'subthemes'  => $subthemes 
+		);
+		
+        return View::make('schemas.create')->with( $data );
 	}
 
 	/**

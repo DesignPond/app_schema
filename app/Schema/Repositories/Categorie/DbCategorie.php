@@ -20,5 +20,10 @@ class DbCategorie implements CategorieInterface {
 				
 	}
 	
+	public function droplist(){
+	
+		return Categorie::lists('titre','id');
+	}
+	
 }
 

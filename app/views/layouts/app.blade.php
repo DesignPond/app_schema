@@ -71,6 +71,9 @@
 	                <ul id="mainmenu">
 	                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
 	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}</li>
+	                    @if ( Auth::check() )
+							<li><i class="icon-user"></i> {{ link_to('schemas/projet/create', 'Créer un schéma' ) }}</li>
+						@endif 
 	                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
 	                </ul>
 	                <!-- mainmenu close -->
