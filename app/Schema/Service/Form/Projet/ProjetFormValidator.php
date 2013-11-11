@@ -1,4 +1,6 @@
-<?php namespace Schema\Service\Validation;
+<?php namespace Schema\Service\Form\Projet;
+
+use  Schema\Service\Validation\AbstractLaravelValidator;
 
 class ProjetFormValidator extends AbstractLaravelValidator {
 	

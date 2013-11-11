@@ -3,7 +3,7 @@
 use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
-use  Schema\Service\Validation\ProjetFormValidator;
+use  Schema\Service\Form\Projet\ProjetFormValidator;
 
 class ProjetController extends BaseController {
 
@@ -79,7 +79,7 @@ class ProjetController extends BaseController {
 	{
 		if( $this->validator->with( Input::all() )->passes() )
 		{
-			
+		
 		}
 		else
 		{	

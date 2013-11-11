@@ -79,5 +79,6 @@ Route::group(array('prefix' => 'api/v1'), function()
 });
 
 App::bind('Schema\Repositories\Projet\ProjetInterface', 'Schema\Repositories\Projet\DbProjet');
+App::bind('Schema\Repositories\Projet\ProjetFormInterface', 'Schema\Service\Form\Projet\ProjetForm');
 App::bind('Schema\Repositories\Categorie\CategorieInterface', 'Schema\Repositories\Categorie\DbCategorie');
 App::bind('Schema\Repositories\Theme\ThemeInterface', 'Schema\Repositories\Theme\DbTheme');
