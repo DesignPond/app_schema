@@ -1,7 +1,7 @@
 <?php namespace Schema\Service\Form\Projet;
 
-use  Schema\Service\Validation\ValidableInterface;
-use  Schema\Repositories\Projet\ProjetFormInterface;
+use  Schema\Repositories\Projet\ProjetInterface;
+use  Schema\Service\Form\Projet\ProjetFormValidator;
 
 class ProjetForm {
 	
@@ -20,7 +20,7 @@ class ProjetForm {
 	*/
 	protected $projet;
 	
-	public function __construct( ValidableInterface $validator, ProjetFormInterface $projet )
+	public function __construct( ProjetFormValidator $validator , ProjetInterface $projet )
 	{
 		$this->validator = $validator;
 		$this->projet    = $projet;

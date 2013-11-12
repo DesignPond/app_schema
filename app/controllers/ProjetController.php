@@ -3,7 +3,7 @@
 use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
-use  Schema\Service\Form\Projet\ProjetFormValidator;
+use  Schema\Service\Form\Projet\ProjetForm;
 
 class ProjetController extends BaseController {
 
@@ -15,7 +15,7 @@ class ProjetController extends BaseController {
 	
 	protected $validator;
 	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, ProjetFormValidator $validator ){
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, ProjetForm $validator ){
 		
 		$this->projet = $projet;
 		
@@ -77,13 +77,13 @@ class ProjetController extends BaseController {
 	 */
 	public function store()
 	{
-		if( $this->projet->create( Input::all() )  )
+		if( $this->validator->save( Input::all() ) )
 		{
-			
+			echo 'yeh';
 		}
 		else
 		{	
-			return Redirect::to('schemas/projet/create')->withErrors($this->projet->errors())->withInput(Input::all() ); 
+			return Redirect::to('schemas/projet/create')->withErrors($this->validator->errors())->withInput(Input::all() ); 
 		}
 	}
 

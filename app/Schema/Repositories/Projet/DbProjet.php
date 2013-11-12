@@ -4,8 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 use Schema\Repositories\Projet\ProjetInterface;
 use Illuminate\Database\Eloquent\Model as M;
 
-use Projet;
-
 class DbProjet implements ProjetInterface {
 
 	protected $projet;
@@ -13,7 +11,7 @@ class DbProjet implements ProjetInterface {
 	// Class expects an Eloquent model
 	public function __construct(M $projet)
 	{
-		$this->projet = $projet;
+		$this->projet = $projet;	
 	}
 	
 	public function getAll(){
@@ -40,7 +38,7 @@ class DbProjet implements ProjetInterface {
 	}
 	
 	public function create(array $data){
-	
+		
 		// Create the article
 		$projet = $this->projet->create(array(
 			'titre'       => $data['titre'],
