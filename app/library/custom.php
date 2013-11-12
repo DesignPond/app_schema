@@ -39,4 +39,11 @@ class Custom {
 	   return $argument;
 	}
 	
+	public function formatDate($date){
+		
+		$Carbon = new Carbon\Carbon();
+		$dateFormatted   = $Carbon->createFromFormat('Y-m-d H:i:s', $date);
+		return  $dateFormatted;
+	}
+	
 }

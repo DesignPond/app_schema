@@ -28,13 +28,21 @@ class SchemaController extends BaseController {
 	 */
 	public function index()
 	{
-
+		$user_projets = array();
+		
         $projets  = $this->projet->getLast(3);
         
+        if(Auth::check())
+        {
+        	$user = Auth::user()->id;
+	        $user_projets = $this->projet->projectsByUser($user,2);  
+        }       	
+        
         $data = array(
-        	'titre'     => 'Accueil',
-			'soustitre' => 'Schémas des procédures civiles',
-			'projets'   => $projets 
+        	'titre'        => 'Accueil',
+			'soustitre'    => 'Schémas des procédures civiles',
+			'projets'      => $projets ,
+			'user_projets' => $user_projets
 		);
 		
 	    return View::make('schemas.home')->with( $data );

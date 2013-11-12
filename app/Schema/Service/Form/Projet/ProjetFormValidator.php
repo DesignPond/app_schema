@@ -9,9 +9,9 @@ class ProjetFormValidator extends AbstractLaravelValidator {
 	*/
 	
 	protected $rules = array(
-		'titre'     => 'required',
-		'categorie' => 'required',
-		'refTheme'  => 'required'
+		'titre'        => 'required',
+		'categorie_id' => 'required',
+		'theme_id'     => 'required'
 	);
 	
 	/*
@@ -19,10 +19,10 @@ class ProjetFormValidator extends AbstractLaravelValidator {
 	*/
 	
 	protected $messages = array(
-		'titre.required'     => 'Le titre est requis',
-		'user_id.exists'     => 'That user does not exist',
-		'categorie.required' => 'La catégorie principale est requise',
-		'refTheme.required'  => 'Le thème est requis'
+		'titre.required'        => 'Le titre est requis',
+		'user_id.exists'        => 'That user does not exist',
+		'categorie_id.required' => 'La catégorie principale est requise',
+		'theme_id.required'     => 'Le thème est requis'
 	);
 	
 }

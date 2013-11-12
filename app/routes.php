@@ -17,32 +17,11 @@ Route::get('/', function()
 {
 
 			
-		 $themes    = Theme::get()->toArray();
-		 $subthemes = Subtheme::get()->toArray();
- 
-		 $themesByCategories = array();
-		 
-		 if( !empty($themes) )
-		 {
-			 foreach($themes as $theme)
-			 {
-				 $themesByCategories[$theme['categorie_id']][$theme['id']]['titre'] = $theme['titre'];
-				 $sub = array();
-				 
-				 if( !empty($subthemes) )
-				 {
-					  foreach($subthemes as $subtheme)
-					  {
-						  $sub[$subtheme['id']] = $subtheme['titre'];
-					  }
-					  
-					  $themesByCategories[$theme['categorie_id']][$theme['id']]['subtheme'][] = $sub;
-				 }  
-			 }
-		 }
+$user_projets = Projet::where('user_id', '=', 1)->orderBy('id', 'DESC')->take(2)->get()->toArray();
+		
 		
 		echo '<pre>';
-		print_r($themesByCategories);
+		print_r(Auth::user());
 		echo '</pre>';	
 
 			 
@@ -85,6 +64,7 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::resource('theme', 'ThemeController');
 	Route::get('theme/drop_theme/{id}', 'ThemeController@drop_theme');
 	Route::get('theme/drop_subtheme/{id}', 'ThemeController@drop_subtheme');
+	Route::get('projet/schema/{id}', 'ProjetController@schema');
 	Route::resource('projet', 'ProjetController');
 
 });

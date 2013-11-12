@@ -17,7 +17,7 @@
 						<div class="row">
 						
 						{{ Form::label('titre', 'Titre *' , array('class' => 'span2 ')) }}
-						<div class="span3">{{ Form::text('titre', '' , array('class' => 'required')) }}</div>
+						<div class="span4">{{ Form::text('titre', '' , array('class' => 'required')) }}</div>
 							@foreach($errors->get('titre') as $message)<div class="span3 errors">{{ $message }}</div> @endforeach
 						</div>
 						
@@ -25,24 +25,24 @@
 						
 						<div class="row">
 						{{ Form::label('description', 'Description', array('class' => 'span2')) }}
-						<div class="span3">{{ Form::textarea('description', '', array('class' => 'required redactor')) }}</div>
+						<div class="span4">{{ Form::textarea('description', '', array('class' => 'required redactor')) }}</div>
 						</div>
 						
 						<div class="row">
 						{{ Form::label('Catégorie *', '' , array('class' => 'span2')) }}
-						<div class="span3">{{ Form::select('categorie_id', $categories ,'' , array( 'id' => 'categorie', 'class' => 'required')) }}</div>
+						<div class="span4">{{ Form::select('categorie_id', $categories ,'' , array( 'id' => 'categorie', 'class' => 'required')) }}</div>
 								@foreach($errors->get('categorie_id') as $message)<div class="span3 errors">{{ $message }}</div> @endforeach
 						</div>	
 						
 						<div class="row">
 						{{ Form::label('Thème *', '' , array('class' => 'span2')) }}
-						<div class="span3">{{ Form::select('theme_id', $themes, '' , array('id' => 'theme', 'class' => 'required', 'id' => 'theme' )) }}</div>
+						<div class="span4">{{ Form::select('theme_id', $themes, '' , array('id' => 'theme', 'class' => 'required', 'id' => 'theme' )) }}</div>
 								@foreach($errors->get('theme_id') as $message)<div class="span3 errors">{{ $message }}</div> @endforeach
 						</div>	
 						
 						<div class="row">
 						{{ Form::label('Sous thème', '' ,array('class' => 'span2')) }}
-						<div class="span3">{{ Form::select('subtheme_id', $subthemes, '' , array('id' => 'subtheme', 'class' => 'span3', 'id' => 'subtheme')) }}</div>
+						<div class="span4">{{ Form::select('subtheme_id', $subthemes, '' , array('id' => 'subtheme', 'class' => '', 'id' => 'subtheme')) }}</div>
 						</div>
 						
 						<br/>

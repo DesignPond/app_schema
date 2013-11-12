@@ -99,7 +99,7 @@
 			                    <ul class="crumb">
 			                    
 			                    	@if ( Auth::check() )
-									    <li><i class="icon-user"></i> {{ Auth::user()->email }}</li>
+									    <li><i class="icon-user"></i> {{ Auth::user()->prenom }} {{ Auth::user()->nom }}</li>
 									    <li> | <a href="">Logout</a></li>
 									@endif 
 			                       

@@ -37,6 +37,12 @@ class DbProjet implements ProjetInterface {
     	return $this->projet->where('theme_id', '=', $refTheme)->with(array('user'))->get()->toArray();
 	}
 	
+	public function projectsByUser($user , $nbr){
+	
+		return $this->projet->where('user_id', '=', $user)->with( array('user','theme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
+		
+	}
+	
 	public function create(array $data){
 		
 		// Create the article

@@ -26,6 +26,7 @@
 						<?php
 						
 							 $Carbon = new Carbon\Carbon();
+							 
 							 $date   = $Carbon->createFromFormat('Y-m-d H:i:s', $projet['created_at']);
 							 
 							 $day    = $date->format('d');  
@@ -38,11 +39,20 @@
 				                <span class="month">{{ $month }}</span>
 				            </div>
 				            <div class="txt">
-				                <h5>{{ link_to('schemas/projet/'.$projet['id'].'#projet/'.$projet['id'] , $projet['titre'] ) }}</h5>
+				            	@if($projet['type'] == 'app')	
+				               		<h5>{{ link_to('schemas/projet/'.$projet['id'], $projet['titre'] ) }}</h5>
+				               	@else
+				               		<h5>{{ link_to('schemas/projet/schema/'.$projet['id'], $projet['titre']) }}</h5>
+				                @endif 
 				                <span class="read">{{ $projet['description'] }}</span>
 				                <span class="info">
 				                	<strong>{{ $projet['theme']['titre'] }}</strong> | 
-				                	{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }} | {{ link_to('schemas/projet/'.$projet['id'].'#projet/'.$projet['id'] , 'Voir le schéma' ) }} 
+				                		{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }} | 
+				                	@if($projet['type'] == 'app')	
+					               		{{ link_to('schemas/projet/'.$projet['id'], 'Voir le schéma' ) }}
+					               	@else
+					               		{{ link_to('schemas/projet/schema/'.$projet['id'], 'Voir le schéma') }}
+					                @endif  
 				                </span>
 				            </div>
 				        </li>
@@ -55,43 +65,43 @@
             <div class="span4 login-frontpage">
             
             	  @if (Auth::check())
-            	  
+    	  
             	  	<h3>Vos infos</h3>
 				  	<div class="widget tab-holder">
                             <div class="de_tab">
                                 <ul class="de_nav">
                                     <li><span class="active">Vos schémas</span></li>
-                                    <li><span>Profile</span></li>
+                                    <li><span>Profil</span></li>
                                 </ul>
 
                                 <div class="de_tab_content">
 
                                     <div class="tab-small-post tab-hompage">
                                         <ul>
-                                            <li>
-                                                <span class="post-content">
-                                                    <a href="#">Sed ut perspiciatis unde </a></span>
-                                                <span class="post-date">Sept 22, 2013</span>
-						                        <span><i class="icon-bookmark"></i><a href="#">Histoire</a></span>
-                                            </li>
+                                        
+                                        @if ( !empty($user_projets) )
+											@foreach($user_projets as $user_projet) 
+											
+											<?php  $projetdate = $Carbon->createFromFormat('Y-m-d H:i:s', $user_projet['created_at'] ); ?>
 
                                             <li>
                                                 <span class="post-content">
-                                                    <a href="#">Sed ut perspiciatis unde </a></span>
-                                                <span class="post-date">Sept 22, 2013 </span>
-                                                <span><i class="icon-bookmark"></i><a href="#">Histoire</a></span>
+                                                    <a href="#">{{ $user_projet['titre'] }}</a></span>
+                                                <span class="post-date">{{ $projetdate->format('d/m/Y'); }}</span>
+						                        <span><i class="icon-bookmark"></i><a href="#">{{ $user_projet['theme']['titre'] }}</a></span>
                                             </li>
 
+                                            
+											@endforeach
+										@endif 
+										
                                         </ul>
                                     </div>
 
                                     <div class="tab-small-post">
                                         <address>
-			                                100 Mainstreet Center, Sydney
-			                                <span><strong>Phone:</strong>(208) 333 9296</span>
-			                                <span><strong>Fax:</strong>(208) 333 9298</span>
-			                                <span><strong>Email:</strong><a href="mailto:contact@example.com">contact@example.com</a></span>
-			                                <span><strong>Web:</strong><a href="#test">http://example.com</a></span>
+			                                {{ Auth::user()->prenom }} {{ Auth::user()->nom }}
+			                                <span><strong>Email:</strong><a href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a></span>
 			                            </address>
                                     </div>
                                     

@@ -38,7 +38,7 @@ class ProjetsTableSeeder extends Seeder {
 				'categorie_id'  => '1',
 				'theme_id'   => '1',
 				'subtheme_id'=> '2',
-				'type'       => 'app',
+				'type'       => 'pdf',
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
 			),
@@ -71,7 +71,7 @@ class ProjetsTableSeeder extends Seeder {
 				'categorie_id'  => '1',
 				'theme_id'   => '2',
 				'subtheme_id'=> '4',
-				'type'       => 'app',
+				'type'       => 'pdf',
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
 			),
@@ -115,7 +115,7 @@ class ProjetsTableSeeder extends Seeder {
 				'categorie_id'  => '1',
 				'theme_id'   => '1',
 				'subtheme_id'=> '1',
-				'type'       => 'app',
+				'type'       => 'pdf',
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
 			),
