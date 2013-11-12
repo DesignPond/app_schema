@@ -20,6 +20,7 @@ class CreateProjetsTable extends Migration {
 			$table->integer('categorie_id');
 			$table->integer('theme_id');
 			$table->integer('subtheme_id');
+			$table->enum('type', array('app', 'pdf'));
 			$table->timestamps();
 		});
 	}
