@@ -49,13 +49,13 @@ class ProjetController extends BaseController {
 		$subthemes  = array();
 		
 		$categories = $this->categorie->droplist();
-		$categories = array_add($categories, '0', 'Choix');
+		$categories = array_add($categories, '', 'Choix');
 			ksort($categories);
 		$themes     = $this->theme->droplist_theme();
-		$themes     = array_add($themes, '0', 'Choix');
+		$themes     = array_add($themes, '', 'Choix');
 			ksort($themes); 
 		$subthemes  = $this->theme->droplist_subtheme();
-		$subthemes  = array_add($subthemes, '0', 'Choix');
+		$subthemes  = array_add($subthemes, '', 'Choix');
 			 ksort($subthemes); 
 		
 		$data = array(
@@ -79,7 +79,11 @@ class ProjetController extends BaseController {
 	{
 		if( $this->validator->save( Input::all() ) )
 		{
-			echo 'yeh';
+			// Get last inserted
+			$projet = Projet::orderBy('id', 'DESC')->take(1)->get()->first()->toArray();
+			$id     = $projet['id'];
+			
+			return Redirect::to('schemas/projet/'.$id.'#projet/'.$id.'');
 		}
 		else
 		{	

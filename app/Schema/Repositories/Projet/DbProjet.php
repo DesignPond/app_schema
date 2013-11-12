@@ -22,19 +22,19 @@ class DbProjet implements ProjetInterface {
 	
 	public function find($id){
 		
-		return $this->projet->with( array('user') )->findOrFail($id)->toArray();
+		return $this->projet->with( array('user','theme') )->findOrFail($id)->toArray();
 				
 	}
 	
 	public function getLast($nbr){
 	
-		return $this->projet->with( array('theme','subtheme','user') )->take($nbr)->skip(0)->get()->toArray();
+		return $this->projet->with( array('user','theme') )->take($nbr)->skip(0)->get()->toArray();
 		
 	}
 		
 	public function projectsByTheme($refTheme){
     	
-    	return $this->projet->where('refTheme', '=', $refTheme)->with(array('user'))->get()->toArray();
+    	return $this->projet->where('theme_id', '=', $refTheme)->with(array('user'))->get()->toArray();
 	}
 	
 	public function create(array $data){
@@ -44,9 +44,9 @@ class DbProjet implements ProjetInterface {
 			'titre'       => $data['titre'],
 			'description' => $data['description'],
 			'user_id'     => $data['user_id'],
-			'categorie'   => $data['categorie'],
-			'refTheme'    => $data['refTheme'],
-			'refSubtheme' => $data['refSubtheme']
+			'categorie_id'=> $data['categorie_id'],
+			'theme_id'    => $data['theme_id'],
+			'subtheme_id' => $data['subtheme_id']
 		));
 		
 		if( ! $projet )
@@ -66,12 +66,12 @@ class DbProjet implements ProjetInterface {
 			return false;
 		}
 
-		$projet->titre       = $data['titre'];
-		$projet->description = $data['description'];
-		$projet->user_id     = $data['user_id'];
-		$projet->categorie   = $data['categorie'];
-		$projet->refTheme    = $data['refTheme'];
-		$projet->refSubtheme = $data['refSubtheme'];
+		$projet->titre        = $data['titre'];
+		$projet->description  = $data['description'];
+		$projet->user_id      = $data['user_id'];
+		$projet->categorie_id = $data['categorie_id'];
+		$projet->theme_id     = $data['theme_id'];
+		$projet->subtheme_id  = $data['subtheme_id'];
 		$projet->save();	
 		
 		return true;

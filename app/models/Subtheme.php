@@ -5,16 +5,16 @@ class Subtheme extends Eloquent {
 	protected $guarded = array('id');
 	public $timestamps = false;
 
-	public static $rules = array( 'titre' => 'required', 'refCategorie' => 'required', 'refTheme' => 'required' );
+	public static $rules = array( 'titre' => 'required', 'categorie_id' => 'required', 'theme_id' => 'required' );
 	
 	public function categorie()
     {
-        return $this->hasOne('Categorie', 'refCategorie');
+        return $this->belongsTo('Categorie');
     }
     
 	public function theme()
     {
-        return $this->hasOne('Theme', 'refTheme');
+        return $this->belongsTo('Theme');
     }
 	
 }

@@ -44,9 +44,6 @@ class ThemeController extends BaseController {
 	public function drop_theme($id = NULL){
 		
 		$themes = $this->theme->drop_theme_by_categorie($id);
-		$themes = array_add($themes, '0', 'Choix');
-		
-		ksort($themes);
 		
 		return Response::json($themes, 200 );
 	}
@@ -55,7 +52,7 @@ class ThemeController extends BaseController {
 	public function drop_subtheme($id){
 
 		$subthemes = $this->theme->drop_subtheme_by_categorie($id);
-		$subthemes = array_add($subthemes, '0', 'Choix');
+		$subthemes = array_add($subthemes, '0', 'Aucun');
 		
 		ksort($subthemes);
 		

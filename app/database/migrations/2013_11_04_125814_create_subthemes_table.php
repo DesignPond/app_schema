@@ -15,8 +15,8 @@ class CreateSubthemesTable extends Migration {
 		Schema::create('subthemes', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('titre');
-			$table->integer('refCategorie');
-			$table->integer('refTheme');
+			$table->integer('categorie_id');
+			$table->integer('theme_id');
 		});
 	}
 

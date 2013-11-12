@@ -446,8 +446,7 @@ h5 {
 /* -------------------------------------------------- */
 
 .form_holder{
-	width: 600px;
-	margin: 0 auto;
+	margin-top: 20px;
 }
 
 /* -------------------------------------------------- */
@@ -2767,6 +2766,7 @@ address span {
 .errors{
 	list-style: none;
 	margin-left: 0;
+	color: #b30e0e;
 }
 
 .errors li{

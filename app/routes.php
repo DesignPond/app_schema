@@ -15,16 +15,38 @@
 
 Route::get('/', function()
 {
-	//return View::make('hello');
-	
-	//$user =  Projet::with( array('user') )->findOrFail(1)->toArray();
-	
-	$projet = Projet::where('refTheme', '=', 1)->with(array('user'))->get()->toArray();
- 
-	 echo '<pre>';
-	 print_r( $projet );
-	 echo '</pre>';	 
 
+			
+		 $themes    = Theme::get()->toArray();
+		 $subthemes = Subtheme::get()->toArray();
+ 
+		 $themesByCategories = array();
+		 
+		 if( !empty($themes) )
+		 {
+			 foreach($themes as $theme)
+			 {
+				 $themesByCategories[$theme['categorie_id']][$theme['id']]['titre'] = $theme['titre'];
+				 $sub = array();
+				 
+				 if( !empty($subthemes) )
+				 {
+					  foreach($subthemes as $subtheme)
+					  {
+						  $sub[$subtheme['id']] = $subtheme['titre'];
+					  }
+					  
+					  $themesByCategories[$theme['categorie_id']][$theme['id']]['subtheme'][] = $sub;
+				 }  
+			 }
+		 }
+		
+		echo '<pre>';
+		print_r($themesByCategories);
+		echo '</pre>';	
+
+			 
+	 
 /*		 foreach($categories as $categorie) 
 	 {
 	 	foreach($categorie->theme as $theme)

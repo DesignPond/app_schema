@@ -6,17 +6,17 @@ class Projet extends Eloquent {
 	
 	public function categorie()
     {
-        return $this->hasOne('Categorie', 'id');
+        return $this->hasOne('Categorie');
     }
     
     public function theme()
     {
-        return $this->hasOne('Theme', 'id');
+        return $this->belongsTo('Theme');
     }
     
     public function subtheme()
     {
-        return $this->hasOne('Subtheme', 'id');
+        return $this->belongsTo('Subtheme');
     }
     
     public function user()

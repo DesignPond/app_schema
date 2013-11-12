@@ -22,25 +22,27 @@ class DbTheme implements ThemeInterface {
 	
 	public function themeAndSubthemeByCategory(){
 			
-		 $themes = Theme::with(array('subtheme'))->get()->toArray();
-		 
+		 $themes    = Theme::get()->toArray();
+		 $subthemes = Subtheme::get()->toArray();
+ 
 		 $themesByCategories = array();
 		 
 		 if( !empty($themes) )
 		 {
 			 foreach($themes as $theme)
 			 {
-				 $themesByCategories[$theme['refCategorie']][$theme['id']]['titre'] = $theme['titre'];
-				 $subthemes = array();
+				 $themesByCategories[$theme['categorie_id']][$theme['id']]['titre'] = $theme['titre'];
 				 
-				 if( isset($theme['subtheme']) )
+				 $sub = array();
+				 
+				 if( !empty($subthemes) )
 				 {
-					  foreach($theme['subtheme'] as $subtheme)
+					  foreach($subthemes as $subtheme)
 					  {
-						  $subthemes[$subtheme['id']] = $subtheme['titre'];
+						  $sub[$subtheme['id']] = $subtheme['titre'];
 					  }
 					  
-					  $themesByCategories[$theme['refCategorie']][$theme['id']]['subtheme'][] = $subthemes;
+					  $themesByCategories[$theme['categorie_id']][$theme['id']]['subtheme'][] = $sub;
 				 }  
 			 }
 		 }
@@ -50,7 +52,7 @@ class DbTheme implements ThemeInterface {
 	
 	public function subthemes($id){
 	
-    	$subthemes = Subtheme::where('refTheme', '=', $id)->get()->lists('titre', 'id');
+    	$subthemes = Subtheme::where('theme_id', '=', $id)->get()->lists('titre', 'id');
 		
 		return $subthemes;
     	
@@ -68,7 +70,7 @@ class DbTheme implements ThemeInterface {
 	
 	public function drop_theme_by_categorie($id){
 		
-		$themeList = Theme::where('refCategorie', '=', $id)->get();
+		$themeList = Theme::where('categorie_id', '=', $id)->get();
 		$themes    = $themeList->lists('titre','id');
 		
 		return $themes;
@@ -76,7 +78,7 @@ class DbTheme implements ThemeInterface {
 	
 	public function drop_subtheme_by_categorie($id){
 		
-		$subthemeList = Subtheme::where('refTheme', '=', $id)->get();
+		$subthemeList = Subtheme::where('theme_id', '=', $id)->get();
 		$subthemes    = $subthemeList->lists('titre','id');
 		
 		return $subthemes;

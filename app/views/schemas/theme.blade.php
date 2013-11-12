@@ -35,7 +35,7 @@
 								@foreach($projets as $projet) 
 			                    
 		                        <!-- gallery item -->
-		                        <div class="span3 item {{ $custom->makeSlug( $custom->if_exist($subthemes[$projet['refSubtheme']])) }}">
+		                        <div class="span3 item {{ $custom->makeSlug( $custom->if_exist($subthemes[$projet['subtheme_id']])) }}">
 		                            <div class="picframe">
 		                                <span class="overlay">
 		                                    <span class="info-area">

@@ -9,12 +9,12 @@ class Categorie extends Eloquent {
 	
 	public function theme()
     {
-        return $this->hasMany('Theme','id');
+        return $this->hasMany('Theme');
     }
    
 	public function subtheme()
     {
-        return $this->hasMany('Subtheme','id');
+        return $this->hasMany('Subtheme');
     }   
 
     

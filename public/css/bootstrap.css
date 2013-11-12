@@ -121,6 +121,17 @@ textarea {
   vertical-align: middle;
 }
 
+input{
+	min-height: 26px;
+}
+
+input,
+textarea {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 button,
 input {
   *overflow: visible;
@@ -1092,6 +1103,7 @@ input[type="color"],
 .uneditable-input {
   display: inline-block;
   height: 20px;
+  width: 100%;
   padding: 4px 6px;
   margin-bottom: 10px;
   font-size: 14px;
@@ -1129,6 +1141,7 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input {
+  width: 100%;
   background-color: #ffffff;
   border: 1px solid #cccccc;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1196,7 +1209,6 @@ input[type="file"] {
 }
 
 select {
-  width: 220px;
   background-color: #ffffff;
   border: 1px solid #cccccc;
 }
