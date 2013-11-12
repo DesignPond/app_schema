@@ -43,7 +43,7 @@ define([
 				   		data = data.items.id - 1;
 					   	var colors = default_colors[data];
 	
-					   	$('.simple_color').simpleColor({ colors: colors , defaultColor: '#'+colors[5]});
+					   	$('.simple_color').simpleColor({ colors: colors , defaultColor: '#eeeeee'});
 				   },
 				   url: base_url+'theme/projet/'+id
 				});

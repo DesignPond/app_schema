@@ -46,7 +46,7 @@
                             <h4>Notre Adresse</h4>
                             <address>
                                 Avenue du 1er-Mars 26 <br/> 2000 Neuchâtel 
-                                <span><strong>Téléphone:</strong>+41 32 / 718 12 22</span>
+                                <span><strong>Tél.:</strong>+41 32 / 718 12 22</span>
                                 <span><strong>Email:</strong><a href="mailto:info@droitenschema.ch">info@droitenschema.ch</a></span>
                             </address>
                         </div>

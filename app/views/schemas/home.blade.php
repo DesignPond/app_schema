@@ -53,29 +53,81 @@
             	
             </div>
             <div class="span4 login-frontpage">
-                <h3>Login</h3>
-                
-                <ul class="errors">
-					 @foreach($errors->all() as $message)
-					 <li>{{ $message }}</li>
-					 @endforeach
-				 </ul>
-				 
-				  <div class="contact_form_holder">	
-				  					  
-						{{ Form::open(array( 'url' => 'login', 'class' => 'form-login')) }}
+            
+            	  @if (Auth::check())
+            	  
+            	  	<h3>Vos infos</h3>
+				  	<div class="widget tab-holder">
+                            <div class="de_tab">
+                                <ul class="de_nav">
+                                    <li><span class="active">Vos schémas</span></li>
+                                    <li><span>Profile</span></li>
+                                </ul>
 
-						{{ Form::label('email', 'Email', array( 'class' => '' ) ) }}							
-						{{ Form::text('email', '' , array('class' => '')) }}
+                                <div class="de_tab_content">
 
-						{{ Form::label('password', 'Mot de passe', array( 'class' => '' )) }}
-						{{ Form::password('password', '' , array('class' => '')) }}
-						
-						{{ Form::submit('Envoyer', array('class' => 'btn')) }}
-						<p class="clear"></p>
-						{{ Form::close() }}
-						
-				  </div>
+                                    <div class="tab-small-post tab-hompage">
+                                        <ul>
+                                            <li>
+                                                <span class="post-content">
+                                                    <a href="#">Sed ut perspiciatis unde </a></span>
+                                                <span class="post-date">Sept 22, 2013</span>
+						                        <span><i class="icon-bookmark"></i><a href="#">Histoire</a></span>
+                                            </li>
+
+                                            <li>
+                                                <span class="post-content">
+                                                    <a href="#">Sed ut perspiciatis unde </a></span>
+                                                <span class="post-date">Sept 22, 2013 </span>
+                                                <span><i class="icon-bookmark"></i><a href="#">Histoire</a></span>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-small-post">
+                                        <address>
+			                                100 Mainstreet Center, Sydney
+			                                <span><strong>Phone:</strong>(208) 333 9296</span>
+			                                <span><strong>Fax:</strong>(208) 333 9298</span>
+			                                <span><strong>Email:</strong><a href="mailto:contact@example.com">contact@example.com</a></span>
+			                                <span><strong>Web:</strong><a href="#test">http://example.com</a></span>
+			                            </address>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+
+	              @else
+	              
+	             	 <h3>Login</h3>
+	                
+	                  <ul class="errors">
+						 @foreach($errors->all() as $message)
+						 <li>{{ $message }}</li>
+						 @endforeach
+					  </ul>
+					 
+					  <div class="contact_form_holder">	
+					  					  
+							{{ Form::open(array( 'url' => 'login', 'class' => 'form-login')) }}
+	
+							{{ Form::label('email', 'Email', array( 'class' => '' ) ) }}							
+							{{ Form::text('email', '' , array('class' => '')) }}
+	
+							{{ Form::label('password', 'Mot de passe', array( 'class' => '' )) }}
+							{{ Form::password('password', '' , array('class' => '')) }}
+							
+							{{ Form::submit('Envoyer', array('class' => 'btn')) }}
+							<p class="clear"></p>
+							{{ Form::close() }}
+							
+					  </div>
+
+				  @endif
+				  
             </div>
 
         </div>

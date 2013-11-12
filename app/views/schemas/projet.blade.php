@@ -3,13 +3,7 @@
 @section('content')
 	
 	@if ( !empty($projet) )		
-		
-		<?php
-			echo '<pre>';
-print_r($projet);
-echo '</pre>';
-?>
-		
+			
         <!-- content begin -->
         <div id="content">
             <div class="container">
@@ -24,12 +18,13 @@ echo '</pre>';
                         </div>
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>
                         	Par: <a href="#">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}</a></span> 
-                        	<span><i class="icon-comment"></i><a href="#">10 Commentaires</a></span> 
+                        	<span><i class="icon-bookmark"></i><a href="#">{{ $projet['theme']['titre'] }}</a></span>
+                        	<!-- <span><i class="icon-comment"></i><a href="#">10 Commentaires</a></span> --> 
                         </div>
                         
                         <div id="controls" class="row">
 	                         <div id="colors" class="span3">
-	                         	<p>Couleur</p><input id="colorPicker" class='simple_color' value='#666666'/>
+	                         	<p>Couleur</p><input id="colorPicker" class="simple_color" value="{{ $projet['theme']['couleur'] }}"/>
 	                         </div>
 	                         <div id="shapes" class="span6">
 				                <button class="btn"  id="add"><span class="car"></span>Ajouter</button>

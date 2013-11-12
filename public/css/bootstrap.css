@@ -629,6 +629,7 @@ a:focus {
   margin-right: auto;
   margin-left: auto;
   *zoom: 1;
+  margin-bottom: 5px;
 }
 
 .container:before,
@@ -975,7 +976,6 @@ blockquote:after {
 
 address {
   display: block;
-  margin-bottom: 20px;
   font-style: normal;
   line-height: 20px;
 }

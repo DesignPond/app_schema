@@ -29,7 +29,7 @@ class SchemaController extends BaseController {
 	public function index()
 	{
 
-        $projets  = $this->projet->getLast(2);
+        $projets  = $this->projet->getLast(3);
         
         $data = array(
         	'titre'     => 'Accueil',

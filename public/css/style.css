@@ -2665,7 +2665,13 @@ address span {
                 font-size: 11px;
             }
 
+.tab-hompage ul li span{
+	padding-left: 0;
+}
 
+.tab-hompage ul li span i{
+	margin-top: 3px;
+}
 
 
 
