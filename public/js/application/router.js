@@ -51,9 +51,9 @@ define([
 				// extend events to pass them from views to views
 				var vent = _.extend({}, Backbone.Events);
 				// app box view
-				var appboxview   = new AppBoxView({ refProjet: id , vent: vent });
+				var appboxview   = new AppBoxView({ projet_id: id , vent: vent });
 				// app arrows view
-				var apparrowview = new AppArrowView({ refProjet : id , vent: vent });
+				var apparrowview = new AppArrowView({ projet_id : id , vent: vent });
 				// The menu view
 				var buttonview   = new ButtonsView({ vent: vent });
 				

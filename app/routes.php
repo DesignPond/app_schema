@@ -17,11 +17,11 @@ Route::get('/', function()
 {
 
 			
-$user_projets = Projet::where('user_id', '=', 1)->orderBy('id', 'DESC')->take(2)->get()->toArray();
+$user_projets = Projet::where('id', '=', 3)->with('boxe','arrow')->get()->toArray();
 		
 		
 		echo '<pre>';
-		print_r(Auth::user());
+		print_r( $user_projets );
 		echo '</pre>';	
 
 			 

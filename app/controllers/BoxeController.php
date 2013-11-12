@@ -25,7 +25,7 @@ class BoxeController extends BaseController {
 	 */
 	public function refProject($id){
 	
-		$boxes = Boxe::where('refProjet', '=', $id)->get()->toArray();
+		$boxes = Boxe::where('projet_id', '=', $id)->get()->toArray();
 		
 		return Response::json(array(
         	'error' => false,

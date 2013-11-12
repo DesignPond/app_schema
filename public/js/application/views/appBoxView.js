@@ -18,10 +18,10 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 				options.vent.bind("deleteAll", this.deleteAll);
 				
 				this.vent      = options.vent;
-				this.refProjet = options.refProjet;
+				this.projet_id = options.projet_id;
 				
 				// Create new collection and bind events to rerender on reset and add
-				this.collection = new Boxes(null,{ refProjet:this.refProjet, view: this , base_url:this.base_url });
+				this.collection = new Boxes(null,{ projet_id:this.projet_id, view: this , base_url:this.base_url });
 				
 				this.collection.on('add',   this.render() , this);
 				this.collection.on('reset', this.render() , this);
@@ -60,7 +60,7 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 				{ 
 					$.ajax({
 						 type: "POST",
-						 url: base_url+"deleteAll/"+this.refProjet ,
+						 url: base_url+"deleteAll/"+this.projet_id ,
 						 success: function(msg)
 						 {	
 							self.collection.reset(null);
@@ -236,7 +236,7 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 				
 				// if(colorPicker == '#ffffff'){ text = '<p style="color:#000000;"></p>'; }
 				
-				var box = new Box({ refProjet      : self.refProjet, 
+				var box = new Box({ projet_id      : self.projet_id, 
 									couleurBg_node : colorPicker, 
 									borderBg_node  : '', 
 									no_node        : newNbr,

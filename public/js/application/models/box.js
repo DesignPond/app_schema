@@ -17,13 +17,13 @@ define(["jquery", "backbone"],
 							width_node     : 150, 
 							height_node    : 150 ,
 							base_url       : this.base_url , 
-							refProjet      : this.refProjet ,
+							projet_id      : this.projet_id ,
 							text           : '' 
 				},
 				initialize: function (options) {
 					options || (options = {});
 					// Pass the projet id to the querie of the collection
-					this.refProjet = options.refProjet;	
+					this.projet_id = options.projet_id;	
 				},
 				url: function(){ 
 					return base_url+'boxe/' + this.get('id') + '';

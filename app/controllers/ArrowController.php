@@ -25,7 +25,7 @@ class ArrowController extends BaseController {
 	 */
 	public function refProject($id){
 	
-		$arrows = Arrow::where('refProjet', '=', $id)->get()->toArray();
+		$arrows = Arrow::where('projet_id', '=', $id)->get()->toArray();
 		
 		return Response::json(array(
         	'error' => false,

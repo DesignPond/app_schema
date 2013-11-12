@@ -14,10 +14,10 @@ define(["jquery", "backbone","models/arrow"],
 				initialize: function (models, options) {
 					options || (options = {});
 					// Pass the projet id to the querie of the collection
-					this.refProjet = options.refProjet;	
+					this.projet_id = options.projet_id;	
 				},
 				url: function () {
-	            	return base_url+'arrow/projet/' + this.refProjet + '';
+	            	return base_url+'arrow/projet/' + this.projet_id + '';
 	            }
 		});
 

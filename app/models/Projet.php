@@ -9,6 +9,16 @@ class Projet extends Eloquent {
         return $this->hasOne('Categorie');
     }
     
+	public function boxe()
+    {
+        return $this->hasMany('Boxe');
+    }
+    
+	public function arrow()
+    {
+        return $this->hasMany('Arrow');
+    }
+    
     public function theme()
     {
         return $this->belongsTo('Theme');

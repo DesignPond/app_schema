@@ -9,7 +9,7 @@ class BoxesTableSeeder extends Seeder {
 
 		$boxes = array(
 			array( 
-				'refProjet'      => '3', 
+				'projet_id'      => '3', 
 				'topCoord_node'  => '100', 
 				'leftCoord_node' => '150', 
 				'no_node'        => '1', 
@@ -19,6 +19,18 @@ class BoxesTableSeeder extends Seeder {
 				'text'           => '<p>Hey</p>', 
 				'borderBg_node'  => '#fcfcfc', 
 				'zindex'         => '10' 
+			),
+			array( 
+				'projet_id'      => '3', 
+				'topCoord_node'  => '140', 
+				'leftCoord_node' => '110', 
+				'no_node'        => '2', 
+				'width_node'     => '260', 
+				'height_node'    => '140', 
+				'couleurBg_node' => '#eee', 
+				'text'           => '<p>How</p>', 
+				'borderBg_node'  => '#fcfcfc', 
+				'zindex'         => '20' 
 			)
 		);
 

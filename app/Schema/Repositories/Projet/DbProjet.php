@@ -16,20 +16,17 @@ class DbProjet implements ProjetInterface {
 	
 	public function getAll(){
 		
-		return $this->projet->with( array('theme','subtheme','user') )->get();
-			
+		return $this->projet->with( array('theme','subtheme','user') )->get();		
 	}
 	
 	public function find($id){
 		
-		return $this->projet->with( array('user','theme') )->findOrFail($id)->toArray();
-				
+		return $this->projet->with( array('user','theme') )->findOrFail($id)->toArray();			
 	}
 	
 	public function getLast($nbr){
 	
-		return $this->projet->with( array('user','theme') )->take($nbr)->skip(0)->get()->toArray();
-		
+		return $this->projet->with( array('user','theme') )->take($nbr)->skip(0)->get()->toArray();	
 	}
 		
 	public function projectsByTheme($refTheme){
@@ -40,6 +37,11 @@ class DbProjet implements ProjetInterface {
 	public function projectsByUser($user , $nbr){
 	
 		return $this->projet->where('user_id', '=', $user)->with( array('user','theme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
+	}
+	
+	public function appByProjet($id){
+	
+		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme')->get()->first()->toArray();
 		
 	}
 	

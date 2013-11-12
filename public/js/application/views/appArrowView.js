@@ -18,10 +18,10 @@ define(["jquery", "backbone","views/arrowView" ,"models/arrow","models/arrowColl
 				
 				this.vent = options.vent;
 				
-				this.refProjet = options.refProjet;
+				this.projet_id = options.projet_id;
 				
 				// Create new collection and bind events to rerender on reset and add
-				this.collection = new Arrows(null,{ refProjet:this.refProjet, view: this });
+				this.collection = new Arrows(null,{ projet_id:this.projet_id, view: this });
 				
 				this.collection.on('add',   this.render() , this);
 				this.collection.on('reset', this.render() , this);
@@ -135,7 +135,7 @@ define(["jquery", "backbone","views/arrowView" ,"models/arrow","models/arrowColl
 	
 				// Get color choosen and create new box model with it 
 				var colorPicker = $("#colorPicker").val();
-				var arrow       = new Arrow({ refProjet:self.refProjet , couleurBg_arrow: colorPicker ,topCoord_arrow:0, leftCoord_arrow:20 , position: position });
+				var arrow       = new Arrow({ projet_id:self.projet_id , couleurBg_arrow: colorPicker ,topCoord_arrow:0, leftCoord_arrow:20 , position: position });
 	
 				// Save the new model
 				arrow.save({},

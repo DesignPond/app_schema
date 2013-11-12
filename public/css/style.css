@@ -450,6 +450,27 @@ h5 {
 }
 
 /* -------------------------------------------------- */
+/* projet */
+/* -------------------------------------------------- */
+
+#projet{
+	background: #eee;
+	margin-top: 20px;
+	height: auto;
+	z-index:10;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+#content-projet{
+	z-index: 20;
+	position: relative;
+	background: #eee;
+	display: block;
+}
+
+/* -------------------------------------------------- */
 /* application */
 /* -------------------------------------------------- */
 
