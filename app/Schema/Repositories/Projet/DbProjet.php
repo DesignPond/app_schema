@@ -62,7 +62,7 @@ class DbProjet implements ProjetInterface {
         }
         
         if(!empty($contentHeight)){
-	        return max($contentHeight) + 50;
+	        return max($contentHeight) + 40;
         }
         else
         {
