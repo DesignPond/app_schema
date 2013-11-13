@@ -766,6 +766,7 @@ a.Txt{
 	width: auto;
 	height: 35px;
 	float: left;
+	z-index: 30;
 }
 
 #colors.simpleColorDisplay{
@@ -2511,6 +2512,10 @@ address span {
 .no-space-left{
 	padding-left: 0;
 	margin-left: 0;
+}
+
+body .redactor_toolbar li a.redactor_btn_addmodal {
+	background: url(../images/advanced.png) no-repeat;
 }
 
 

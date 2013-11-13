@@ -39,20 +39,12 @@
 				                <span class="month">{{ $month }}</span>
 				            </div>
 				            <div class="txt">
-				            	@if($projet['type'] == 'app')	
-				               		<h5>{{ link_to('schemas/projet/'.$projet['id'], $projet['titre'] ) }}</h5>
-				               	@else
 				               		<h5>{{ link_to('schemas/projet/schema/'.$projet['id'], $projet['titre']) }}</h5>
-				                @endif 
 				                <span class="read">{{ $projet['description'] }}</span>
 				                <span class="info">
 				                	<strong>{{ $projet['theme']['titre'] }}</strong> | 
 				                		{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }} | 
-				                	@if($projet['type'] == 'app')	
-					               		{{ link_to('schemas/projet/'.$projet['id'], 'Voir le schéma' ) }}
-					               	@else
 					               		{{ link_to('schemas/projet/schema/'.$projet['id'], 'Voir le schéma') }}
-					                @endif  
 				                </span>
 				            </div>
 				        </li>
@@ -86,9 +78,10 @@
 
                                             <li>
                                                 <span class="post-content">
-                                                    <a href="#">{{ $user_projet['titre'] }}</a></span>
+                                                    {{ link_to('schemas/projet/schema/'.$user_projet['id'], $user_projet['titre'] ) }}
+                                                </span>
                                                 <span class="post-date">{{ $projetdate->format('d/m/Y'); }}</span>
-						                        <span><i class="icon-bookmark"></i><a href="#">{{ $user_projet['theme']['titre'] }}</a></span>
+						                        <span><i class="icon-bookmark"></i>{{ link_to('schemas/theme/'.$user_projet['theme']['id'], $user_projet['theme']['titre'] ) }}</span>
                                             </li>
 
                                             

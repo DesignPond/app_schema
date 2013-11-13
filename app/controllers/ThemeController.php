@@ -66,8 +66,8 @@ class ThemeController extends BaseController {
 	 */
 	public function projet($id){
 		
-		$ref   = Projet::find($id);
-		$theme = $ref->refTheme;
+		$ref   = $this->projet->find($id);
+		$theme = $ref['theme_id'];
 		
 		return Response::json(array(
         	'error' => false,

@@ -25,7 +25,7 @@
 
                                 <div class="span8">
                                     <label>Message <span class="req">*</span></label>
-                                    <textarea cols="10" rows="10" name="message" id="message" class="full"></textarea>
+                                    <textarea cols="10" rows="10" name="message" id="message" class=""></textarea>
                                     <div id="error_message" class="error">Please check your message</div>
                                     <div id="mail_success" class="success">Thank you. Your message has been sent.</div>
                                     <div id="mail_failed" class="error">Error, email not sent</div>

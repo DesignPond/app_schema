@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?php echo asset('css/main.css');?>" type="text/css" id="main-css">
     <link rel="stylesheet" href="<?php echo asset('css/smoothness/jquery-ui-1.10.3.custom.css'); ?>" type="text/css" media="screen" />
     <link rel="stylesheet" href="<?php echo asset('css/jquery.contextMenu.css'); ?>">
+    <link rel="stylesheet" href="<?php echo asset('fancybox/jquery.fancybox.css'); ?>">
     <link rel="stylesheet" href="<?php echo asset('js/vendor/redactor/redactor.css'); ?>">
     
     <!-- Javascript Files
@@ -21,7 +22,7 @@
    	<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
    	<script src="<?php echo asset('js/jquery-ui.js');?>"></script>
     <script src="<?php echo asset('js/bootstrap.min.js');?>"></script>
-    <script src="<?php echo asset('js/jquery.prettyPhoto.js');?>"></script>
+    <script src="<?php echo asset('fancybox/jquery.fancybox.js');?>"></script>
     <script src="<?php echo asset('js/jquery.simple-color.js');?>"></script>
     <script src="<?php echo asset('js/easing.js');?>"></script>
     <script src="<?php echo asset('js/jquery.ui.totop.js');?>"></script>
@@ -39,6 +40,7 @@
     <script data-main="<?php echo asset('js/application/bootstrap'); ?>" src="<?php echo asset('js/require.js'); ?>"></script>
     <script src="<?php echo asset('js/vendor/redactor/fontsize.js');?>"></script>
     <script src="<?php echo asset('js/vendor/redactor/fontcolor.js');?>"></script>
+    <script src="<?php echo asset('js/vendor/redactor/addmodal.js');?>"></script>
 	
 	</head>
 	<body>
@@ -74,7 +76,7 @@
 	                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
 	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}</li>
 	                    @if ( Auth::check() )
-							<li><i class="icon-user"></i> {{ link_to('schemas/projet/create', 'Créer un schéma' ) }}</li>
+							<li><i class="icon-user"></i> {{ link_to('schemas/create', 'Créer un schéma' ) }}</li>
 						@endif 
 	                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
 	                </ul>
@@ -84,8 +86,7 @@
 	        </header>
 	        <!-- header close -->
 	        
-	        	        
-	       <?php  if( Request::segment(2) != 'projet'){  ?>  	        
+	       <?php  if( (Request::segment(2) != 'projet') && (Request::segment(1) != '') ){  ?>  	        
 		    
 		    @section('sidebar')
 			 	

@@ -294,8 +294,9 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 				var button = ['bold', '|', 'italic' , '|' , 'unorderedlist', '|' ,'alignleft', 'aligncenter', 'alignright', 'link','justify'];
 				$('.redactor').redactor({ 
 								focus: true, 
-								buttons: button, 
-								plugins: ['fontcolor','fontsize'],
+								buttons: button,
+								linkAnchor: true,
+								plugins: ['fontcolor','fontsize','addmodal'],
 								blurCallback: function()
 								{
 									// Change the default color to black if the box background is set to white

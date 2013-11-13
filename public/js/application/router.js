@@ -38,7 +38,7 @@ define([
 				   async:false,
 				   success: function(data) {
 				   		
-				   		console.log(data.items.id);
+				   		console.log(data);
 				   			
 				   		data = data.items.id - 1;
 					   	var colors = default_colors[data];

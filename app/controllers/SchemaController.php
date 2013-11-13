@@ -64,8 +64,31 @@ class SchemaController extends BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{
-        return View::make('schemas.create');
+	{		
+		$categories = array();
+		$themes     = array();
+		$subthemes  = array();
+		
+		$categories = $this->categorie->droplist();
+		$categories = array_add($categories, '', 'Choix');
+			ksort($categories);
+		$themes     = $this->theme->droplist_theme();
+		$themes     = array_add($themes, '', 'Choix');
+			ksort($themes); 
+		$subthemes  = $this->theme->droplist_subtheme();
+		$subthemes  = array_add($subthemes, '', 'Choix');
+			 ksort($subthemes); 
+		
+		$data = array(
+        	'titre'      => 'Schéma',
+			'soustitre'  => 'Créer un nouveau schéma',
+			'categories' => $categories,
+			'themes'     => $themes ,
+			'subthemes'  => $subthemes,
+			'input'      => Input::old() 
+		);
+		
+        return View::make('schemas.create')->with( $data );
 	}
 
 	/**

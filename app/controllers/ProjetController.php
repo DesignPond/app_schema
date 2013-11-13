@@ -43,31 +43,7 @@ class ProjetController extends BaseController {
 	 */
 	public function create()
 	{
-		
-		$categories = array();
-		$themes     = array();
-		$subthemes  = array();
-		
-		$categories = $this->categorie->droplist();
-		$categories = array_add($categories, '', 'Choix');
-			ksort($categories);
-		$themes     = $this->theme->droplist_theme();
-		$themes     = array_add($themes, '', 'Choix');
-			ksort($themes); 
-		$subthemes  = $this->theme->droplist_subtheme();
-		$subthemes  = array_add($subthemes, '', 'Choix');
-			 ksort($subthemes); 
-		
-		$data = array(
-        	'titre'      => 'Schéma',
-			'soustitre'  => 'Créer un nouveau schéma',
-			'categories' => $categories,
-			'themes'     => $themes ,
-			'subthemes'  => $subthemes,
-			'input'      => Input::old() 
-		);
-		
-        return View::make('schemas.create')->with( $data );
+
 	}
 
 	/**
@@ -87,7 +63,7 @@ class ProjetController extends BaseController {
 		}
 		else
 		{	
-			return Redirect::to('schemas/projet/create')->withErrors($this->validator->errors())->withInput(Input::all() ); 
+			return Redirect::to('schemas/create')->withErrors($this->validator->errors())->withInput(Input::all() ); 
 		}
 	}
 

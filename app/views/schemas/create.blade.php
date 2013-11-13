@@ -6,9 +6,7 @@
 <div id="content">
     <div class="container">
         <div class="row">
-            <div class="span12">
-			
-				<h3>Créer un schéma</h3>		                
+            <div class="span12">	                
 				 
 				  <div class="form_holder">	
 				  					  

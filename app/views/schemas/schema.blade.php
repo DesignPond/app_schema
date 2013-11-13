@@ -18,7 +18,7 @@
                         </div>
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>
                         	Par: <a href="#">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}</a></span> 
-                        	<span><i class="icon-bookmark"></i><a href="#">{{ $projet['theme']['titre'] }}</a></span>
+                        	<span><i class="icon-bookmark"></i>{{ link_to('schemas/theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
                         	<!-- <span><i class="icon-comment"></i><a href="#">10 Commentaires</a></span> --> 
                         </div>
                         
