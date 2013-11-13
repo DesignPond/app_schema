@@ -17,19 +17,19 @@ class BoxesTableSeeder extends Seeder {
 				'height_node'    => '40', 
 				'couleurBg_node' => '#000', 
 				'text'           => '<p>Hey</p>', 
-				'borderBg_node'  => '#fcfcfc', 
+				'borderBg_node'  => '#000', 
 				'zindex'         => '10' 
 			),
 			array( 
 				'projet_id'      => '3', 
-				'topCoord_node'  => '140', 
-				'leftCoord_node' => '110', 
+				'topCoord_node'  => '160', 
+				'leftCoord_node' => '310', 
 				'no_node'        => '2', 
-				'width_node'     => '260', 
-				'height_node'    => '140', 
-				'couleurBg_node' => '#eee', 
+				'width_node'     => '160', 
+				'height_node'    => '110', 
+				'couleurBg_node' => '#000', 
 				'text'           => '<p>How</p>', 
-				'borderBg_node'  => '#fcfcfc', 
+				'borderBg_node'  => '#000', 
 				'zindex'         => '20' 
 			)
 		);

@@ -32,13 +32,13 @@
     <script src="<?php echo asset('js/custom.js');?>"></script>
     <script src="<?php echo asset('js/script.js');?>"></script>
     <script src="<?php echo asset('js/vendor/history.js');?>"></script>
-    <script src="<?php echo asset('js/vendor/redactor/fontsize.js');?>"></script>
-    <script src="<?php echo asset('js/vendor/redactor/fontcolor.js');?>"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
 
     <!-- Require and backbone Files
     ================================================== -->    
     <script data-main="<?php echo asset('js/application/bootstrap'); ?>" src="<?php echo asset('js/require.js'); ?>"></script>
+    <script src="<?php echo asset('js/vendor/redactor/fontsize.js');?>"></script>
+    <script src="<?php echo asset('js/vendor/redactor/fontcolor.js');?>"></script>
 	
 	</head>
 	<body>

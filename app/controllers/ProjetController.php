@@ -99,16 +99,17 @@ class ProjetController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$projet     = $this->projet->appByProjet($id);		
+		$projet  = $this->projet->find($id);	
 
         return View::make('schemas.projet')->with( array('projet' => $projet ));
 	}
 	
 	public function schema($id){
 	
-		$projet  = $this->projet->find($id);
+		$projet = $this->projet->appByProjet($id);	
+		$height = $this->projet->heightProjet($id);	
 
-        return View::make('schemas.schema')->with( array('projet' => $projet ));
+        return View::make('schemas.schema')->with( array('projet' => $projet , 'height' => $height));
 	}
 
 	/**

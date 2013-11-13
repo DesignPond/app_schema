@@ -38,39 +38,9 @@
 				             </div>
                         </div>
                         
-                        <div id="projet">
-            
-                        @if(!empty($projet['boxe']))
-                        
-						   	<div id="content-projet">
-						   		
-						   		@foreach($projet['boxe'] as $box)
-						   		
-						   		<div class="box" 
-						   			 style="background-color:{{ $box['couleurBg_node'] }}; 
-								   			border:2px solid {{ $box['borderBg_node'] }}; 
-								   			position:absolute; 
-								   			width:{{ $box['width_node'] }}px; 
-								   			height:{{ $box['height_node'] }}px; 
-								   			z-index:{{ $box['zindex'] }}; 
-								   			top:{{ $box['topCoord_node'] }}px; 
-								   			left: {{ $box['leftCoord_node'] }}px;">
-							   		<div class="inner">
-										{{ $box['text'] }}
-									</div>
-						   		</div>
-						   		
-						   		<?php  $contentHeight[] = $box['topCoord_node'] + $box['height_node']; ?>
-						   		
-						   		@endforeach
-						   		
-						   	</div>
-						   	{{ print_r($contentHeight) }}	
-						   	
-	                    @else
-	                         <p id="emptyProjet">Le projet est vide</p>	 
-	                    @endif
-	                        
+                        <div id="application">
+						   	<div id="content-application"></div>
+	                        <p id="emptyProjet">Le projet est vide</p>	 
                         </div>
                        
                     </div>

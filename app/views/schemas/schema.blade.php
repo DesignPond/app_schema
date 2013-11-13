@@ -21,10 +21,45 @@
                         	<span><i class="icon-bookmark"></i><a href="#">{{ $projet['theme']['titre'] }}</a></span>
                         	<!-- <span><i class="icon-comment"></i><a href="#">10 Commentaires</a></span> --> 
                         </div>
-						
-						<div>
-							Projet
-						</div>
+                        
+						<div id="projet" style="height:{{ $height }}px;">
+  
+						   	<div id="content-projet">
+						   	
+						   		@if(!empty($projet['boxe']))
+							   		@foreach($projet['boxe'] as $box)
+							   		
+							   		<div class="box" 
+							   			 style="background-color:{{ $box['couleurBg_node'] }}; 
+									   			border:2px solid {{ $box['borderBg_node'] }}; 
+									   			position:absolute; 
+									   			width:{{ $box['width_node'] }}px; 
+									   			height:{{ $box['height_node'] }}px; 
+									   			z-index:{{ $box['zindex'] }}; 
+									   			top:{{ $box['topCoord_node'] }}px; 
+									   			left: {{ $box['leftCoord_node'] }}px;">
+								   		<div class="inner">
+											{{ $box['text'] }}
+										</div>
+							   		</div>
+							   		
+							   		@endforeach					  
+						   		@endif
+						   		
+							   	@if(!empty($projet['arrow']))
+			                    	@foreach($projet['arrow'] as $arr)
+		
+										<p class="icon-large arrows icon-caret-{{ $arr['position'] }}" 
+										   style="color: {{ $arr['couleurBg_arrow'] }}; 
+												  position: absolute; 
+												  top: {{ $arr['topCoord_arrow'] }}px; 
+												  left: {{ $arr['leftCoord_arrow'] }}px;"> </p>
+											                    		
+			                    	@endforeach                  
+			                    @endif
+						   		
+						   	</div> 	
+                        </div>
                        
                     </div>
                 </div>

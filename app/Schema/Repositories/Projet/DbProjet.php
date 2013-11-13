@@ -14,16 +14,6 @@ class DbProjet implements ProjetInterface {
 		$this->projet = $projet;	
 	}
 	
-	public function getAll(){
-		
-		return $this->projet->with( array('theme','subtheme','user') )->get();		
-	}
-	
-	public function find($id){
-		
-		return $this->projet->with( array('user','theme') )->findOrFail($id)->toArray();			
-	}
-	
 	public function getLast($nbr){
 	
 		return $this->projet->with( array('user','theme') )->take($nbr)->skip(0)->get()->toArray();	
@@ -38,11 +28,61 @@ class DbProjet implements ProjetInterface {
 	
 		return $this->projet->where('user_id', '=', $user)->with( array('user','theme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
 	}
+
+
+	/*
+	 * Applications functions
+	*/
 	
 	public function appByProjet($id){
 	
 		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme')->get()->first()->toArray();
+	}
+	
+	public function heightProjet($id){
 		
+		$app = $this->appByProjet($id);
+		
+		$contentHeight = array();
+
+        if(!empty($app['boxe']))
+        {
+        	foreach($app['boxe'] as $box)
+        	{
+        		$contentHeight[] = $box['topCoord_node'] + $box['height_node'];
+        	}                  
+        }
+        		
+        if(!empty($app['arrow']))
+        {
+        	foreach($app['arrow'] as $arr)
+        	{
+        		$contentHeight[] = $arr['topCoord_arrow'] + 15;	
+        	}                  
+        }
+        
+        if(!empty($contentHeight)){
+	        return max($contentHeight) + 50;
+        }
+        else
+        {
+	        return 150;
+        }
+		
+	}
+	
+	/*
+	 * CRUD functions
+	*/
+		
+	public function getAll(){
+		
+		return $this->projet->with( array('theme','subtheme','user') )->get();		
+	}
+		
+	public function find($id){
+		
+		return $this->projet->with( array('user','theme') )->findOrFail($id)->toArray();			
 	}
 	
 	public function create(array $data){
