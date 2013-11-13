@@ -59,7 +59,8 @@ Route::group(array('prefix' => 'schemas'), function()
 
 	Route::get('/', 'SchemaController@index');
 	Route::get('contact', 'SchemaController@contact');	
-	Route::get('create', 'SchemaController@create');	
+	
+	Route::get('create', array('before' => 'auth' ,'uses' => 'SchemaController@create') );	
 	
 	Route::resource('categorie', 'CategorieController');
 	Route::resource('theme', 'ThemeController');

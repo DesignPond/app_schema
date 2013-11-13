@@ -35,7 +35,7 @@ class SessionController extends BaseController {
         );
         
         if (Auth::attempt($user)) {
-            return Redirect::to('schemas')
+            return Redirect::intended('schemas')
                 ->with('flash_notice', 'You are successfully logged in.');
         }
         
@@ -62,9 +62,11 @@ class SessionController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function destroy()
 	{
-        return View::make('sessions.edit');
+        Auth::logout();
+        return Redirect::to('schemas');
+        
 	}
 
 }

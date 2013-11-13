@@ -453,6 +453,11 @@ h5 {
 /* projet */
 /* -------------------------------------------------- */
 
+.projet_width{
+	width: 1024px;
+	margin: 0 auto;
+}
+
 #projet{
 	background: #eee;
 	margin-top: 20px;
@@ -507,7 +512,6 @@ h5 {
 }
 
 #content-application{
-	border-top:1px solid #ddd;
 	border-bottom:8px solid #dedede;
 	z-index: 20;
 	position: relative;

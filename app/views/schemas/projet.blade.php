@@ -38,7 +38,7 @@
 				             </div>
                         </div>
                         
-                        <div id="application">
+                        <div id="application" class="projet_width">
 						   	<div id="content-application"></div>
 	                        <p id="emptyProjet">Le projet est vide</p>	 
                         </div>

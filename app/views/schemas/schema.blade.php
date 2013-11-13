@@ -22,7 +22,7 @@
                         	<!-- <span><i class="icon-comment"></i><a href="#">10 Commentaires</a></span> --> 
                         </div>
                         
-						<div id="projet" style="height:{{ $height }}px;">
+						<div id="projet" style="height:{{ $height }}px;" class="projet_width">
   
 						   	<div id="content-projet">
 						   	

@@ -101,7 +101,7 @@
 			                    
 			                    	@if ( Auth::check() )
 									    <li><i class="icon-user"></i> {{ Auth::user()->prenom }} {{ Auth::user()->nom }}</li>
-									    <li> | <a href="">Logout</a></li>
+									    <li> | <a href="">{{ link_to('logout', 'Logout' ) }}</a></li>
 									@endif 
 			                       
 			                    </ul>
