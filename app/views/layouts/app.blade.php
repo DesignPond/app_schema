@@ -119,7 +119,20 @@
 	        
 	        @yield('content')
 	        
-	        <!--  content close -->
+	        <!--  content close -->  
+	                               
+           <!-- My Modal HTML -->
+			<div id="mymodal" style="display: none;">
+				<section>
+					<label>Lien vers projet n°</label>
+					<p><input type="text" id="redactor_link_addmodal" class="redactor_input"  style="width:60px;" /></p>
+					<input type="hidden" id="redactor_link_addmodal_url" value="{{ action('ProjetController@modal'); }}" />
+					<p><button class="btn btn-primary" id="mymodal-link">Insert</button></p>
+				</section>
+				<footer>
+					<a href="#" class="redactor_modal_btn redactor_btn_modal_close">Close</a>
+				</footer>
+			</div>
             
 		</div>
 		<!--  wrapper close -->

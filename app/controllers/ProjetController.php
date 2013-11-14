@@ -87,6 +87,14 @@ class ProjetController extends BaseController {
 
         return View::make('schemas.schema')->with( array('projet' => $projet , 'height' => $height));
 	}
+	
+	public function modal($id = NULL){
+	
+		$projet = $this->projet->appByProjet($id);	
+		$height = $this->projet->heightProjet($id);	
+
+        return View::make('schemas.modal')->with( array('projet' => $projet , 'height' => $height));
+	}
 
 	/**
 	 * Show the form for editing the specified resource.

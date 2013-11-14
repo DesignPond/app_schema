@@ -32,13 +32,18 @@ RedactorPlugins.addmodal = {
 	{
 		var _self = this;
 		
-		var link = $('#redactor_link_addmodal').val();
+		var id  = $('#redactor_link_addmodal').val();
+		var url = $('#redactor_link_addmodal_url').val();
 		
-		var a = '<a href="' + link + '" class="popup_modal">' + html + '</a>';
+		var a = '<a href="'+ url + '/' + id + '" class="popup_modal">' + html + '</a>';
 			
 		_self.selectionRestore();
-		_self.execCommand('inserthtml', a);
-		_self.modalClose();
+		
+		if(id)
+		{
+			_self.execCommand('inserthtml', a);
+			_self.modalClose();
+		}
 	}
 
 }

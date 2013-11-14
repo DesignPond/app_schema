@@ -43,19 +43,6 @@
 	                        <p id="emptyProjet">Le projet est vide</p>	 
                         </div>
                        
-                       <!-- My Modal HTML -->
-						<div id="mymodal" style="display: none;">
-							<section>
-								<label>Lien vers projet n°</label>
-								<input type="text" id="redactor_link_addmodal" class="redactor_input" />
-								<p><button id="mymodal-link">Insert</button></p>
-							</section>
-							<footer>
-								<a href="#" class="redactor_modal_btn redactor_btn_modal_close">Close</a>
-							</footer>
-						</div>
-
-                       
                     </div>
                 </div>
             </div>

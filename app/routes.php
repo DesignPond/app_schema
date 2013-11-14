@@ -67,6 +67,7 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::get('theme/drop_theme/{id}', 'ThemeController@drop_theme');
 	Route::get('theme/drop_subtheme/{id}', 'ThemeController@drop_subtheme');
 	Route::get('projet/schema/{id}', 'ProjetController@schema');
+	Route::get('projet/modal/{id?}', 'ProjetController@modal');
 	Route::resource('projet', 'ProjetController');
 
 });

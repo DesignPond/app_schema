@@ -78,7 +78,8 @@ jQuery(document).ready(function() {
       
    $(".popup_modal").fancybox({
         type: 'iframe',
-        minWidth: 900,
+        minWidth: 1030,
+        height: 'auto',
         beforeLoad : function() 
         {     
 /*
