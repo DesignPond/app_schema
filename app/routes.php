@@ -70,6 +70,7 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::get('projet/schema/{id}', 'ProjetController@schema');
 	Route::get('projet/modal/{id?}', 'ProjetController@modal');
 	Route::resource('projet', 'ProjetController');
+	Route::resource('user', 'UserController');
 
 });
 
@@ -87,6 +88,7 @@ Route::group(array('prefix' => 'api/v1'), function()
 
 App::bind('Schema\Repositories\Categorie\CategorieInterface', 'Schema\Repositories\Categorie\DbCategorie');
 App::bind('Schema\Repositories\Theme\ThemeInterface', 'Schema\Repositories\Theme\DbTheme');
+App::bind('Schema\Repositories\User\UserInterface', 'Schema\Repositories\User\DbUser');
 
 App::bind('Schema\Repositories\Projet\ProjetInterface', function()
 {

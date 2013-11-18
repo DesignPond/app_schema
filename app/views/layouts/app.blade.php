@@ -75,6 +75,7 @@
 	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}</li>
 	                    @if ( Auth::check() )
 							<li> {{ link_to('schemas/create', 'Créer un schéma' ) }}</li>
+							<li> {{ link_to('schemas/user/'.Auth::user()->id, 'Votre profil' ) }}</li>
 						@endif 
 	                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
 	                </ul>
@@ -84,7 +85,7 @@
 	        </header>
 	        <!-- header close -->
 	        
-	       <?php  if( (Request::segment(2) != 'projet') && (Request::segment(1) != '') ){  ?>  	        
+	       <?php  if( (Request::segment(2) != 'projet') && (Request::segment(2) != '') ){  ?>  	        
 		    
 		    @section('sidebar')
 			 	
@@ -112,7 +113,7 @@
 	        
 	        <!--  content close -->  
 	                               
-           <!-- My Modal HTML -->
+            <!-- My Modal HTML -->
 			<div id="mymodal" style="display: none;">
 				<section>
 					<label>Lien vers projet n°</label>

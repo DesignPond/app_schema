@@ -24,11 +24,16 @@ class DbProjet implements ProjetInterface {
     	return $this->projet->where('theme_id', '=', $refTheme)->with(array('user'))->orderBy('id', 'DESC')->get()->toArray();
 	}
 	
-	public function projectsByUser($user , $nbr){
-	
-		return $this->projet->where('user_id', '=', $user)->with( array('user','theme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
+	public function projectsByUser($user , $nbr = NULL){
+		
+		if($nbr)
+		{
+			return $this->projet->where('user_id', '=', $user)->with( array('user','theme','subtheme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
+		}
+		
+		return $this->projet->where('user_id', '=', $user)->with( array('user','theme','subtheme') )->orderBy('id', 'DESC')->get()->toArray();
+		
 	}
-
 
 	/*
 	 * Applications functions
