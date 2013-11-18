@@ -2164,8 +2164,6 @@ i.black {
         font-weight: bold;
     }
 
-
-
 /* -------------------------------------------------- */
 /* gallery */
 /* -------------------------------------------------- */
@@ -2174,13 +2172,14 @@ i.black {
 	margin-bottom: 40px;
 }
 
-#gallery .item {
+#gallery .item , .gallery .item {
     text-align: center;
     margin-bottom: 30px;
     font-size: 12px;
     position: relative;
 }
-	#gallery .item .itemColor{
+
+	#gallery .item .itemColor , .gallery .item .itemColor{
 		background: #d5d5d5;
 		display: block;
 	}

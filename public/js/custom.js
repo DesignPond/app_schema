@@ -79,18 +79,7 @@ jQuery(document).ready(function() {
    $(".popup_modal").fancybox({
         type: 'iframe',
         minWidth: 1030,
-        height: 'auto',
-        beforeLoad : function() 
-        {     
-/*
-        	var link = $(this).find("a").attr("href");  
-        	if(!link){
-        		var link = $(this).parent().attr("href"); 
-        	}
-        	            
-            this.href = link;
-*/
-        }
+        height: 'auto'
     });
 	  
 	  
@@ -131,32 +120,33 @@ jQuery(document).ready(function() {
 	 jQuery(this).parent().find(".sb-icons").animate({'margin-top': '10%'},'fast');
 	 jQuery(this).parent().find(".overlay").fadeTo(150, 0);
   	})
-	
-	
-	
+		
 	jQuery(window).load(function() {
-	// --------------------------------------------------
-	// filtering gallery
-	// --------------------------------------------------
-	var $container = jQuery('#gallery');
-		$container.isotope({
-			itemSelector: '.item',
-			filter: '*',
-	});
-	jQuery('#filters a').click(function(){
-		var $this = jQuery(this);
-		if ( $this.hasClass('selected') ) {
-			return false;
-			}
-		var $optionSet = $this.parents();
-		$optionSet.find('.selected').removeClass('selected');
-		$this.addClass('selected');
-				
-		var selector = jQuery(this).attr('data-filter');
-		$container.isotope({ 
-		filter: selector,
-	});
-	return false;
+		// --------------------------------------------------
+		// filtering gallery
+		// --------------------------------------------------
+		
+		var $container = jQuery('#gallery');
+			$container.isotope({
+				itemSelector: '.item',
+				filter: '*',
+		});
+		
+		jQuery('#filters a').click(function(){
+			var $this = jQuery(this);
+			if ( $this.hasClass('selected') ) {
+				return false;
+				}
+			var $optionSet = $this.parents();
+			$optionSet.find('.selected').removeClass('selected');
+			$this.addClass('selected');
+					
+			var selector = jQuery(this).attr('data-filter');
+			$container.isotope({ 
+			filter: selector,
+		});
+		
+		return false;
 	});
 		
 

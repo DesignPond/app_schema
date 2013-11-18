@@ -28,10 +28,10 @@ class DbProjet implements ProjetInterface {
 		
 		if($nbr)
 		{
-			return $this->projet->where('user_id', '=', $user)->with( array('user','theme','subtheme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
+			return $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme','subtheme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
 		}
 		
-		return $this->projet->where('user_id', '=', $user)->with( array('user','theme','subtheme') )->orderBy('id', 'DESC')->get()->toArray();
+		return $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme','subtheme') )->orderBy('id', 'DESC')->get()->toArray();
 		
 	}
 
@@ -41,7 +41,7 @@ class DbProjet implements ProjetInterface {
 	
 	public function appByProjet($id){
 	
-		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme')->get()->first()->toArray();
+		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme','subtheme')->get()->first()->toArray();
 	}
 	
 	public function heightProjet($id){

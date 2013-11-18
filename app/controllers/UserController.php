@@ -58,6 +58,7 @@ class UserController extends BaseController {
         $user    = $this->user->find($id);
 	    $projets = $this->projet->projectsByUser($id);  
 	    $themes  = array();
+	    $sorting = array();
 	    
 	    if(!empty($projets)){
 		    foreach($projets as $projet)
@@ -65,6 +66,8 @@ class UserController extends BaseController {
 		    	if( isset($projet['theme']['titre']) )
 		    	{
 			    	$themes[$projet['theme']['id']] = $projet['theme']['titre'];
+			    	
+			    	$sorting[$projet['categorie']['titre']][$projet['theme']['titre']][] = $projet;
 		    	}
 		    }
 	    } 
@@ -76,7 +79,8 @@ class UserController extends BaseController {
 			'soustitre' => $name,
 			'user'      => $user,
 			'projets'   => $projets,
-			'themes'    => $themes
+			'themes'    => $themes,
+			'sorting'   => $sorting
 		);
 		
 	    return View::make('users.home')->with( $data );

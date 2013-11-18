@@ -6,7 +6,7 @@ class Projet extends Eloquent {
 	
 	public function categorie()
     {
-        return $this->hasOne('Categorie');
+        return $this->belongsTo('Categorie');
     }
     
 	public function boxe()
