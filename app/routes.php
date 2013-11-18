@@ -15,18 +15,10 @@
 
 Route::get('/', function()
 {
-
 			
-$user_projets = Projet::where('id', '=', 3)->with('boxe','arrow')->get()->toArray();
-		
-		
-		echo '<pre>';
-		print_r( $user_projets );
-		echo '</pre>';	
-
-			 
+//$user_projets = Projet::where('id', '=', 3)->with('boxe','arrow')->get()->toArray();			 
 	 
-/*		 foreach($categories as $categorie) 
+/*	foreach($categories as $categorie) 
 	 {
 	 	foreach($categorie->theme as $theme)
 	 	{
@@ -36,6 +28,15 @@ $user_projets = Projet::where('id', '=', 3)->with('boxe','arrow')->get()->toArra
 	 		echo '</pre>';
 	 	}	 	
 	 }
+*/
+/*
+	$data = array();
+
+	Mail::send('emails.contact', $data, function($message)
+	{
+	    $message->to('cindy.leschaud@gmail.com', 'Cindy Leschaud')->subject('Welcome!');
+	    
+	});
 */
 	 
 });

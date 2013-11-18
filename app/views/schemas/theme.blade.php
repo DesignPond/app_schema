@@ -39,13 +39,13 @@
 		                            <div class="picframe">
 		                                <span class="overlay">
 		                                    <span class="info-area">	                                    	
-		                                       <a class="img-icon-zoom" href="{{ url('schemas/projet/'.$projet['id'].'#projet/'.$projet['id']) }}" title=""></a>		                                       
+		                                       <a class="img-icon-zoom" href="{{ url('schemas/projet/schema/'.$projet['id']) }}" title=""></a>		                                       
 		                                    </span>
 		                                </span>
 										<span class="itemColor" style="background:{{ $couleur }};">
 											@if($projet['type'] == 'app')										
 												<img src="{{ asset('images/pf2.png') }}" data-original="{{ asset('images/pf2.png') }}" alt="" /></span>
-												<h4>{{ link_to('schemas/projet/'.$projet['id'], $projet['titre'] ) }}</h4>										
+												<h4>{{ link_to('schemas/projet/schema/'.$projet['id'], $projet['titre'] ) }}</h4>										
 											@else										
 												<img src="{{ asset('images/pf3.png') }}" data-original="{{ asset('images/pf3.png') }}" alt="" /></span>	
 												<h4>{{ link_to('schemas/projet/schema/'.$projet['id'], $projet['titre']) }}</h4>                                      

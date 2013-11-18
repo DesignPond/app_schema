@@ -81,14 +81,13 @@
                                                     {{ link_to('schemas/projet/schema/'.$user_projet['id'], $user_projet['titre'] ) }}
                                                 </span>
                                                 <span class="post-date">{{ $projetdate->format('d/m/Y'); }}</span>
-						                        <span><i class="icon-bookmark"></i>{{ link_to('schemas/theme/'.$user_projet['theme']['id'], $user_projet['theme']['titre'] ) }}</span>
                                             </li>
-
                                             
 											@endforeach
 										@endif 
 										
                                         </ul>
+                                        <p>{{ link_to('schemas/user/'. Auth::user()->id , 'Tous vos projets', array( 'class' => 'btn btn-mini btn-primary') ) }}</p>
                                     </div>
 
                                     <div class="tab-small-post">

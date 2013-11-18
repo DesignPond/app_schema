@@ -13,7 +13,7 @@
                             <form id="contact" class="row" name="form1" method="post" action="#">
 
                                 <div class="span4">
-                                    <label>Nom</label>
+                                    <label>Nom <span class="req">*</span></label>
                                     <input type="text" class="full" name="name" id="name" />
                                 </div>
 

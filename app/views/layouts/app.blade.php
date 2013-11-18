@@ -54,12 +54,10 @@
 	                        <div class="span6 info-text">
 	                            <strong>Email:</strong>  <a href="#">info@droitenschema.ch</a>
 	                        </div>
-	                        <div class="span6 text-right">
-	                            <div class="social-icons">
-	                                <a class="social-icon sb-icon-facebook" href="#"></a>
-	                                <a class="social-icon sb-icon-rss" href="#"></a>
-	                                <a class="social-icon sb-icon-linkedin" href="#"></a>
-	                            </div>
+	                        <div class="span6 info-text text-right">
+	                        @if ( Auth::check() )
+	                            <i class="icon-user"></i> {{ Auth::user()->email }} &nbsp;|&nbsp; <a href="">{{ link_to('logout', 'Logout' ) }}
+	                        @endif
 	                        </div>
 	                    </div>
 	                </div>
@@ -76,7 +74,7 @@
 	                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
 	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}</li>
 	                    @if ( Auth::check() )
-							<li><i class="icon-user"></i> {{ link_to('schemas/create', 'Créer un schéma' ) }}</li>
+							<li> {{ link_to('schemas/create', 'Créer un schéma' ) }}</li>
 						@endif 
 	                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
 	                </ul>
@@ -97,14 +95,7 @@
 			                <div class="span12">
 			                    <h1>{{ $titre }}</h1>
 			                    <span>{{ $soustitre }}</span>
-			                    <ul class="crumb">
-			                    
-			                    	@if ( Auth::check() )
-									    <li><i class="icon-user"></i> {{ Auth::user()->prenom }} {{ Auth::user()->nom }}</li>
-									    <li> | <a href="">{{ link_to('logout', 'Logout' ) }}</a></li>
-									@endif 
-			                       
-			                    </ul>
+			                    <ul class="crumb"></ul>
 			                </div>
 			            </div>
 			        </div>

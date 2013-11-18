@@ -35,7 +35,7 @@ class SchemaController extends BaseController {
         if(Auth::check())
         {
         	$user = Auth::user()->id;
-	        $user_projets = $this->projet->projectsByUser($user,2);  
+	        $user_projets = $this->projet->projectsByUser($user,3);  
         }       	
         
         $data = array(
