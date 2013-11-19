@@ -104,7 +104,7 @@ body {
 #wrapper{
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: -85px; 
+  margin-bottom: -95px; 
 }
 
 #wrapper:after {
@@ -1274,6 +1274,16 @@ footer {
     margin-bottom: 10px;
 }
 
+.post-text{
+	position: relative;
+}
+
+.isEditable{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
 /* -------------------------------------------------- */
 /* slider */
 /* -------------------------------------------------- */
@@ -1747,6 +1757,10 @@ a, a:visited {
         color: #fff;
         border: none;
         text-shadow: none;
+    }
+    
+    a.btn:visited {
+        color: #fff;
     }
 
 .label {

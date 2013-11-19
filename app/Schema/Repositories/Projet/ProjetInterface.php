@@ -9,6 +9,8 @@ interface ProjetInterface {
 	public function projectsByUser($user,$nbr);
 	public function appByProjet($id);
 	
+	public function isUsers($projet,$user);
+	
 	public function heightProjet($id);
 	
 	public function create(array $data);

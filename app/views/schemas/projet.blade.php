@@ -35,7 +35,7 @@
 						        <button data-position="right" class="btn arrow"><span class="right"></span>Droite</button>
 						        <button data-position="up"    class="btn arrow"><span class="up"></span>Haut</button>
 				            </div>
-				            <div class="span3">
+				            <div class="span3 text-right">
 				            	<button type="button" class="btn btn-primary save">Terminer</button>
 				             </div>
                         </div>

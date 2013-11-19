@@ -16,7 +16,11 @@
 Route::get('/', function()
 {
 			
-//$user_projets = Projet::where('id', '=', 3)->with('boxe','arrow')->get()->toArray();			 
+$app = Projet::find(3);	
+
+echo '<pre>';
+print_r($app->user_id);
+echo '</pre>';	 
 	 
 /*	foreach($categories as $categorie) 
 	 {

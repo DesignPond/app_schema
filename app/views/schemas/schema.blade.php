@@ -16,6 +16,11 @@
                             <div class="post-text">
                                 <h3><a href="css/#">{{ $projet['titre'] }}</a></h3>
                                 {{ $projet['description'] }}
+                                
+                                @if($isEditable)
+                                {{ link_to('schemas/projet/'.$projet['id'].'/#projet/'.$projet['id'],'&Eacute;diter le schéma',array('class' => 'btn btn-small btn-primary isEditable')) }}
+                                @endif
+                                
                             </div>
                         </div>
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>

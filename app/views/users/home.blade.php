@@ -16,8 +16,8 @@
 			 			@if(!empty($sorted))
 			 				@foreach($sorted as $categorie => $projets) 
 			 					
-			 					<h4>{{ $categorie }}</h4>
-			 					<div class="row">
+			 				<h4>{{ $categorie }}</h4>
+			 				<div class="row">
 			 					<div class="gallery">
 			 							 					
 			 					@if(!empty($sorted))
@@ -48,7 +48,7 @@
 			 					@endif 	
 			 					
 			 					</div>
-			 					</div>
+			 				</div>
 			 					
 			 				@endforeach
 			 			@endif 	

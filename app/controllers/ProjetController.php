@@ -75,7 +75,7 @@ class ProjetController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$projet  = $this->projet->find($id);	
+		$projet     = $this->projet->find($id);	
 
         return View::make('schemas.projet')->with( array('projet' => $projet ));
 	}
@@ -84,8 +84,15 @@ class ProjetController extends BaseController {
 	
 		$projet = $this->projet->appByProjet($id);	
 		$height = $this->projet->heightProjet($id);	
+		
+		$isEditable = FALSE;
+		
+		if( Auth::check() )
+		{
+			$isEditable = $this->projet->isUsers($id,Auth::user()->id);	
+		}	
 
-        return View::make('schemas.schema')->with( array('projet' => $projet , 'height' => $height));
+        return View::make('schemas.schema')->with( array('projet' => $projet , 'height' => $height ,'isEditable' => $isEditable));
 	}
 	
 	public function modal($id = NULL){

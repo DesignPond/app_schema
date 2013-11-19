@@ -39,6 +39,17 @@ class DbProjet implements ProjetInterface {
 	 * Applications functions
 	*/
 	
+	public function isUsers($projet,$user){
+		
+		$app = $this->projet->find($projet);
+		
+		if($app->user_id == $user){
+			return TRUE;
+		}
+		
+		return FALSE;		
+	}
+	
 	public function appByProjet($id){
 	
 		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme','subtheme')->get()->first()->toArray();
