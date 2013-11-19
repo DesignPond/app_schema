@@ -12,6 +12,7 @@ define(["jquery", "backbone"],
 				// Event from the menu
 				"click #add"       : "addBox",
 				"click .arrow"     : "addArrow",
+				"click #save"      : "saveProjet",
 				"click #deleteAll" : "deleteAll"
 			},
 			deleteAll : function(){
@@ -23,6 +24,11 @@ define(["jquery", "backbone"],
 			addArrow : function(e){
 				var position = $(e.currentTarget).data("position");
 				this.vent.trigger("addArrow" , position);
+			},
+			saveProjet: function(e){
+				var href = $(e.currentTarget).attr('href');
+				// location.href
+				console.log(href);
 			}
 		});		
 

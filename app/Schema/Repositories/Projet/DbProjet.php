@@ -98,7 +98,7 @@ class DbProjet implements ProjetInterface {
 		
 	public function find($id){
 		
-		return $this->projet->with( array('user','theme') )->findOrFail($id)->toArray();			
+		return $this->projet->with( array('user','theme','subtheme') )->findOrFail($id)->toArray();			
 	}
 	
 	public function create(array $data){
