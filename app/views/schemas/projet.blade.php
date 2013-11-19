@@ -36,7 +36,7 @@
 						        <button data-position="up"    class="btn arrow"><span class="up"></span>Haut</button>
 				            </div>
 				            <div class="span3 text-right">
-				            	<button id="save" type="button" href="schemas/projet/schema/{{ $projet['id'] }}" class="btn btn-primary save">Terminer</button>
+				            	{{ link_to('schemas/projet/schema/'.$projet['id'], 'Terminer', array( 'id' => 'save' , 'class' => 'btn btn-primary save') ) }}
 				             </div>
                         </div>
                         
