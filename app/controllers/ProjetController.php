@@ -122,9 +122,23 @@ class ProjetController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$id     = Input::get('id');
+		$value  = Input::get('value');
+		
+		$projet = $this->projet->findO($id);
+		
+		if( ! $projet )
+		{
+			return false;
+		}
+
+		$projet->description  = $value;
+		$projet->save();	
+		
+		return $value;
+		
 	}
 
 	/**

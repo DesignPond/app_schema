@@ -33,6 +33,7 @@
     <script src="<?php echo asset('js/custom.js');?>"></script>
     <script src="<?php echo asset('js/script.js');?>"></script>
     <script src="<?php echo asset('js/vendor/history.js');?>"></script>
+    <script src="<?php echo asset('js/jquery.jeditable.js');?>"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
 
     <!-- Require and backbone Files

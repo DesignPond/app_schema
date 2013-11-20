@@ -1,4 +1,7 @@
 jQuery(document).ready(function() {
+
+	var base_url = location.protocol + "//" + location.host+"/";
+	
 	// --------------------------------------------------
 	// change menu on mobile version
 	// --------------------------------------------------
@@ -67,22 +70,27 @@ jQuery(document).ready(function() {
 	// --------------------------------------------------
 	// lazyload
 	// --------------------------------------------------
-	 jQuery(function() {
+	jQuery(function() {
           jQuery("img").lazyload({
               effect : "fadeIn",
 			  effectspeed: '1000' 
 
           });
-      });
+    });     
       
-      
-   $(".popup_modal").fancybox({
+    jQuery(".popup_modal").fancybox({
         type: 'iframe',
         minWidth: 1030,
         height: 'auto'
     });
-	  
-	  
+
+    jQuery('.edit_content').editable( base_url + 'schemas/projet/update', { 
+         type     : 'textarea',
+         submit   : 'OK',
+         cssclass : 'edit_form_projet',
+         tooltip  : 'Click to edit...'
+    });
+     	  
 	// --------------------------------------------------
 	// gallery hover
 	// --------------------------------------------------

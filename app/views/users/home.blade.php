@@ -3,31 +3,43 @@
 @section('content')
 
 <?php  $custom = new Custom; ?>
-	
-	
-    <!-- call to action -->
-    <div class="call-to-action">
-        <div class="container">
-            <div class="row">
-                <div class="span6">
-                    <h4>{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</h4>
-			        <a href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a>
+
+	<div id="content">
+    	<div class="container profile">
+			 <div class="row">
+		        <div class="span1 widget">
+		        	<ul class="">
+			        	<li>Nom</li>
+			        	<li>Email</li>
+		        	</ul>
                 </div>
-                <div class="span6">
-                    <a href="#" class="btn btn-small btn-primary">Get This Now!</a>
+		        <div class="span11 widget">
+		        	<ul>
+			        	<li>{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</li>
+			        	<li><a href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a></li>
+		        	</ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- call to action close -->
 	
-	<div id="content">
-        <div class="container">
-	 	
-			 	@if(!empty($sorting))
-			 		@foreach($sorting as $sorted) 
-			 					 			
-			 			<h3>{{ key($sorting) }}</h3>
+ 	@if(!empty($sorting))
+ 		@foreach($sorting as $sorted) 
+ 					 			
+		    <!-- call to action -->
+		    <div class="call-to-action">
+		        <div class="container">
+		            <div class="row">
+		                <div class="span12">
+		                	<h3>{{ key($sorting) }}</h3>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		    <!-- call to action close -->
+			
+			<div id="content">
+		        <div class="container">
 			 			
 			 			@if(!empty($sorted))
 			 				@foreach($sorted as $categorie => $projets) 
@@ -66,12 +78,12 @@
 			 				</div>
 			 					
 			 				@endforeach
-			 			@endif 	
-			 		
-					@endforeach
-				@endif 			 		                
-                
-        </div>
-    </div>
+			 			@endif 			 		                
+		                
+			        </div>
+			    </div>
+		    			 		
+				@endforeach
+			@endif 	
 	
 @stop

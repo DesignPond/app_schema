@@ -101,6 +101,12 @@ class DbProjet implements ProjetInterface {
 		return $this->projet->with( array('user','theme',) )->findOrFail($id)->toArray();			
 	}
 	
+	public function findO($id){
+	
+		return $this->projet->find($id);
+		
+	}
+	
 	public function create(array $data){
 		
 		// Create the article

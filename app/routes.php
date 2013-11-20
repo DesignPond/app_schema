@@ -67,6 +67,8 @@ Route::group(array('prefix' => 'schemas'), function()
 	
 	Route::get('create', array('before' => 'auth' ,'uses' => 'SchemaController@create') );	
 	
+	Route::post('projet/update', array( 'uses' => 'ProjetController@update') );
+	
 	Route::resource('categorie', 'CategorieController');
 	Route::resource('theme', 'ThemeController');
 	Route::get('theme/drop_theme/{id}', 'ThemeController@drop_theme');

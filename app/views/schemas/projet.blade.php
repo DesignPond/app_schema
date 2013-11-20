@@ -15,7 +15,7 @@
                         <div class="post-content no-space-left">
                             <div class="post-text">
                                 <h3><a href="css/#">{{ $projet['titre'] }}</a></h3>
-                                {{ $projet['description'] }}
+                                <span id="{{ $projet['id'] }}" class="edit_content">{{ $projet['description'] }}</span>
                             </div>
                         </div>
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>
