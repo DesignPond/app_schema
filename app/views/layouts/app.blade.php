@@ -56,7 +56,9 @@
 	                        </div>
 	                        <div class="span6 info-text text-right">
 	                        @if ( Auth::check() )
-	                            <i class="icon-user"></i> {{ Auth::user()->email }} &nbsp;|&nbsp; <a href="">{{ link_to('logout', 'Logout' ) }}
+	                            <i class="icon-user"></i> {{ Auth::user()->email }} &nbsp;|&nbsp; {{ link_to('logout', 'Logout' ) }}
+	                        @else
+	                        	{{ link_to('login', 'Login' ) }}
 	                        @endif
 	                        </div>
 	                    </div>

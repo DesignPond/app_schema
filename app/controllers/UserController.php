@@ -71,12 +71,10 @@ class UserController extends BaseController {
 		    	}
 		    }
 	    } 
-	    
-	    $name = $user['prenom'].' '.$user['nom'];
         
         $data = array(
         	'titre'     => 'Profil',
-			'soustitre' => $name,
+			'soustitre' => 'Vos informations et schémas',
 			'user'      => $user,
 			'projets'   => $projets,
 			'themes'    => $themes,
