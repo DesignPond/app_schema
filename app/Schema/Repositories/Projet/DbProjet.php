@@ -28,10 +28,10 @@ class DbProjet implements ProjetInterface {
 		
 		if($nbr)
 		{
-			return $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme','subtheme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
+			return $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
 		}
 		
-		return $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme','subtheme') )->orderBy('id', 'DESC')->get()->toArray();
+		return $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme') )->orderBy('id', 'DESC')->get()->toArray();
 		
 	}
 
@@ -52,7 +52,7 @@ class DbProjet implements ProjetInterface {
 	
 	public function appByProjet($id){
 	
-		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme','subtheme')->get()->first()->toArray();
+		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme')->get()->first()->toArray();
 	}
 	
 	public function heightProjet($id){
@@ -93,12 +93,12 @@ class DbProjet implements ProjetInterface {
 		
 	public function getAll(){
 		
-		return $this->projet->with( array('theme','subtheme','user') )->get();		
+		return $this->projet->with( array('theme','user') )->get();		
 	}
 		
 	public function find($id){
 		
-		return $this->projet->with( array('user','theme','subtheme') )->findOrFail($id)->toArray();			
+		return $this->projet->with( array('user','theme',) )->findOrFail($id)->toArray();			
 	}
 	
 	public function create(array $data){
@@ -109,8 +109,8 @@ class DbProjet implements ProjetInterface {
 			'description' => $data['description'],
 			'user_id'     => $data['user_id'],
 			'categorie_id'=> $data['categorie_id'],
-			'theme_id'    => $data['theme_id'],
-			'subtheme_id' => $data['subtheme_id']
+			'theme_id'    => $data['theme_id']
+			//'subtheme_id' => $data['subtheme_id']
 		));
 		
 		if( ! $projet )
@@ -135,7 +135,7 @@ class DbProjet implements ProjetInterface {
 		$projet->user_id      = $data['user_id'];
 		$projet->categorie_id = $data['categorie_id'];
 		$projet->theme_id     = $data['theme_id'];
-		$projet->subtheme_id  = $data['subtheme_id'];
+		//$projet->subtheme_id  = $data['subtheme_id'];
 		$projet->save();	
 		
 		return true;

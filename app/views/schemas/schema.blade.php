@@ -17,7 +17,7 @@
                                 <h3><a href="css/#">{{ $projet['titre'] }}</a></h3>
                                 {{ $projet['description'] }}
                                 
-                                @if($isEditable)
+                                @if($isEditable && ($projet['type'] == 'app'))
                                 {{ link_to('schemas/projet/'.$projet['id'].'/#projet/'.$projet['id'],'&Eacute;diter le schéma',array('class' => 'btn btn-small btn-primary isEditable')) }}
                                 @endif
                                 
@@ -26,7 +26,6 @@
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>
                         	Par: <a href="#">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}</a></span> 
                         	<span><i class="icon-tag"></i>{{ link_to('schemas/theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
-                        	<span><i class="icon-tags"></i> {{   $custom->if_exist($projet['subtheme']['titre']) }}</span> 
                         </div>
                         
                         @if($projet['type'] == 'app')
@@ -72,7 +71,7 @@
                         @else
                         
                         <div id="projet" class="projet_width">
-                        	 <embed src="{{ asset('documents/projets/litispendance.pdf') }}" width="1024"  height="750"></embed>
+                        	 <embed src="{{ asset('documents/projets/'.$projet['slug'].'.pdf') }}" width="1024"  height="750"></embed>
                         </div>
                         
                         @endif

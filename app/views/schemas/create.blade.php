@@ -38,10 +38,12 @@
 								@foreach($errors->get('theme_id') as $message)<div class="span3 errors">{{ $message }}</div> @endforeach
 						</div>	
 						
+<!--
 						<div class="row">
 						{{ Form::label('Sous thème', '' ,array('class' => 'span2')) }}
 						<div class="span4">{{ Form::select('subtheme_id', $subthemes, '' , array('id' => 'subtheme', 'class' => '', 'id' => 'subtheme')) }}</div>
 						</div>
+-->
 						
 						<br/>
 						{{ Form::submit('Créer le schéma', array('class' => 'btn btn-primary')) }}

@@ -11,7 +11,9 @@
 				<!-- content begin -->
 		        <div id="content">
 		            <div class="container">
-		                <div class="row">
+		            
+		                <!--
+							<div class="row">
 		                    <div class="span12">	                  
 		                        <ul id="filters">
 		                        	<li><a href="#" data-filter="*" class="selected">Tous</a></li>
@@ -27,6 +29,7 @@
 		                        </ul>
 		                    </div>
 		                </div>
+						-->
 
 		                <div class="row">
 		                    <div id="gallery" class="gallery">

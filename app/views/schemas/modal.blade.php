@@ -21,7 +21,6 @@
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>
                         	Par: <a href="#">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}</a></span> 
                         	<span><i class="icon-tag"></i>{{ link_to('schemas/theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
-                        	<span><i class="icon-tags"></i> {{ $custom->if_exist($projet['subtheme']['titre']) }}</span> 
                         </div>
                         
                         @if($projet['type'] == 'app')
