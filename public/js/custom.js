@@ -74,7 +74,6 @@ jQuery(document).ready(function() {
           jQuery("img").lazyload({
               effect : "fadeIn",
 			  effectspeed: '1000' 
-
           });
     });     
       
@@ -85,11 +84,53 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.edit_content').editable( base_url + 'schemas/projet/update', { 
-         type     : 'textarea',
-         submit   : 'OK',
-         cssclass : 'edit_form_projet',
-         tooltip  : 'Click to edit...'
-    });
+         type      : 'textarea',
+         submit    : 'OK',
+         indicator : 'Sauvegarde...',
+         cssclass  : 'edit_form_projet',
+         tooltip   : 'Click to edit...',
+		 submitdata : function(value, settings) {
+		 	 var column = $(this).data('column');
+		 	 var id     = $(this).data('id');
+			 return {column: column , id : id};
+	   	 }
+    });   
+	
+	jQuery('.toggle').toggles({
+		drag:false,
+		text:{on:'Actif', off:'Brouillon'}
+	});
+	
+	// Getting notified of changes, and the new state:
+	jQuery('.toggle').on('toggle', function (e, active) {
+		
+		var id = $(this).data('id');
+		
+	    if (active) 
+	    {
+	       var status = 'actif';
+	    } 
+	    else 
+	    {
+	       var status = 'brouillon';
+	    }
+	    
+		jQuery.ajax({
+			type: 'POST',
+			data: {
+			    id    : id,
+			    value : status,
+			    column: 'status'
+			}, 
+			success: function(data) 
+			{
+				console.log(data);
+			},
+			url: base_url + 'schemas/projet/update'
+		});	    
+	     
+	  
+	});
      	  
 	// --------------------------------------------------
 	// gallery hover

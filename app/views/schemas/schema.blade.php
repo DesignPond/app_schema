@@ -4,7 +4,7 @@
 
 	<?php  $custom = new Custom; ?>
 		
-	@if ( !empty($projet) )		
+	@if ( !empty($projet) )	
 			
         <!-- content begin -->
         <div id="content">
@@ -14,13 +14,13 @@
 
                         <div class="post-content no-space-left">
                             <div class="post-text">
-                                <h3><a href="css/#">{{ $projet['titre'] }}</a></h3>
+                                <h3>{{ $projet['titre'] }}</h3>
                                 {{ $projet['description'] }}
                                 
                                 @if($isEditable && ($projet['type'] == 'app'))
                                 {{ link_to('schemas/projet/'.$projet['id'].'/#projet/'.$projet['id'],'&Eacute;diter le schéma',array('class' => 'btn btn-small btn-primary isEditable')) }}
                                 @endif
-                                
+ 
                             </div>
                         </div>
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>

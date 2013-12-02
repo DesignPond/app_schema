@@ -4,7 +4,7 @@
 
 <?php  $custom = new Custom; ?>
 
-	<div id="content">
+	<div class="content">
     	<div class="container profile">
 			 <div class="row">
 		        <div class="span1 widget">
@@ -53,6 +53,7 @@
 			 							
 			 							<!-- gallery item -->
 					                    <div class="span4 item">
+					                    	<div class="status {{ $projet['status'] }}"></div>
 					                        <div class="picframe">
 												<span class="itemColor " style="background:{{ $projet['theme']['couleur'] }};">
 												<a href="{{ url('schemas/projet/schema', array('id' => $projet['id'] ) ) }}">
@@ -65,7 +66,7 @@
 					                            </span>
 					                            <span class="itemInfos">
 					                           		<h4>{{ link_to('schemas/projet/schema/'.$projet['id'], $projet['titre']) }}</h4>    
-											   		<div class="auteur">{{ $custom->if_exist($projet['subtheme']['titre']) }}</div>
+											   		<div class="auteur">{{ $custom->limit_words($projet['description'], 10) }}</div>
 					                            </span>
 					                        </div>
 					                    </div>

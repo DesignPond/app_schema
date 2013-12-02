@@ -69,6 +69,6 @@ jQuery(document).ready(function() {
 		console.log('value!');
 		jQuery( "#categorie" ).trigger('change');
 	}
+
 	
-	
-});
+}); ///////////////

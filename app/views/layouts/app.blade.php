@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="<?php echo asset('css/jquery.contextMenu.css'); ?>">
     <link rel="stylesheet" href="<?php echo asset('fancybox/jquery.fancybox.css'); ?>">
     <link rel="stylesheet" href="<?php echo asset('js/vendor/redactor/redactor.css'); ?>">
+    <link rel="stylesheet" href="<?php echo asset('css/toggles.css'); ?>">
+    <link rel="stylesheet" href="<?php echo asset('css/toggles-soft.css'); ?>">
     
     <!-- Javascript Files
     ================================================== -->
@@ -31,6 +33,7 @@
     <script src="<?php echo asset('js/ender.js');?>"></script>
     <script src="<?php echo asset('js/jquery.lazyload.js');?>"></script>
     <script src="<?php echo asset('js/custom.js');?>"></script>
+    <script src="<?php echo asset('js/toggles.js');?>"></script>
     <script src="<?php echo asset('js/script.js');?>"></script>
     <script src="<?php echo asset('js/vendor/history.js');?>"></script>
     <script src="<?php echo asset('js/jquery.jeditable.js');?>"></script>
@@ -68,19 +71,19 @@
 	            <div class="container">
 	                <div id="logo">
 	                    <div class="inner">
-	                        {{ link_to('schemas/', '' ) }}
+	                         {{ link_to('schemas/', 'DROIT EN SCH&Eacute;ma' ) }}
 	                    </div>
 	                </div>
 	
 	                <!-- mainmenu begin -->
 	                <ul id="mainmenu">
-	                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
-	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}</li>
+	                    <li>{{ link_to('schemas/', 'Accueil', array('class' => Request::is( 'schemas') ? 'active' : '')  ) }}</li>
+	                    <li>{{ link_to('schemas/categorie/', 'Catégories' , array('class' => Request::is( 'schemas/categorie') ? 'active' : '') ) }}</li>
 	                    @if ( Auth::check() )
-							<li> {{ link_to('schemas/create', 'Créer un schéma' ) }}</li>
-							<li> {{ link_to('schemas/user/'.Auth::user()->id, 'Votre profil' ) }}</li>
+							<li> {{ link_to('schemas/create', 'Créer un schéma', array('class' => Request::is( 'schemas/create') ? 'active' : '')  ) }}</li>
+							<li> {{ link_to('schemas/user/'.Auth::user()->id, 'Votre profil' , array('class' => Request::is( 'schemas/user/*') ? 'active' : '')) }}</li>
 						@endif 
-	                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
+	                    <li>{{ link_to('schemas/contact', 'Contact' , array('class' => Request::is( 'schemas/contact') ? 'active' : '') ) }}</li>
 	                </ul>
 	                <!-- mainmenu close -->
 	

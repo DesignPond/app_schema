@@ -43,7 +43,7 @@
 	            <div class="container">
 	                <div id="logo">
 	                    <div class="inner">
-	                        {{ link_to('schemas/', '' ) }}
+	                        {{ link_to('schemas/', 'DROIT EN SCH&Eacute;ma' ) }}
 	                    </div>
 	                </div>
 	

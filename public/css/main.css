@@ -11,6 +11,7 @@ To enable css file simply remove mark '/*' and '* /' between line of css file
 @import url("bootstrap-responsive.css");
 @import url("prettyPhoto.css");
 @import url("style.css");
+@import url("stylesheet.css");
 @import url("../font-awesome/css/font-awesome.css");
 
 
@@ -30,7 +31,6 @@ to use boxed layout please enable code below and disable 'wide-screen.css' above
 
 
 
-
 /* load  color css 
 ------------------------------
 select one: 
@@ -44,7 +44,7 @@ pink.css
 purple.css
 yellow.css
 */
-@import url("colors/orange.css");
+@import url("colors/unine.css");
 
 
 

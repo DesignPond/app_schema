@@ -14,8 +14,8 @@
 
                         <div class="post-content no-space-left">
                             <div class="post-text">
-                                <h3><a href="css/#">{{ $projet['titre'] }}</a></h3>
-                                <span id="{{ $projet['id'] }}" class="edit_content">{{ $projet['description'] }}</span>
+                                <h3><span data-column="titre" data-id="{{ $projet['id'] }}" class="edit_content">{{ $projet['titre'] }}</span></h3>
+                                <span data-column="description" data-id="{{ $projet['id'] }}" class="edit_content">{{ $projet['description'] }}</span>
                             </div>
                         </div>
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>
@@ -27,14 +27,19 @@
 	                         <div id="colors" class="span3">
 	                         	<p>Couleur</p><input id="colorPicker" class="simple_color" value="{{ $projet['theme']['couleur'] }}"/>
 	                         </div>
-	                         <div id="shapes" class="span6">
+	                         <div id="shapes" class="span7">
 				                <button class="btn"  id="add"><span class="car"></span>Ajouter</button>
 								<button data-position="down"  class="btn arrow"><span class="down"></span>Bas</button>
 						        <button data-position="left"  class="btn arrow"><span class="left"></span>Gauche</button>
 						        <button data-position="right" class="btn arrow"><span class="right"></span>Droite</button>
 						        <button data-position="up"    class="btn arrow"><span class="up"></span>Haut</button>
 				            </div>
-				            <div class="span3 text-right">
+				            <div class="span1 text-right">
+				            	<div class="toggle-soft">
+                                	<div data-id="{{ $projet['id'] }}" class="toggle on"></div>
+                                </div>
+				            </div>
+				            <div class="span1 text-right">
 				            	{{ link_to('schemas/projet/schema/'.$projet['id'], 'Terminer', array( 'id' => 'save' , 'class' => 'btn btn-primary save') ) }}
 				             </div>
                         </div>

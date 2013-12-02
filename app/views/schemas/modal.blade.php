@@ -14,7 +14,7 @@
 
                         <div class="post-content no-space-left">
                             <div class="post-text">
-                                <h3><a href="css/#">{{ $projet['titre'] }}</a></h3>
+                                <h3>{{ $projet['titre'] }}</h3>
                                 {{ $projet['description'] }}
                             </div>
                         </div>

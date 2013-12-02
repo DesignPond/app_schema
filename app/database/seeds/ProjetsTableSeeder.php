@@ -18,6 +18,7 @@ class ProjetsTableSeeder extends Seeder {
 				'subtheme_id' => '',
 				'type'        => 'pdf',
 				'slug'        => 'historique',
+				'status'      => 'actif',
 				'created_at'  => date('Y-m-d G:i:s'),
 				'updated_at'  => date('Y-m-d G:i:s') 
 			),
@@ -30,6 +31,7 @@ class ProjetsTableSeeder extends Seeder {
 				'subtheme_id' => '',
 				'type'        => 'pdf',
 				'slug'        => 'instances_cantonales_uniques',
+				'status'      => 'actif',
 				'created_at'  => date('Y-m-d G:i:s'),
 				'updated_at'  => date('Y-m-d G:i:s') 
 			),
@@ -42,6 +44,7 @@ class ProjetsTableSeeder extends Seeder {
 				'subtheme_id' => '',
 				'type'        => 'app',
 				'slug'        => 'schema_projet',
+				'status'      => 'actif',
 				'created_at'  => date('Y-m-d G:i:s'),
 				'updated_at'  => date('Y-m-d G:i:s') 
 			),
@@ -54,6 +57,7 @@ class ProjetsTableSeeder extends Seeder {
 				'subtheme_id' => '',
 				'type'        => 'app',
 				'slug'        => 'un_quatrieme',
+				'status'      => 'brouillon',
 				'created_at'  => date('Y-m-d G:i:s'),
 				'updated_at'  => date('Y-m-d G:i:s') 
 			),		
@@ -66,6 +70,7 @@ class ProjetsTableSeeder extends Seeder {
 				'subtheme_id' => '',
 				'type'        => 'pdf',
 				'slug'        => 'principe_de_la_bonne_foi',
+				'status'      => 'actif',
 				'created_at'  => date('Y-m-d G:i:s'),
 				'updated_at'  => date('Y-m-d G:i:s') 
 			),
@@ -78,6 +83,7 @@ class ProjetsTableSeeder extends Seeder {
 				'subtheme_id' => '',
 				'type'        => 'pdf',
 				'slug'        => 'consorites',
+				'status'      => 'brouillon',
 				'created_at'  => date('Y-m-d G:i:s'),
 				'updated_at'  => date('Y-m-d G:i:s') 
 			),
@@ -89,6 +95,7 @@ class ProjetsTableSeeder extends Seeder {
 				'theme_id'    => '4',
 				'subtheme_id' => '',
 				'type'        => 'app',
+				'status'      => 'actif',
 				'slug'        => 'consorites_de_test',
 				'created_at'  => date('Y-m-d G:i:s'),
 				'updated_at'  => date('Y-m-d G:i:s') 

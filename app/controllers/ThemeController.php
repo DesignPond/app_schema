@@ -89,7 +89,7 @@ class ThemeController extends BaseController {
 		$titre    = $this->theme->find($id);
 		
 		$data = array(
-        	'titre'     => 'Thèmes',
+        	'titre'     => 'Thème',
 			'soustitre' => $titre->titre,
 			'couleur'   => $titre->couleur,
 			'projets'   => $projets ,

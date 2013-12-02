@@ -77,7 +77,7 @@ class ProjetController extends BaseController {
 	{
 		$projet = $this->projet->find($id);	
 
-        return View::make('schemas.projet')->with( array('projet' => $projet ));
+        return View::make('schemas.projet')->with( array('projet' => $projet) );
 	}
 	
 	public function schema($id){
@@ -126,6 +126,7 @@ class ProjetController extends BaseController {
 	{
 		$id     = Input::get('id');
 		$value  = Input::get('value');
+		$column = Input::get('column');
 		
 		$projet = $this->projet->findO($id);
 		
@@ -134,7 +135,7 @@ class ProjetController extends BaseController {
 			return false;
 		}
 
-		$projet->description  = $value;
+		$projet->$column  = $value;
 		$projet->save();	
 		
 		return $value;
