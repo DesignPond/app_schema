@@ -15,6 +15,14 @@ class UsersTableSeeder extends Seeder {
 				'password'   => Hash::make('secret'),
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
+			),
+			array( 
+				'prenom'     => 'François',
+				'nom'        => 'Bohnet',
+				'email'      => 'francois.bohnet@unine.ch',
+				'password'   => Hash::make('1234'),
+				'created_at' => date('Y-m-d G:i:s'),
+				'updated_at' => date('Y-m-d G:i:s') 
 			)
 		);
 

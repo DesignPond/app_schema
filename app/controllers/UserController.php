@@ -14,7 +14,7 @@ class UserController extends BaseController {
 		$this->user = $user;
 		
 		$this->projet = $projet;
-
+		
 	}
 	
 	/**
@@ -54,7 +54,12 @@ class UserController extends BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{             
+	{ 
+		if( !Auth::check() )
+		{
+			return Redirect::to('schemas'); 
+		}	
+		            
         $user    = $this->user->find($id);
 	    $projets = $this->projet->projectsByUser($id);  
 	    $themes  = array();

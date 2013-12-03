@@ -36,7 +36,7 @@
 				            </div>
 				            <div class="span1 text-right">
 				            	<div class="toggle-soft">
-                                	<div data-id="{{ $projet['id'] }}" class="toggle on"></div>
+                                	<div id="toggle-btn" data-status="{{ $projet['status'] }}" data-id="{{ $projet['id'] }}" class="toggle on"></div>
                                 </div>
 				            </div>
 				            <div class="span1 text-right">

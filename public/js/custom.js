@@ -94,10 +94,22 @@ jQuery(document).ready(function() {
 		 	 var id     = $(this).data('id');
 			 return {column: column , id : id};
 	   	 }
-    });   
+    });  
+    
+    var status = jQuery('#toggle-btn').data('status'); 
+    
+    if (status === 'actif') 
+	    {
+	       var on = true;
+	    } 
+	    else 
+	    {
+	       var on = false;
+	    }
 	
 	jQuery('.toggle').toggles({
 		drag:false,
+		on:on,
 		text:{on:'Actif', off:'Brouillon'}
 	});
 	
