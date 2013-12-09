@@ -128,7 +128,7 @@ class ProjetController extends BaseController {
 		$value  = Input::get('value');
 		$column = Input::get('column');
 		
-		$projet = $this->projet->findO($id);
+		$projet = $this->projet->find($id);
 		
 		if( ! $projet )
 		{
