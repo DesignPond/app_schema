@@ -2,12 +2,12 @@
 
 namespace Behat\Mink\Driver;
 
-use Behat\Mink\Session,
-    Behat\Mink\Element\NodeElement,
-    Behat\Mink\Exception\DriverException;
-
-use WebDriver\WebDriver;
+use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\DriverException;
+use Behat\Mink\Session;
+use WebDriver\Exception\UnknownError;
 use WebDriver\Key;
+use WebDriver\WebDriver;
 
 /*
  * This file is part of the Behat\Mink.
@@ -59,6 +59,12 @@ class Selenium2Driver extends CoreDriver
     private $wdSession;
 
     /**
+     * The timeout configuration
+     * @var array
+     */
+    private $timeouts = array();
+
+    /**
      * Instantiates the driver.
      *
      * @param string    $browserName Browser name
@@ -78,10 +84,11 @@ class Selenium2Driver extends CoreDriver
      * After a clone, we break our reference to the "old" wdSession and create
      * a new WebDriver.
      */
-    public function __clone() {
-      $this->wdSession = NULL;
-      $this->started = false;
-      $this->setWebDriver(new WebDriver($this->webDriver->getURL()));
+    public function __clone()
+    {
+        $this->wdSession = null;
+        $this->started = false;
+        $this->setWebDriver(new WebDriver($this->webDriver->getURL()));
     }
 
     /**
@@ -208,7 +215,7 @@ class Selenium2Driver extends CoreDriver
      *
      * @return string a json encoded options array for Syn
      */
-    protected static function charToOptions($event, $char, $modifier=null)
+    protected static function charToOptions($event, $char, $modifier = null)
     {
         $ord = ord($char);
         if (is_numeric($char)) {
@@ -270,6 +277,7 @@ class Selenium2Driver extends CoreDriver
     {
         try {
             $this->wdSession = $this->webDriver->session($this->browserName, $this->desiredCapabilities);
+            $this->applyTimeouts();
         } catch (\Exception $e) {
             throw new DriverException('Could not open connection: '.$e->getMessage(), 0, $e);
         }
@@ -278,6 +286,35 @@ class Selenium2Driver extends CoreDriver
             throw new DriverException('Could not connect to a Selenium 2 / WebDriver server');
         }
         $this->started = true;
+    }
+
+    /**
+     * Sets the timeouts to apply to the webdriver session
+     *
+     * @param array $timeouts The session timeout settings: Array of {script, implicit, page} => time in microsecconds
+     * @throws DriverException
+     */
+    public function setTimeouts($timeouts)
+    {
+        $this->timeouts = $timeouts;
+
+        if ($this->isStarted()) {
+            $this->applyTimeouts();
+        }
+    }
+
+    /**
+     * Applies timeouts to the current session
+     */
+    private function applyTimeouts()
+    {
+        try {
+            foreach ($this->timeouts as $type => $param) {
+                $this->wdSession->timeouts($type, $param);
+            }
+        } catch (UnknownError $e) {
+            throw new DriverException('Error setting timeout: ' . $e->getMessage(), 0, $e);
+        }
     }
 
     /**
@@ -528,10 +565,9 @@ class Selenium2Driver extends CoreDriver
      */
     public function getAttribute($xpath, $name)
     {
-        $attribute = $this->wdSession->element('xpath', $xpath)->attribute($name);
-        if ('' !== $attribute) {
-            return $attribute;
-        }
+        $script = 'return {{ELEMENT}}.getAttribute(' . json_encode((string)$name) . ')';
+
+        return $this->executeJsOnXpath($xpath, $script);
     }
 
     /**
@@ -545,74 +581,58 @@ class Selenium2Driver extends CoreDriver
     {
         $script = <<<JS
 var node = {{ELEMENT}},
-    tagName = node.tagName;
+    tagName = node.tagName.toUpperCase(),
+    value = null;
 
-if (tagName == "INPUT" || "TEXTAREA" == tagName) {
+if (tagName == 'INPUT' || tagName == 'TEXTAREA') {
     var type = node.getAttribute('type');
-    if (type == "checkbox") {
-        value = "boolean:" + node.checked;
-    } else if (type == "radio") {
+    if (type == 'checkbox') {
+        value = node.checked;
+    } else if (type == 'radio') {
         var name = node.getAttribute('name');
         if (name) {
-            var fields = window.document.getElementsByName(name);
-            var i, l = fields.length;
+            var fields = window.document.getElementsByName(name),
+                i, l = fields.length;
             for (i = 0; i < l; i++) {
                 var field = fields.item(i);
                 if (field.checked) {
-                    value = "string:" + field.value;
+                    value = field.value;
+                    break;
                 }
             }
         }
     } else {
-        value = "string:" + node.value;
+        value = node.value;
     }
-} else if (tagName == "SELECT") {
+} else if (tagName == 'SELECT') {
     if (node.getAttribute('multiple')) {
-        options = [];
+        value = [];
         for (var i = 0; i < node.options.length; i++) {
-            if (node.options[ i ].selected) {
-                options.push(node.options[ i ].value);
+            if (node.options[i].selected) {
+                value.push(node.options[i].value);
             }
         }
-        value = "array:" + options.join(',');
     } else {
         var idx = node.selectedIndex;
         if (idx >= 0) {
-            value = "string:" + node.options.item(idx).value;
+            value = node.options.item(idx).value;
         } else {
             value = null;
         }
     }
 } else {
-    attributeValue = node.getAttribute('value');
+    var attributeValue = node.getAttribute('value');
     if (attributeValue != null) {
-        value = "string:" + attributeValue;
+        value = attributeValue;
     } else if (node.value) {
-        value = "string:" + node.value;
-    } else {
-        return null;
+        value = node.value;
     }
 }
 
-return value;
+return JSON.stringify(value);
 JS;
 
-        $value = $this->executeJsOnXpath($xpath, $script);
-        if ($value) {
-            if (preg_match('/^string:(.*)$/ms', $value, $vars)) {
-                return $vars[1];
-            }
-            if (preg_match('/^boolean:(.*)$/', $value, $vars)) {
-                return 'true' === strtolower($vars[1]);
-            }
-            if (preg_match('/^array:(.*)$/', $value, $vars)) {
-                if ('' === trim($vars[1])) {
-                    return array();
-                }
-
-                return explode(',', $vars[1]);
-            }
-        }
+        return json_decode($this->executeJsOnXpath($xpath, $script), true);
     }
 
     /**
@@ -654,7 +674,7 @@ JS;
      */
     public function check($xpath)
     {
-        if ( $this->isChecked($xpath) ) {
+        if ($this->isChecked($xpath)) {
             return;
         }
 
@@ -668,7 +688,7 @@ JS;
      */
     public function uncheck($xpath)
     {
-        if ( !$this->isChecked($xpath) ) {
+        if (!$this->isChecked($xpath)) {
             return;
         }
 
@@ -981,7 +1001,7 @@ JS;
         do {
             $result = $this->wdSession->execute(array('script' => $script, 'args' => array()));
             usleep(100000);
-        } while ( microtime(true) < $end && !$result );
+        } while (microtime(true) < $end && !$result);
 
         return (bool)$result;
     }
@@ -995,7 +1015,9 @@ JS;
      */
     public function resizeWindow($width, $height, $name = null)
     {
-        return $this->wdSession->window($name ? $name : 'current')->postSize(array('width' => $width, 'height' => $height));
+        return $this->wdSession->window($name ? $name : 'current')->postSize(
+            array('width' => $width, 'height' => $height)
+        );
     }
 
     /**

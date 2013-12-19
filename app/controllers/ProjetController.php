@@ -75,9 +75,16 @@ class ProjetController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$projet = $this->projet->find($id);	
+		$projet = $this->projet->find($id)->toArray();	
+      	
+      	if( Auth::check() )
+		{
+			$isEditable = $this->projet->isUsers($id,Auth::user()->id);	
+		}	
+      	
+      	$themes  = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
 
-        return View::make('schemas.projet')->with( array('projet' => $projet) );
+        return View::make('schemas.projet')->with( array('projet' => $projet,'isEditable' => $isEditable, 'themes' => $themes) );
 	}
 	
 	public function schema($id){
@@ -91,8 +98,10 @@ class ProjetController extends BaseController {
 		{
 			$isEditable = $this->projet->isUsers($id,Auth::user()->id);	
 		}	
+		      	
+      	$themes  = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
 
-        return View::make('schemas.schema')->with( array('projet' => $projet , 'height' => $height ,'isEditable' => $isEditable));
+        return View::make('schemas.schema')->with( array('projet' => $projet , 'height' => $height ,'isEditable' => $isEditable, 'themes' => $themes));
 	}
 	
 	public function modal($id = NULL){
@@ -111,7 +120,7 @@ class ProjetController extends BaseController {
 	 */
 	public function edit($id)
 	{
-      	$projet  = $this->projet->find($id);
+      	$projet  = $this->projet->find($id)->toArray();
 
         return View::make('schemas.edit')->with( array('projet' => $projet ));
 	}
@@ -134,9 +143,10 @@ class ProjetController extends BaseController {
 		{
 			return false;
 		}
+		
+		$data = array( $column => $value );
 
-		$projet->$column  = $value;
-		$projet->save();	
+		$projet->update( $data );	
 		
 		return $value;
 		

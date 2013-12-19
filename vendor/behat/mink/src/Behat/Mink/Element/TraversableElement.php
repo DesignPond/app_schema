@@ -71,16 +71,14 @@ abstract class TraversableElement extends Element
         $link = $this->findLink($locator);
 
         if (null === $link) {
-            throw new ElementNotFoundException(
-                $this->getSession(), 'link', 'id|title|alt|text', $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'link', 'id|title|alt|text', $locator);
         }
 
         $link->click();
     }
 
     /**
-     * Checks whether document has a button (input[type=submit|image|button], button) with specified locator.
+     * Checks whether document has a button (input[type=submit|image|button|reset], button) with specified locator.
      *
      * @param string $locator button id, value or alt
      *
@@ -108,7 +106,7 @@ abstract class TraversableElement extends Element
     }
 
     /**
-     * Finds button (input[type=submit|image|button], button) with specified locator.
+     * Finds button (input[type=submit|image|button|reset], button) with specified locator.
      *
      * @param string $locator button id, value or alt
      *
@@ -122,7 +120,7 @@ abstract class TraversableElement extends Element
     }
 
     /**
-     * Presses button (input[type=submit|image|button], button) with specified locator.
+     * Presses button (input[type=submit|image|button|reset], button) with specified locator.
      *
      * @param string $locator button id, value or alt
      *
@@ -133,9 +131,7 @@ abstract class TraversableElement extends Element
         $button = $this->findButton($locator);
 
         if (null === $button) {
-            throw new ElementNotFoundException(
-                $this->getSession(), 'button', 'id|name|title|alt|value', $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'button', 'id|name|title|alt|value', $locator);
         }
 
         $button->press();
@@ -180,9 +176,7 @@ abstract class TraversableElement extends Element
         $field = $this->findField($locator);
 
         if (null === $field) {
-            throw new ElementNotFoundException(
-                $this->getSession(), 'form field', 'id|name|label|value', $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'form field', 'id|name|label|value', $locator);
         }
 
         $field->setValue($value);
@@ -228,9 +222,7 @@ abstract class TraversableElement extends Element
         $field = $this->findField($locator);
 
         if (null === $field) {
-            throw new ElementNotFoundException(
-                $this->getSession(), 'form field', 'id|name|label|value', $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'form field', 'id|name|label|value', $locator);
         }
 
         $field->check();
@@ -248,9 +240,7 @@ abstract class TraversableElement extends Element
         $field = $this->findField($locator);
 
         if (null === $field) {
-            throw new ElementNotFoundException(
-                $this->getSession(), 'form field', 'id|name|label|value', $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'form field', 'id|name|label|value', $locator);
         }
 
         $field->uncheck();
@@ -284,9 +274,7 @@ abstract class TraversableElement extends Element
         $field = $this->findField($locator);
 
         if (null === $field) {
-            throw new ElementNotFoundException(
-                $this->getSession(), 'form field', 'id|name|label|value', $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'form field', 'id|name|label|value', $locator);
         }
 
         $field->selectOption($value, $multiple);
@@ -319,9 +307,7 @@ abstract class TraversableElement extends Element
         $field = $this->findField($locator);
 
         if (null === $field) {
-            throw new ElementNotFoundException(
-                $this->getSession(), 'form field', 'id|name|label|value', $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'form field', 'id|name|label|value', $locator);
         }
 
         $field->attachFile($path);

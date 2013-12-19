@@ -2,11 +2,10 @@
 
 namespace Tests\Behat\Mink\Driver;
 
-use Behat\Mink\Mink,
-    Behat\Mink\Session;
-
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
+use Behat\Mink\Driver\DriverInterface;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
+use Behat\Mink\Mink;
+use Behat\Mink\Session;
 
 abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,6 +23,17 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         self::$mink = new Mink(array('sess' => new Session(static::getDriver())));
+    }
+
+    /**
+     * Creates driver instance.
+     *
+     * @return DriverInterface
+     * @throws \RuntimeException
+     */
+    protected static function getDriver()
+    {
+        throw new \RuntimeException('Please implement "getDriver" method in your test case first');
     }
 
     /**
@@ -145,6 +155,45 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Previous cookie: NO', $this->getSession()->getPage()->getText());
     }
 
+    /**
+     * @dataProvider cookieWithPathsDataProvider
+     */
+    public function testCookieWithPaths($cookieRemovalMode)
+    {
+        // start clean
+        $session = $this->getSession();
+        $session->visit($this->pathTo('/sub-folder/cookie_page2.php'));
+        $this->assertContains('Previous cookie: NO', $session->getPage()->getText());
+
+        // cookie from root path is accessible in sub-folder
+        $session->visit($this->pathTo('/cookie_page1.php'));
+        $session->visit($this->pathTo('/sub-folder/cookie_page2.php'));
+        $this->assertContains('Previous cookie: srv_var_is_set', $session->getPage()->getText());
+
+        // cookie from sub-folder overrides cookie from root path
+        $session->visit($this->pathTo('/sub-folder/cookie_page1.php'));
+        $session->visit($this->pathTo('/sub-folder/cookie_page2.php'));
+        $this->assertContains('Previous cookie: srv_var_is_set_sub_folder', $session->getPage()->getText());
+
+        if ($cookieRemovalMode == 'session_reset') {
+            $session->reset();
+        } elseif ($cookieRemovalMode == 'cookie_delete') {
+            $session->setCookie('srvr_cookie', null);
+        }
+
+        // cookie is removed from all paths
+        $session->reload();
+        $this->assertContains('Previous cookie: NO', $session->getPage()->getText());
+    }
+
+    public function cookieWithPathsDataProvider()
+    {
+        return array(
+            array('session_reset'),
+            array('cookie_delete'),
+        );
+    }
+
     public function testReset()
     {
         $this->getSession()->visit($this->pathTo('/cookie_page1.php'));
@@ -188,9 +237,7 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
 
         $this->getSession()->reset();
         $this->getSession()->visit($this->pathTo('/print_cookies.php'));
-        $this->assertContains(
-            'array ( )', $this->getSession()->getPage()->getText()
-        );
+        $this->assertContains('array ( )', $this->getSession()->getPage()->getText());
     }
 
     public function testHttpOnlyCookieIsDeleted()
@@ -288,6 +335,28 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://mink.behat.org', $element->getAttribute('data-href'));
         $this->assertNull($element->getAttribute('data-url'));
         $this->assertEquals('div', $element->getTagName());
+    }
+
+    /**
+     * @dataProvider getAttributeDataProvider
+     */
+    public function testGetAttribute($attributeName, $attributeValue)
+    {
+        $this->getSession()->visit($this->pathTo('/index.php'));
+
+        $element = $this->getSession()->getPage()->findById('attr-elem[' . $attributeName . ']');
+
+        $this->assertSame($attributeValue, $element->getAttribute($attributeName));
+    }
+
+    public function getAttributeDataProvider()
+    {
+        return array(
+            array('with-value', 'some-value'),
+            array('without-value', ''),
+            array('with-empty-value', ''),
+            array('with-missing', null),
+        );
     }
 
     public function testVeryDeepElementsTraversing()
@@ -392,7 +461,8 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
     {
         $this->getSession()->visit($this->pathTo('/json.php'));
         $this->assertContains(
-            '{"key1":"val1","key2":234,"key3":[1,2,3]}', $this->getSession()->getPage()->getContent()
+            '{"key1":"val1","key2":234,"key3":[1,2,3]}',
+            $this->getSession()->getPage()->getContent()
         );
     }
 
@@ -418,11 +488,21 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Konstantin', $firstname->getValue());
         $this->assertEquals('Kudryashov', $lastname->getValue());
 
+        $page->findButton('Reset')->click();
+
+        $this->assertEquals('Firstname', $firstname->getValue());
+        $this->assertEquals('Lastname', $lastname->getValue());
+
+        $firstname->setValue('Konstantin');
+        $page->fillField('last_name', 'Kudryashov');
+
         $page->findButton('Save')->click();
 
-        $this->assertEquals('Anket for Konstantin', $page->find('css', 'h1')->getText());
-        $this->assertEquals('Firstname: Konstantin', $page->find('css', '#first')->getText());
-        $this->assertEquals('Lastname: Kudryashov', $page->find('css', '#last')->getText());
+        if ($this->safePageWait(5000, 'document.getElementById("first") !== null')) {
+            $this->assertEquals('Anket for Konstantin', $page->find('css', 'h1')->getText());
+            $this->assertEquals('Firstname: Konstantin', $page->find('css', '#first')->getText());
+            $this->assertEquals('Lastname: Kudryashov', $page->find('css', '#last')->getText());
+        }
     }
 
     public function testFormSubmit()
@@ -432,9 +512,27 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
 
         $page = $session->getPage();
         $page->findField('first_name')->setValue('Konstantin');
-        $page->find('xpath', 'descendant-or-self::form[1]')->submit();
 
-        $this->assertEquals('Firstname: Konstantin', $page->find('css', '#first')->getText());
+        try {
+            $page->find('xpath', 'descendant-or-self::form[1]')->submit();
+        } catch (UnsupportedDriverActionException $e) {
+            $this->markTestSkipped('Driver doesn\'t support form submission');
+        }
+
+        if ($this->safePageWait(5000, 'document.getElementById("first") !== null')) {
+            $this->assertEquals('Firstname: Konstantin', $page->find('css', '#first')->getText());
+        };
+    }
+
+    protected function safePageWait($time, $condition)
+    {
+        try {
+            $ret = $this->getSession()->wait($time, $condition);
+        } catch (UnsupportedDriverActionException $e) {
+            return true;
+        }
+
+        return $ret;
     }
 
     public function testBasicGetForm()
@@ -467,13 +565,8 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('20', $select->getValue());
         $this->assertSame(array(), $multiSelect->getValue());
 
-        $option_value = $this->getSession()->getSelectorsHandler()->xpathLiteral('30');
-        $option = $select->find('xpath', 'descendant-or-self::option[@value = ' . $option_value . ']');
-        $this->assertFalse($option->isSelected());
-
         $select->selectOption('thirty');
         $this->assertEquals('30', $select->getValue());
-        $this->assertTrue($option->isSelected());
 
         $multiSelect->selectOption('one', true);
 
@@ -487,15 +580,44 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
         $button->press();
 
         $space = ' ';
-        $this->assertContains(<<<OUT
-  'select_number' = '30',
+        $out = <<<OUT
+  'agreement' = 'off',
   'select_multiple_numbers' =$space
   array (
     0 = '1',
     1 = '3',
-  )
-OUT
-            , $page->getContent()
+  ),
+  'select_number' = '30',
+OUT;
+        $this->assertContains($out, $page->getContent());
+    }
+
+    /**
+     * @dataProvider testElementSelectedStateCheckDataProvider
+     */
+    public function testElementSelectedStateCheck($selectName, $optionValue, $optionText)
+    {
+        $session = $this->getSession();
+        $session->visit($this->pathTo('/multiselect_form.php'));
+        $select = $session->getPage()->findField($selectName);
+
+        $optionValueEscaped = $session->getSelectorsHandler()->xpathLiteral($optionValue);
+        $option = $select->find('xpath', 'descendant-or-self::option[@value = ' . $optionValueEscaped . ']');
+
+        try {
+            $this->assertFalse($option->isSelected());
+            $select->selectOption($optionText);
+            $this->assertTrue($option->isSelected());
+        } catch (UnsupportedDriverActionException $e) {
+            $this->markTestSkipped('Element selection check is not supported by the driver');
+        }
+    }
+
+    public function testElementSelectedStateCheckDataProvider()
+    {
+        return array(
+            array('select_number', '30', 'thirty'),
+            array('select_multiple_numbers[]', '2', 'two'),
         );
     }
 
@@ -523,6 +645,7 @@ OUT
         $sex         = $page->findField('sex');
         $maillist    = $page->findField('mail_list');
         $agreement   = $page->findField('agreement');
+        $notes       = $page->findField('notes');
         $about       = $page->findField('about');
 
         $this->assertNotNull($firstname);
@@ -532,12 +655,14 @@ OUT
         $this->assertNotNull($sex);
         $this->assertNotNull($maillist);
         $this->assertNotNull($agreement);
+        $this->assertNotNull($notes);
 
         $this->assertEquals('Firstname', $firstname->getValue());
         $this->assertEquals('Lastname', $lastname->getValue());
         $this->assertEquals('your@email.com', $email->getValue());
         $this->assertEquals('20', $select->getValue());
         $this->assertEquals('w', $sex->getValue());
+        $this->assertEquals('original notes', $notes->getValue());
 
         $this->assertTrue($maillist->getValue());
         $this->assertFalse($agreement->getValue());
@@ -557,6 +682,9 @@ OUT
         $sex->selectOption('m');
         $this->assertEquals('m', $sex->getValue());
 
+        $notes->setValue('new notes');
+        $this->assertEquals('new notes', $notes->getValue());
+
         $about->attachFile($this->mapRemoteFilePath(__DIR__ . '/web-fixtures/some_file.txt'));
 
         $button = $page->findButton('Register');
@@ -570,21 +698,99 @@ OUT
 
         $button->press();
 
-        $space = ' ';
-        $this->assertContains(<<<OUT
+        if ($this->safePageWait(5000, 'document.getElementsByTagName("title") !== null')) {
+            $out = <<<OUT
 array (
+  'agreement' = 'on',
+  'email' = 'ever.zet@gmail.com',
   'first_name' = 'Foo "item"',
   'last_name' = 'Bar',
-  'email' = 'ever.zet@gmail.com',
+  'notes' = 'new notes',
   'select_number' = '30',
   'sex' = 'm',
-  'agreement' = 'on',
   'submit' = 'Register',
 )
 1 uploaded file
-OUT
-            , $page->getContent()
-        );
+OUT;
+            $this->assertContains($out, $page->getContent());
+        }
+    }
+
+    public function testCheckboxMultiple()
+    {
+        $this->getSession()->visit($this->pathTo('/multicheckbox_form.php'));
+
+        $page = $this->getSession()->getPage();
+        $this->assertEquals('Multicheckbox Test', $page->find('css', 'h1')->getText());
+
+        $updateMail  = $page->find('css', '[name="mail_types[]"][value="update"]');
+        $spamMail    = $page->find('css', '[name="mail_types[]"][value="spam"]');
+
+        $this->assertNotNull($updateMail);
+        $this->assertNotNull($spamMail);
+
+        $this->assertTrue($updateMail->getValue());
+        $this->assertFalse($spamMail->getValue());
+
+        $this->assertTrue($updateMail->isChecked());
+        $this->assertFalse($spamMail->isChecked());
+
+        $updateMail->uncheck();
+        $this->assertFalse($updateMail->isChecked());
+        $this->assertFalse($spamMail->isChecked());
+
+        $spamMail->check();
+        $this->assertFalse($updateMail->isChecked());
+        $this->assertTrue($spamMail->isChecked());
+    }
+
+    public function testMultiInput()
+    {
+        $this->getSession()->visit($this->pathTo('/multi_input_form.php'));
+        $page = $this->getSession()->getPage();
+        $this->assertEquals('Multi input Test', $page->find('css', 'h1')->getText());
+
+        $first = $page->findField('First');
+        $second = $page->findField('Second');
+        $third = $page->findField('Third');
+
+        $this->assertNotNull($first);
+        $this->assertNotNull($second);
+        $this->assertNotNull($third);
+
+        $this->assertEquals('tag1', $first->getValue());
+        $this->assertSame('tag2', $second->getValue());
+        $this->assertEquals('tag1', $third->getValue());
+
+        $first->setValue('tag2');
+        $this->assertEquals('tag2', $first->getValue());
+        $this->assertSame('tag2', $second->getValue());
+        $this->assertEquals('tag1', $third->getValue());
+
+        $second->setValue('one');
+
+        $this->assertEquals('tag2', $first->getValue());
+        $this->assertSame('one', $second->getValue());
+
+        $third->setValue('tag3');
+
+        $this->assertEquals('tag2', $first->getValue());
+        $this->assertSame('one', $second->getValue());
+        $this->assertEquals('tag3', $third->getValue());
+
+        $button = $page->findButton('Register');
+        $button->press();
+
+        $space = ' ';
+        $out = <<<OUT
+  'tags' =$space
+  array (
+    0 = 'tag2',
+    1 = 'one',
+    2 = 'tag3',
+  ),
+OUT;
+        $this->assertContains($out, $page->getContent());
     }
 
     /**
@@ -597,7 +803,7 @@ OUT
      */
     protected function mapRemoteFilePath($file)
     {
-        if ( !isset($_SERVER['TEST_MACHINE_BASE_PATH']) || !isset($_SERVER['DRIVER_MACHINE_BASE_PATH']) ) {
+        if (!isset($_SERVER['TEST_MACHINE_BASE_PATH']) || !isset($_SERVER['DRIVER_MACHINE_BASE_PATH'])) {
             return $file;
         }
 
@@ -612,13 +818,42 @@ OUT
         $button = $page->findButton('Login');
         $button->press();
 
-        $this->assertContains(<<<OUT
-  'submit' = 'Login',
-  'agreement' = 'off',
-)
-no file
-OUT
-            , $page->getContent()
+        $toSearch = array(
+            "'agreement' = 'off',",
+            "'submit' = 'Login',",
+            'no file',
+        );
+
+        $pageContent = $page->getContent();
+
+        foreach ($toSearch as $searchString) {
+            $this->assertContains($searchString, $pageContent);
+        }
+    }
+
+    /**
+     * @dataProvider setBasicAuthDataProvider
+     */
+    public function testSetBasicAuth($user, $pass, $pageText)
+    {
+        $session = $this->getSession();
+
+        try {
+            $session->setBasicAuth($user, $pass);
+        } catch (UnsupportedDriverActionException $e) {
+            $this->markTestSkipped('This driver doesn\'t support basic authentication');
+        }
+
+        $session->visit($this->pathTo('/basic_auth.php'));
+
+        $this->assertContains($pageText, $session->getPage()->getContent());
+    }
+
+    public function setBasicAuthDataProvider()
+    {
+        return array(
+            array('mink-user', 'mink-password', 'is authenticated'),
+            array('', '', 'is not authenticated'),
         );
     }
 

@@ -7,27 +7,17 @@ class SessionController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function auth()
 	{
         return View::make('session.login');
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-        return View::make('sessions.create');
-	}
-
+	
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function login()
 	{
         $user = array(
             'email'    => Input::get('email'),
@@ -46,26 +36,15 @@ class SessionController extends BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-        return View::make('sessions.show');
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy()
+	public function logout()
 	{
         Auth::logout();
-        return Redirect::to('schemas');
+        return Redirect::intended('schemas');
         
 	}
 

@@ -2623,6 +2623,28 @@ header .text-right a
 	color: #013766;
 }
 
+.text-isEditable{
+	position: relative;
+}
+
+.icon-isEditable{
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #013766;
+}
+
+#theme-edit{
+	width: 200px;
+	display: inline-block;
+	margin-bottom: 0;
+}
+
+.isUpdated{
+	padding-top: 8px;
+	color: #0f8817;
+}
+
 
 /* -------------------------------------------------- */
 /* social-icons */

@@ -19,6 +19,13 @@ class Debug {
         self::$output->debug($message);
     }
 
+    static function pause()
+    {
+        if (!self::$output) return;
+        self::$output->writeln("<info>The execution paused. Press ENTER to continue</info>");
+        if (trim(fgets(fopen("php://stdin","r"))) != chr(13)) return;
+    }
+
 
 
 }

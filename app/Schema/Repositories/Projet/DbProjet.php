@@ -98,7 +98,7 @@ class DbProjet implements ProjetInterface {
 		
 	public function find($id){
 		
-		return $this->projet->with( array('user','theme',) )->findOrFail($id)->toArray();			
+		return $this->projet->with( array('user','theme',) )->findOrFail($id);			
 	}
 	
 	public function findO($id){
@@ -135,12 +135,27 @@ class DbProjet implements ProjetInterface {
 		{
 			return false;
 		}
+		
+		if( isset($data['titre']) ){
+			$projet->titre  = $data['titre'];
+		}
+		
+		if( isset($data['description']) ){
+			$projet->description  = $data['description'];
+		}
+		
+		if( isset($data['user_id']) ){
+			$projet->user_id  = $data['user_id'];
+		}
+		
+		if( isset($data['categorie_id']) ){
+			$projet->categorie_id  = $data['categorie_id'];
+		}
+		
+		if( isset($data['theme_id']) ){
+			$projet->theme_id  = $data['theme_id'];
+		}
 
-		$projet->titre        = $data['titre'];
-		$projet->description  = $data['description'];
-		$projet->user_id      = $data['user_id'];
-		$projet->categorie_id = $data['categorie_id'];
-		$projet->theme_id     = $data['theme_id'];
 		//$projet->subtheme_id  = $data['subtheme_id'];
 		$projet->save();	
 		

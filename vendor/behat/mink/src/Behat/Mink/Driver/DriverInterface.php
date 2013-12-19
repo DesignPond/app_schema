@@ -2,6 +2,7 @@
 
 namespace Behat\Mink\Driver;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 
 /*
@@ -154,11 +155,25 @@ interface DriverInterface
     public function getScreenshot();
 
     /**
+     * Return the names of all open windows.
+     *
+     * @return array    array of all open windows
+     */
+    public function getWindowNames();
+
+    /**
+     * Return the name of the currently active window.
+     *
+     * @return string    the name of the current window
+     */
+    public function getWindowName();
+
+    /**
      * Finds elements with specified XPath query.
      *
      * @param string $xpath
      *
-     * @return array array of NodeElements
+     * @return NodeElement[]
      */
     public function find($xpath);
 
@@ -399,5 +414,4 @@ interface DriverInterface
      * @param string $xpath Xpath.
      */
     public function submitForm($xpath);
-
 }

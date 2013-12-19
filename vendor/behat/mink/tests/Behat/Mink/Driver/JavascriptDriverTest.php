@@ -37,7 +37,10 @@ abstract class JavascriptDriverTest extends GeneralDriverTest
         $page    = $session->getPage();
 
         $page->clickLink('Popup #1');
+        $session->switchToWindow(null);
+
         $page->clickLink('Popup #2');
+        $session->switchToWindow(null);
 
         $el = $page->find('css', '#text');
         $this->assertNotNull($el);
@@ -67,12 +70,11 @@ abstract class JavascriptDriverTest extends GeneralDriverTest
 
         try {
             $windowName = $this->getSession()->getWindowName();
-        }
-        catch (UnsupportedDriverActionException $e) {
+        } catch (UnsupportedDriverActionException $e) {
             $this->markTestSkipped('The current driver does not support getWindowName function.');
             return;
         }
-        
+
         $this->assertNotNull($windowName);
 
         $page->clickLink('Popup #1');
@@ -80,8 +82,7 @@ abstract class JavascriptDriverTest extends GeneralDriverTest
 
         try {
             $windowNames = $this->getSession()->getWindowNames();
-        }
-        catch (UnsupportedDriverActionException $e) {
+        } catch (UnsupportedDriverActionException $e) {
             $this->markTestSkipped('The current driver does not support getWindowNames function.');
             return;
         }

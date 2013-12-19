@@ -1,3 +1,5 @@
+
+
 jQuery(document).ready(function() {
 
 	var base_url = location.protocol + "//" + location.host+"/";
@@ -95,6 +97,34 @@ jQuery(document).ready(function() {
 			 return {column: column , id : id};
 	   	 }
     });  
+    
+	// Get all themes for editing in place
+	if (jQuery('#theme-edit').length > 0) { 
+		
+		jQuery("body").on("change", "#theme-edit", function(){
+			// Grab choosen categories
+			var theme  = jQuery(this).find(":selected").val();
+			var column = jQuery(this).data('column');
+		 	var id     = jQuery(this).data('id');
+		 	
+			if(theme)
+			{	
+				jQuery.ajax({
+					 dataType: 'json',
+					 type    : "POST",
+					 data    : { column: column , id : id , value : theme },
+					 success : function(data) 
+					 {
+					 	console.log('update ok');
+					 	$('.isUpdated').fadeIn(400);
+					 	$('.isUpdated').delay(1500).fadeOut(1000);
+					 },
+					 url: base_url + 'schemas/projet/update'
+				});
+			}
+		});
+		
+	}
     
     var status = jQuery('#toggle-btn').data('status'); 
     

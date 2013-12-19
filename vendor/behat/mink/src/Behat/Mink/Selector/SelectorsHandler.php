@@ -2,8 +2,6 @@
 
 namespace Behat\Mink\Selector;
 
-use Behat\Mink\Selector\SelectorInterface;
-
 /*
  * This file is part of the Behat\Mink.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
@@ -24,12 +22,12 @@ class SelectorsHandler
     /**
      * Initializes selectors handler.
      *
-     * @param array $selectors default selectors to register
+     * @param SelectorInterface[] $selectors default selectors to register
      */
     public function __construct(array $selectors = array())
     {
-        $this->registerSelector('named',    new NamedSelector());
-        $this->registerSelector('css',      new CssSelector());
+        $this->registerSelector('named', new NamedSelector());
+        $this->registerSelector('css', new CssSelector());
 
         foreach ($selectors as $name => $selector) {
             $this->registerSelector($name, $selector);

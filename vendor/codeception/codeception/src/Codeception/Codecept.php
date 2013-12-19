@@ -9,7 +9,7 @@ use Codeception\Exception\Configuration as ConfigurationException;
 
 class Codecept
 {
-    const VERSION = "1.8.0-dev";
+    const VERSION = "1.9-dev";
 
     /**
      * @var \Codeception\PHPUnit\Runner
@@ -74,7 +74,7 @@ class Codecept
     }
 
     private function mergeOptions($options) {
-        
+
         foreach ($this->options as $option => $default) {
             $value = isset($options[$option]) ? $options[$option] : $default;
             if (!$value) {
@@ -101,6 +101,7 @@ class Codecept
         $this->dispatcher->addSubscriber(new Subscriber\ErrorHandler());
         $this->dispatcher->addSubscriber(new Subscriber\Module());
         $this->dispatcher->addSubscriber(new Subscriber\Cest());
+        $this->dispatcher->addSubscriber(new Subscriber\BeforeAfterClass());
 
         // optional
         if (!$this->options['silent'])  $this->dispatcher->addSubscriber(new Subscriber\Console($this->options));
@@ -124,12 +125,12 @@ class Codecept
         $settings = Configuration::suiteSettings($suite, Configuration::config());
 
         $selectedEnvironments = $this->options['env'];
-        if (!$selectedEnvironments) {
+        $environments = \Codeception\Configuration::suiteEnvironments($suite);
+
+        if (!$selectedEnvironments or empty($environments)) {
             $this->runSuite($settings, $suite, $test);
             return;
         }
-
-        $environments = \Codeception\Configuration::suiteEnvironments($suite);
 
         foreach ($environments as $env => $config) {
             if (!in_array($env, $selectedEnvironments)) {
@@ -153,7 +154,6 @@ class Codecept
 
         return $this->result;
     }
-
 
     public static function versionString() {
         return 'Codeception PHP Testing Framework v'.self::VERSION;

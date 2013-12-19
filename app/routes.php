@@ -19,7 +19,7 @@ Route::get('/', function()
 $app = Projet::find(3);	
 
 echo '<pre>';
-print_r($app->user_id);
+print_r($app->categorie_id);
 echo '</pre>';	 
 	 
 /*	foreach($categories as $categorie) 
@@ -55,9 +55,9 @@ View::composer('layouts.app', function($view){
 
 
 
-Route::post('login', array( 'uses' => 'SessionController@store') );
-Route::get('login', 'SessionController@index');
-Route::get('logout', 'SessionController@destroy');
+Route::post('login', array( 'uses' => 'SessionController@login') );
+Route::get('login', 'SessionController@auth');
+Route::get('logout', 'SessionController@logout');
 
 Route::group(array('prefix' => 'schemas'), function()
 {
