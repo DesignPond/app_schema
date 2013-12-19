@@ -1,18 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
-
-
 Route::get('/', function()
 {
 			
@@ -22,17 +9,6 @@ echo '<pre>';
 print_r($app->categorie_id);
 echo '</pre>';	 
 	 
-/*	foreach($categories as $categorie) 
-	 {
-	 	foreach($categorie->theme as $theme)
-	 	{
-		 	echo '<pre>';
-		 	//print_r($projet->theme->titre) ;
-	 		print_r($theme->titre);
-	 		echo '</pre>';
-	 	}	 	
-	 }
-*/
 /*
 	$data = array();
 
@@ -53,7 +29,7 @@ View::composer('layouts.app', function($view){
     $view->with('menus', $menus);
 });
 
-
+Route::get('/', 'SchemaController@index');
 
 Route::post('login', array( 'uses' => 'SessionController@login') );
 Route::get('login', 'SessionController@auth');
@@ -89,14 +65,4 @@ Route::group(array('prefix' => 'api/v1'), function()
     Route::get('arrow/projet/{id}', 'ArrowController@refProject');
     Route::resource('arrow', 'ArrowController');
     
-});
-
-
-App::bind('Schema\Repositories\Categorie\CategorieInterface', 'Schema\Repositories\Categorie\DbCategorie');
-App::bind('Schema\Repositories\Theme\ThemeInterface', 'Schema\Repositories\Theme\DbTheme');
-App::bind('Schema\Repositories\User\UserInterface', 'Schema\Repositories\User\DbUser');
-
-App::bind('Schema\Repositories\Projet\ProjetInterface', function()
-{
-   return new Schema\Repositories\Projet\DbProjet( new Projet );
 });

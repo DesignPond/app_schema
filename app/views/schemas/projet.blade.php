@@ -24,7 +24,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="post-meta no-space-left"><span><i class="icon-user"></i>
+                        <div class="post-meta no-space-left">
                         
 							@if($isEditable)                        	
                         		{{ Form::select('theme_id',$themes,$projet['theme']['id'],array('id' => 'theme-edit','data-id' => $projet['id'],'data-column' => 'theme_id' )) }} 

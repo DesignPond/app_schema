@@ -12,7 +12,10 @@ class SchemaServiceProvider extends ServiceProvider {
     	$this->registerCategorieService();
     	$this->registerThemeService();	
     	$this->registerUserService();	
-    	$this->registerProjetService();	
+    	$this->registerProjetService();
+    	
+    	$this->registerFileService();
+		$this->registerUploadService();		
     			
     }
     
@@ -48,6 +51,25 @@ class SchemaServiceProvider extends ServiceProvider {
 	    $this->app->bind('Schema\Repositories\Projet\ProjetInterface', function()
         {
             return new \Schema\Repositories\Projet\DbProjet( new P );
+        });
+        
+    }
+    
+	        
+    protected function registerFileService(){
+
+	    $this->app->bind('Schema\Repo\File\FileInterface', function()
+        {
+            return new \Schema\Repo\File\FileEloquent( new F );
+        });
+        
+    }
+    
+    protected function registerUploadService(){
+    
+	    $this->app->bind('Schema\Service\Upload\UploadInterface', function()
+        {
+            return new \Schema\Service\Upload\UploadWorker();
         });
         
     }

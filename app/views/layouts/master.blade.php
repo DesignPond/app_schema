@@ -30,13 +30,6 @@
 	                        <div class="span6 info-text">
 	                            <strong>Email:</strong>  <a href="#">info@droitenschema.ch</a>
 	                        </div>
-	                        <div class="span6 text-right">
-	                            <div class="social-icons">
-	                                <a class="social-icon sb-icon-facebook" href="#"></a>
-	                                <a class="social-icon sb-icon-rss" href="#"></a>
-	                                <a class="social-icon sb-icon-linkedin" href="#"></a>
-	                            </div>
-	                        </div>
 	                    </div>
 	                </div>
 	            </div>

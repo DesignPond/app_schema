@@ -3,7 +3,11 @@
 use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
+
 use  Schema\Service\Form\Projet\ProjetForm;
+use  Schema\Service\Form\File\FileValidator as FileValidator;
+use  Schema\Service\Form\Projet\ProjetValidator as ProjetValidator;
+use  Schema\Service\Upload\UploadInterface;
 
 class ProjetController extends BaseController {
 
@@ -15,15 +19,20 @@ class ProjetController extends BaseController {
 	
 	protected $validator;
 	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, ProjetForm $validator ){
+	protected $upload;
+	
+	
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, ProjetForm $validator , UploadInterface $upload ){
 		
-		$this->projet = $projet;
+		$this->projet    = $projet;
 		
 		$this->categorie = $categorie;
 		
-		$this->theme = $theme;
+		$this->theme     = $theme;
 		
 		$this->validator = $validator;
+		
+		$this->upload    = $upload;
 
 	}
 	/**
@@ -53,6 +62,9 @@ class ProjetController extends BaseController {
 	 */
 	public function store()
 	{
+	
+		//$projetValidator = ProjetValidator::make(Input::all());
+		
 		if( $this->validator->save( Input::all() ) )
 		{
 			// Get last inserted
