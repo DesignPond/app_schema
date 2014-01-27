@@ -1,12 +1,9 @@
-<?php namespace Schema\Service\Form\Projet;
+<?php namespace Droit\Service\Form\Schema;
 
-use  Schema\Service\Validation\AbstractLaravelValidator;
+use Crhayes\Validation\ContextualValidator;
 
-class ProjetFormValidator extends AbstractLaravelValidator {
-	
-	/*
-	 * Validation rules
-	*/
+class SchemaValidator extends ContextualValidator
+{
 	
 	protected $rules = array(
 		'titre'        => 'required',

@@ -67,6 +67,19 @@
             </div>
         </div>
         <!-- content close -->
+                	                               
+        <!-- My Modal HTML -->
+		<div id="mymodal" style="display: none;">
+			<section>
+				<label>Lien vers projet n°</label>
+				<?php echo Form::select( 'list', $list ,'', array('id' => 'redactor_link_addmodal') ); ?> </p>	
+				<input type="hidden" id="redactor_link_addmodal_url" value="{{ action('ProjetController@modal'); }}" />				
+				<p><button class="btn btn-primary" id="mymodal-link">Appliquer</button></p>
+			</section>
+			<footer>
+				<a href="#" class="redactor_modal_btn redactor_btn_modal_close">Fermer</a>
+			</footer>
+		</div>
         
 	@endif  
 					

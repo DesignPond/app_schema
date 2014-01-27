@@ -80,7 +80,18 @@
 	                    <li>{{ link_to('schemas/', 'Accueil', array('class' => Request::is( 'schemas') ? 'active' : '')  ) }}</li>
 	                    <li>{{ link_to('schemas/categorie/', 'Catégories' , array('class' => Request::is( 'schemas/categorie') ? 'active' : '') ) }}</li>
 	                    @if ( Auth::check() )
-							<li> {{ link_to('schemas/create', 'Créer un schéma', array('class' => Request::is( 'schemas/create') ? 'active' : '')  ) }}</li>
+	                    	
+	                    	<?php $segment = Request::segment(2);?>
+	                    	
+							<li><a class="@if( ($segment == 'add') || ($segment == 'create') ) 
+										   active 
+										  @endif" href="#">
+									Créer un schéma</a>
+								<ul> 
+		                        	<li>{{ link_to('schemas/create', 'Composer un schéma') }}</li>
+		                            <li>{{ link_to('schemas/add', 'Ajouter un schéma en pdf') }}</li>
+		                        </ul>
+							</li>
 							<li> {{ link_to('schemas/user/'.Auth::user()->id, 'Votre profil' , array('class' => Request::is( 'schemas/user/*') ? 'active' : '')) }}</li>
 						@endif 
 	                    <li>{{ link_to('schemas/contact', 'Contact' , array('class' => Request::is( 'schemas/contact') ? 'active' : '') ) }}</li>
@@ -118,19 +129,6 @@
 	        @yield('content')
 	        
 	        <!--  content close -->  
-	                               
-            <!-- My Modal HTML -->
-			<div id="mymodal" style="display: none;">
-				<section>
-					<label>Lien vers projet n°</label>
-					<p><input type="text" id="redactor_link_addmodal" class="redactor_input"  style="width:60px;" /></p>
-					<input type="hidden" id="redactor_link_addmodal_url" value="{{ action('ProjetController@modal'); }}" />
-					<p><button class="btn btn-primary" id="mymodal-link">Insert</button></p>
-				</section>
-				<footer>
-					<a href="#" class="redactor_modal_btn redactor_btn_modal_close">Close</a>
-				</footer>
-			</div>
             
 		</div>
 		<!--  wrapper close -->

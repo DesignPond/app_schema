@@ -6,8 +6,10 @@ use  Schema\Repositories\Theme\ThemeInterface;
 
 use  Schema\Service\Form\Projet\ProjetForm;
 use  Schema\Service\Form\File\FileValidator as FileValidator;
-use  Schema\Service\Form\Projet\ProjetValidator as ProjetValidator;
 use  Schema\Service\Upload\UploadInterface;
+
+use  Schema\Service\Form\Projet\ProjetValidator as ProjetValidator;
+use  Schema\Service\Form\Projet\SchemaValidator as SchemaValidator;
 
 class ProjetController extends BaseController {
 
@@ -62,23 +64,65 @@ class ProjetController extends BaseController {
 	 */
 	public function store()
 	{
-	
-		//$projetValidator = ProjetValidator::make(Input::all());
 		
-		if( $this->validator->save( Input::all() ) )
-		{
-			// Get last inserted
-			$projet = Projet::orderBy('id', 'DESC')->take(1)->get()->first()->toArray();
-			$id     = $projet['id'];
+ 	 	$ProjetValidator = ProjetValidator::make(Input::all());
+				 	 		
+		if ($ProjetValidator->passes()) 
+		{			
+			$this->projet->create(Input::all());
+			
+			$id = $this->projet->getLastId();
 			
 			return Redirect::to('schemas/projet/'.$id.'#projet/'.$id.'');
 		}
 		else
 		{	
-			return Redirect::to('schemas/create')->withErrors($this->validator->errors())->withInput(Input::all() ); 
+			return Redirect::back()->withErrors( $this->validator->errors() )->withInput( Input::all() ); 
 		}
 	}
 
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function insert()
+	{
+		
+		$projet = array(
+ 	 		'title'        => Input::get('title'),
+ 	 		'description'  => Input::get('description'),
+ 	 		'categorie_id' => Input::get('categorie_id'),
+ 	 		'theme_id'     => Input::get('theme_id')
+ 	 	);
+ 	 	
+ 	 	$SchemaValidator = SchemaValidator::make(Input::all());
+				 	 		
+		if ($SchemaValidator->passes()) 
+		{			
+			$this->projet->create(Input::all());
+											
+			$data = $this->upload->upload( Input::file('file') , 'files/projets' );
+					 	
+		 	if($data)
+		 	{			 		
+		 		//$this->upload->rename( $data['name'] , Input::get('title') , 'files/projects' );
+		 		
+		 		$id = $this->projet->getLastId();
+		 		
+		 		return Redirect::to('schemas/projet/'.$id);
+			}
+			else
+			{
+				return Redirect::back()->withErrors($this->validator->errors())->with('error_file', 'Le fichier est obligatoire')->withInput( Input::all() ); 
+			}				
+		}
+		else
+		{			
+			return Redirect::back()->withErrors( $this->validator->errors() )->withInput( Input::all() ); 
+		}			
+	}
+	
 	/**
 	 * Display the specified resource.
 	 *
@@ -88,6 +132,7 @@ class ProjetController extends BaseController {
 	public function show($id)
 	{
 		$projet = $this->projet->find($id)->toArray();	
+		$list   = $this->projet->getAllList();
       	
       	if( Auth::check() )
 		{
@@ -96,7 +141,7 @@ class ProjetController extends BaseController {
       	
       	$themes  = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
 
-        return View::make('schemas.projet')->with( array('projet' => $projet,'isEditable' => $isEditable, 'themes' => $themes) );
+        return View::make('schemas.projet')->with( array('projet' => $projet,'isEditable' => $isEditable, 'themes' => $themes , 'list' => $list) );
 	}
 	
 	public function schema($id){

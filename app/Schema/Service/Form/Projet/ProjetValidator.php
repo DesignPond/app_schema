@@ -13,6 +13,7 @@ class ProjetValidator extends ContextualValidator
 		'titre'        => 'required',
 		'categorie_id' => 'required',
 		'theme_id'     => 'required'
+		'file'         => 'required'
 	);
 	
 	/*
@@ -23,7 +24,8 @@ class ProjetValidator extends ContextualValidator
 		'titre.required'        => 'Le titre est requis',
 		'user_id.exists'        => 'That user does not exist',
 		'categorie_id.required' => 'La catégorie principale est requise',
-		'theme_id.required'     => 'Le thème est requis'
+		'theme_id.required'     => 'Le thème est requis',
+		'file.required'         => 'Le ficher est requis'
 	);
 	
 }

@@ -42,6 +42,7 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::get('contact', 'SchemaController@contact');	
 	
 	Route::get('create', array('before' => 'auth' ,'uses' => 'SchemaController@create') );	
+	Route::get('add', array('before' => 'auth' ,'uses' => 'SchemaController@add') );	
 	
 	Route::post('projet/update', array( 'uses' => 'ProjetController@update') );
 	
@@ -51,6 +52,8 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::get('theme/drop_subtheme/{id}', 'ThemeController@drop_subtheme');
 	Route::get('projet/schema/{id}', 'ProjetController@schema');
 	Route::get('projet/modal/{id?}', 'ProjetController@modal');
+	Route::post('projet/insert', 'ProjetController@insert');	
+	
 	Route::resource('projet', 'ProjetController');
 	Route::resource('user', 'UserController');
 

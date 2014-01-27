@@ -91,6 +91,40 @@ class SchemaController extends BaseController {
         return View::make('schemas.create')->with( $data );
 	}
 
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function add()
+	{		
+		$categories = array();
+		$themes     = array();
+		$subthemes  = array();
+		
+		$categories = $this->categorie->droplist();
+		$categories = array_add($categories, '', 'Choix');
+			ksort($categories);
+		$themes     = $this->theme->droplist_theme();
+		$themes     = array_add($themes, '', 'Choix');
+			ksort($themes); 
+		$subthemes  = $this->theme->droplist_subtheme();
+		$subthemes  = array_add($subthemes, '', 'Choix');
+			 ksort($subthemes); 
+		
+		$data = array(
+        	'titre'      => 'Schéma',
+			'soustitre'  => 'Créer un nouveau schéma',
+			'categories' => $categories,
+			'themes'     => $themes ,
+			'subthemes'  => $subthemes,
+			'input'      => Input::old() 
+		);
+		
+        return View::make('schemas.add')->with( $data );
+	}
+	
 	/**
 	 * Store a newly created resource in storage.
 	 *

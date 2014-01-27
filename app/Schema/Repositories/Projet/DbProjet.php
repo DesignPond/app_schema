@@ -95,6 +95,11 @@ class DbProjet implements ProjetInterface {
 		
 		return $this->projet->with( array('theme','user') )->get();		
 	}
+	
+	public function getAllList(){
+	
+		return $this->projet->orderBy('id')->lists('titre', 'id');	
+	}
 		
 	public function find($id){
 		
@@ -104,10 +109,18 @@ class DbProjet implements ProjetInterface {
 	public function findO($id){
 	
 		return $this->projet->find($id);
+	}
+	
+	public function getLastId(){
 		
+		$projet = $this->projet->orderBy('id', 'DESC')->take(1)->get()->first()->toArray();
+		
+		return $projet['id'];					
 	}
 	
 	public function create(array $data){
+		
+		$custom = new \Custom;
 		
 		// Create the article
 		$projet = $this->projet->create(array(
@@ -115,7 +128,9 @@ class DbProjet implements ProjetInterface {
 			'description' => $data['description'],
 			'user_id'     => $data['user_id'],
 			'categorie_id'=> $data['categorie_id'],
-			'theme_id'    => $data['theme_id']
+			'theme_id'    => $data['theme_id'],
+			'type'        => $data['type'],
+			'slug'        => $custom->makeSlug($data['titre'])
 			//'subtheme_id' => $data['subtheme_id']
 		));
 		

@@ -91,7 +91,7 @@
                         @else
                         
                         <div id="projet" class="projet_width">
-                        	 <embed src="{{ asset('documents/projets/'.$projet['slug'].'.pdf') }}" width="1024"  height="750"></embed>
+                        	 <embed src="{{ asset('files/projets/'.$projet['slug'].'.pdf') }}" width="1024"  height="750"></embed>
                         </div>
                         
                         @endif
