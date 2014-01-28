@@ -2213,6 +2213,16 @@ i.black {
     position: relative;
 }
 
+    .gallery .item .deleteSchema{
+	    position: absolute;
+	    display: none;
+	    left: -15px;
+	    top: -15px;
+	    width: 37px;
+	    height: 37px;
+	    background: url("../images/delete_schema.png");
+    }
+
 	#gallery .item .itemColor , .gallery .item .itemColor{
 		background: #d5d5d5;
 		display: block;

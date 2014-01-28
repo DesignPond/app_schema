@@ -10,7 +10,7 @@
                         <h4>Formulaire</h4>
 
                         <div class="contact_form_holder">
-                            <form id="contact" class="row" name="form1" method="post" action="#">
+                            {{ Form::open(array( 'url' => 'schemas/sendemail', 'class' => 'row', 'id' => 'contact' )) }}
 
                                 <div class="span4">
                                     <label>Nom <span class="req">*</span></label>
@@ -26,16 +26,23 @@
                                 <div class="span8">
                                     <label>Message <span class="req">*</span></label>
                                     <textarea cols="10" rows="10" name="message" id="message" class=""></textarea>
-                                    <div id="error_message" class="error">Please check your message</div>
-                                    <div id="mail_success" class="success">Thank you. Your message has been sent.</div>
-                                    <div id="mail_failed" class="error">Error, email not sent</div>
+
+                                    <?php if(Session::has('success')){ ?>
+                                    	 <div id="mail_success" class="success"><?php echo Session::get('success'); ?></div>
+                                     <?php } ?>
+                                    
+                                    <?php if(Session::has('error')){ ?>
+                                    	  <div id="mail_failed" class="error"><?php echo Session::get('error'); ?></div>
+                                    <?php } ?>
+
 									<br/>
+									
                                     <p id="btnsubmit">
                                         <input type="submit" id="send" value="Envoyer" class="btn btn-primary" />
                                      </p>
                                 </div>
 
-                            </form>
+                            {{ Form::close() }}
                         </div>
 
                     </div>

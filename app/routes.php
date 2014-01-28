@@ -40,21 +40,24 @@ Route::group(array('prefix' => 'schemas'), function()
 
 	Route::get('/', 'SchemaController@index');
 	Route::get('contact', 'SchemaController@contact');	
+	Route::post('sendemail', 'SchemaController@sendemail');	
 	
 	Route::get('create', array('before' => 'auth' ,'uses' => 'SchemaController@create') );	
 	Route::get('add', array('before' => 'auth' ,'uses' => 'SchemaController@add') );	
 	
-	Route::post('projet/update', array( 'uses' => 'ProjetController@update') );
-	
 	Route::resource('categorie', 'CategorieController');
+	
 	Route::resource('theme', 'ThemeController');
 	Route::get('theme/drop_theme/{id}', 'ThemeController@drop_theme');
 	Route::get('theme/drop_subtheme/{id}', 'ThemeController@drop_subtheme');
+	
 	Route::get('projet/schema/{id}', 'ProjetController@schema');
 	Route::get('projet/modal/{id?}', 'ProjetController@modal');
-	Route::post('projet/insert', 'ProjetController@insert');	
-	
+	Route::post('projet/insert', 'ProjetController@insert');
+	Route::get('projet/{id}/delete', array('uses' => 'ProjetController@destroy'));
+	Route::post('projet/update', array( 'uses' => 'ProjetController@update') );		
 	Route::resource('projet', 'ProjetController');
+	
 	Route::resource('user', 'UserController');
 
 });

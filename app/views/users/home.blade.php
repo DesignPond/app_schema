@@ -53,6 +53,7 @@
 			 							
 			 							<!-- gallery item -->
 					                    <div class="span4 item">
+					                    	<a href="{{ url('schemas/projet/'.$projet['id'].'/delete') }}" data-action="Projet" class="deleteSchema deleteAction"></a>
 					                    	<div class="status {{ $projet['status'] }}"></div>
 					                        <div class="picframe">
 												<span class="itemColor " style="background:{{ $projet['theme']['couleur'] }};">

@@ -4,7 +4,6 @@ use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
 
-use  Schema\Service\Form\Projet\ProjetForm;
 use  Schema\Service\Form\File\FileValidator as FileValidator;
 use  Schema\Service\Upload\UploadInterface;
 
@@ -24,15 +23,13 @@ class ProjetController extends BaseController {
 	protected $upload;
 	
 	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, ProjetForm $validator , UploadInterface $upload ){
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme , UploadInterface $upload ){
 		
 		$this->projet    = $projet;
 		
 		$this->categorie = $categorie;
 		
 		$this->theme     = $theme;
-		
-		$this->validator = $validator;
 		
 		$this->upload    = $upload;
 
@@ -77,7 +74,7 @@ class ProjetController extends BaseController {
 		}
 		else
 		{	
-			return Redirect::back()->withErrors( $this->validator->errors() )->withInput( Input::all() ); 
+			return Redirect::back()->withErrors( $ProjetValidator->errors() )->withInput( Input::all() ); 
 		}
 	}
 
@@ -89,37 +86,37 @@ class ProjetController extends BaseController {
 	public function insert()
 	{
 		
+		$custom = new \Custom;
+		
 		$projet = array(
- 	 		'title'        => Input::get('title'),
+ 	 		'titre'        => Input::get('titre'),
  	 		'description'  => Input::get('description'),
  	 		'categorie_id' => Input::get('categorie_id'),
  	 		'theme_id'     => Input::get('theme_id')
  	 	);
  	 	
  	 	$SchemaValidator = SchemaValidator::make(Input::all());
-				 	 		
+		 	 		
 		if ($SchemaValidator->passes()) 
 		{			
 			$this->projet->create(Input::all());
 											
-			$data = $this->upload->upload( Input::file('file') , 'files/projets' );
+			$data = $this->upload->upload( Input::file('file') , 'files/projets' , $custom->makeSlug(Input::get('titre')) );
 					 	
 		 	if($data)
-		 	{			 		
-		 		//$this->upload->rename( $data['name'] , Input::get('title') , 'files/projects' );
-		 		
+		 	{			 				 				 				 		
 		 		$id = $this->projet->getLastId();
 		 		
-		 		return Redirect::to('schemas/projet/'.$id);
+		 		return Redirect::to('schemas/projet/schema/'.$id);
 			}
 			else
 			{
-				return Redirect::back()->withErrors($this->validator->errors())->with('error_file', 'Le fichier est obligatoire')->withInput( Input::all() ); 
+				return Redirect::back()->withErrors( $SchemaValidator->errors() )->with('error_file', 'Le fichier est obligatoire')->withInput( Input::all() ); 
 			}				
 		}
 		else
 		{			
-			return Redirect::back()->withErrors( $this->validator->errors() )->withInput( Input::all() ); 
+			return Redirect::back()->withErrors( $SchemaValidator->errors()  )->withInput( Input::all() ); 
 		}			
 	}
 	
@@ -217,7 +214,12 @@ class ProjetController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if( $this->projet->delete($id) )
+		{
+			return Redirect::to('schemas/user/'.Auth::user()->id)->with( array('status' => 'success' , 'message' => 'Le projet a été supprimé') );
+		}
+		
+		return Redirect::to('schemas/user/'.Auth::user()->id)->with( array('status' => 'error' , 'message' => 'Problème avec la suppression') );
 	}
 
 }

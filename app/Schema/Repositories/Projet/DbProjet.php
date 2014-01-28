@@ -177,5 +177,12 @@ class DbProjet implements ProjetInterface {
 		return true;
 	}
 	
+	public function delete($id){
+	
+		$projet = $this->projet->find($id);
+
+		return $projet->delete();		
+	}
+	
 }
 

@@ -81,7 +81,7 @@ class SchemaController extends BaseController {
 		
 		$data = array(
         	'titre'      => 'Schéma',
-			'soustitre'  => 'Créer un nouveau schéma',
+			'soustitre'  => 'Composer un nouveau schéma online',
 			'categories' => $categories,
 			'themes'     => $themes ,
 			'subthemes'  => $subthemes,
@@ -115,7 +115,7 @@ class SchemaController extends BaseController {
 		
 		$data = array(
         	'titre'      => 'Schéma',
-			'soustitre'  => 'Créer un nouveau schéma',
+			'soustitre'  => 'Ajouter un nouveau schéma en pdf',
 			'categories' => $categories,
 			'themes'     => $themes ,
 			'subthemes'  => $subthemes,
@@ -130,53 +130,38 @@ class SchemaController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function sendemail()
 	{
-		//
+	
+		$fromEmail = Input::get('email');
+	    $fromName  = Input::get('name');
+	    $data      = Input::get('message');
+	    
+	    $subject =  'Demande de rensignement depuis www.droitenschema.ch';
+	
+	    $toEmail = 'cindy.leschaud@gmail.com';
+	    $toName  = 'Cindy Leschaud';
+	
+	    $send = Mail::send('emails.contact', array('data' => $data) , function($message) use ($toEmail, $toName, $fromEmail, $fromName, $subject )
+	    {
+	        $message->to($toEmail, $toName);
+	
+	        $message->from($fromEmail, $fromName);
+	
+	        $message->subject($subject);
+	    });
+	    
+	    if($send)
+	    {
+		    return Redirect::back()->with('success', 'Merci pour votre message!');
+	    }
+	    else
+	    {
+		    return Redirect::back()->with('error', 'Problème avec l\'envoi du mail');
+	    }
+	    	    
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-        return View::make('schemas.show');
-	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-        return View::make('schemas.edit');
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 }

@@ -1,4 +1,4 @@
-<?php namespace Droit\Service\Form\Schema;
+<?php namespace Schema\Service\Form\Projet;
 
 use Crhayes\Validation\ContextualValidator;
 

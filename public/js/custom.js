@@ -173,6 +173,28 @@ jQuery(document).ready(function() {
 	     
 	  
 	});
+	
+	// hover delete schemas in profil
+	jQuery(".gallery .item").hover(
+		function() {
+			$(this).find('.deleteSchema').show();
+		},
+    	function() {
+    		$(this).find('.deleteSchema').hide();
+  	});
+  	
+	// Delete button util function
+	$('body').on('click','.deleteAction',function(){
+		
+		var $this   = $(this);
+		var action  = $this.data('action');
+		
+		var answer = confirm('Voulez-vous vraiment supprimer : '+ action +' ?');
+	    if (answer){
+			return true;
+	    }
+	    return false;	
+	});
      	  
 	// --------------------------------------------------
 	// gallery hover

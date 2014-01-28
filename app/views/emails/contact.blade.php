@@ -7,7 +7,7 @@
 		<h2>Demande de rensignement depuis www.droitenschema.ch </h2>
 
 		<div>
-			Message!
+			{{$data}}
 		</div>
 	</body>
 </html>
