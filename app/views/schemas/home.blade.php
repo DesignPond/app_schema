@@ -40,7 +40,6 @@
 				            </div>
 				            <div class="txt">
 				               		<h5>{{ link_to('schemas/projet/schema/'.$projet['id'], $projet['titre']) }}</h5>
-				                <span class="read">{{ $projet['description'] }}</span>
 				                <span class="info">
 				                	<strong>{{ $projet['theme']['titre'] }}</strong> | 
 				                		{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }} | 

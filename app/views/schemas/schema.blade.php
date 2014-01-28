@@ -20,10 +20,12 @@
 	                                	<span data-column="titre" data-id="{{ $projet['id'] }}" class="edit_content">{{ $projet['titre'] }}</span>
 	                                	<i class="icon-edit icon-isEditable"></i>
 	                                </h3>
+	                                @if( !empty($projet['description']) )
 	                                <p class="text-isEditable">
 	                                	<span data-column="description" data-id="{{ $projet['id'] }}" class="edit_content">{{ $projet['description'] }}</span>
 		                                <i class="icon-edit icon-isEditable"></i>
 	                                </p>
+	                                @endif
                                 @else
                                		<h3>{{ $projet['titre'] }}</h3> {{ $projet['description'] }}
                                 @endif
@@ -37,8 +39,34 @@
                         <div class="post-meta no-space-left">
 
                         	@if($isEditable && ($projet['type'] != 'app') )
-                        	
-                        		{{ Form::select('theme_id',$themes,$projet['theme']['id'],array('id' => 'theme-edit','data-id' => $projet['id'],'data-column' => 'theme_id' )) }} 
+                        		
+                        		<div class="row">
+                        			<div class="span6">
+	                        			{{ Form::select('theme_id',$themes,$projet['theme']['id'],array('id' => 'theme-edit','data-id' => $projet['id'],'data-column' => 'theme_id' )) }} 
+                        			</div>
+                        			<div class="span3">
+                        				<?php if(Session::has('error_file')){ ?>
+                        				<?php echo Session::get('error_file'); ?>
+                        				<?php } ?>  
+										{{ Form::open(array( 'url' => 'schemas/projet/fileUpdate', 'class' => '' ,'files' => true )) }}
+											<div class="fileUpload">
+										    	<span>&nbsp;Changer le fichier&nbsp;</span>
+										   		<input class="uploadBtn upload" type="file" name="file" />
+										   		<input type="hidden" name="name" value="{{ $projet['slug'] }}" />
+										   		<input type="hidden" name="id" value="{{ $projet['id'] }}" />
+											</div>
+											{{ Form::submit('Ok', array('class' => 'btn btn-primary')) }}
+										{{ Form::close() }}
+		                            </div>
+		                            <div class="span2">
+		                            </div>
+                        			<div class="span1">
+		                    			<div class="toggle-soft">
+		                                	<div id="toggle-btn" data-status="{{ $projet['status'] }}" data-id="{{ $projet['id'] }}" class="toggle on"></div>
+		                                </div>
+		                            </div>
+                        		</div>
+                                
                         		<span class="isUpdated" style="display:none;">&nbsp;<i class="icon-check-sign"></i></span>
                         		
                         	@else

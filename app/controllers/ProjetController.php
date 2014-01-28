@@ -62,9 +62,9 @@ class ProjetController extends BaseController {
 	public function store()
 	{
 		
- 	 	$ProjetValidator = ProjetValidator::make(Input::all());
+ 	 	$SchemaValidator = SchemaValidator::make(Input::all());
 				 	 		
-		if ($ProjetValidator->passes()) 
+		if ($SchemaValidator->passes()) 
 		{			
 			$this->projet->create(Input::all());
 			
@@ -74,7 +74,7 @@ class ProjetController extends BaseController {
 		}
 		else
 		{	
-			return Redirect::back()->withErrors( $ProjetValidator->errors() )->withInput( Input::all() ); 
+			return Redirect::back()->withErrors( $SchemaValidator->errors() )->withInput( Input::all() ); 
 		}
 	}
 
@@ -95,9 +95,9 @@ class ProjetController extends BaseController {
  	 		'theme_id'     => Input::get('theme_id')
  	 	);
  	 	
- 	 	$SchemaValidator = SchemaValidator::make(Input::all());
-		 	 		
-		if ($SchemaValidator->passes()) 
+ 	 	$ProjetValidator = ProjetValidator::make(Input::all());
+ 	 			 	 		
+		if ($ProjetValidator->passes()) 
 		{			
 			$this->projet->create(Input::all());
 											
@@ -111,12 +111,12 @@ class ProjetController extends BaseController {
 			}
 			else
 			{
-				return Redirect::back()->withErrors( $SchemaValidator->errors() )->with('error_file', 'Le fichier est obligatoire')->withInput( Input::all() ); 
+				return Redirect::back()->withErrors( $ProjetValidator->errors() )->with('error_file', 'Le fichier est obligatoire')->withInput( Input::all() ); 
 			}				
 		}
 		else
 		{			
-			return Redirect::back()->withErrors( $SchemaValidator->errors()  )->withInput( Input::all() ); 
+			return Redirect::back()->withErrors( $ProjetValidator->errors()  )->withInput( Input::all() ); 
 		}			
 	}
 	
@@ -204,6 +204,24 @@ class ProjetController extends BaseController {
 		
 		return $value;
 		
+	}
+		
+	public function fileUpdate(){
+		
+		$id   = Input::get('id');
+		$slug = Input::get('name');
+		
+		$data = $this->upload->upload( Input::file('file') , 'files/projets' , $slug );
+				 	
+	 	if($data)
+	 	{			 				 				 				 			
+	 		return Redirect::to('schemas/projet/schema/'.$id);
+		}
+		else
+		{
+			return Redirect::to('schemas/projet/schema/'.$id)->with('error_file', 'Problème avec le fichier'); 
+		}
+	
 	}
 
 	/**

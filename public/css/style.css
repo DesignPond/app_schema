@@ -367,7 +367,7 @@ h5 {
         width: 170px;
         height: auto;
         position: absolute;
-        top: 70%;
+        top: 100%;
         margin-top: 0px;
         left: -15px;
         z-index: 10;
@@ -1109,8 +1109,8 @@ footer {
         display: block;
         color: #fff !important;
         background: #013766;
-        font-size: 26px;
-        padding: 20px 0 20px 0;
+		font-size: 22px;
+		padding: 10px 0;
     }
 
     .date-box .month {
@@ -1301,6 +1301,48 @@ footer {
 	position: absolute;
 	bottom: -20px;
 	right: 0;
+}
+
+
+.uploadFile{
+	border: none;
+	width: 150px;
+	margin: 0 auto;
+	display: none;
+	margin-bottom: 10px;
+	background: none;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.fileUpload {
+	background: none repeat scroll 0 0 #D5D5D5;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    margin-right: 5px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 160px;
+    color: #000;
+    border: 1px solid #b1b1b1;
+}
+
+.fileUpload span{
+	margin: 0;
+}
+
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
 }
 
 /* -------------------------------------------------- */
@@ -2622,6 +2664,10 @@ address span {
 
 body .redactor_toolbar li a.redactor_btn_addmodal {
 	background: url(../images/advanced.png) no-repeat;
+}
+
+.redactor{
+	height: 120px;
 }
 
 .text-right i{

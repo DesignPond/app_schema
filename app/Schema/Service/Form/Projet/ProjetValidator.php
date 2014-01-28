@@ -12,7 +12,7 @@ class ProjetValidator extends ContextualValidator
 	protected $rules = array(
 		'titre'        => 'required',
 		'categorie_id' => 'required',
-		'theme_id'     => 'required'
+		'theme_id'     => 'required',
 		'file'         => 'required'
 	);
 	

@@ -55,7 +55,8 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::get('projet/modal/{id?}', 'ProjetController@modal');
 	Route::post('projet/insert', 'ProjetController@insert');
 	Route::get('projet/{id}/delete', array('uses' => 'ProjetController@destroy'));
-	Route::post('projet/update', array( 'uses' => 'ProjetController@update') );		
+	Route::post('projet/update', array( 'uses' => 'ProjetController@update') );	
+	Route::post('projet/fileUpdate', array( 'uses' => 'ProjetController@fileUpdate') );		
 	Route::resource('projet', 'ProjetController');
 	
 	Route::resource('user', 'UserController');

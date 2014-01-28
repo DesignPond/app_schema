@@ -16,7 +16,7 @@ class DbProjet implements ProjetInterface {
 	
 	public function getLast($nbr){
 	
-		return $this->projet->with( array('user','theme') )->where('status','=','actif')->orderBy('id', 'DESC')->take($nbr)->skip(0)->get()->toArray();	
+		return $this->projet->with( array('user','theme') )->where('status','=','actif')->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
 	}
 		
 	public function projectsByTheme($refTheme){
