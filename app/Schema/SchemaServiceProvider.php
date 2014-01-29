@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Projet as P;
-
+use Files as F;
 
 class SchemaServiceProvider extends ServiceProvider {
 
