@@ -1,11 +1,21 @@
 language: php
 
-php: [5.3, 5.4, 5.5]
+php: [5.3, 5.4, 5.5, hhvm]
+
+matrix:
+  allow_failures:
+    - php: hhvm
+  fast_finish: true
+  exclude:
+    - php: hhvm
+      env: SYMFONY_VERSION='2.3.*'
+    - php: hhvm
+      env: SYMFONY_VERSION='2.5.*@dev'
 
 env:
-  - SYMFONY_VERSION='2.2.*'
   - SYMFONY_VERSION='2.3.*'
-  - SYMFONY_VERSION='2.4.*@dev'
+  - SYMFONY_VERSION='2.4.*'
+  - SYMFONY_VERSION='2.5.*@dev'
 
 before_script:
   - export WEB_FIXTURES_HOST=http://localhost
@@ -19,4 +29,8 @@ before_script:
   - sudo sed -i -e "s,/var/www,$(pwd)/vendor/behat/mink/tests/Behat/Mink/Driver/web-fixtures,g" /etc/apache2/sites-available/default
   - sudo /etc/init.d/apache2 restart
 
-script: phpunit -v
+script: phpunit -v --coverage-clover=coverage.clover
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

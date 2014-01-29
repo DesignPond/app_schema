@@ -1,16 +1,16 @@
 <?php
 
-namespace Behat\Mink\Element;
-
-use Behat\Mink\Session;
-
 /*
- * This file is part of the Behat\Mink.
+ * This file is part of the Mink package.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\Mink\Element;
+
+use Behat\Mink\Session;
 
 /**
  * Base element.
@@ -44,8 +44,8 @@ abstract class Element implements ElementInterface
     /**
      * Checks whether element with specified selector exists.
      *
-     * @param string $selector selector engine name
-     * @param string $locator  selector locator
+     * @param string       $selector selector engine name
+     * @param string|array $locator  selector locator
      *
      * @return Boolean
      */
@@ -57,8 +57,8 @@ abstract class Element implements ElementInterface
     /**
      * Finds first element with specified selector.
      *
-     * @param string $selector selector engine name
-     * @param string $locator  selector locator
+     * @param string       $selector selector engine name
+     * @param string|array $locator  selector locator
      *
      * @return NodeElement|null
      */
@@ -72,21 +72,38 @@ abstract class Element implements ElementInterface
     /**
      * Finds all elements with specified selector.
      *
-     * @param string $selector selector engine name
-     * @param string $locator  selector locator
+     * @param string       $selector selector engine name
+     * @param string|array $locator  selector locator
      *
      * @return NodeElement[]
      */
     public function findAll($selector, $locator)
     {
         $xpath = $this->getSession()->getSelectorsHandler()->selectorToXpath($selector, $locator);
+        $currentXpath = $this->getXpath();
+        $expressions = array();
 
-        // add parent xpath before element selector
-        if (0 === strpos($xpath, '/')) {
-            $xpath = $this->getXpath().$xpath;
-        } else {
-            $xpath = $this->getXpath().'/'.$xpath;
+        // Regex to find union operators not inside brackets.
+        $pattern = '/\|(?![^\[]*\])/';
+
+        // If the parent current xpath contains a union we need to wrap it in parentheses.
+        if (preg_match($pattern, $currentXpath)) {
+            $currentXpath = '(' . $currentXpath . ')';
         }
+
+        // Split any unions into individual expressions.
+        foreach (preg_split($pattern, $xpath) as $expression) {
+            $expression = trim($expression);
+            // add parent xpath before element selector
+            if (0 === strpos($expression, '/')) {
+                $expression = $currentXpath.$expression;
+            } else {
+                $expression = $currentXpath.'/'.$expression;
+            }
+            $expressions[] = $expression;
+        }
+
+        $xpath = implode(' | ', $expressions);
 
         return $this->getSession()->getDriver()->find($xpath);
     }
@@ -94,7 +111,7 @@ abstract class Element implements ElementInterface
     /**
      * Returns element text (inside tag).
      *
-     * @return string|null
+     * @return string
      */
     public function getText()
     {
@@ -104,7 +121,7 @@ abstract class Element implements ElementInterface
     /**
      * Returns element html.
      *
-     * @return string|null
+     * @return string
      */
     public function getHtml()
     {

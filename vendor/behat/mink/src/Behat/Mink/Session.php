@@ -1,18 +1,18 @@
 <?php
 
-namespace Behat\Mink;
-
-use Behat\Mink\Driver\DriverInterface;
-use Behat\Mink\Selector\SelectorsHandler;
-use Behat\Mink\Element\DocumentElement;
-
 /*
- * This file is part of the Behat\Mink.
+ * This file is part of the Mink package.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\Mink;
+
+use Behat\Mink\Driver\DriverInterface;
+use Behat\Mink\Selector\SelectorsHandler;
+use Behat\Mink\Element\DocumentElement;
 
 /**
  * Mink session.
@@ -44,20 +44,6 @@ class Session
         $this->page             = new DocumentElement($this);
         $this->selectorsHandler = $selectorsHandler;
         $this->uniqueId         = uniqid('mink_session_');
-    }
-
-    /**
-     * Clones this session
-     *
-     * Clones the driver and freshens up references and uniqueId.
-     */
-    public function __clone()
-    {
-        $this->driver = clone $this->driver;
-        $this->driver->setSession($this);
-        $this->selectorsHandler = clone $this->selectorsHandler;
-        $this->uniqueId = uniqid('mink_session_');
-        $this->page = new DocumentElement($this);
     }
 
     /**
@@ -232,8 +218,8 @@ class Session
     /**
      * Capture a screenshot of the current window.
      *
-     * @return  string  screenshot of MIME type image/* depending
-     *   on driver (e.g., image/png, image/jpeg)
+     * @return string screenshot of MIME type image/* depending
+     *                on driver (e.g., image/png, image/jpeg)
      */
     public function getScreenshot()
     {
@@ -243,7 +229,7 @@ class Session
     /**
      * Return the names of all open windows
      *
-     * @return array    Array of all open window's names.
+     * @return array Array of all open window's names.
      */
     public function getWindowNames()
     {
@@ -253,7 +239,7 @@ class Session
     /**
      * Return the name of the currently active window
      *
-     * @return string    The name of the current window.
+     * @return string The name of the current window.
      */
     public function getWindowName()
     {
@@ -342,12 +328,12 @@ class Session
     /**
      * Set the dimensions of the window.
      *
-     * @param integer $width set the window width, measured in pixels
+     * @param integer $width  set the window width, measured in pixels
      * @param integer $height set the window height, measured in pixels
-     * @param string $name window name (null for the main window)
+     * @param string  $name   window name (null for the main window)
      */
     public function resizeWindow($width, $height, $name = null)
     {
-        return $this->driver->resizeWindow($width, $height, $name);
+        $this->driver->resizeWindow($width, $height, $name);
     }
 }

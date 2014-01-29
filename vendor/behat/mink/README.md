@@ -1,9 +1,13 @@
 Mink
 ====
+[![Latest Stable Version](https://poser.pugx.org/behat/mink/v/stable.png)](https://packagist.org/packages/behat/mink)
+[![Total Downloads](https://poser.pugx.org/behat/mink/downloads.png)](https://packagist.org/packages/behat/mink)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Behat/Mink/badges/quality-score.png?s=d4faf469d6b399df121deed6070390800722ada0)](https://scrutinizer-ci.com/g/Behat/Mink/)
+[![Code Coverage](https://scrutinizer-ci.com/g/Behat/Mink/badges/coverage.png?s=88ab1cee4e131f4ef595f17ae4837001ef2aec3b)](https://scrutinizer-ci.com/g/Behat/Mink/)
 
 - [stable (master)](https://github.com/Behat/Mink) ([![Master Build
-Status](https://secure.travis-ci.org/Behat/Mink.png?branch=master)](http://travis-ci.org/Behat/Mink)) - staging branch. Last stable version.
-- [development (develop)](https://github.com/Behat/Mink/tree/develop) ([![Develop Build Status](https://secure.travis-ci.org/Behat/Mink.png?branch=develop)](http://travis-ci.org/Behat/Mink)) - development branch. Development happens here and you should send your PRs here too.
+Status](https://travis-ci.org/Behat/Mink.png?branch=master)](http://travis-ci.org/Behat/Mink)) - staging branch. Last stable version.
+- [development (develop)](https://github.com/Behat/Mink/tree/develop) ([![Develop Build Status](https://travis-ci.org/Behat/Mink.png?branch=develop)](http://travis-ci.org/Behat/Mink)) - development branch. Development happens here and you should send your PRs here too.
 
 Useful Links
 ------------

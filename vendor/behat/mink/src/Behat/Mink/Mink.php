@@ -1,14 +1,14 @@
 <?php
 
-namespace Behat\Mink;
-
 /*
- * This file is part of the Behat\Mink.
+ * This file is part of the Mink package.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\Mink;
 
 /**
  * Mink sessions manager.
@@ -132,6 +132,7 @@ class Mink
     public function isSessionStarted($name = null)
     {
         $session = $this->locateSession($name);
+
         return $session->isStarted();
     }
 
@@ -147,6 +148,7 @@ class Mink
         if (!($session instanceof Session)) {
             $session = $this->getSession($session);
         }
+
         return new WebAssert($session);
     }
 
@@ -208,6 +210,7 @@ class Mink
         }
 
         $session = $this->sessions[$name];
+
         return $session;
     }
 }

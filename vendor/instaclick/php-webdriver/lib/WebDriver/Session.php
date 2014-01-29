@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2004-2013 Facebook. All Rights Reserved.
+ * Copyright 2004-2014 Facebook. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,6 +62,11 @@ namespace WebDriver;
  */
 final class Session extends Container
 {
+    /**
+     * @var array
+     */
+    private $capabilities = null;
+
     /**
      * {@inheritdoc}
      */
@@ -136,9 +141,13 @@ final class Session extends Container
      */
     public function capabilities()
     {
-        $result = $this->curl('GET', '');
+        if ( ! isset($this->capabilities)) {
+            $result = $this->curl('GET', '');
 
-        return $result['value'];
+            $this->capabilities = $result['value'];
+        }
+
+        return $this->capabilities;
     }
 
     /**

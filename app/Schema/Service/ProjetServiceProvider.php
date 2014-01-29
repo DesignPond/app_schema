@@ -1,4 +1,5 @@
-<?php namespace Schema\Repositories;
+<?php 
+/* namespace Schema\Repositories;
 
 use Illuminate\Support\ServiceProvider;
 use Projet as P;
@@ -13,7 +14,7 @@ class ProjetServiceProvider extends ServiceProvider {
 		    
     protected function registerProjetService(){
     
-		$this->app->bind('Schema\Repositories\Projet\ProjetInterface', function()
+		$this->app->bind('Schema\Repositories\Projet\ProjetValidator', function()
 		{
 			return new DbProjet( new P );
 		});        
@@ -28,3 +29,4 @@ class ProjetServiceProvider extends ServiceProvider {
     }
         
 }
+*/

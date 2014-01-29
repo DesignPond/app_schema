@@ -1,18 +1,18 @@
 <?php
 
-namespace Behat\Mink\Element;
-
-use Behat\Mink\Session;
-use Behat\Mink\Exception\ElementException;
-use Behat\Mink\Exception\ElementNotFoundException;
-
 /*
- * This file is part of the Behat\Mink.
+ * This file is part of the Mink package.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\Mink\Element;
+
+use Behat\Mink\Session;
+use Behat\Mink\Exception\ElementException;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * Page element node.
@@ -114,6 +114,22 @@ class NodeElement extends TraversableElement
     public function getAttribute($name)
     {
         return $this->getSession()->getDriver()->getAttribute($this->getXpath(), $name);
+    }
+
+    /**
+     * Checks whether an element has a named CSS class
+     *
+     * @param string $className Name of the class
+     *
+     * @return boolean
+     */
+    public function hasClass($className)
+    {
+        if ($this->hasAttribute('class')) {
+            return in_array($className, explode(' ', $this->getAttribute('class')));
+        }
+
+        return false;
     }
 
     /**

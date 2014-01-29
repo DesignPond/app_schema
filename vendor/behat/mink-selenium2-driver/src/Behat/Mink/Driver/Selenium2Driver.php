@@ -67,9 +67,9 @@ class Selenium2Driver extends CoreDriver
     /**
      * Instantiates the driver.
      *
-     * @param string    $browserName Browser name
-     * @param array     $desiredCapabilities The desired capabilities
-     * @param string    $wdHost The WebDriver host
+     * @param string $browserName         Browser name
+     * @param array  $desiredCapabilities The desired capabilities
+     * @param string $wdHost              The WebDriver host
      */
     public function __construct($browserName = 'firefox', $desiredCapabilities = null, $wdHost = 'http://localhost:4444/wd/hub')
     {
@@ -107,7 +107,7 @@ class Selenium2Driver extends CoreDriver
      *
      * See http://code.google.com/p/selenium/wiki/DesiredCapabilities
      *
-     * @param   array $desiredCapabilities  an array of capabilities to pass on to the WebDriver server
+     * @param array $desiredCapabilities an array of capabilities to pass on to the WebDriver server
      */
     public function setDesiredCapabilities($desiredCapabilities = null)
     {
@@ -209,18 +209,16 @@ class Selenium2Driver extends CoreDriver
     /**
      * Creates some options for key events
      *
-     * @param  string $event         the type of event ('keypress', 'keydown', 'keyup');
-     * @param  string $char          the character or code
-     * @param  string $modifier=null one of 'shift', 'alt', 'ctrl' or 'meta'
+     * @param string $char     the character or code
+     * @param string $modifier one of 'shift', 'alt', 'ctrl' or 'meta'
      *
      * @return string a json encoded options array for Syn
      */
-    protected static function charToOptions($event, $char, $modifier = null)
+    protected static function charToOptions($char, $modifier = null)
     {
         $ord = ord($char);
         if (is_numeric($char)) {
-            $ord  = $char;
-            $char = chr($char);
+            $ord = $char;
         }
 
         $options = array(
@@ -241,9 +239,9 @@ class Selenium2Driver extends CoreDriver
      *
      * @example $this->executeJsOnXpath($xpath, 'return {{ELEMENT}}.childNodes.length');
      *
-     * @param  string   $xpath  the xpath to search with
-     * @param  string   $script the script to execute
-     * @param  Boolean  $sync   whether to run the script synchronously (default is TRUE)
+     * @param string  $xpath  the xpath to search with
+     * @param string  $script the script to execute
+     * @param Boolean $sync   whether to run the script synchronously (default is TRUE)
      *
      * @return mixed
      */
@@ -263,7 +261,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * @see Behat\Mink\Driver\DriverInterface::setSession()
+     * {@inheritdoc}
      */
     public function setSession(Session $session)
     {
@@ -271,7 +269,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Starts driver.
+     * {@inheritdoc}
      */
     public function start()
     {
@@ -292,6 +290,7 @@ class Selenium2Driver extends CoreDriver
      * Sets the timeouts to apply to the webdriver session
      *
      * @param array $timeouts The session timeout settings: Array of {script, implicit, page} => time in microsecconds
+     *
      * @throws DriverException
      */
     public function setTimeouts($timeouts)
@@ -318,9 +317,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Checks whether driver is started.
-     *
-     * @return  Boolean
+     * {@inheritdoc}
      */
     public function isStarted()
     {
@@ -328,7 +325,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Stops driver.
+     * {@inheritdoc}
      */
     public function stop()
     {
@@ -345,7 +342,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Resets driver.
+     * {@inheritdoc}
      */
     public function reset()
     {
@@ -353,9 +350,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Visit specified URL.
-     *
-     * @param   string  $url    url of the page
+     * {@inheritdoc}
      */
     public function visit($url)
     {
@@ -363,9 +358,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Returns current URL address.
-     *
-     * @return  string
+     * {@inheritdoc}
      */
     public function getCurrentUrl()
     {
@@ -373,7 +366,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Reloads current page.
+     * {@inheritdoc}
      */
     public function reload()
     {
@@ -381,7 +374,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Moves browser forward 1 page.
+     * {@inheritdoc}
      */
     public function forward()
     {
@@ -389,7 +382,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Moves browser backward 1 page.
+     * {@inheritdoc}
      */
     public function back()
     {
@@ -397,9 +390,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Switches to specific browser window.
-     *
-     * @param string $name window name (null for switching back to main window)
+     * {@inheritdoc}
      */
     public function switchToWindow($name = null)
     {
@@ -407,9 +398,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Switches to specific iFrame.
-     *
-     * @param string $name iframe name (null for switching back)
+     * {@inheritdoc}
      */
     public function switchToIFrame($name = null)
     {
@@ -417,10 +406,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Sets cookie.
-     *
-     * @param   string  $name
-     * @param   string  $value
+     * {@inheritdoc}
      */
     public function setCookie($name, $value = null)
     {
@@ -440,11 +426,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Returns cookie by name.
-     *
-     * @param   string  $name
-     *
-     * @return  string|null
+     * {@inheritdoc}
      */
     public function getCookie($name)
     {
@@ -457,9 +439,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Returns last response content.
-     *
-     * @return  string
+     * {@inheritdoc}
      */
     public function getContent()
     {
@@ -467,10 +447,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Capture a screenshot of the current window.
-     *
-     * @return  string  screenshot of MIME type image/* depending
-     *   on driver (e.g., image/png, image/jpeg)
+     * {@inheritdoc}
      */
     public function getScreenshot()
     {
@@ -478,9 +455,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Return the names of all open windows
-     *
-     * @return array    Array of all open window's names.
+     * {@inheritdoc}
      */
     public function getWindowNames()
     {
@@ -488,9 +463,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Return the name of the currently active window
-     *
-     * @return string    The name of the current window.
+     * {@inheritdoc}
      */
     public function getWindowName()
     {
@@ -498,11 +471,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Finds elements with specified XPath query.
-     *
-     * @param   string  $xpath
-     *
-     * @return  array           array of Behat\Mink\Element\NodeElement
+     * {@inheritdoc}
      */
     public function find($xpath)
     {
@@ -517,11 +486,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Returns element's tag name by it's XPath query.
-     *
-     * @param   string  $xpath
-     *
-     * @return  string
+     * {@inheritdoc}
      */
     public function getTagName($xpath)
     {
@@ -529,11 +494,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Returns element's text by it's XPath query.
-     *
-     * @param   string  $xpath
-     *
-     * @return  string
+     * {@inheritdoc}
      */
     public function getText($xpath)
     {
@@ -545,11 +506,7 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Returns element's html by it's XPath query.
-     *
-     * @param   string  $xpath
-     *
-     * @return  string
+     * {@inheritdoc}
      */
     public function getHtml($xpath)
     {
@@ -557,25 +514,17 @@ class Selenium2Driver extends CoreDriver
     }
 
     /**
-     * Returns element's attribute by it's XPath query.
-     *
-     * @param   string  $xpath
-     *
-     * @return  mixed
+     * {@inheritdoc}
      */
     public function getAttribute($xpath, $name)
     {
-        $script = 'return {{ELEMENT}}.getAttribute(' . json_encode((string)$name) . ')';
+        $script = 'return {{ELEMENT}}.getAttribute(' . json_encode((string) $name) . ')';
 
         return $this->executeJsOnXpath($xpath, $script);
     }
 
     /**
-     * Returns element's value by it's XPath query.
-     *
-     * @param   string  $xpath
-     *
-     * @return  mixed
+     * {@inheritdoc}
      */
     public function getValue($xpath)
     {
@@ -636,10 +585,7 @@ JS;
     }
 
     /**
-     * Sets element's value by it's XPath query.
-     *
-     * @param   string  $xpath
-     * @param   string  $value
+     * {@inheritdoc}
      */
     public function setValue($xpath, $value)
     {
@@ -659,6 +605,7 @@ JS;
                 break;
             case ($elementname == 'select'):
                 $this->selectOption($xpath, $value);
+
                 return;
         }
 
@@ -668,9 +615,7 @@ JS;
     }
 
     /**
-     * Checks checkbox by it's XPath query.
-     *
-     * @param   string  $xpath
+     * {@inheritdoc}
      */
     public function check($xpath)
     {
@@ -682,9 +627,7 @@ JS;
     }
 
     /**
-     * Unchecks checkbox by it's XPath query.
-     *
-     * @param   string  $xpath
+     * {@inheritdoc}
      */
     public function uncheck($xpath)
     {
@@ -696,11 +639,7 @@ JS;
     }
 
     /**
-     * Checks whether checkbox checked located by it's XPath query.
-     *
-     * @param   string  $xpath
-     *
-     * @return  Boolean
+     * {@inheritdoc}
      */
     public function isChecked($xpath)
     {
@@ -708,15 +647,11 @@ JS;
     }
 
     /**
-     * Selects option from select field located by it's XPath query.
-     *
-     * @param   string  $xpath
-     * @param   string  $value
-     * @param   Boolean $multiple
+     * {@inheritdoc}
      */
     public function selectOption($xpath, $value, $multiple = false)
     {
-        $valueEscaped = json_encode((string)$value);
+        $valueEscaped = json_encode((string) $value);
         $multipleJS   = $multiple ? 'true' : 'false';
 
         $script = <<<JS
@@ -775,11 +710,7 @@ JS;
     }
 
     /**
-     * Checks whether select option, located by it's XPath query, is selected.
-     *
-     * @param string $xpath
-     *
-     * @return Boolean
+     * {@inheritdoc}
      */
     public function isSelected($xpath)
     {
@@ -787,9 +718,7 @@ JS;
     }
 
     /**
-     * Clicks button or link located by it's XPath query.
-     *
-     * @param   string  $xpath
+     * {@inheritdoc}
      */
     public function click($xpath)
     {
@@ -797,9 +726,7 @@ JS;
     }
 
     /**
-     * Double-clicks button or link located by it's XPath query.
-     *
-     * @param   string  $xpath
+     * {@inheritdoc}
      */
     public function doubleClick($xpath)
     {
@@ -808,9 +735,7 @@ JS;
     }
 
     /**
-     * Right-clicks button or link located by it's XPath query.
-     *
-     * @param   string  $xpath
+     * {@inheritdoc}
      */
     public function rightClick($xpath)
     {
@@ -819,10 +744,7 @@ JS;
     }
 
     /**
-     * Attaches file path to file field located by it's XPath query.
-     *
-     * @param   string  $xpath
-     * @param   string  $path
+     * {@inheritdoc}
      */
     public function attachFile($xpath, $path)
     {
@@ -830,11 +752,7 @@ JS;
     }
 
     /**
-     * Checks whether element visible located by it's XPath query.
-     *
-     * @param   string  $xpath
-     *
-     * @return  Boolean
+     * {@inheritdoc}
      */
     public function isVisible($xpath)
     {
@@ -842,9 +760,7 @@ JS;
     }
 
     /**
-     * Simulates a mouse over on the element.
-     *
-     * @param   string  $xpath
+     * {@inheritdoc}
      */
     public function mouseOver($xpath)
     {
@@ -853,9 +769,7 @@ JS;
     }
 
     /**
-     * Brings focus to element.
-     *
-     * @param   string  $xpath
+     * {@inheritdoc}
      */
     public function focus($xpath)
     {
@@ -864,9 +778,7 @@ JS;
     }
 
     /**
-     * Removes focus from element.
-     *
-     * @param   string  $xpath
+     * {@inheritdoc}
      */
     public function blur($xpath)
     {
@@ -875,53 +787,37 @@ JS;
     }
 
     /**
-     * Presses specific keyboard key.
-     *
-     * @param   string  $xpath
-     * @param   mixed   $char       could be either char ('b') or char-code (98)
-     * @param   string  $modifier   keyboard modifier (could be 'ctrl', 'alt', 'shift' or 'meta')
+     * {@inheritdoc}
      */
     public function keyPress($xpath, $char, $modifier = null)
     {
-        $options = self::charToOptions('keypress', $char, $modifier);
+        $options = self::charToOptions($char, $modifier);
         $script = "Syn.trigger('keypress', $options, {{ELEMENT}})";
         $this->withSyn()->executeJsOnXpath($xpath, $script);
     }
 
     /**
-     * Pressed down specific keyboard key.
-     *
-     * @param   string  $xpath
-     * @param   mixed   $char       could be either char ('b') or char-code (98)
-     * @param   string  $modifier   keyboard modifier (could be 'ctrl', 'alt', 'shift' or 'meta')
+     * {@inheritdoc}
      */
     public function keyDown($xpath, $char, $modifier = null)
     {
-        $options = self::charToOptions('keydown', $char, $modifier);
+        $options = self::charToOptions($char, $modifier);
         $script = "Syn.trigger('keydown', $options, {{ELEMENT}})";
         $this->withSyn()->executeJsOnXpath($xpath, $script);
     }
 
     /**
-     * Pressed up specific keyboard key.
-     *
-     * @param   string  $xpath
-     * @param   mixed   $char       could be either char ('b') or char-code (98)
-     * @param   string  $modifier   keyboard modifier (could be 'ctrl', 'alt', 'shift' or 'meta')
+     * {@inheritdoc}
      */
     public function keyUp($xpath, $char, $modifier = null)
     {
-        $options = self::charToOptions('keyup', $char, $modifier);
+        $options = self::charToOptions($char, $modifier);
         $script = "Syn.trigger('keyup', $options, {{ELEMENT}})";
         $this->withSyn()->executeJsOnXpath($xpath, $script);
     }
 
-
     /**
-     * Drag one element onto another.
-     *
-     * @param   string  $sourceXpath
-     * @param   string  $destinationXpath
+     * {@inheritdoc}
      */
     public function dragTo($sourceXpath, $destinationXpath)
     {
@@ -964,9 +860,7 @@ JS;
     }
 
     /**
-     * Executes JS script.
-     *
-     * @param   string  $script
+     * {@inheritdoc}
      */
     public function executeScript($script)
     {
@@ -974,11 +868,7 @@ JS;
     }
 
     /**
-     * Evaluates JS script.
-     *
-     * @param   string  $script
-     *
-     * @return  mixed           script return value
+     * {@inheritdoc}
      */
     public function evaluateScript($script)
     {
@@ -986,12 +876,7 @@ JS;
     }
 
     /**
-     * Waits some time or until JS condition turns true.
-     *
-     * @param   integer $time       time in milliseconds
-     * @param   string  $condition  JS condition
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function wait($time, $condition)
     {
@@ -1004,40 +889,32 @@ JS;
             usleep(100000);
         } while (microtime(true) < $end && !$result);
 
-        return (bool)$result;
+        return (bool) $result;
     }
 
     /**
-     * Set the dimensions of the window.
-     *
-     * @param integer $width set the window width, measured in pixels
-     * @param integer $height set the window height, measured in pixels
-     * @param string $name window name (null for the main window)
+     * {@inheritdoc}
      */
     public function resizeWindow($width, $height, $name = null)
     {
-        return $this->wdSession->window($name ? $name : 'current')->postSize(
+        $this->wdSession->window($name ? $name : 'current')->postSize(
             array('width' => $width, 'height' => $height)
         );
     }
 
     /**
-     * Submits the form.
-     *
-     * @param string $xpath Xpath.
+     * {@inheritdoc}
      */
     public function submitForm($xpath)
     {
         $this->wdSession->element('xpath', $xpath)->submit();
     }
 
-   /**
-     * Maximize the window.
-     *
-     * @param string $name window name (null for the main window)
+    /**
+     * {@inheritdoc}
      */
     public function maximizeWindow($name = null)
     {
-        return $this->wdSession->window($name ? $name : 'current')->postMaximize();
+        $this->wdSession->window($name ? $name : 'current')->maximize();
     }
 }

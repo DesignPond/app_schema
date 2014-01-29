@@ -98,18 +98,6 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group issue162
-     * TODO: fix goutte behavior
-     */
-    public function _testIssue162()
-    {
-        $this->getSession()->visit($this->pathTo('/issue162.php'));
-
-        $this->getSession()->getPage()->uncheckField('Checkbox 1');
-        $this->getSession()->getPage()->pressButton('Submit');
-    }
-
-    /**
      * @group issue211
      */
     public function testIssue211()
@@ -505,6 +493,37 @@ abstract class GeneralDriverTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @dataProvider formSubmitWaysDataProvider
+     */
+    public function testFormSubmitWays($submitVia)
+    {
+        $session = $this->getSession();
+        $session->visit($this->pathTo('/basic_form.php'));
+        $page = $session->getPage();
+
+        $firstname = $page->findField('first_name');
+        $firstname->setValue('Konstantin');
+
+        $page->findButton($submitVia)->click();
+
+        if ($this->safePageWait(5000, 'document.getElementById("first") !== null')) {
+            $this->assertEquals('Firstname: Konstantin', $page->find('css', '#first')->getText());
+        } else {
+            $this->fail('Form was never submitted');
+        }
+    }
+
+    public function formSubmitWaysDataProvider()
+    {
+        return array(
+            array('Save'),
+            array('input-type-image'),
+            array('button-without-type'),
+            array('button-type-submit'),
+        );
+    }
+
     public function testFormSubmit()
     {
         $session = $this->getSession();
@@ -855,6 +874,54 @@ OUT;
             array('mink-user', 'mink-password', 'is authenticated'),
             array('', '', 'is not authenticated'),
         );
+    }
+
+    public function testHtmlDecodingNotPerformed()
+    {
+        $session = $this->getSession();
+        $session->visit($this->pathTo('/html_decoding.html'));
+        $page = $session->getPage();
+
+        $span = $page->find('css', 'span');
+        $input = $page->find('css', 'input');
+
+        $expectedHtml = '<span custom-attr="&amp;">some text</span>';
+        $this->assertContains($expectedHtml, $page->getHtml(), '.innerHTML is returned as-is');
+        $this->assertContains($expectedHtml, $page->getContent(), '.outerHTML is returned as-is');
+
+        $this->assertEquals('&', $span->getAttribute('custom-attr'), '.getAttribute value is decoded');
+        $this->assertEquals('&', $input->getAttribute('value'), '.getAttribute value is decoded');
+        $this->assertEquals('&', $input->getValue(), 'node value is decoded');
+    }
+
+    public function testStatuses()
+    {
+        $this->getSession()->visit($this->pathTo('/index.php'));
+
+        try {
+            $this->assertEquals(200, $this->getSession()->getStatusCode());
+        } catch (UnsupportedDriverActionException $e) {
+            $this->markTestSkipped('This driver does not support checking the status code');
+        }
+        $this->assertEquals($this->pathTo('/index.php'), $this->getSession()->getCurrentUrl());
+
+        $this->getSession()->visit($this->pathTo('/404.php'));
+
+        $this->assertEquals($this->pathTo('/404.php'), $this->getSession()->getCurrentUrl());
+        $this->assertEquals(404, $this->getSession()->getStatusCode());
+        $this->assertEquals('Sorry, page not found', $this->getSession()->getPage()->getContent());
+    }
+
+    public function testHeaders()
+    {
+        try {
+            $this->getSession()->setRequestHeader('Accept-Language', 'fr');
+        } catch (UnsupportedDriverActionException $e) {
+            $this->markTestSkipped('This driver does not support setting request header');
+        }
+        $this->getSession()->visit($this->pathTo('/headers.php'));
+
+        $this->assertContains('[HTTP_ACCEPT_LANGUAGE] => fr', $this->getSession()->getPage()->getContent());
     }
 
     protected function pathTo($path)

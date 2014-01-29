@@ -1,17 +1,17 @@
 <?php
 
-namespace Behat\Mink\Exception;
-
-use Behat\Mink\Session;
-use Behat\Mink\Element\Element;
-
 /*
- * This file is part of the Behat\Mink.
+ * This file is part of the Mink package.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\Mink\Exception;
+
+use Behat\Mink\Session;
+use Behat\Mink\Element\Element;
 
 /**
  * Mink's element HTML exception.
@@ -35,7 +35,7 @@ class ElementHtmlException extends ExpectationException
      * @param Element    $element   element
      * @param \Exception $exception expectation exception
      */
-    public function __construct($message = null, Session $session, Element $element, \Exception $exception = null)
+    public function __construct($message, Session $session, Element $element, \Exception $exception = null)
     {
         $this->element = $element;
 
