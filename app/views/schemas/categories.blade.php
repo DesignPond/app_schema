@@ -4,35 +4,57 @@
 			
 	<div id="content">
 	    <div class="container">
-	        <div class="row"> 
-	  
-				@if ( !empty($categories) )
-					@foreach($categories as $categorie) 
+
+				@if ( !empty($categorie) )
 					
-		                <!-- feature box begin -->
-		                <div class="feature-box-small-icon span4">
-		                    <div class="inner">
-		                        <i class="icon-legal circle"></i>
-		                        <div class="text">
-		                            <h3>{{ link_to('schemas/categorie/'.$categorie->id, $categorie->titre ) }} </h3>
-	
-		                            <ul>
-		                            	@if ( isset($themes[$categorie->id]) )
-		                            		@foreach( $themes[$categorie->id] as $id => $theme) 	 
-												<li>{{ link_to('schemas/theme/'.$id, $theme['titre'] ) }}</li>
-				                            @endforeach
-				                        @endif 
-		                            </ul>		
-									
-		                        </div>
-		                    </div>
-		                </div>
-		                <!-- feature box close -->
-		                
-					@endforeach
-				@endif 
+					<h2>{{ $categorie->titre }}</h2>
+					
+					@if( !$categorie->theme->isEmpty() )
+						
+						<?php 
+							$i      = 1;
+							$themes = $categorie->theme->toArray();
+							$nbr    = count($themes); 
+							$chunks = array_chunk($themes, 7);
+						?>
+												
+						@foreach($chunks as $chunk)	
+						<ul class="categoriesList clearfix">				
+							@foreach($chunk as $theme)
+							
+								<li>
+									<a style="background:<?php echo $theme['couleur_primaire']; ?>;" href=""><span><?php echo $theme['titre']; ?></span>
+										<?php if($i < $nbr){  ?>
+											<i style="border-color: transparent transparent transparent <?php echo $theme['couleur_primaire']; ?>;" class="triangle_droit"></i>
+										<?php } ?>
+									</a>
+									<i style="border-color: transparent transparent <?php echo $theme['couleur_primaire']; ?> transparent;" class="triangle_bottom"></i>
+									<ul>
+										<li>
+											<a style="background:<?php echo $theme['couleur_secondaire']; ?>;" href="#">dvsv</a>
+										</li>
+									</ul>
+								</li>
+								
+								<?php $i++; ?>
+								
+							@endforeach
+						</ul>
+						@endforeach
+											
+					@endif 
+					
+					
+				<?php
+					
+				echo '<pre>';
+				print_r($subthemes);
+				echo '</pre>';
 				
-			</div>
+				?>
+					
+		               
+		        @endif     
 		</div>
 	</div>
 					

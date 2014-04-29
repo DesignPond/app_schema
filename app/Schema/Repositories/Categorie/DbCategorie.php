@@ -1,28 +1,30 @@
 <?php namespace Schema\Repositories\Categorie;
 
-use Categorie;
+use Schema\Repositories\Categorie\CategorieInterface;
+use Illuminate\Database\Eloquent\Model as M;
 
 class DbCategorie implements CategorieInterface {
 	
-	public function __construct(){
-
+	protected $category;
+	
+	public function __construct(M $category){
+	
+		$this->category = $category;
 	}
 	
 	public function getAll(){
 		
-		return Categorie::with(array('theme'))->get();
-				
+		return $this->category->with(array('theme'))->get();				
 	}
 	
 	public function find($id){
 
-		return Categorie::findOrFail($id);
-				
+		return $this->category->where('id','=',$id)->with(array('theme'))->get()->first();
 	}
 	
 	public function droplist(){
 	
-		return Categorie::lists('titre','id');
+		return $this->category->lists('titre','id');
 	}
 	
 }

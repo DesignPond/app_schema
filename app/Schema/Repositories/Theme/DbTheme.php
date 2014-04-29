@@ -22,32 +22,19 @@ class DbTheme implements ThemeInterface {
 	
 	public function themeAndSubthemeByCategory(){
 			
-		 $themes    = Theme::get()->toArray();
 		 $subthemes = Subtheme::get()->toArray();
  
-		 $themesByCategories = array();
-		 
-		 if( !empty($themes) )
+		 $subthemeByTheme = array();
+				 
+		 if( !empty($subthemes) )
 		 {
-			 foreach($themes as $theme)
+			 foreach($subthemes as $subtheme)
 			 {
-				 $themesByCategories[$theme['categorie_id']][$theme['id']]['titre'] = $theme['titre'];
-				 
-				 $sub = array();
-				 
-				 if( !empty($subthemes) )
-				 {
-					  foreach($subthemes as $subtheme)
-					  {
-						  $sub[$subtheme['id']] = $subtheme['titre'];
-					  }
-					  
-					  $themesByCategories[$theme['categorie_id']][$theme['id']]['subtheme'][] = $sub;
-				 }  
+				  $subthemeByTheme[$subtheme['theme_id']][] = $subtheme;
 			 }
-		 }
+		 }  
 		 
-		 return $themesByCategories;	 
+		 return $subthemeByTheme;	 
 	}
 	
 	public function subthemes($id){

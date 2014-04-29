@@ -56,9 +56,6 @@
 	                <div class="container">
 	                    <div class="row">
 	                        <div class="span6 info-text">
-	                            <strong>Email:</strong>  <a href="#">info@droitenschema.ch</a>
-	                        </div>
-	                        <div class="span6 info-text text-right">
 	                        @if ( Auth::check() )
 	                            <i class="icon-user"></i> {{ Auth::user()->email }} &nbsp;|&nbsp; {{ link_to('logout', 'Logout' ) }}
 	                        @else
@@ -68,13 +65,17 @@
 	                    </div>
 	                </div>
 	            </div>
+					
 	            <div class="container">
+	            	            					
+					<a id="logo_unine" href="http://www.unine.ch"><img src="{{ asset('images/logo_unine.png') }}" alt="" /></a>
+					
 	                <div id="logo">
 	                    <div class="inner">
-	                         {{ link_to('schemas/', 'DROIT EN SCH&Eacute;ma' ) }}
+	                         {{ link_to('schemas/', 'Droit en sch&eacute;mas' ) }}
 	                    </div>
 	                </div>
-	
+
 	                <!-- mainmenu begin -->
 	                <ul id="mainmenu">
 	                    <li>{{ link_to('schemas/', 'Accueil', array('class' => Request::is( 'schemas') ? 'active' : '')  ) }}</li>

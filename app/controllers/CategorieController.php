@@ -28,14 +28,14 @@ class CategorieController extends BaseController {
 	 */
 	public function index()
 	{
-        $categories = $this->categorie->getAll();
-		$themes     = $this->theme->themeAndSubthemeByCategory();
+        $categorie  = $this->categorie->find(1);
+		$subthemes  = $this->theme->themeAndSubthemeByCategory();
 		
 		$data = array(
         	'titre'      => 'Catégories',
 			'soustitre'  => 'Toutes les catégories',
-			'categories' => $categories ,
-			'themes'     => $themes 
+			'categorie'  => $categorie ,
+			'subthemes'  => $subthemes 
 		);
 		
 	    return View::make('schemas.categories')->with( $data );

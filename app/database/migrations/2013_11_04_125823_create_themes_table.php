@@ -16,7 +16,8 @@ class CreateThemesTable extends Migration {
 			$table->increments('id');
 			$table->string('titre');
 			$table->integer('categorie_id');
-			$table->string('couleur');
+			$table->string('couleur_primaire');
+			$table->string('couleur_secondaire');
 		});
 	}
 

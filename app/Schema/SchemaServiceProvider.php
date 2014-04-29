@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 use Projet as P;
 use Files as F;
+use Categorie as C;
 
 class SchemaServiceProvider extends ServiceProvider {
 
@@ -23,7 +24,7 @@ class SchemaServiceProvider extends ServiceProvider {
     
 	    $this->app->bind('Schema\Repositories\Categorie\CategorieInterface', function()
         {
-            return new \Schema\Repositories\Categorie\DbCategorie();
+            return new \Schema\Repositories\Categorie\DbCategorie(new C);
         });
         
     }

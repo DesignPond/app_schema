@@ -6,9 +6,10 @@
         <div class="container">
             <div class="row">
                 <div class="span12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt 
-                    ut labore et <strong>dolore magna aliqua</strong>. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
-                    ea commodo consequat. Duis aute irure <strong>dolor in reprehenderit  mollit</strong> anim id est laborum.</p>               
+                    <p>Complément indispensable de l'ouvrage <strong>"La procédure civile en schémas"</strong>, ce site reprend l’ensemble des schémas du livre ainsi que d'autre schméas additionels.
+						Les graphiques couvrent les matières traitées par le Code, en décrivant les processus formels et en tentant de conceptualiser les notions essentielles.</p>  
+
+						<p>Un soin particulier a été mis dans la réalisation des schémas, déclinés en douze couleurs et dégradés afin d’en faciliter la lecture et la compréhension.</p>               
                 </div>
             </div>
         </div>
