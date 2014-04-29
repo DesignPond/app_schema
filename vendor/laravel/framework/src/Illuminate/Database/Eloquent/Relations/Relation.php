@@ -1,8 +1,6 @@
 <?php namespace Illuminate\Database\Eloquent\Relations;
 
 use Closure;
-use DateTime;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
@@ -74,7 +72,7 @@ abstract class Relation {
 	 *
 	 * @param  array   $models
 	 * @param  string  $relation
-	 * @return void
+	 * @return array
 	 */
 	abstract public function initRelation(array $models, $relation);
 
@@ -94,6 +92,16 @@ abstract class Relation {
 	 * @return mixed
 	 */
 	abstract public function getResults();
+
+	/**
+	 * Get the relationship for eager loading.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Collection
+	 */
+	public function getEager()
+	{
+		return $this->get();
+	}
 
 	/**
 	 * Touch all of the related models for the relationship.
@@ -132,19 +140,20 @@ abstract class Relation {
 	 * Add the constraints for a relationship count query.
 	 *
 	 * @param  \Illuminate\Database\Eloquent\Builder  $query
+	 * @param  \Illuminate\Database\Eloquent\Builder  $parent
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
-	public function getRelationCountQuery(Builder $query)
+	public function getRelationCountQuery(Builder $query, Builder $parent)
 	{
 		$query->select(new Expression('count(*)'));
 
-		$key = $this->wrap($this->parent->getQualifiedKeyName());
+		$key = $this->wrap($this->getQualifiedParentKeyName());
 
-		return $query->where($this->getForeignKey(), '=', new Expression($key));
+		return $query->where($this->getHasCompareKey(), '=', new Expression($key));
 	}
 
 	/**
-	 * Run a callback with constrains disabled on the relation.
+	 * Run a callback with constraints disabled on the relation.
 	 *
 	 * @param  \Closure  $callback
 	 * @return mixed
@@ -166,14 +175,15 @@ abstract class Relation {
 	/**
 	 * Get all of the primary keys for an array of models.
 	 *
-	 * @param  array  $models
+	 * @param  array   $models
+	 * @param  string  $key
 	 * @return array
 	 */
-	protected function getKeys(array $models)
+	protected function getKeys(array $models, $key = null)
 	{
-		return array_values(array_map(function($value)
+		return array_values(array_map(function($value) use ($key)
 		{
-			return $value->getKey();
+			return $key ? $value->getAttribute($key) : $value->getKey();
 
 		}, $models));
 	}
@@ -206,6 +216,16 @@ abstract class Relation {
 	public function getParent()
 	{
 		return $this->parent;
+	}
+
+	/**
+	 * Get the fully qualified parent key name.
+	 *
+	 * @return string
+	 */
+	protected function getQualifiedParentKeyName()
+	{
+		return $this->parent->getQualifiedKeyName();
 	}
 
 	/**

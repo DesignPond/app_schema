@@ -4,12 +4,13 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.0.*",
+		"laravel/framework": "4.1.*",
 		"phpunit/phpunit": "3.7.*",
-		"way/generators": "dev-master"
+		"way/generators": "dev-master",
+		"crhayes/validation": "dev-master",
+		"intervention/image": "dev-master"
 	},
 	"require-dev": {
-		"codeception/codeception": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -18,7 +19,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+			"app/library"
 		],
 		
 		"psr-0":{

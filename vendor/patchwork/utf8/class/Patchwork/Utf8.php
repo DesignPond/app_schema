@@ -36,17 +36,54 @@ class Utf8
 
     // Generic UTF-8 to ASCII transliteration
 
-    static function toAscii($s)
+    static function toAscii($s, $subst_chr = '?')
     {
         if (preg_match("/[\x80-\xFF]/", $s))
         {
-            static $translitExtra = false;
-            $translitExtra or $translitExtra = self::getData('translit_extra');
+            static $translitExtra = array();
+            $translitExtra or $translitExtra = static::getData('translit_extra');
 
-            $s = n::normalize($s, n::NFKD);
-            $s = preg_replace('/\p{Mn}+/u', '', $s);
-            $s = str_replace($translitExtra[0], $translitExtra[1], $s);
-            $s = iconv('UTF-8', 'ASCII' . ('glibc' !== ICONV_IMPL ? '//IGNORE' : '') . '//TRANSLIT', $s);
+            $s = n::normalize($s, n::NFKC);
+
+/**/        $glibc = 'glibc' === ICONV_IMPL;
+
+            preg_match_all('/./u', $s, $s);
+
+            foreach ($s[0] as &$c)
+            {
+                if (! isset($c[1])) continue;
+
+/**/            if ($glibc)
+/**/            {
+                    $t = iconv('UTF-8', 'ASCII//TRANSLIT', $c);
+/**/            }
+/**/            else
+/**/            {
+                    $t = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $c);
+
+                    if (! isset($t[0])) $t = '?';
+                    else if (isset($t[1])) $t = ltrim($t, '\'`"^~');
+/**/            }
+
+                if ('?' === $t)
+                {
+                    if (isset($translitExtra[$c]))
+                    {
+                        $t = $translitExtra[$c];
+                    }
+                    else
+                    {
+                        $t = n::normalize($c, n::NFD);
+
+                        if ($t[0] < "\x80") $t = $t[0];
+                        else $t = $subst_chr;
+                    }
+                }
+
+                $c = $t;
+            }
+
+            $s = implode('', $s[0]);
         }
 
         return $s;
@@ -105,7 +142,7 @@ class Utf8
         if ($full)
         {
             static $fullCaseFold = false;
-            $fullCaseFold || $fullCaseFold = self::getData('caseFolding_full');
+            $fullCaseFold || $fullCaseFold = static::getData('caseFolding_full');
 
             $s = str_replace($fullCaseFold[0], $fullCaseFold[1], $s);
         }
@@ -178,8 +215,9 @@ class Utf8
 /**/    if (50418 > PHP_VERSION_ID || 50500 == PHP_VERSION_ID)
 /**/    {
             // Don't use grapheme_stripos because of https://bugs.php.net/61860
+            if (! preg_match('//u', $s .= '')) return false;
             if ($offset < 0) $offset = 0;
-            if (!$needle = mb_stripos($s, $needle, $offset, 'UTF-8')) return $needle;
+            if (! $needle = mb_stripos($s, $needle .= '', $offset, 'UTF-8')) return $needle;
             return grapheme_strlen(iconv_substr($s, 0, $needle, 'UTF-8'));
 /**/    }
 /**/    else
@@ -193,8 +231,9 @@ class Utf8
 /**/    if (50418 > PHP_VERSION_ID || 50500 == PHP_VERSION_ID)
 /**/    {
             // Don't use grapheme_strripos because of https://bugs.php.net/61860
+            if (! preg_match('//u', $s .= '')) return false;
             if ($offset < 0) $offset = 0;
-            if (!$needle = mb_strripos($s, $needle, $offset, 'UTF-8')) return $needle;
+            if (! $needle = mb_strripos($s, $needle .= '', $offset, 'UTF-8')) return $needle;
             return grapheme_strlen(iconv_substr($s, 0, $needle, 'UTF-8'));
 /**/    }
 /**/    else
@@ -205,7 +244,7 @@ class Utf8
 
     static function stristr($s, $needle, $before_needle = false)
     {
-        if ('' === (string) $needle) return false;
+        if ('' === $needle .= '') return false;
         return mb_stristr($s, $needle, $before_needle, 'UTF-8');
     }
 
@@ -218,65 +257,54 @@ class Utf8
 
     static function wordwrap($s, $width = 75, $break = "\n", $cut = false)
     {
-        // This implementation could be extended to handle unicode word boundaries,
-        // but that's enough work for today (see http://www.unicode.org/reports/tr29/)
+        if (false === wordwrap('-', $width, $break, $cut)) return false;
 
-        $width = (int) $width;
+        is_string($break) or $break = (string) $break;
+
+        $w = '';
         $s = explode($break, $s);
-
         $iLen = count($s);
-        $result = array();
-        $line = '';
-        $lineLen = 0;
+        $chars = array();
+
+        if (1 === $iLen && '' === $s[0])
+            return '';
 
         for ($i = 0; $i < $iLen; ++$i)
         {
-            $words = explode(' ', $s[$i]);
-            $line && $result[] = $line;
-            $lineLen = grapheme_strlen($line);
-            $jLen = count($words);
-
-            for ($j = 0; $j < $jLen; ++$j)
+            if ($i)
             {
-                $w = $words[$j];
-                $wLen = grapheme_strlen($w);
+                $chars[] = $break;
+                $w .= '#';
+            }
 
-                if ($lineLen + $wLen < $width)
-                {
-                    if ($j) $line .= ' ';
-                    $line .= $w;
-                    $lineLen += $wLen + 1;
-                }
-                else
-                {
-                    if ($j || $i) $result[] = $line;
-                    $line = '';
-                    $lineLen = 0;
+            $c = $s[$i];
+            unset($s[$i]);
 
-                    if ($cut && $wLen > $width)
-                    {
-                        $w = self::str_split($w);
-
-                        do
-                        {
-                            $result[] = implode('', array_slice($w, 0, $width));
-                            $line = implode('', $w = array_slice($w, $width));
-                            $lineLen = $wLen -= $width;
-                        }
-                        while ($wLen > $width);
-
-                        $w = implode('', $w);
-                    }
-
-                    $line = $w;
-                    $lineLen = $wLen;
-                }
+            foreach (self::str_split($c) as $c)
+            {
+                $chars[] = $c;
+                $w .= ' ' === $c ? ' ' : '?';
             }
         }
 
-        $line && $result[] = $line;
+        $s = '';
+        $j = 0;
+        $b = $i = -1;
+        $w = wordwrap($w, $width, '#', $cut);
 
-        return implode($break, $result);
+        while (false !== $b = strpos($w, '#', $b+1))
+        {
+            for (++$i; $i < $b; ++$i)
+            {
+                $s .= $chars[$j];
+                unset($chars[$j++]);
+            }
+
+            if ($break === $chars[$j] || ' ' === $chars[$j]) unset($chars[$j++]);
+            $s .= $break;
+        }
+
+        return $s . implode('', $chars);
     }
 
     static function chr($c)
@@ -323,9 +351,7 @@ class Utf8
 
         foreach ($search as $i => $s)
         {
-            is_string($s) or $s = (string) $s;
-
-            if ('' === $s) $s = '/^(?<=.)$/';
+            if ('' === $s .= '') $s = '/^(?<=.)$/';
             else $s = '/' . preg_quote($s, '/') . '/ui';
 
             $search[$i] = $s;
@@ -430,8 +456,8 @@ class Utf8
         return $charlist;
     }
 
-    static function strcmp       ($a, $b) {return (string) $a === (string) $b ? 0 : strcmp(n::normalize($a, n::NFD), n::normalize($b, n::NFD));}
-    static function strnatcmp    ($a, $b) {return (string) $a === (string) $b ? 0 : strnatcmp(self::strtonatfold($a), self::strtonatfold($b));}
+    static function strcmp       ($a, $b) {return $a . '' === $b . '' ? 0 : strcmp(n::normalize($a, n::NFD), n::normalize($b, n::NFD));}
+    static function strnatcmp    ($a, $b) {return $a . '' === $b . '' ? 0 : strnatcmp(self::strtonatfold($a), self::strtonatfold($b));}
     static function strcasecmp   ($a, $b) {return self::strcmp   (static::strtocasefold($a), static::strtocasefold($b));}
     static function strnatcasecmp($a, $b) {return self::strnatcmp(static::strtocasefold($a), static::strtocasefold($b));}
     static function strncasecmp  ($a, $b, $len) {return self::strncmp(static::strtocasefold($a), static::strtocasefold($b), $len);}
@@ -439,7 +465,7 @@ class Utf8
 
     static function strcspn($s, $charlist, $start = 0, $len = 2147483647)
     {
-        if ('' === (string) $charlist) return null;
+        if ('' === $charlist .= '') return null;
         if ($start || 2147483647 != $len) $s = self::substr($s, $start, $len);
 
         return preg_match('/^(.*?)' . self::rxClass($charlist) . '/us', $s, $len) ? grapheme_strlen($len[1]) : grapheme_strlen($s);

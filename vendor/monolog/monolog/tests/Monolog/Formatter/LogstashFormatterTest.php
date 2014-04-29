@@ -12,7 +12,6 @@
 namespace Monolog\Formatter;
 
 use Monolog\Logger;
-use Monolog\Formatter\LogstashFormatter;
 
 class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,7 +34,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
 
         $message = json_decode($formatter->format($record), true);
 
-        $this->assertEquals("1970-01-01T00:00:00+00:00", $message['@timestamp']);
+        $this->assertEquals("1970-01-01T00:00:00.000000+00:00", $message['@timestamp']);
         $this->assertEquals('log', $message['@message']);
         $this->assertEquals('meh', $message['@fields']['channel']);
         $this->assertContains('meh', $message['@tags']);
@@ -176,7 +175,7 @@ class LogstashFormatterTest extends \PHPUnit_Framework_TestCase
 
         $message = json_decode($formatter->format($record), true);
 
-        $this->assertEquals("1970-01-01T00:00:00+00:00", $message['@timestamp']);
+        $this->assertEquals("1970-01-01T00:00:00.000000+00:00", $message['@timestamp']);
         $this->assertEquals("1", $message['@version']);
         $this->assertEquals('log', $message['message']);
         $this->assertEquals('meh', $message['channel']);

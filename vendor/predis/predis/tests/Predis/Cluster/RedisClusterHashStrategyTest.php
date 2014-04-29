@@ -11,26 +11,32 @@
 
 namespace Predis\Cluster;
 
-use \PHPUnit_Framework_TestCase as StandardTestCase;
-
+use PredisTestCase;
 use Predis\Profile\ServerProfile;
 
 /**
  *
  */
-class RedisClusterHashStrategyTest extends StandardTestCase
+class RedisClusterHashStrategyTest extends PredisTestCase
 {
     /**
      * @group disconnected
      */
-    public function testDoesNotSupportKeyTags()
+    public function testSupportsKeyTags()
     {
         $strategy = $this->getHashStrategy();
 
-        $this->assertSame(35910, $strategy->getKeyHash('{foo}'));
-        $this->assertSame(60032, $strategy->getKeyHash('{foo}:bar'));
-        $this->assertSame(27528, $strategy->getKeyHash('{foo}:baz'));
-        $this->assertSame(34064, $strategy->getKeyHash('bar:{foo}:bar'));
+        $this->assertSame(44950, $strategy->getKeyHash('{foo}'));
+        $this->assertSame(44950, $strategy->getKeyHash('{foo}:bar'));
+        $this->assertSame(44950, $strategy->getKeyHash('{foo}:baz'));
+        $this->assertSame(44950, $strategy->getKeyHash('bar:{foo}:baz'));
+        $this->assertSame(44950, $strategy->getKeyHash('bar:{foo}:{baz}'));
+
+        $this->assertSame(44950, $strategy->getKeyHash('bar:{foo}:baz{}'));
+        $this->assertSame(9415,  $strategy->getKeyHash('{}bar:{foo}:baz'));
+
+        $this->assertSame(0,     $strategy->getKeyHash(''));
+        $this->assertSame(31641, $strategy->getKeyHash('{}'));
     }
 
     /**
@@ -251,7 +257,7 @@ class RedisClusterHashStrategyTest extends StandardTestCase
     /**
      * Returns the list of expected supported commands.
      *
-     * @param string $type Optional type of command (based on its keys)
+     * @param  string $type Optional type of command (based on its keys)
      * @return array
      */
     protected function getExpectedCommands($type = null)

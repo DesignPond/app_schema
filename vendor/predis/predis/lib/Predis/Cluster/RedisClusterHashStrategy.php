@@ -166,7 +166,7 @@ class RedisClusterHashStrategy implements CommandHashStrategyInterface
      * associated handler for the specified command ID is removed.
      *
      * @param string $commandId The ID of the command to be handled.
-     * @param mixed $callback A valid callable object or NULL.
+     * @param mixed  $callback  A valid callable object or NULL.
      */
     public function setCommandHandler($commandId, $callback = null)
     {
@@ -174,6 +174,7 @@ class RedisClusterHashStrategy implements CommandHashStrategyInterface
 
         if (!isset($callback)) {
             unset($this->commands[$commandId]);
+
             return;
         }
 
@@ -187,7 +188,7 @@ class RedisClusterHashStrategy implements CommandHashStrategyInterface
     /**
      * Extracts the key from the first argument of a command instance.
      *
-     * @param CommandInterface $command Command instance.
+     * @param  CommandInterface $command Command instance.
      * @return string
      */
     protected function getKeyFromFirstArgument(CommandInterface $command)
@@ -199,7 +200,7 @@ class RedisClusterHashStrategy implements CommandHashStrategyInterface
      * Extracts the key from a command that can accept multiple keys ensuring
      * that only one key is actually specified to comply with redis-cluster.
      *
-     * @param CommandInterface $command Command instance.
+     * @param  CommandInterface $command Command instance.
      * @return string
      */
     protected function getKeyFromAllArguments(CommandInterface $command)
@@ -215,7 +216,7 @@ class RedisClusterHashStrategy implements CommandHashStrategyInterface
      * Extracts the key from a command that can accept multiple keys ensuring
      * that only one key is actually specified to comply with redis-cluster.
      *
-     * @param CommandInterface $command Command instance.
+     * @param  CommandInterface $command Command instance.
      * @return string
      */
     protected function getKeyFromInterleavedArguments(CommandInterface $command)
@@ -231,7 +232,7 @@ class RedisClusterHashStrategy implements CommandHashStrategyInterface
      * Extracts the key from BLPOP and BRPOP commands ensuring that only one key
      * is actually specified to comply with redis-cluster.
      *
-     * @param CommandInterface $command Command instance.
+     * @param  CommandInterface $command Command instance.
      * @return string
      */
     protected function getKeyFromBlockingListCommands(CommandInterface $command)
@@ -246,7 +247,7 @@ class RedisClusterHashStrategy implements CommandHashStrategyInterface
     /**
      * Extracts the key from EVAL and EVALSHA commands.
      *
-     * @param CommandInterface $command Command instance.
+     * @param  CommandInterface $command Command instance.
      * @return string
      */
     protected function getKeyFromScriptingCommands(CommandInterface $command)
@@ -286,6 +287,27 @@ class RedisClusterHashStrategy implements CommandHashStrategyInterface
      */
     public function getKeyHash($key)
     {
-        return $this->hashGenerator->hash($key);
+        $key = $this->extractKeyTag($key);
+        $hash = $this->hashGenerator->hash($key);
+
+        return $hash;
+    }
+
+    /**
+     * Returns only the hashable part of a key (delimited by "{...}"), or the
+     * whole key if a key tag is not found in the string.
+     *
+     * @param  string $key A key.
+     * @return string
+     */
+    protected function extractKeyTag($key)
+    {
+        if (false !== $start = strpos($key, '{')) {
+            if (false !== ($end = strpos($key, '}', $start)) && $end !== ++$start) {
+                $key = substr($key, $start, $end - $start);
+            }
+        }
+
+        return $key;
     }
 }

@@ -62,6 +62,8 @@ abstract class Manager {
 	 *
 	 * @param  string  $driver
 	 * @return mixed
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	protected function createDriver($driver)
 	{
@@ -103,7 +105,7 @@ abstract class Manager {
 	public function extend($driver, Closure $callback)
 	{
 		$this->customCreators[$driver] = $callback;
-		
+
 		return $this;
 	}
 

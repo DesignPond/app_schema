@@ -22,10 +22,12 @@ class MailServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->registerSwiftMailer();
+		$me = $this;
 
-		$this->app['mailer'] = $this->app->share(function($app)
+		$this->app->bindShared('mailer', function($app) use ($me)
 		{
+			$me->registerSwiftMailer();
+
 			// Once we have create the mailer instance, we will set a container instance
 			// on the mailer. This allows us to resolve mailer classes via containers
 			// for maximum testability on said classes instead of passing Closures.
@@ -40,14 +42,14 @@ class MailServiceProvider extends ServiceProvider {
 			// on each one, which makes the developer's life a lot more convenient.
 			$from = $app['config']['mail.from'];
 
-			if (is_array($from) and isset($from['address']))
+			if (is_array($from) && isset($from['address']))
 			{
 				$mailer->alwaysFrom($from['address'], $from['name']);
 			}
 
 			// Here we will determine if the mailer should be in "pretend" mode for this
 			// environment, which will simply write out e-mail to the logs instead of
-			// sending it over the web, which is useful for local dev enviornments.
+			// sending it over the web, which is useful for local dev environments.
 			$pretend = $app['config']->get('mail.pretend', false);
 
 			$mailer->pretend($pretend);
@@ -61,7 +63,7 @@ class MailServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	protected function registerSwiftMailer()
+	public function registerSwiftMailer()
 	{
 		$config = $this->app['config']['mail'];
 
@@ -81,6 +83,8 @@ class MailServiceProvider extends ServiceProvider {
 	 *
 	 * @param  array  $config
 	 * @return void
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	protected function registerSwiftTransport($config)
 	{

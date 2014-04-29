@@ -11,13 +11,11 @@
 
 namespace Predis\Command;
 
-use \PHPUnit_Framework_TestCase as StandardTestCase;
-
 /**
  * @group commands
  * @group realm-hash
  */
-class HashScanTest extends CommandTestCase
+class HashScanTest extends PredisCommandTestCase
 {
     /**
      * {@inheritdoc}
@@ -138,8 +136,6 @@ class HashScanTest extends CommandTestCase
      */
     public function testScanWithMatchingMembers()
     {
-        $this->markTestSkipped('This test currently makes Redis crash.');
-
         $redis = $this->getClient();
         $redis->hmset('key', array('field:one' => 'one', 'field:two' => 'two', 'field:three' => 'three', 'field:four' => 'four'));
 

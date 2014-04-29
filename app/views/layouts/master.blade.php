@@ -7,46 +7,89 @@
 	<meta name="description" content="Droit en schéma">
 	<meta name="author" content="Cindy Leschaud">
 	<meta name="viewport" content="width=device-width">
-
-	<link rel="stylesheet" href="<?php echo asset('public/css/bootstrap.css'); ?>">
-	
-	<link rel="stylesheet" href="<?php echo asset('public/css/style.css');?>">
-	<link rel="stylesheet" href="<?php echo asset('public/css/bubbles.css');?>">
-	<link rel="stylesheet" href="<?php echo asset('public/css/jquery-ui-1.8.21.custom.css');?>" type="text/css" media="screen" />
-	<link rel="stylesheet" href="<?php echo asset('public/css/jquery.contextMenu.css');?>">
-    <link rel="stylesheet" href="<?php echo asset('public/css/redactor/redactor.css');?>" type="text/css"/>
-    <link rel="stylesheet" href="<?php echo asset('public/css/font-awesome.css');?>" type="text/css"/>
-    <script src="<?php echo asset('public/js/vendor/history.js');?>"></script>
-    <script src="<?php echo asset('public/js/vendor/redactor/fontsize.js');?>"></script>
-    <script src="<?php echo asset('public/js/vendor/redactor/fontcolor.js');?>"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
-    <script data-main="<?php echo asset('public/js/application/bootstrap');?>" src="<?php echo asset('public/js/require.js');?>"></script>
-	
+    
+    <!-- CSS Files
+    ================================================== -->
+    <link rel="stylesheet" href="<?php echo asset('css/main.css');?>" type="text/css" id="main-css">
+    
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="<?php echo asset('js/bootstrap.min.js');?>"></script>
+    <script src="<?php echo asset('js/selectnav.js');?>"></script>
+    <script src="<?php echo asset('js/custom.js');?>"></script>
+    
 	</head>
 	<body>
-        <div class="container">
-        
-        <header id="mainHeader" class="row">
-			<div class="navbar navbar-inverse">
-			  <a class="navbar-brand" href="#">Droit en schéma</a>
-			  <ul class="nav navbar-nav">
-
-			    <li <?php //if ($title == 'index' || $title == '') {echo ' class="active"';} ?> >
-			    	<a href="<?php //echo action('AppController@getIndex');?>">Projets</a>
-			    </li>
-			    <li <?php //if ($title == 'create' || $title == 'addProjet') {echo ' class="active"';} ?>>
-			    	<a href="<?php //echo action('AppController@showCreate'); ?>">Créer</a>
-			    </li>
-			    
-			  </ul>
-			</div>
-	    </header>
+		<div id="wrapper">
         	
-            @yield('content')
-            
-        </div>
+	        <!-- header begin -->
+	        <header>
+	            <div class="info">
+	                <div class="container">
+	                    <div class="row">
+	                        <div class="span6 info-text">
+	                            <strong>Email:</strong>  <a href="#">info@droitenschema.ch</a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="container">
+	                <div id="logo">
+	                    <div class="inner">
+	                        {{ link_to('schemas/', 'DROIT EN SCH&Eacute;ma' ) }}
+	                    </div>
+	                </div>
+	
+	                <!-- mainmenu begin -->
+	                <ul id="mainmenu">
+	                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
+	                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}
+	                        <ul>
+	                            <li><a href="carousel.html">Procédure civile</a></li>
+	                            <li><a href="carousel.html">Assurances sociales</a></li>
+	                        </ul>
+	                    </li>
+	                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
+	                </ul>
+	                <!-- mainmenu close -->
+	
+	            </div>
+	        </header>
+	        <!-- header close -->
         
-    	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    	<script src="<?php echo asset('public/js/script.js');?>"></script>
+	        <!-- content -->
+	        
+	        @yield('content')
+	        
+	        <!--  content close -->
+            
+		</div>
+            
+        <!-- footer begin -->
+        <footer>
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row">
+                        <div class="span4">
+                            &copy; Copyright 2013 - Droit en Schéma                     
+                        </div>
+                        <div class="span4">
+                            Faculté de droit - Avenue du 1er-Mars 26 - 2000 Neuchâtel                    
+                        </div>
+                        <div class="span4">
+                            <nav>
+                                <ul>
+                                    <li>{{ link_to('schemas/', 'Accueil' ) }}</li>
+                                    <li>{{ link_to('schemas/categorie/', 'Catégories' ) }}</li>
+                                    <li>{{ link_to('schemas/contact', 'Contact' ) }}</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer close -->
+
 	</body>
 </html>

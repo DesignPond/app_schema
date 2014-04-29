@@ -11,16 +11,15 @@
 
 namespace Predis\Profile;
 
-use \PHPUnit_Framework_TestCase as StandardTestCase;
-
+use PredisTestCase;
 use Predis\Command\Processor\ProcessorChain;
 
 /**
  *
  */
-class ServerProfileTest extends StandardTestCase
+class ServerProfileTest extends PredisTestCase
 {
-    const DEFAULT_PROFILE_VERSION = '2.6';
+    const DEFAULT_PROFILE_VERSION = '2.8';
     const DEVELOPMENT_PROFILE_VERSION = '3.0';
 
     /**

@@ -25,12 +25,12 @@ use Symfony\Component\Translation\MessageCatalogue;
 abstract class FileDumper implements DumperInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function dump(MessageCatalogue $messages, $options = array())
     {
         if (!array_key_exists('path', $options)) {
-            throw new \InvalidArgumentException('The file dumper need a path options.');
+            throw new \InvalidArgumentException('The file dumper needs a path option.');
         }
 
         // save a file for each domain

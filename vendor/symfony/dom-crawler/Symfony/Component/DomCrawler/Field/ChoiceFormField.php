@@ -27,18 +27,22 @@ class ChoiceFormField extends FormField
      */
     private $type;
     /**
-     * @var Boolean
+     * @var bool
      */
     private $multiple;
     /**
      * @var array
      */
     private $options;
+    /**
+     * @var bool
+     */
+    private $validationDisabled = false;
 
     /**
      * Returns true if the field should be included in the submitted values.
      *
-     * @return Boolean true if the field should be included in the submitted values, false otherwise
+     * @return bool    true if the field should be included in the submitted values, false otherwise
      */
     public function hasValue()
     {
@@ -53,7 +57,7 @@ class ChoiceFormField extends FormField
     /**
      * Check if the current selected option is disabled
      *
-     * @return Boolean
+     * @return bool
      */
     public function isDisabled()
     {
@@ -188,7 +192,7 @@ class ChoiceFormField extends FormField
     /**
      * Returns true if the field accepts multiple values.
      *
-     * @return Boolean true if the field accepts multiple values, false otherwise
+     * @return bool    true if the field accepts multiple values, false otherwise
      */
     public function isMultiple()
     {
@@ -280,6 +284,10 @@ class ChoiceFormField extends FormField
      */
     public function containsOption($optionValue, $options)
     {
+        if ($this->validationDisabled) {
+            return true;
+        }
+
         foreach ($options as $option) {
             if ($option['value'] == $optionValue) {
                 return true;
@@ -303,5 +311,17 @@ class ChoiceFormField extends FormField
         }
 
         return $values;
+    }
+
+    /**
+     * Disables the internal validation of the field.
+     *
+     * @return self
+     */
+    public function disableValidation()
+    {
+        $this->validationDisabled = true;
+
+        return $this;
     }
 }

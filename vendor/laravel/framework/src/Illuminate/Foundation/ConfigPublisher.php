@@ -43,11 +43,11 @@ class ConfigPublisher {
 	 *
 	 * @param  string  $package
 	 * @param  string  $source
-	 * @return void
+	 * @return bool
 	 */
 	public function publish($package, $source)
 	{
-		$destination = $this->publishPath."/packages/{$package}";		
+		$destination = $this->publishPath."/packages/{$package}";
 
 		$this->makeDestination($destination);
 
@@ -59,7 +59,7 @@ class ConfigPublisher {
 	 *
 	 * @param  string  $package
 	 * @param  string  $packagePath
-	 * @return void
+	 * @return bool
 	 */
 	public function publishPackage($package, $packagePath = null)
 	{
@@ -82,6 +82,8 @@ class ConfigPublisher {
 	 * @param  string  $name
 	 * @param  string  $packagePath
 	 * @return string
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	protected function getSource($package, $name, $packagePath)
 	{

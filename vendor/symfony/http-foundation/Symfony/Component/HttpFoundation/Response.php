@@ -20,6 +20,67 @@ namespace Symfony\Component\HttpFoundation;
  */
 class Response
 {
+    const HTTP_CONTINUE = 100;
+    const HTTP_SWITCHING_PROTOCOLS = 101;
+    const HTTP_PROCESSING = 102;            // RFC2518
+    const HTTP_OK = 200;
+    const HTTP_CREATED = 201;
+    const HTTP_ACCEPTED = 202;
+    const HTTP_NON_AUTHORITATIVE_INFORMATION = 203;
+    const HTTP_NO_CONTENT = 204;
+    const HTTP_RESET_CONTENT = 205;
+    const HTTP_PARTIAL_CONTENT = 206;
+    const HTTP_MULTI_STATUS = 207;          // RFC4918
+    const HTTP_ALREADY_REPORTED = 208;      // RFC5842
+    const HTTP_IM_USED = 226;               // RFC3229
+    const HTTP_MULTIPLE_CHOICES = 300;
+    const HTTP_MOVED_PERMANENTLY = 301;
+    const HTTP_FOUND = 302;
+    const HTTP_SEE_OTHER = 303;
+    const HTTP_NOT_MODIFIED = 304;
+    const HTTP_USE_PROXY = 305;
+    const HTTP_RESERVED = 306;
+    const HTTP_TEMPORARY_REDIRECT = 307;
+    const HTTP_PERMANENTLY_REDIRECT = 308;  // RFC-reschke-http-status-308-07
+    const HTTP_BAD_REQUEST = 400;
+    const HTTP_UNAUTHORIZED = 401;
+    const HTTP_PAYMENT_REQUIRED = 402;
+    const HTTP_FORBIDDEN = 403;
+    const HTTP_NOT_FOUND = 404;
+    const HTTP_METHOD_NOT_ALLOWED = 405;
+    const HTTP_NOT_ACCEPTABLE = 406;
+    const HTTP_PROXY_AUTHENTICATION_REQUIRED = 407;
+    const HTTP_REQUEST_TIMEOUT = 408;
+    const HTTP_CONFLICT = 409;
+    const HTTP_GONE = 410;
+    const HTTP_LENGTH_REQUIRED = 411;
+    const HTTP_PRECONDITION_FAILED = 412;
+    const HTTP_REQUEST_ENTITY_TOO_LARGE = 413;
+    const HTTP_REQUEST_URI_TOO_LONG = 414;
+    const HTTP_UNSUPPORTED_MEDIA_TYPE = 415;
+    const HTTP_REQUESTED_RANGE_NOT_SATISFIABLE = 416;
+    const HTTP_EXPECTATION_FAILED = 417;
+    const HTTP_I_AM_A_TEAPOT = 418;                                               // RFC2324
+    const HTTP_UNPROCESSABLE_ENTITY = 422;                                        // RFC4918
+    const HTTP_LOCKED = 423;                                                      // RFC4918
+    const HTTP_FAILED_DEPENDENCY = 424;                                           // RFC4918
+    const HTTP_RESERVED_FOR_WEBDAV_ADVANCED_COLLECTIONS_EXPIRED_PROPOSAL = 425;   // RFC2817
+    const HTTP_UPGRADE_REQUIRED = 426;                                            // RFC2817
+    const HTTP_PRECONDITION_REQUIRED = 428;                                       // RFC6585
+    const HTTP_TOO_MANY_REQUESTS = 429;                                           // RFC6585
+    const HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE = 431;                             // RFC6585
+    const HTTP_INTERNAL_SERVER_ERROR = 500;
+    const HTTP_NOT_IMPLEMENTED = 501;
+    const HTTP_BAD_GATEWAY = 502;
+    const HTTP_SERVICE_UNAVAILABLE = 503;
+    const HTTP_GATEWAY_TIMEOUT = 504;
+    const HTTP_VERSION_NOT_SUPPORTED = 505;
+    const HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL = 506;                        // RFC2295
+    const HTTP_INSUFFICIENT_STORAGE = 507;                                        // RFC4918
+    const HTTP_LOOP_DETECTED = 508;                                               // RFC5842
+    const HTTP_NOT_EXTENDED = 510;                                                // RFC2774
+    const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;                             // RFC6585
+
     /**
      * @var \Symfony\Component\HttpFoundation\ResponseHeaderBag
      */
@@ -36,7 +97,7 @@ class Response
     protected $version;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $statusCode;
 
@@ -127,8 +188,8 @@ class Response
     /**
      * Constructor.
      *
-     * @param string  $content The response content
-     * @param integer $status  The response status code
+     * @param mixed   $content The response content, see setContent()
+     * @param int     $status  The response status code
      * @param array   $headers An array of response headers
      *
      * @throws \InvalidArgumentException When the HTTP status code is not valid
@@ -154,8 +215,8 @@ class Response
      *     return Response::create($body, 200)
      *         ->setSharedMaxAge(300);
      *
-     * @param string  $content The response content
-     * @param integer $status  The response status code
+     * @param mixed   $content The response content, see setContent()
+     * @param int     $status  The response status code
      * @param array   $headers An array of response headers
      *
      * @return Response
@@ -271,12 +332,12 @@ class Response
         }
 
         // status
-        header(sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText));
+        header(sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText), true, $this->statusCode);
 
         // headers
         foreach ($this->headers->allPreserveCase() as $name => $values) {
             foreach ($values as $value) {
-                header($name.': '.$value, false);
+                header($name.': '.$value, false, $this->statusCode);
             }
         }
 
@@ -342,9 +403,9 @@ class Response
     /**
      * Sets the response content.
      *
-     * Valid types are strings, numbers, and objects that implement a __toString() method.
+     * Valid types are strings, numbers, null, and objects that implement a __toString() method.
      *
-     * @param mixed $content
+     * @param mixed $content Content that can be cast to string
      *
      * @return Response
      *
@@ -406,7 +467,7 @@ class Response
     /**
      * Sets the response status code.
      *
-     * @param integer $code HTTP status code
+     * @param int     $code HTTP status code
      * @param mixed   $text HTTP status text
      *
      * If the status text is null it will be automatically populated for the known
@@ -445,7 +506,7 @@ class Response
     /**
      * Retrieves the status code for the current web response.
      *
-     * @return integer Status code
+     * @return int     Status code
      *
      * @api
      */
@@ -491,7 +552,7 @@ class Response
      * Responses with neither a freshness lifetime (Expires, max-age) nor cache
      * validator (Last-Modified, ETag) are considered uncacheable.
      *
-     * @return Boolean true if the response is worth caching, false otherwise
+     * @return bool    true if the response is worth caching, false otherwise
      *
      * @api
      */
@@ -515,7 +576,7 @@ class Response
      * origin. A response is considered fresh when it includes a Cache-Control/max-age
      * indicator or Expires header and the calculated age is less than the freshness lifetime.
      *
-     * @return Boolean true if the response is fresh, false otherwise
+     * @return bool    true if the response is fresh, false otherwise
      *
      * @api
      */
@@ -528,7 +589,7 @@ class Response
      * Returns true if the response includes headers that can be used to validate
      * the response with the origin server using a conditional GET request.
      *
-     * @return Boolean true if the response is validateable, false otherwise
+     * @return bool    true if the response is validateable, false otherwise
      *
      * @api
      */
@@ -579,7 +640,7 @@ class Response
      * When present, the TTL of the response should not be overridden to be
      * greater than the value provided by the origin.
      *
-     * @return Boolean true if the response must be revalidated by a cache, false otherwise
+     * @return bool    true if the response must be revalidated by a cache, false otherwise
      *
      * @api
      */
@@ -622,7 +683,7 @@ class Response
     /**
      * Returns the age of the response.
      *
-     * @return integer The age of the response in seconds
+     * @return int     The age of the response in seconds
      */
     public function getAge()
     {
@@ -697,7 +758,7 @@ class Response
      * First, it checks for a s-maxage directive, then a max-age directive, and then it falls
      * back on an expires header. It returns null when no maximum age can be established.
      *
-     * @return integer|null Number of seconds
+     * @return int|null     Number of seconds
      *
      * @api
      */
@@ -714,8 +775,6 @@ class Response
         if (null !== $this->getExpires()) {
             return $this->getExpires()->format('U') - $this->getDate()->format('U');
         }
-
-        return null;
     }
 
     /**
@@ -723,7 +782,7 @@ class Response
      *
      * This methods sets the Cache-Control max-age directive.
      *
-     * @param integer $value Number of seconds
+     * @param int     $value Number of seconds
      *
      * @return Response
      *
@@ -741,7 +800,7 @@ class Response
      *
      * This methods sets the Cache-Control s-maxage directive.
      *
-     * @param integer $value Number of seconds
+     * @param int     $value Number of seconds
      *
      * @return Response
      *
@@ -763,7 +822,7 @@ class Response
      * When the responses TTL is <= 0, the response may not be served from cache without first
      * revalidating with the origin.
      *
-     * @return integer|null The TTL in seconds
+     * @return int|null     The TTL in seconds
      *
      * @api
      */
@@ -772,8 +831,6 @@ class Response
         if (null !== $maxAge = $this->getMaxAge()) {
             return $maxAge - $this->getAge();
         }
-
-        return null;
     }
 
     /**
@@ -781,7 +838,7 @@ class Response
      *
      * This method adjusts the Cache-Control/s-maxage directive.
      *
-     * @param integer $seconds Number of seconds
+     * @param int     $seconds Number of seconds
      *
      * @return Response
      *
@@ -799,7 +856,7 @@ class Response
      *
      * This method adjusts the Cache-Control/max-age directive.
      *
-     * @param integer $seconds Number of seconds
+     * @param int     $seconds Number of seconds
      *
      * @return Response
      *
@@ -866,7 +923,7 @@ class Response
      * Sets the ETag value.
      *
      * @param string|null $etag The ETag unique identifier or null to remove the header
-     * @param Boolean     $weak Whether you want a weak ETag or not
+     * @param bool        $weak Whether you want a weak ETag or not
      *
      * @return Response
      *
@@ -969,7 +1026,7 @@ class Response
     /**
      * Returns true if the response includes a Vary header.
      *
-     * @return Boolean true if the response includes a Vary header, false otherwise
+     * @return bool    true if the response includes a Vary header, false otherwise
      *
      * @api
      */
@@ -987,18 +1044,23 @@ class Response
      */
     public function getVary()
     {
-        if (!$vary = $this->headers->get('Vary')) {
+        if (!$vary = $this->headers->get('Vary', null, false)) {
             return array();
         }
 
-        return is_array($vary) ? $vary : preg_split('/[\s,]+/', $vary);
+        $ret = array();
+        foreach ($vary as $item) {
+            $ret = array_merge($ret, preg_split('/[\s,]+/', $item));
+        }
+
+        return $ret;
     }
 
     /**
      * Sets the Vary header.
      *
      * @param string|array $headers
-     * @param Boolean      $replace Whether to replace the actual value of not (true by default)
+     * @param bool         $replace Whether to replace the actual value of not (true by default)
      *
      * @return Response
      *
@@ -1020,7 +1082,7 @@ class Response
      *
      * @param Request $request A Request instance
      *
-     * @return Boolean true if the Response validators match the Request, false otherwise
+     * @return bool    true if the Response validators match the Request, false otherwise
      *
      * @api
      */
@@ -1049,7 +1111,7 @@ class Response
     /**
      * Is response invalid?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1061,7 +1123,7 @@ class Response
     /**
      * Is response informative?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1073,7 +1135,7 @@ class Response
     /**
      * Is response successful?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1085,7 +1147,7 @@ class Response
     /**
      * Is the response a redirect?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1097,7 +1159,7 @@ class Response
     /**
      * Is there a client error?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1109,7 +1171,7 @@ class Response
     /**
      * Was there a server side error?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1121,7 +1183,7 @@ class Response
     /**
      * Is the response OK?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1133,7 +1195,7 @@ class Response
     /**
      * Is the response forbidden?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1145,7 +1207,7 @@ class Response
     /**
      * Is the response a not found error?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1159,7 +1221,7 @@ class Response
      *
      * @param string $location
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
@@ -1171,17 +1233,17 @@ class Response
     /**
      * Is the response empty?
      *
-     * @return Boolean
+     * @return bool
      *
      * @api
      */
     public function isEmpty()
     {
-        return in_array($this->statusCode, array(201, 204, 304));
+        return in_array($this->statusCode, array(204, 304));
     }
 
     /**
-     * Check if we need to remove Cache-Control for ssl encrypted downloads when using IE < 9
+     * Check if we need to remove Cache-Control for SSL encrypted downloads when using IE < 9
      *
      * @link http://support.microsoft.com/kb/323308
      */

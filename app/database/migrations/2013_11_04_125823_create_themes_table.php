@@ -15,7 +15,8 @@ class CreateThemesTable extends Migration {
 		Schema::create('themes', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('titre');
-			$table->integer('refCategorie');
+			$table->integer('categorie_id');
+			$table->string('couleur');
 		});
 	}
 
