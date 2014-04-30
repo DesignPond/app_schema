@@ -824,12 +824,12 @@ a.Txt{
 
 .categoriesList li .triangle_bottom{
 	position: absolute;
-	bottom: 28px;
+	top: 75px;
 	left: 0;
 	width: 0px;
 	height: 0px;
 	border-style: solid;
-	border-width: 0 65px 20px 65px;
+	border-width: 0 65px 15px 65px;
 	border-color: transparent transparent #007bff transparent;
 }
 
@@ -847,7 +847,8 @@ a.Txt{
 	.categoriesList li ul li{
 		width: 100%;
 		height: auto;
-		line-height: 20px;
+		margin-bottom: 4px;
+		line-height: 15px;
 		clear: both;
 		-webkit-border-radius: 4px 4px 4px 4px;
 		border-radius: 4px 4px 4px 4px;

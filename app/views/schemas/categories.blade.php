@@ -29,11 +29,13 @@
 										<?php } ?>
 									</a>
 									<i style="border-color: transparent transparent <?php echo $theme['couleur_primaire']; ?> transparent;" class="triangle_bottom"></i>
-									<ul>
-										<li>
-											<a style="background:<?php echo $theme['couleur_secondaire']; ?>;" href="#">dvsv</a>
-										</li>
-									</ul>
+									@if ( isset($subthemes[$theme['id']]) )
+										<ul>
+											@foreach($subthemes[$theme['id']] as $subtheme)
+												<li><a style="background:<?php echo $theme['couleur_secondaire']; ?>;" href="#"><?php echo $subtheme['titre']; ?></a></li>
+											@endforeach
+										</ul>
+									@endif 
 								</li>
 								
 								<?php $i++; ?>
@@ -43,17 +45,7 @@
 						@endforeach
 											
 					@endif 
-					
-					
-				<?php
-					
-				echo '<pre>';
-				print_r($subthemes);
-				echo '</pre>';
-				
-				?>
-					
-		               
+	    
 		        @endif     
 		</div>
 	</div>
