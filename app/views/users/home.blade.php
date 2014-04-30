@@ -25,22 +25,12 @@
 	
  	@if(!empty($sorting))
  		@foreach($sorting as $sorted) 
- 					 			
-		    <!-- call to action -->
-		    <div class="call-to-action">
-		        <div class="container">
-		            <div class="row">
-		                <div class="span12">
-		                	<h3>{{ key($sorting) }}</h3>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
-		    <!-- call to action close -->
 			
 			<div id="content">
 		        <div class="container">
-			 			
+		        	<h3>{{ key($sorting) }}</h3>
+		        	
+			 			<div class="well">
 			 			@if(!empty($sorted))
 			 				@foreach($sorted as $categorie => $projets) 
 			 					
@@ -56,7 +46,7 @@
 					                    	<a href="{{ url('schemas/projet/'.$projet['id'].'/delete') }}" data-action="Projet" class="deleteSchema deleteAction"></a>
 					                    	<div class="status {{ $projet['status'] }}"></div>
 					                        <div class="picframe">
-												<span class="itemColor " style="background:{{ $projet['theme']['couleur'] }};">
+												<span class="itemColor " style="background:{{ $projet['theme']['couleur_primaire'] }};">
 												<a href="{{ url('schemas/projet/schema', array('id' => $projet['id'] ) ) }}">
 													@if($projet['type'] == 'app')										
 														<img src="{{ asset('images/pf2.png') }}" data-original="{{ asset('images/pf2.png') }}" alt="" />									
@@ -81,7 +71,7 @@
 			 					
 			 				@endforeach
 			 			@endif 			 		                
-		                
+			 			</div> 
 			        </div>
 			    </div>
 		    			 		

@@ -100,10 +100,12 @@
 	                <!-- mainmenu close -->
 	
 	            </div>
+	            	        
+	        <div id="colors"></div>
+	        
 	        </header>
 	        <!-- header close -->
-	        
-	        <div id="colors"></div>
+
 	        
 	       <?php  if( (Request::segment(2) != 'projet') && (Request::segment(2) != '') ){  ?>  	        
 		    

@@ -196,6 +196,7 @@ h5 {
 			font-size: 45px;
 			display: block;
 			color: #fff;
+			margin-top: 10px;
 			font-family: 'Helvetica Neue',Arial, Helvetica, sans-serif;
 	    }
 
@@ -207,7 +208,7 @@ h5 {
 /* content */
 /* -------------------------------------------------- */
 #content, .content {
-    padding: 30px 0 0 0;
+    padding: 20px 0 0 0;
 }
 
 #features {
@@ -348,6 +349,7 @@ h5 {
             background: #939fad;
             border-top: none;
             color: #fff;
+            line-height: 20px;
             width: 140px;
             border-left: none;
             text-align: center;
@@ -1873,6 +1875,7 @@ header .container{
 /* -------------------------------------------------- */
 #subheader {
     padding: 5px 0 5px 0;
+
     border-top: solid 1px #eee;
     border-bottom: solid 1px #eee;
 }
@@ -2344,6 +2347,10 @@ i.black {
 /* gallery */
 /* -------------------------------------------------- */
 
+.gallery{
+	margin-bottom: 20px;
+}
+
 #gallery{
 	margin-bottom: 40px;
 }
@@ -2639,8 +2646,9 @@ a.img-icon-zoom {
 
 /* -------------------------------------------------- */
 /* widget */
-/* -------------------------------------------------- */ .widget {
-    margin-bottom: 40px;
+/* -------------------------------------------------- */ 
+.widget {
+    margin-bottom: 20px;
 }
 
     .widget h4 {
@@ -2743,7 +2751,7 @@ address span {
 }
 
 #content .container {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 #content .container.profile{
