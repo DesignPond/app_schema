@@ -32,7 +32,7 @@
 									@if ( isset($subthemes[$theme['id']]) )
 										<ul>
 											@foreach($subthemes[$theme['id']] as $subtheme)
-												<li><a style="background:<?php echo $theme['couleur_secondaire']; ?>;" href="#"><?php echo $subtheme['titre']; ?></a></li>
+												<li><a style="background:<?php echo $theme['couleur_secondaire']; ?>;" href="{{ url('schemas/theme/'.$subtheme['id']) }}"><?php echo $subtheme['titre']; ?></a></li>
 											@endforeach
 										</ul>
 									@endif 

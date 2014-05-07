@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?php echo asset('js/vendor/redactor/redactor.css'); ?>">
     <link rel="stylesheet" href="<?php echo asset('css/toggles.css'); ?>">
     <link rel="stylesheet" href="<?php echo asset('css/toggles-soft.css'); ?>">
+	<link rel="stylesheet" href="<?php echo asset('documentViewer/css/pdf.css'); ?>">
     
     <!-- Javascript Files
     ================================================== -->
@@ -29,7 +30,9 @@
     <script src="<?php echo asset('js/easing.js');?>"></script>
     <script src="<?php echo asset('js/jquery.ui.totop.js');?>"></script>
     <script src="<?php echo asset('js/jquery.isotope.min.js');?>"></script>
-    <script src="<?php echo asset('js/selectnav.js');?>"></script>
+    <script src="<?php echo asset('js/selectnav.js');?>"></script> 
+	<script src="<?php echo asset('documentViewer/libs/yepnope.1.5.3-min.js');?>"></script> 
+	<script src="<?php echo asset('documentViewer/ttw-document-viewer.min.js');?>"></script>
     <script src="<?php echo asset('js/ender.js');?>"></script>
     <script src="<?php echo asset('js/jquery.lazyload.js');?>"></script>
     <script src="<?php echo asset('js/custom.js');?>"></script>

@@ -1,14 +1,9 @@
 <?php
 
-Route::get('/', function()
+Route::get('test', function()
 {
 			
-$app = Projet::find(3);	
-
-echo '<pre>';
-print_r($app->categorie_id);
-echo '</pre>';	 
-	 
+	return View::make('schemas.test');	 
 /*
 	$data = array();
 
