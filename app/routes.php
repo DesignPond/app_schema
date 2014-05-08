@@ -3,7 +3,7 @@
 Route::get('test', function()
 {
 			
-	return View::make('schemas.test');	 
+	return Subtheme::where('id','=',1)->get()->first()->toArray(); 
 /*
 	$data = array();
 
@@ -45,6 +45,8 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::resource('theme', 'ThemeController');
 	Route::get('theme/drop_theme/{id}', 'ThemeController@drop_theme');
 	Route::get('theme/drop_subtheme/{id}', 'ThemeController@drop_subtheme');
+	
+	Route::resource('subtheme', 'SubthemeController');
 	
 	Route::get('projet/schema/{id}', 'ProjetController@schema');
 	Route::get('projet/modal/{id?}', 'ProjetController@modal');

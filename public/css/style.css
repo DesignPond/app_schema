@@ -779,7 +779,7 @@ a.Txt{
     
 .categoriesList{
 	width: 100%;
-	margin: 20px 0 30px 0;
+	margin: 10px 0 30px 0;
 	padding: 0;
 }
 
@@ -790,14 +790,14 @@ a.Txt{
 }
 
 .categoriesList li{
-	width: 11.5%;
+	width: 11%;
 	line-height: 18px;
 	font-size: 12px;
 	text-align: center;
-	margin: 0 2.5% 0 0;
+	margin: 0 15px 0 0;
 	display: block;
-	float: left;
 	color: #fff;
+	float: left;
 	line-height: 60px;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -807,10 +807,19 @@ a.Txt{
 
 .categoriesList li a{
 	display: block;
-	color: #fff;
+	color: #000;
 	padding:5px;
 	-webkit-border-radius: 4px 4px 4px 4px;
 	border-radius: 4px 4px 4px 4px;
+}
+
+.categoriesList li.principal{
+	margin-right: 35px;
+	width: 11%;
+}
+
+.categoriesList li.principal a{
+	color: #fff;
 }
 
 .categoriesList li .triangle_droit{
@@ -831,8 +840,8 @@ a.Txt{
 	width: 0px;
 	height: 0px;
 	border-style: solid;
-	border-width: 0 65px 15px 65px;
-	border-color: transparent transparent #007bff transparent;
+	border-width: 15px 65px 0 65px;
+	border-color: transparent ;
 }
 
 .categoriesList li span {

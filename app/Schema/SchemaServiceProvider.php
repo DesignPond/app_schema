@@ -12,6 +12,7 @@ class SchemaServiceProvider extends ServiceProvider {
        	// Admin
     	$this->registerCategorieService();
     	$this->registerThemeService();	
+    	$this->registerSubthemeService();	
     	$this->registerUserService();	
     	$this->registerProjetService();
     	
@@ -37,7 +38,16 @@ class SchemaServiceProvider extends ServiceProvider {
         });
         
     }
-
+    
+    protected function registerSubthemeService(){
+    
+	    $this->app->bind('Schema\Repositories\Subtheme\SubthemeInterface', function()
+        {
+            return new \Schema\Repositories\Subtheme\DbSubtheme();
+        });
+        
+    }
+    
     protected function registerUserService(){
     
 	    $this->app->bind('Schema\Repositories\User\UserInterface', function()

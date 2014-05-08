@@ -16,5 +16,6 @@ class Subtheme extends Eloquent {
     {
         return $this->belongsTo('Theme');
     }
+
 	
 }

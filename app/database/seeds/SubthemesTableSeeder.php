@@ -59,7 +59,7 @@ class SubthemesTableSeeder extends Seeder {
 			array( 'titre' => 'Mémoire préventif', 'categorie_id' => 1, 'theme_id' => 10 , 'schemas' => '110'),
 			array( 'titre' => 'Preuve à futur', 'categorie_id' => 1, 'theme_id' => 10 , 'schemas' => '111'),
 			array( 'titre' => 'Cas clairs', 'categorie_id' => 1, 'theme_id' => 10 , 'schemas' => '112,113'),
-			array( 'titre' => 'Mise à ban (114)', 'categorie_id' => 1, 'theme_id' => 10 , 'schemas' => '114'),
+			array( 'titre' => 'Mise à ban', 'categorie_id' => 1, 'theme_id' => 10 , 'schemas' => '114'),
 			array( 'titre' => 'Bail', 'categorie_id' => 1, 'theme_id' => 11 , 'schemas' => '115'),
 			array( 'titre' => 'Travail', 'categorie_id' => 1, 'theme_id' => 11 , 'schemas' => '116'),
 			array( 'titre' => 'Mesure protectrices', 'categorie_id' => 1, 'theme_id' => 11 , 'schemas' => '117,118'),

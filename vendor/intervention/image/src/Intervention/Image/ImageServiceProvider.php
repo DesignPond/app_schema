@@ -57,7 +57,7 @@ class ImageServiceProvider extends ServiceProvider
                     // find file
                     foreach ($config['paths'] as $path) {
                         $image_path = $path.'/'.$filename;
-                        if (file_exists($image_path)) {
+                        if (file_exists($image_path) && is_file($image_path)) {
                             break;
                         } else {
                             $image_path = false;
@@ -95,7 +95,7 @@ class ImageServiceProvider extends ServiceProvider
                         'Etag' => md5($content)
                     ));
 
-                }))->where(array('template' => join('|', array_keys($config['templates'])), 'filename' => '^[\w.-]+$'));
+                }))->where(array('template' => join('|', array_keys($config['templates'])), 'filename' => '^[\/\w.-]+$'));
             }
         }
     }

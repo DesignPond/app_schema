@@ -15,37 +15,34 @@
 							$i      = 1;
 							$themes = $categorie->theme->toArray();
 							$nbr    = count($themes); 
-						?>												
-						
-										
-							@foreach($themes as $theme)
-							<ul class="categoriesList clearfix">
-								<li class="principal">
+							$chunks = array_chunk($themes, 7);
+						?>
+												
+						@foreach($chunks as $chunk)	
+						<ul class="categoriesList clearfix">				
+							@foreach($chunk as $theme)
+							
+								<li>
 									<a style="background:<?php echo $theme['couleur_primaire']; ?>;" href=""><span><?php echo $theme['titre']; ?></span>
-										
+										<?php if($i < $nbr){  ?>
 											<i style="border-color: transparent transparent transparent <?php echo $theme['couleur_primaire']; ?>;" class="triangle_droit"></i>
-										
+										<?php } ?>
 									</a>
-									<?php if($i < $nbr){  ?>
-										<i style="border-color: <?php echo $theme['couleur_primaire']; ?> transparent transparent transparent;" class="triangle_bottom"></i>
-									<?php } ?>
+									<i style="border-color: transparent transparent <?php echo $theme['couleur_primaire']; ?> transparent;" class="triangle_bottom"></i>
+									@if ( isset($subthemes[$theme['id']]) )
+										<ul>
+											@foreach($subthemes[$theme['id']] as $subtheme)
+												<li><a style="background:<?php echo $theme['couleur_secondaire']; ?>;" href="{{ url('schemas/theme/'.$theme['id']) }}"><?php echo $subtheme['titre']; ?></a></li>
+											@endforeach
+										</ul>
+									@endif 
 								</li>
-								@if ( isset($subthemes[$theme['id']]) )
-								
-									@foreach($subthemes[$theme['id']] as $subtheme)
-									
-										<li><a style="background:<?php echo $theme['couleur_secondaire']; ?>;" href="{{ url('schemas/subtheme/'.$subtheme['id']) }}"><span><?php echo $subtheme['titre']; ?></span></a></li>
-									
-									@endforeach
-									
-								@endif 
-								
 								
 								<?php $i++; ?>
-								</ul>	
 								
 							@endforeach
-											
+						</ul>
+						@endforeach
 											
 					@endif 
 	    
