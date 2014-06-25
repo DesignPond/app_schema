@@ -69,6 +69,8 @@ jQuery(document).ready(function() {
 		console.log('value!');
 		jQuery( "#categorie" ).trigger('change');
 	}
+	
+	$(".zoom_projet").elevateZoom({ zoomType : "lens", lensShape : "round", lensSize : 200 });
 
 	
 }); ///////////////

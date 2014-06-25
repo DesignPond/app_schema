@@ -8,6 +8,10 @@
 /* body */
 /* -------------------------------------------------- */
 
+text{
+	font-family: "Helvetica Neue",Arial, sans-serif !important;
+}
+
 html, body {
   height: 100%;
 }
@@ -135,7 +139,7 @@ body {
 /* -------------------------------------------------- */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
-    color: #333;
+    color: #06274a;
     font-family: "Helvetica Neue",Arial, Helvetica, sans-serif;
 }
 
@@ -178,6 +182,10 @@ h5 {
     font-weight: bold;
 }
 
+p{
+	font-size: 14px;
+}
+
 
 /* -------------------------------------------------- */
 /* logo */
@@ -189,14 +197,13 @@ h5 {
     #logo .inner {
         display: table-cell;
         vertical-align: middle;
-        height: 100px;
+        height: 65px;
     }
 
 		#logo .inner a{
-			font-size: 45px;
+			font-size: 34px;
 			display: block;
 			color: #fff;
-			margin-top: 10px;
 			font-family: "Helvetica Neue",Arial, Helvetica, sans-serif;
 	    }
 
@@ -209,6 +216,11 @@ h5 {
 /* -------------------------------------------------- */
 #content, .content {
     padding: 20px 0 0 0;
+    position: relative;
+}
+
+.relativeDiv{
+	position: relative;
 }
 
 #features {
@@ -282,10 +294,14 @@ h5 {
 /* menu, navigation */
 /* -------------------------------------------------- */
 
-#logo_unine{
-	position: absolute;
-	right: 0;
-	top: -25px;
+.logo_unine{
+	display: block;
+	margin-top: -20px;
+}
+
+.logo_little{
+	margin-top: 3px;
+    width: 40%;
 }
 
 #mainmenu {
@@ -295,7 +311,6 @@ h5 {
     float: right;
     height: 60px;
     margin: 0;
-    margin-top: 35px;
 }
 
     #mainmenu ul {
@@ -316,7 +331,7 @@ h5 {
 
     #mainmenu a {
         display: block;
-        padding:15px;
+		padding: 15px 9px;
         line-height: 35px;
         text-decoration: none;
         color: #dedede;
@@ -973,7 +988,6 @@ footer {
     .subfooter li {
         display: inline;
         padding: 0 15px 0 15px;
-        border-left: solid 1px #ccc;
     }
 
     .subfooter a {
@@ -1165,9 +1179,8 @@ footer {
 }
 
     .bloglist-small li {
-        padding-bottom: 10px;
+        padding-bottom: 15px;
         margin-bottom: 20px;
-        border-bottom: solid 1px #eee;
     }
     
     .bloglist-small li:last-child {
@@ -1190,7 +1203,7 @@ footer {
         .bloglist-small li .info {
             display: block;
             margin: 0;
-            font-size: 11px;
+            font-size: 13px;
             color: #5a6b85;
         }
 
@@ -1872,7 +1885,7 @@ header .container{
 	position: relative;
 }
     
-#colors{
+#colors_line{
 	width: 100%;
 	height: 5px;
 	background: url("../images/colors.png") center center repeat-x;
@@ -1972,21 +1985,15 @@ blockquote {
 
 
 /* -------------------------------------------------- */
-/* flickr */
+/* Schemas list gallery */
 /* -------------------------------------------------- */
-#flickr-photo-stream img {
-    width: 48px;
-    height: auto;
-    margin: 0 12px 12px 0;
-    float: left;
-}
 
-#flickr-photo-stream a img {
-    border: solid 2px #fff;
-}
-
-#flickr-photo-stream a:hover img {
-    border: solid 2px #777777;
+.schemas{
+	border: 1px solid #ccc;
+	padding: 5px;
+	height: 200px;
+	overflow: hidden;
+	margin-bottom: 30px;
 }
 
 
@@ -2138,6 +2145,10 @@ i {
     float: left;
     margin-right: 10px;
     margin-bottom: 5px;
+}
+
+i{
+	padding-top: 3px;
 }
 
     i.large {
@@ -2749,6 +2760,14 @@ address span {
 /* -------------------------------------------------- */
 .no-bottom .span12 {
     margin-bottom: -10px;
+}
+
+.marge-top{
+	margin-top: 20px;
+}
+
+.marge-bottom{
+	margin-bottom: 20px;
 }
 
 #content.no-bottom {

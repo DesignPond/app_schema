@@ -72,7 +72,7 @@ define(["jquery", "backbone","views/boxView" ,"models/box","models/boxCollection
 				}
 			},
 			events: {
-				"click .ok"        : "addText",
+				"click .ok" : "addText",
 			},
 		    showTextarea: function(key, opt) {
 		    	

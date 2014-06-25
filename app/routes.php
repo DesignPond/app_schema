@@ -24,6 +24,8 @@ View::composer('layouts.app', function($view){
     $view->with('menus', $menus);
 });
 
+Route::get('svg', 'HomeController@index');
+
 Route::get('/', 'SchemaController@index');
 
 Route::post('login', array( 'uses' => 'SessionController@login') );

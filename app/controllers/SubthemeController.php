@@ -70,13 +70,14 @@ class SubthemeController extends \BaseController {
 	{
 		$projets  = $this->subtheme->schemas($id);
 		$titre    = $this->subtheme->find($id);
+		$subtheme = $this->subtheme->find($id);
 		
 		$data = array(
-        	'titre'     => 'Thème',
-			'soustitre' => 'sous',
-			//'couleur'   => $titre->couleur,
+        	'titre'     => $subtheme->theme->titre,
+			'soustitre' => $subtheme->titre,
+			'couleur'   => $subtheme->theme->couleur_primaire,
 			'projets'   => $projets ,
-			//'subthemes' => $subtheme 
+			'subtheme'  => $subtheme 
 		);
 		
 	    return View::make('schemas.subtheme')->with( $data );

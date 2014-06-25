@@ -41,6 +41,8 @@
     <script src="<?php echo asset('js/vendor/history.js');?>"></script>
     <script src="<?php echo asset('js/jquery.jeditable.js');?>"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+    <script src="<?php echo asset('js/jquery.ui.touch-punch.min.js');?>"></script>
+    <script src="<?php echo asset('js/jquery.elevatezoom.js');?>"></script>    
 
     <!-- Require and backbone Files
     ================================================== -->    
@@ -70,41 +72,43 @@
 	            </div>
 					
 	            <div class="container">
-	            	            					
-					<a id="logo_unine" href="http://www.unine.ch"><img src="{{ asset('images/logo_unine.png') }}" alt="" /></a>
-					
-	                <div id="logo">
-	                    <div class="inner">
-	                         {{ link_to('schemas/', 'Droit en sch&eacute;mas' ) }}
-	                    </div>
-	                </div>
-
-	                <!-- mainmenu begin -->
-	                <ul id="mainmenu">
-	                    <li>{{ link_to('schemas/', 'Accueil', array('class' => Request::is( 'schemas') ? 'active' : '')  ) }}</li>
-	                    <li>{{ link_to('schemas/categorie/', 'Catégories' , array('class' => Request::is( 'schemas/categorie') ? 'active' : '') ) }}</li>
-	                    @if ( Auth::check() )
-	                    	
-	                    	<?php $segment = Request::segment(2);?>
-	                    	
-							<li><a class="@if( ($segment == 'add') || ($segment == 'create') ) 
-										   active 
-										  @endif" href="#">
-									Créer un schéma</a>
-								<ul> 
-		                        	<li>{{ link_to('schemas/create', 'Composer un schéma') }}</li>
-		                            <li>{{ link_to('schemas/add', 'Ajouter un schéma en pdf') }}</li>
-		                        </ul>
-							</li>
-							<li> {{ link_to('schemas/user/'.Auth::user()->id, 'Votre profil' , array('class' => Request::is( 'schemas/user/*') ? 'active' : '')) }}</li>
-						@endif 
-	                    <li>{{ link_to('schemas/contact', 'Contact' , array('class' => Request::is( 'schemas/contact') ? 'active' : '') ) }}</li>
-	                </ul>
-	                <!-- mainmenu close -->
-	
+	            	<div class="row">      
+						
+		                <div class="span3" id="logo">
+		                    <div class="inner">
+		                         {{ link_to('schemas/', 'Droit en sch&eacute;mas' ) }}
+		                    </div>
+		                </div>
+						
+						<div class="span7">
+			                <!-- mainmenu begin -->
+			                <ul id="mainmenu">
+			                    <li>{{ link_to('schemas/', 'Accueil', array('class' => Request::is( 'schemas') ? 'active' : '')  ) }}</li>
+			                    <li>{{ link_to('schemas/categorie/', 'Catégories' , array('class' => Request::is( 'schemas/categorie') ? 'active' : '') ) }}</li>
+			                    @if ( Auth::check() )
+			                    	
+			                    	<?php $segment = Request::segment(2);?>
+			                    	
+									<li><a class="<?php if(($segment == 'add') || ($segment == 'create')){ echo 'active';} ?>" 
+									href="{{ url('schemas/create') }}">Composer un schéma</a>
+										 <!--<ul> 
+				                        	<li>{{ link_to('schemas/create', 'Composer un schéma') }}</li>
+				                            <li>{{ link_to('schemas/add', 'Ajouter un schéma en pdf') }}</li> 
+				                        </ul>-->
+									</li>
+									<li> {{ link_to('schemas/user/'.Auth::user()->id, 'Votre profil' , array('class' => Request::is( 'schemas/user/*') ? 'active' : '')) }}</li>
+								@endif 
+			                    <li>{{ link_to('schemas/contact', 'Contact' , array('class' => Request::is( 'schemas/contact') ? 'active' : '') ) }}</li>
+			                </ul>
+			                <!-- mainmenu close -->
+						</div>
+						
+						<div class="span2"><a id="logo_unine" class="logo_unine" href="http://www.unine.ch"><img src="{{ asset('images/logo_unine.png') }}" alt="" /></a></div>
+						
+	            	</div>
 	            </div>
 	            	        
-	        <div id="colors"></div>
+	        <div id="colors_line"></div>
 	        
 	        </header>
 	        <!-- header close -->
@@ -147,7 +151,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="span4">
-                            &copy; Copyright 2013 - Droit en Schéma                     
+                            &copy; Copyright <?php echo date('Y'); ?> - Droit en schémas                     
                         </div>
                         <div class="span4">
                             Faculté de droit - Avenue du 1er-Mars 26 - 2000 Neuchâtel                    

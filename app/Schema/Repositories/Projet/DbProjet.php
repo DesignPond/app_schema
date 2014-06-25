@@ -24,6 +24,11 @@ class DbProjet implements ProjetInterface {
     	return $this->projet->where('theme_id', '=', $refTheme)->where('status','=','actif')->with(array('user'))->orderBy('id', 'DESC')->get()->toArray();
 	}
 	
+	public function getListById($array){
+	
+		return $this->projet->whereIn('id', $array )->orderBy('id', 'DESC')->get();
+	}
+	
 	public function projectsByUser($user , $nbr = NULL){
 		
 		if($nbr)
@@ -104,11 +109,6 @@ class DbProjet implements ProjetInterface {
 	public function find($id){
 		
 		return $this->projet->with( array('user','theme',) )->findOrFail($id);			
-	}
-	
-	public function findO($id){
-	
-		return $this->projet->find($id);
 	}
 	
 	public function getLastId(){

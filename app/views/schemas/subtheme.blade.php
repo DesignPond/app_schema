@@ -7,38 +7,43 @@
 <div id="content">
     <div class="container">
         <div class="row"> 
-	
+		  
 				<!-- content begin -->
 		        <div id="content">
 		            <div class="container">
 		            
+		            <?php $url = Request::url(); ?>
 		            
-		            <?php
+		            @if(isset($_GET['show']))
+		            	<div class="row">
+		            		<div class="span10 offset1 text-center">	
+		            			<a class="btn btn-primary marge-bottom" href="{{ $url }}">Fermer</a>
+		            			<img src="{{ asset('files/projets/'.$_GET['show'].'.jpg'); }}" class="zoom_projet" data-zoom-image="{{ asset('files/projets/'.$_GET['show'].'.jpg'); }}" alt="" />
+		            			<a class="btn btn-primary marge-top" href="{{ $url }}">Fermer</a>
+		            		</div>
+						</div>
+		            @else
 		            
-						echo '<pre>';
-						print_r($projets);
-						echo '</pre>';
-
-					?>
-		                <!--
-							<div class="row">
-		                    <div class="span12">	                  
-		                        <ul id="filters">
-		                        	<li><a href="#" data-filter="*" class="selected">Tous</a></li>
-		                        	
-		                        	@if ( !empty($subthemes) )
-										@foreach($subthemes as $subtheme) 
-										
-											<li><a href="#" data-filter=".{{ $custom->makeSlug($subtheme) }}">{{ $subtheme }}</a></li>	
+			            @if(!empty($projets))	
+			            	  
+			            	<a class="btn btn-primary marge-bottom" href="{{ url('schemas/categorie/') }}"><i class="icon-arrow-left"></i> Retour aux catégories</a> 
+			            	            
+			            	<?php $rows = array_chunk($projets, 3); ?>
 		
-										@endforeach
-									@endif 
-									
-		                        </ul>
-		                    </div>
-		                </div>
-						-->
-
+			              	@foreach($rows as $row)
+								<div class="row">
+									@foreach($row as $projet)
+				                    <div class="span4">	                  
+				                       <p class="schemas"><a href="{{ $url }}?show={{ $projet }}"><img src="{{ asset('files/projets/'.$projet.'.jpg'); }}" alt="" /></a></p>
+				                    </div>
+				                    @endforeach  
+				                </div>
+				               @endforeach
+				               
+						 @endif
+						 
+					@endif
+					
 		            </div>
 		        </div>
 		        <!-- content close -->

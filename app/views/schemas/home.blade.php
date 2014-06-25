@@ -3,10 +3,10 @@
 @section('content')
 	
 	<div id="content">
-        <div class="container">
+        <div class="container marge-top">
             <div class="row">
                 <div class="span12">
-                    <p>Complément indispensable de l'ouvrage <strong>"La procédure civile en schémas"</strong>, ce site reprend l’ensemble des schémas du livre ainsi que d'autre schméas additionels.
+                    <p>Complément indispensable de l'ouvrage <strong>"La procédure civile en schémas"</strong>, ce site reprend l’ensemble des schémas du livre ainsi que d'autre schémas additionels.
 						Les graphiques couvrent les matières traitées par le Code, en décrivant les processus formels et en tentant de conceptualiser les notions essentielles.</p>  
 
 						<p>Un soin particulier a été mis dans la réalisation des schémas, déclinés en douze couleurs et dégradés afin d’en faciliter la lecture et la compréhension.</p>               
@@ -126,6 +126,7 @@
 							<p class="clear"></p>
 							{{ Form::close() }}
 							
+							<div class="clearfix"></div>
 					  </div>
 
 				  @endif

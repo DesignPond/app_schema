@@ -38,7 +38,7 @@
                         
                         <div id="controls" class="row">
 	                         <div id="colors" class="span3">
-	                         	<p>Couleur</p><input id="colorPicker" class="simple_color" value="{{ $projet['theme']['couleur'] }}"/>
+	                         	<p>Couleur</p><input id="colorPicker" class="simple_color" value="{{ $projet['theme']['couleur_primaire'] }}"/>
 	                         </div>
 	                         <div id="shapes" class="span7">
 				                <button class="btn"  id="add"><span class="car"></span>Ajouter</button>

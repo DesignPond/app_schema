@@ -130,6 +130,8 @@ class ProjetController extends BaseController {
 	{
 		$projet = $this->projet->find($id)->toArray();	
 		$list   = $this->projet->getAllList();
+		
+		$isEditable = null;
       	
       	if( Auth::check() )
 		{

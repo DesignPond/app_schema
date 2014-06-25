@@ -4,10 +4,13 @@ interface ProjetInterface {
 	
 	public function getAll();
 	public function getAllList();
+	public function getListById($array);
+	
 	public function find($id);
-	public function findO($id);
+	
 	public function getLast($nbr);
 	public function getLastId();
+	
 	public function projectsByTheme($id);
 	public function projectsByUser($user,$nbr);
 	public function appByProjet($id);

@@ -15,7 +15,7 @@ class DbSubtheme implements SubthemeInterface {
 	
 	public function find($id){
 
-		return Subtheme::findOrFail($id);			
+		return Subtheme::where('id' , '=' , $id)->with(array('categorie','theme'))->get()->first();			
 	}	
 	
 	public function schemas($id){

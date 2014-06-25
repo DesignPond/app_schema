@@ -37,10 +37,11 @@ jQuery(document).ready(function() {
 	// sticky header
 	// --------------------------------------------------
 	jQuery(window).scroll(function(){ 
-	  if (jQuery(this).scrollTop() > 50){  
+	  if (jQuery(this).scrollTop() > 35){  
 		jQuery('body').addClass("sticky-2");
 		jQuery('header').addClass("sticky-1");
 		jQuery('header .info').addClass('h_info_hide');
+		jQuery('#logo_unine').addClass('logo_little');
 		
 	  } 
 	  else{
@@ -50,6 +51,7 @@ jQuery(document).ready(function() {
 		jQuery('body').removeClass("sticky-2");
 		jQuery('header').removeClass("sticky-1");
 		jQuery('header .info').removeClass('h_info_hide');
+		jQuery('#logo_unine').removeClass('logo_little');
 	  }
 	});
 	

@@ -59,7 +59,7 @@ define(["jquery", "backbone"],
 						})
 						.draggable({ 
 							grid: [ 10,10 ], 
-							containment: $('#all'), 
+							containment: 'parent', 
 							start: function() 
 							{
 								//$('.box').css('z-index',55);
@@ -88,7 +88,7 @@ define(["jquery", "backbone"],
 								self.update($(this));
 							} 
 						})
-						.resizable({grid: 10 , containment: $('#content-application'), stop: function() { self.update($(this)) } })
+						.resizable({grid: 10 , containment: 'parent', stop: function() { self.update($(this)) } })
 						.append(elements);
 				
 				return this;		
