@@ -16,9 +16,24 @@
 		            
 		            @if(isset($_GET['show']))
 		            	<div class="row">
-		            		<div class="span10 offset1 text-center">	
+		            		<div class="span12 text-center">	
 		            			<a class="btn btn-primary marge-bottom" href="{{ $url }}">Fermer</a>
-		            			<img src="{{ asset('files/projets/'.$_GET['show'].'.jpg'); }}" class="zoom_projet" data-zoom-image="{{ asset('files/projets/'.$_GET['show'].'.jpg'); }}" alt="" />
+		            			
+		            			
+		            			<?php
+		            				
+		            				$map = 'pdf/html/'.$_GET['show'].'/'.$_GET['show'].'.html';
+		            			
+									if (File::exists($map)){ ?>
+									
+										<iframe id="IframeId" scrolling="no" src="<?php echo asset($map); ?>" width="100%" frameborder="0"></iframe>
+									    
+									<?php } else { ?>
+																	
+									<img src="{{asset('files/projets/'.$_GET['show'].'.jpg');}}" class="zoom_projet" data-zoom-image="{{ asset('files/projets/'.$_GET['show'].'.jpg'); }}" alt="" />
+		            			
+									<?php } ?>
+		            			
 		            			<a class="btn btn-primary marge-top" href="{{ $url }}">Fermer</a>
 		            		</div>
 						</div>
@@ -33,9 +48,17 @@
 			              	@foreach($rows as $row)
 								<div class="row">
 									@foreach($row as $projet)
+									
+									<?php $thumb = 'files/projets/'.$projet.'.jpg'; 
+									
+									if (File::exists($thumb)){ ?>
+									
 				                    <div class="span4">	                  
-				                       <p class="schemas"><a href="{{ $url }}?show={{ $projet }}"><img src="{{ asset('files/projets/'.$projet.'.jpg'); }}" alt="" /></a></p>
+				                       <p class="schemas"><a href="{{ $url }}?show={{ $projet }}"><img src="{{ asset($thumb); }}" alt="" /></a></p>
 				                    </div>
+				                    
+				                    <?php } ?>
+				                    
 				                    @endforeach  
 				                </div>
 				               @endforeach

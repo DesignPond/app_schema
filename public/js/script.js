@@ -70,7 +70,16 @@ jQuery(document).ready(function() {
 		jQuery( "#categorie" ).trigger('change');
 	}
 	
-	$(".zoom_projet").elevateZoom({ zoomType : "lens", lensShape : "round", lensSize : 200 });
+	//$(".zoom_projet").elevateZoom({ zoomType : "lens", lensShape : "round", lensSize : 200 });
+	
+	$("#IframeId").load(function() {
+	
+    	$(this).height( $(this).contents().find("body").height() ); 
+    	
+    	$(this).contents().find("html").css('text-align','center');
+    	   
+	});
 
 	
 }); ///////////////
+
