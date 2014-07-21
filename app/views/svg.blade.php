@@ -28,29 +28,21 @@
 		    </script>	
 		
 		        <div class="span12" id="content">
-		           
-		           <div class="row">
-		           		<div class="span3">
-					   		<div id="infoBlocSchema">
-						   		<h2 style="color:#ac1480;">Cadre général</h2>
-						   		<h3><i class="icon-bookmark"></i> Sources</h3>
-					   		</div>
-						</div>
-						<div class="span9">
+		 
+						<!--
 							<object type="image/svg+xml" data="<?php echo asset('pdf/sources2.svg'); ?>" class="logo">
 							  Kiwi Logo 
 							</object>
-						<!--
+						
 						<ul class="document-list">					
 		                    <li><div class="text-code" data-path="<?php echo asset('pdf/Instructions.pdf'); ?>">Instructions</div></li>
 		                    <li><div class="text-code" data-path="<?php echo asset('pdf/sources2.svg'); ?>">SOurces</div></li>
 		                </ul>		
 						<div id="document-preview"></div>
 						-->
-						</div>
-						 
-		           </div>
-		        </div>
+						<iframe id="IframeId" scrolling="no" src="<?php echo asset('pdf/html/325.html'); ?>" width="100%" frameborder="0"></iframe>
+			</div>
+			
 		 
 		        
 			 
