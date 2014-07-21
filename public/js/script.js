@@ -79,6 +79,9 @@ jQuery(document).ready(function() {
     	$(this).contents().find("html").css('text-align','center');
     	   
 	});
+ 
+});
+
 
 	
 }); ///////////////
