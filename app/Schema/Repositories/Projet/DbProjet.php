@@ -57,7 +57,7 @@ class DbProjet implements ProjetInterface {
 	
 	public function appByProjet($id){
 	
-		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme')->get()->first()->toArray();
+		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme','subtheme')->get()->first()->toArray();
 	}
 	
 	public function heightProjet($id){
@@ -98,7 +98,7 @@ class DbProjet implements ProjetInterface {
 		
 	public function getAll(){
 		
-		return $this->projet->with( array('theme','user') )->get();		
+		return $this->projet->with( array('theme','subtheme','user') )->get();
 	}
 	
 	public function getAllList(){
@@ -121,7 +121,7 @@ class DbProjet implements ProjetInterface {
 	public function create(array $data){
 		
 		$custom = new \Custom;
-		
+
 		// Create the article
 		$projet = $this->projet->create(array(
 			'titre'       => $data['titre'],
@@ -130,8 +130,8 @@ class DbProjet implements ProjetInterface {
 			'categorie_id'=> $data['categorie_id'],
 			'theme_id'    => $data['theme_id'],
 			'type'        => $data['type'],
-			'slug'        => $custom->makeSlug($data['titre'])
-			//'subtheme_id' => $data['subtheme_id']
+			'slug'        => $custom->makeSlug($data['titre']),
+			'subtheme_id' => $data['subtheme_id']
 		));
 		
 		if( ! $projet )
@@ -150,11 +150,12 @@ class DbProjet implements ProjetInterface {
 		{
 			return false;
 		}
-		
-		if( isset($data['titre']) ){
-			$projet->titre  = $data['titre'];
-		}
-		
+
+		$projet->titre         = $data['titre'];
+        $projet->categorie_id  = $data['categorie_id'];
+        $projet->theme_id      = $data['theme_id'];
+        $projet->subtheme_id   = $data['subtheme_id'];
+
 		if( isset($data['description']) ){
 			$projet->description  = $data['description'];
 		}
@@ -162,16 +163,7 @@ class DbProjet implements ProjetInterface {
 		if( isset($data['user_id']) ){
 			$projet->user_id  = $data['user_id'];
 		}
-		
-		if( isset($data['categorie_id']) ){
-			$projet->categorie_id  = $data['categorie_id'];
-		}
-		
-		if( isset($data['theme_id']) ){
-			$projet->theme_id  = $data['theme_id'];
-		}
 
-		//$projet->subtheme_id  = $data['subtheme_id'];
 		$projet->save();	
 		
 		return true;

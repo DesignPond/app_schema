@@ -71,24 +71,24 @@ class SchemaController extends BaseController {
 		
 		$categories = $this->categorie->droplist();
 		$categories = array_add($categories, '', 'Choix');
-			ksort($categories);
+		ksort($categories);
 		$themes     = $this->theme->droplist_theme();
 		$themes     = array_add($themes, '', 'Choix');
-			ksort($themes); 
+		ksort($themes);
 		$subthemes  = $this->theme->droplist_subtheme();
 		$subthemes  = array_add($subthemes, '', 'Choix');
-			 ksort($subthemes); 
+		ksort($subthemes);
 		
 		$data = array(
         	'titre'      => 'Schéma',
 			'soustitre'  => 'Composer un nouveau schéma online',
 			'categories' => $categories,
 			'themes'     => $themes ,
-			'subthemes'  => $subthemes,
-			'input'      => Input::old() 
+			'subthemes'  => $subthemes
 		);
 		
         return View::make('schemas.create')->with( $data );
+
 	}
 
 

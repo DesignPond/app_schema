@@ -11,7 +11,14 @@
 				  <div class="form_holder">	
 				  					  
 						{{ Form::open(array( 'url' => 'schemas/projet', 'class' => '')) }}
-			
+			            
+                      <?php
+                        echo '<pre>';
+                        print_r($errors);
+                        echo '</pre>';
+
+                      ?>
+                      
 						<div class="row">
 						
 						{{ Form::label('titre', 'Titre *' , array('class' => 'span2 ')) }}
@@ -34,11 +41,20 @@
 						
 						<div class="row">
 						{{ Form::label('Thème *', '' , array('class' => 'span2')) }}
-						<div class="span4">{{ Form::select('theme_id', $themes, '' , array('id' => 'theme', 'class' => 'required', 'id' => 'theme' )) }}</div>
+						<div class="span4">{{ Form::select('theme_id', $themes, '' , array('class' => 'required', 'id' => 'theme' )) }}</div>
 								@foreach($errors->get('theme_id') as $message)<div class="span3 errors">{{ $message }}</div> @endforeach
-						</div>	
-						
-						<br/>
+						</div>
+
+                        <div class="row">
+                          {{ Form::label('Sous thème *', '' , array('class' => 'span2')) }}
+                          <div class="span4">
+                              {{ Form::select('subtheme_id', $subthemes, '' , array('class' => 'required', 'id' => 'subtheme' )) }}
+                              {{ Form::text('subtheme_new', '' , array('placeholder' => 'Nouveau sous thème')) }}
+                          </div>
+                          @foreach($errors->get('subtheme_id') as $message)<div class="span3 errors">{{ $message }}</div> @endforeach
+                        </div>
+
+                       <br/>
 						{{ Form::hidden('type', 'app') }}
 						
 						{{ Form::submit('Créer le schéma', array('class' => 'btn btn-primary')) }}

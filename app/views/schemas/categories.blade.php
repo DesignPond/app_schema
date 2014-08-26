@@ -16,9 +16,9 @@
 							$themes = $categorie->theme->toArray();
 							$nbr    = count($themes); 
                         
-                         //echo '<pre>';
-                         // print_r($liste);
-                         // echo '</pre>';
+                          echo '<pre>';
+                          print_r($liste);
+                          echo '</pre>';
 						?>
 
 							@foreach($themes as $theme)
@@ -41,7 +41,7 @@
                                                 <?php $link = '#'; ?>
                                             @else
                                                 <?php $drop = null; ?>
-                                                <?php $link = url('schemas/projet/book/'.$liste[$subtheme['id']][0]['id']); ?>
+                                                <?php $link = ''; //url('schemas/projet/book/'.$liste[$subtheme['id']][0]['id']); ?>
                                             @endif
                                             <a style="background:<?php echo $theme['couleur_secondaire']; ?>;"href="{{ $link }}">
                                                 <span><?php echo $subtheme['titre']; ?></span>
@@ -49,7 +49,7 @@
                                             @if( $drop )
                                             <ul class="dropdown" style="background:<?php echo $theme['couleur_primaire']; ?>;">
                                                 @foreach($liste[$subtheme['id']] as $projet)
-                                                    <?php $type = ( $projet['type'] = 'app' ? 'schema' : 'book'); ?>
+                                                    <?php $type = ( $projet['type'] == 'app' ? 'schema' : 'book'); ?>
                                                     <li><a href="{{ url('schemas/projet/'.$type.'/'.$projet['id']) }}">{{ $projet['titre'] }}</a></li>
                                                 @endforeach
                                             </ul>

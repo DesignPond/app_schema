@@ -48,11 +48,57 @@ class DbSubtheme implements SubthemeInterface {
                 {
                     $listBySubtheme[$subtheme->id] = $subtheme->projets->toArray();
                 }
+                else
+                {
+                    $listBySubtheme[$subtheme->id] = array();
+                }
             }
 
             return $listBySubtheme;
         }
 
+    }
+
+    public function create(array $data){
+
+        // Create the article
+        $subtheme = Subtheme::create(array(
+            'titre'       => $data['titre'],
+            'categorie_id'=> $data['categorie_id'],
+            'theme_id'    => $data['theme_id']
+        ));
+
+        if( ! $subtheme )
+        {
+            return false;
+        }
+
+        return $subtheme;
+    }
+
+    public function update(array $data){
+
+        $subtheme = Subtheme::find($id);
+
+        if( ! $subtheme )
+        {
+            return false;
+        }
+
+        $subtheme->titre        = $data['titre'];
+        $subtheme->categorie_id = $data['categorie_id'];
+        $subtheme->theme_id     = $data['theme_id'];
+
+        $subtheme->save();
+
+        return $subtheme;
+    }
+
+    public function delete($id){
+
+        $subtheme = Subtheme::find($id);
+
+        return $subtheme->delete();
     }
 	
 }

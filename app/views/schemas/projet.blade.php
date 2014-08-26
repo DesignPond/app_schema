@@ -30,8 +30,8 @@
                         		{{ Form::select('theme_id',$themes,$projet['theme']['id'],array('id' => 'theme-edit','data-id' => $projet['id'],'data-column' => 'theme_id' )) }} 
                         		<span class="isUpdated" style="display:none;">&nbsp;<i class="icon-check-sign"></i></span>                      		
                         	@else
-                        		<span><i class="icon-user"></i>Par: <a href="#">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}</a></span> 
                         		<span><i class="icon-tag"></i>{{ link_to('schemas/theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
+                                <span><i class="icon-tag"></i>{{ link_to('schemas/theme/'.$projet['subtheme']['id'], $projet['subtheme']['titre'] ) }}</span>
                         	@endif
                         	
                         </div>

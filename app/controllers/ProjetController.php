@@ -3,6 +3,7 @@
 use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
+use  Schema\Repositories\Subtheme\SubthemeInterface;
 
 use  Schema\Service\Form\File\FileValidator as FileValidator;
 use  Schema\Service\Upload\UploadInterface;
@@ -17,21 +18,25 @@ class ProjetController extends BaseController {
 	protected $categorie;
 	
 	protected $theme;
+
+    protected $subtheme;
 	
 	protected $validator;
 	
 	protected $upload;
 	
 	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme , UploadInterface $upload ){
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme , UploadInterface $upload, SubthemeInterface $subtheme){
 		
 		$this->projet    = $projet;
 		
 		$this->categorie = $categorie;
 		
 		$this->theme     = $theme;
-		
-		$this->upload    = $upload;
+
+        $this->subtheme  = $subtheme;
+
+        $this->upload    = $upload;
 
 	}
 	/**
@@ -61,12 +66,44 @@ class ProjetController extends BaseController {
 	 */
 	public function store()
 	{
-		
- 	 	$SchemaValidator = SchemaValidator::make(Input::all());
+        // Test if we have to create a new subtheme
+        $subtheme = Input::get('subtheme_id');
+        $new      = Input::get('subtheme_new');
+
+        if(!empty($subtheme))
+        {
+            $subtheme_id = $subtheme;
+        }
+        else if(!empty($new))
+        {
+            $subtheme = $this->subtheme->create(array(
+                'titre'       => $new,
+                'categorie_id'=> Input::get('categorie_id'),
+                'theme_id'    => Input::get('theme_id')
+            ));
+
+            $subtheme_id = $subtheme->id;
+        }
+        else
+        {
+            $subtheme_id = null;
+        }
+
+        $projet = array(
+            'titre'        => Input::get('titre'),
+            'description'  => Input::get('description'),
+            'user_id'      => Input::get('user_id'),
+            'type'         => 'app',
+            'categorie_id' => Input::get('categorie_id'),
+            'theme_id'     => Input::get('theme_id'),
+            'subtheme_id'  => $subtheme_id
+        );
+
+ 	 	$SchemaValidator = SchemaValidator::make($projet);
 				 	 		
 		if ($SchemaValidator->passes()) 
 		{			
-			$this->projet->create(Input::all());
+			$this->projet->create($projet);
 			
 			$id = $this->projet->getLastId();
 			
@@ -97,14 +134,34 @@ class ProjetController extends BaseController {
 	 */
 	public function insert()
 	{
-		
+
 		$custom = new \Custom;
+
+        // Test if we have to create a new subtheme
+        $subtheme = Input::get('subtheme_id');
+        $new      = Input::get('subtheme_new');
+
+        if(!empty($subtheme))
+        {
+            $subtheme_id = $subtheme;
+        }
+        else
+        {
+            $subtheme = $this->subtheme->create(array(
+                'titre'       => $new,
+                'categorie_id'=> Input::get('categorie_id'),
+                'theme_id'    => Input::get('theme_id')
+            ));
+
+            $subtheme_id = $subtheme->id;
+        }
 		
 		$projet = array(
  	 		'titre'        => Input::get('titre'),
  	 		'description'  => Input::get('description'),
  	 		'categorie_id' => Input::get('categorie_id'),
- 	 		'theme_id'     => Input::get('theme_id')
+ 	 		'theme_id'     => Input::get('theme_id'),
+            'subtheme_id'  => $subtheme_id
  	 	);
  	 	
  	 	$ProjetValidator = ProjetValidator::make(Input::all());
