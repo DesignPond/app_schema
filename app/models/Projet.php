@@ -33,5 +33,7 @@ class Projet extends Eloquent {
     {
         return $this->belongsTo('User');
     }
-	
+
+
+
 }

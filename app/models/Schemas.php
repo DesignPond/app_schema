@@ -8,7 +8,8 @@ class Schemas extends Eloquent {
 		'titre'     => 'required',
 		'auteur'    => 'required',
 		'categorie' => 'required',
-		'refTheme'  => 'required'
+		'refTheme'  => 'required',
+        'subTheme'  => 'required'
 	);
 	
 }

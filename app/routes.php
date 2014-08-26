@@ -1,9 +1,13 @@
 <?php
 
-Route::get('test', function()
+Route::get('wow', function()
 {
-			
-	return Subtheme::where('id','=',1)->get()->first()->toArray(); 
+
+    $themes = Projet::where('status','=','actif')->orderBy('id', 'DESC')->get()->toArray();
+    $themes = Subtheme::with(array('categorie','theme','projets'))->get()->toArray();
+    echo '<pre>';
+    print_r($themes);
+    echo '</pre>';
 /*
 	$data = array();
 
@@ -25,7 +29,7 @@ View::composer('layouts.app', function($view){
 });
 
 Route::get('svg', 'HomeController@index');
-
+Route::get('test', 'HomeController@test');
 Route::get('/', 'SchemaController@index');
 
 Route::post('login', array( 'uses' => 'SessionController@login') );
@@ -51,6 +55,7 @@ Route::group(array('prefix' => 'schemas'), function()
 	Route::resource('subtheme', 'SubthemeController');
 	
 	Route::get('projet/schema/{id}', 'ProjetController@schema');
+    Route::get('projet/book/{id}', 'ProjetController@book');
 	Route::get('projet/modal/{id?}', 'ProjetController@modal');
 	Route::post('projet/insert', 'ProjetController@insert');
 	Route::get('projet/{id}/delete', array('uses' => 'ProjetController@destroy'));

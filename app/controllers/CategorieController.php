@@ -3,6 +3,7 @@
 use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
+use  Schema\Repositories\Subtheme\SubthemeInterface;
 
 class CategorieController extends BaseController {
 
@@ -11,14 +12,18 @@ class CategorieController extends BaseController {
 	protected $categorie;
 	
 	protected $theme;
-	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme){
+
+    protected $subtheme;
+
+    public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, SubthemeInterface $subtheme){
 		
 		$this->projet = $projet;
 		
 		$this->categorie = $categorie;
 		
-		$this->theme = $theme;		
+		$this->theme = $theme;
+
+        $this->subtheme  = $subtheme;
 	}
 	
 	/**
@@ -30,12 +35,14 @@ class CategorieController extends BaseController {
 	{
         $categorie  = $this->categorie->find(1);
 		$subthemes  = $this->theme->themeAndSubthemeByCategory();
+        $liste      = $this->subtheme->subthemes(1);
 		
 		$data = array(
         	'titre'      => 'Catégories',
 			'soustitre'  => 'Toutes les catégories',
 			'categorie'  => $categorie ,
-			'subthemes'  => $subthemes 
+			'subthemes'  => $subthemes ,
+            'liste'      => $liste
 		);
 		
 	    return View::make('schemas.categories')->with( $data );

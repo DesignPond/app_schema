@@ -28,4 +28,15 @@ class HomeController extends BaseController {
 		return View::make('svg');
 	}
 
+
+    /**
+     *
+     */
+    public function test(){
+
+        $new = File::files('temp');
+
+        return View::make('test')->with(array('new' => $new));
+    }
+
 }

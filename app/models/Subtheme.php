@@ -14,8 +14,12 @@ class Subtheme extends Eloquent {
     
 	public function theme()
     {
-        return $this->belongsTo('Theme');
+        return $this->belongsTo('Theme', 'theme_id', 'id');
     }
 
+    public function projets()
+    {
+        return $this->hasMany('Projet', 'subtheme_id', 'id');
+    }
 	
 }

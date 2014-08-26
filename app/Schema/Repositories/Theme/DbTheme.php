@@ -16,7 +16,7 @@ class DbTheme implements ThemeInterface {
 	
 	public function find($id){
 
-		return Theme::findOrFail($id);
+		return Theme::where('id','=',$id)->with(array('subthemes'))->get();
 				
 	}
 	

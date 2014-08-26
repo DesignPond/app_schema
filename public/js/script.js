@@ -76,13 +76,15 @@ jQuery(document).ready(function() {
 	
     	$(this).height( $(this).contents().find("body").height() ); 
     	
+    	var content = $(this).contents().html();
+    	
+    	console.log(content);
+    	
     	$(this).contents().find("html").css('text-align','center');
     	   
 	});
- 
-});
 
 
 	
-}); ///////////////
+}); 
 

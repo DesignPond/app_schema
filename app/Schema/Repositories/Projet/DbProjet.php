@@ -21,7 +21,7 @@ class DbProjet implements ProjetInterface {
 		
 	public function projectsByTheme($refTheme){
     	
-    	return $this->projet->where('theme_id', '=', $refTheme)->where('status','=','actif')->with(array('user'))->orderBy('id', 'DESC')->get()->toArray();
+    	return $this->projet->where('theme_id', '=', $refTheme)->where('status','=','actif')->orderBy('id', 'DESC')->get()->toArray();
 	}
 	
 	public function getListById($array){

@@ -78,6 +78,18 @@ class ProjetController extends BaseController {
 		}
 	}
 
+    /**
+     *
+     *
+     * @return
+     */
+    public function book($id)
+    {
+        $projet  = $this->projet->find($id);
+
+        return View::make('schemas.book')->with( array('projet' => $projet ));
+    }
+
 	/**
 	 * Store a newly created resource in storage.
 	 *

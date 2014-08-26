@@ -11,5 +11,10 @@ class Theme extends Eloquent {
     {
         return $this->belongsTo('Categorie');
     }
-    
+
+    public function subthemes()
+    {
+        return $this->hasMany('Subtheme');
+    }
+
 }

@@ -3,6 +3,7 @@
 use  Schema\Repositories\Projet\ProjetInterface;
 use  Schema\Repositories\Categorie\CategorieInterface;
 use  Schema\Repositories\Theme\ThemeInterface;
+use  Schema\Repositories\Subtheme\SubthemeInterface;
 
 class ThemeController extends BaseController {
 	
@@ -11,15 +12,19 @@ class ThemeController extends BaseController {
 	protected $categorie;
 	
 	protected $theme;
+
+    protected $subtheme;
 	
-	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme){
+	public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, SubthemeInterface $subtheme){
 		
-		$this->projet = $projet;
+		$this->projet    = $projet;
 		
 		$this->categorie = $categorie;
 		
-		$this->theme = $theme;		
-	}
+		$this->theme     = $theme;
+
+        $this->subtheme  = $subtheme;
+    }
 	
 	/**
 	 * Display a listing of the resource.
@@ -93,7 +98,7 @@ class ThemeController extends BaseController {
 			'soustitre' => $titre->titre,
 			'couleur'   => $titre->couleur,
 			'projets'   => $projets ,
-			'subthemes' => $subtheme 
+			'subthemes' => $subtheme
 		);
 		
 	    return View::make('schemas.theme')->with( $data );

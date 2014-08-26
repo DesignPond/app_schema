@@ -33,6 +33,27 @@ class DbSubtheme implements SubthemeInterface {
 		return $schemas;
 		
 	}
+
+    public function subthemes($categorie){
+
+        $projets = Subtheme::where('categorie_id','=',$categorie)->with(array('categorie','theme','projets'))->get();
+
+        if(!empty($projets)){
+
+            $listBySubtheme = array();
+
+            foreach($projets as $subtheme)
+            {
+                if(!$subtheme->projets->isEmpty())
+                {
+                    $listBySubtheme[$subtheme->id] = $subtheme->projets->toArray();
+                }
+            }
+
+            return $listBySubtheme;
+        }
+
+    }
 	
 }
 
