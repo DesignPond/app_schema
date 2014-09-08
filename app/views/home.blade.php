@@ -37,8 +37,8 @@
 						
 				        <li>
 				            <div class="date-box">
-				                <span class="day">{{ $day }}</span>
-				                <span class="month">{{ $month }}</span>
+				                <span class="day" style="background: {{ $projet['theme']['couleur_primaire'] }};">{{ $day }}</span>
+				                <span class="month" style="background: {{ $projet['theme']['couleur_primaire'] }};">{{ $month }}</span>
 				            </div>
 				            <div class="txt">
                                     <?php $type = ( $projet['type'] == 'app' ? 'compose' : 'book'); ?>
