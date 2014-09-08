@@ -30,9 +30,7 @@
 						<?php
 						
 							 $Carbon = new Carbon\Carbon();
-							 
 							 $date   = $Carbon->createFromFormat('Y-m-d H:i:s', $projet['created_at']);
-							 
 							 $day    = $date->format('d');  
 							 $month  = $date->format('M'); 
 						?>  
@@ -43,11 +41,12 @@
 				                <span class="month">{{ $month }}</span>
 				            </div>
 				            <div class="txt">
-				               		<h5>{{ link_to('book/'.$projet['id'], $projet['titre']) }}</h5>
+                                    <?php $type = ( $projet['type'] == 'app' ? 'compose' : 'book'); ?>
+				               		<h5>{{ link_to($type.'/'.$projet['id'], $projet['titre']) }}</h5>
 				                <span class="info">
 				                	<strong>{{ $projet['theme']['titre'] }}</strong> | 
 				                		{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}
-					               		{{ link_to('book/'.$projet['id'], 'Voir le schéma') }}
+					               		{{ link_to($type.'/'.$projet['id'], 'Voir le schéma') }}
 				                </span>
 				            </div>
 				        </li>
@@ -70,7 +69,6 @@
                                 </ul>
 
                                 <div class="de_tab_content">
-
                                     <div class="tab-small-post tab-hompage">
                                         <ul>
                                         
@@ -81,7 +79,7 @@
 
                                             <li>
                                                 <span class="post-content">
-                                                    {{ link_to('book/'.$user_projet['id'], $user_projet['titre'] ) }}
+                                                    {{ link_to('compose/'.$user_projet['id'], $user_projet['titre'] ) }}
                                                 </span>
                                                 <span class="post-date">{{ $projetdate->format('d/m/Y'); }}</span>
                                             </li>
@@ -101,7 +99,6 @@
                                     </div>
                                     
                                 </div>
-
                             </div>
                         </div>
 

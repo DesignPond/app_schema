@@ -22,7 +22,6 @@
 		            		<div class="span12 text-center">	
 		            			<a class="btn btn-primary marge-bottom" href="{{ $url }}">Fermer</a>
 		            			
-		            			
 		            			<?php
 		            				
 		            				$map = 'pdf/html/'.$_GET['show'].'/'.$_GET['show'].'.html';
@@ -33,7 +32,7 @@
 									    
 									<?php } else { ?>
 																	
-									<img src="{{asset('files/projets/'.$_GET['show'].'.jpg');}}" class="zoom_projet" data-zoom-image="{{ asset('files/projets/'.$_GET['show'].'.jpg'); }}" alt="" />
+									<img src="{{asset('files/projets/'.$_GET['show'].'.jpg')}}" class="zoom_projet" data-zoom-image="{{ asset('files/projets/'.$_GET['show'].'.jpg'); }}" alt="" />
 		            			
 									<?php } ?>
 		            			
