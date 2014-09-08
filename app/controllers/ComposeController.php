@@ -5,7 +5,6 @@ use  Schema\Categories\Repo\CategorieInterface;
 use  Schema\Themes\Repo\ThemeInterface;
 use  Schema\Subthemes\Repo\SubthemeInterface;
 
-
 class ComposeController extends BaseController {
 
     protected $projet;
@@ -16,7 +15,7 @@ class ComposeController extends BaseController {
 
     protected $subtheme;
 
-    public function __construct(ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, SubthemeInterface $subtheme){
+    public function __construct( ProjetInterface $projet, CategorieInterface $categorie, ThemeInterface $theme, SubthemeInterface $subtheme ){
 
         $this->projet    = $projet;
 
@@ -25,12 +24,26 @@ class ComposeController extends BaseController {
         $this->theme     = $theme;
 
         $this->subtheme  = $subtheme;
+
     }
 
 	public function index()
 	{
         return View::make('home');
 	}
+
+
+    /**
+     * Book schemas
+     *
+     * @return
+     */
+    public function book($id)
+    {
+        $projet  = $this->projet->find($id);
+
+        return View::make('book')->with( array('projet' => $projet ) );
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -92,7 +105,7 @@ class ComposeController extends BaseController {
 
         $projet = $this->projet->create($projet);
 
-        return Redirect::to('compose/'.$projet->id.'#projet/'.$projet->id.'');
+        return Redirect::to('compose/'.$projet->id.'/edit#projet/'.$projet->id.'');
 
     }
 
@@ -102,7 +115,26 @@ class ComposeController extends BaseController {
      * @param  int  $id
      * @return Response
      */
+
     public function show($id)
+    {
+        $projet = $this->projet->appByProjet($id);
+        $height = $this->projet->heightProjet($id);
+
+        $isEditable = FALSE;
+
+        if( Auth::check() )
+        {
+            $isEditable = $this->projet->isUsers($id,Auth::user()->id);
+        }
+
+        $themes  = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
+
+        return View::make('compose.index')->with( array('projet' => $projet , 'height' => $height ,'isEditable' => $isEditable, 'themes' => $themes));
+
+    }
+
+    public function edit($id)
     {
         $projet = $this->projet->find($id)->toArray();
         $list   = $this->projet->getAllList();
@@ -116,7 +148,67 @@ class ComposeController extends BaseController {
 
         $themes  = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
 
-        return View::make('compose.projet')->with( array('projet' => $projet, 'isEditable' => $isEditable, 'themes' => $themes , 'list' => $list) );
+        return View::make('compose.edit')->with( array('projet' => $projet, 'isEditable' => $isEditable, 'themes' => $themes , 'list' => $list) );
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update()
+    {
+        $id     = Input::get('id');
+        $value  = Input::get('value');
+        $column = Input::get('column');
+
+        $projet = $this->projet->find($id);
+
+        if( ! $projet )
+        {
+            return false;
+        }
+
+        $data = array( $column => $value );
+
+        $projet->update( $data );
+
+        return $value;
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function projet($id){
+
+        $ref   = $this->projet->find($id);
+        $theme = $ref['theme_id'];
+
+        return Response::json(array(
+                'error' => false,
+                'items' => array('id' => $theme)
+            ),
+            200 );
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        if( $this->projet->delete($id) )
+        {
+            return Redirect::to('user/'.Auth::user()->id)->with( array('status' => 'success' , 'message' => 'Le projet a été supprimé') );
+        }
+
+        return Redirect::to('user/'.Auth::user()->id)->with( array('status' => 'error' , 'message' => 'Problème avec la suppression') );
     }
 
 }

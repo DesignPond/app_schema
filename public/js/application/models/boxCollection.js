@@ -2,7 +2,7 @@ define(["jquery", "backbone","models/box"],
 
    function($, Backbone, Box) 
    {
-   		var base_url = location.protocol + "//" + location.host+"/api/v1/";
+   		var base_url = location.protocol + "//" + location.host+"/api/";
 		// Boxes collection	
 		Boxes = Backbone.Collection.extend({
 				//This is our Boxes collection and holds our Boxes models

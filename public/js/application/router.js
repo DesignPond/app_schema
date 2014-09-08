@@ -33,7 +33,7 @@ define([
 										['ffffff','000000','cccccc','999999','666666','b10535','a20025','930016','840007','750000']
 									];
 			  				
-			   var base_url = location.protocol + "//" + location.host+"/api/v1/";
+			   var base_url = location.protocol + "//" + location.host+"/api/";
 
 				$.ajax({
 				   type: 'GET', // Le type de ma requete
@@ -47,7 +47,7 @@ define([
 	
 					   	$('.simple_color').simpleColor({ colors: colors , defaultColor: '#eeeeee'});
 				   },
-				   url: base_url+'theme/projet/'+id
+				   url: base_url+'projet/'+id
 				});
 				
 				// extend events to pass them from views to views

@@ -7,6 +7,8 @@ use Schema\Categories\Entities\Categorie as Categorie;
 use Schema\Themes\Entities\Theme as Theme;
 use Schema\Subthemes\Entities\Subtheme as Subtheme;
 use Schema\User\Entities\User as User;
+use Schema\Compose\Entities\Boxe as Boxe;
+use Schema\Compose\Entities\Arrow as Arrow;
 
 class SchemaServiceProvider extends ServiceProvider {
 
@@ -18,6 +20,9 @@ class SchemaServiceProvider extends ServiceProvider {
     	$this->registerSubthemeService();	
     	$this->registerUserService();	
     	$this->registerProjetService();
+
+        $this->registerBoxeService();
+        $this->registerArrowService();
     			
     }
     
@@ -64,6 +69,24 @@ class SchemaServiceProvider extends ServiceProvider {
             return new \Schema\Compose\Repo\DbProjet( new Projet );
         });
         
+    }
+
+    protected function registerBoxeService(){
+
+        $this->app->bind('Schema\Compose\Repo\BoxeInterface', function()
+        {
+            return new \Schema\Compose\Repo\DbBoxe( new Boxe );
+        });
+
+    }
+
+    protected function registerArrowService(){
+
+        $this->app->bind('Schema\Compose\Repo\ArrowInterface', function()
+        {
+            return new \Schema\Compose\Repo\DbArrow( new Arrow );
+        });
+
     }
 
 }

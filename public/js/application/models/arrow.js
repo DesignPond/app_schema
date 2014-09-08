@@ -3,7 +3,7 @@ define(["jquery", "backbone"],
    function($, Backbone) 
    {
    
-   		var base_url = location.protocol + "//" + location.host+"/api/v1/";
+   		var base_url = location.protocol + "//" + location.host+"/api/";
 	   // Arrow model
 		Arrow = Backbone.Model.extend({
 				//Create a model to hold box atribute and set defaults

@@ -52,7 +52,6 @@ class ThemeController extends BaseController {
 		
 		return Response::json($themes, 200 );
 	}
-	
 			
 	public function drop_subtheme($id){
 
@@ -61,23 +60,6 @@ class ThemeController extends BaseController {
 		ksort($subthemes);
 		
 		return Response::json($subthemes, 200 );
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function projet($id){
-		
-		$ref   = $this->projet->find($id);
-		$theme = $ref['theme_id'];
-		
-		return Response::json(array(
-        	'error' => false,
-			'items' => array('id' => $theme)
-			),
-		200 );	
 	}
 
 	/**
@@ -100,7 +82,7 @@ class ThemeController extends BaseController {
 			'subthemes' => $subtheme
 		);
 		
-	    return View::make('schemas.theme')->with( $data );
+	    return View::make('theme')->with( $data );
 	}
 
 	/**

@@ -2,6 +2,9 @@
 
 @section('content')
 
+<!-- Subheader -->
+@include('partials.subheader')
+
 <!-- content begin -->
 <div id="content">
     <div class="container">

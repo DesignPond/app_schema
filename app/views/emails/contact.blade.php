@@ -7,7 +7,7 @@
 		<h2>Demande de rensignement depuis www.droitenschema.ch </h2>
 
 		<div>
-			{{$data}}
+            <?php echo nl2br($data);  ?>
 		</div>
 	</body>
 </html>

@@ -2,6 +2,9 @@
 
 @section('content')
 
+<!-- Subheader -->
+@include('partials.subheader')
+
 <?php  $custom = new Custom; ?>
 
 	<div class="content">
@@ -43,11 +46,11 @@
 			 							
 			 							<!-- gallery item -->
 					                    <div class="span4 item">
-					                    	<a href="{{ url('schemas/projet/'.$projet['id'].'/delete') }}" data-action="Projet" class="deleteSchema deleteAction"></a>
+					                    	<a href="{{ url('compose/'.$projet['id'].'/delete') }}" data-action="Projet" class="deleteSchema deleteAction"></a>
 					                    	<div class="status {{ $projet['status'] }}"></div>
 					                        <div class="picframe">
 												<span class="itemColor " style="background:{{ $projet['theme']['couleur_primaire'] }};">
-												<a href="{{ url('schemas/projet/schema', array('id' => $projet['id'] ) ) }}">
+												<a href="{{ url('compose', array('id' => $projet['id'] ) ) }}">
 													@if($projet['type'] == 'app')										
 														<img src="{{ asset('images/pf2.png') }}" data-original="{{ asset('images/pf2.png') }}" alt="" />									
 													@else	
@@ -56,7 +59,7 @@
 												</a>    
 					                            </span>
 					                            <span class="itemInfos">
-					                           		<h4>{{ link_to('schemas/projet/schema/'.$projet['id'], $projet['titre']) }}</h4>    
+					                           		<h4>{{ link_to('compose/'.$projet['id'], $projet['titre']) }}</h4>
 											   		<div class="auteur">{{ $custom->limit_words($projet['description'], 10) }}</div>
 					                            </span>
 					                        </div>

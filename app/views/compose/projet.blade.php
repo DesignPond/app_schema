@@ -30,8 +30,8 @@
                         		{{ Form::select('theme_id',$themes,$projet['theme']['id'],array('id' => 'theme-edit','data-id' => $projet['id'],'data-column' => 'theme_id' )) }} 
                         		<span class="isUpdated" style="display:none;">&nbsp;<i class="icon-check-sign"></i></span>                      		
                         	@else
-                        		<span><i class="icon-tag"></i>{{ link_to('schemas/theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
-                                <span><i class="icon-tag"></i>{{ link_to('schemas/theme/'.$projet['subtheme']['id'], $projet['subtheme']['titre'] ) }}</span>
+                        		<span><i class="icon-tag"></i>{{ link_to('theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
+                                <span><i class="icon-tag"></i>{{ link_to('theme/'.$projet['subtheme']['id'], $projet['subtheme']['titre'] ) }}</span>
                         	@endif
                         	
                         </div>
@@ -53,13 +53,13 @@
                                 </div>
 				            </div>
 				            <div class="span1 text-right">
-				            	{{ link_to('schemas/projet/schema/'.$projet['id'], 'Terminer', array( 'id' => 'save' , 'class' => 'btn btn-primary save') ) }}
+				            	{{ link_to('compose/'.$projet['id'], 'Terminer', array( 'id' => 'save' , 'class' => 'btn btn-primary save') ) }}
 				             </div>
                         </div>
-                        
+
                         <div id="application" class="projet_width">
 						   	<div id="content-application"></div>
-	                        <p id="emptyProjet">Le projet est vide</p>	 
+	                        <p id="emptyProjet">Le projet est vide</p>
                         </div>
                        
                     </div>

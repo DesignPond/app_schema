@@ -2,7 +2,7 @@ define(["jquery", "backbone","models/arrow"],
 
    function($, Backbone, Arrow) 
    {
-   		var base_url = location.protocol + "//" + location.host+"/api/v1/";
+   		var base_url = location.protocol + "//" + location.host+"/api/";
 		// Arrows collection	
 		Arrows = Backbone.Collection.extend({
 				//This is our Boxes collection and holds our Boxes models

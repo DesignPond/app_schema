@@ -11,13 +11,13 @@ Route::get('logout', 'SessionController@logout');
  * Pages routes
  */
 Route::get('/', 'HomeController@index');
+Route::get('book/{id}', 'HomeController@book');
 Route::get('contact', 'HomeController@contact');
-Route::post('sendemail', 'SchemaController@sendemail');
+Route::post('sendemail', 'HomeController@sendemail');
 
 /**
  * Categories routes
  */
-
 Route::resource('categorie', 'CategorieController');
 
 /**
@@ -35,11 +35,9 @@ Route::resource('subtheme', 'SubthemeController');
 /**
  * Compose routes
  */
-
-Route::get('compose/schema/{id}', 'ComposeController@schema');
-Route::get('compose/book/{id}', 'ComposeController@book');
+Route::get('compose/{id}/delete', 'ComposeController@destroy');
 Route::get('compose/modal/{id?}', 'ComposeController@modal');
-
+Route::post('compose/update', 'ComposeController@update');
 Route::resource('compose', 'ComposeController');
 
 /**
@@ -50,10 +48,11 @@ Route::resource('user', 'UserController');
 /**
  * API routes
  */
-Route::group(array('prefix' => 'api/v1'), function()
+Route::group(array('prefix' => 'api'), function()
 {
-
-    Route::get('theme/projet/{id}', 'ThemeController@projet');
+    // Get theme for project
+    Route::get('projet/{id}', 'ComposeController@projet');
+    // Boxes and arrows
     Route::get('boxe/projet/{id}', 'BoxeController@refProject');
     Route::resource('boxe', 'BoxeController');
     Route::get('arrow/projet/{id}', 'ArrowController@refProject');

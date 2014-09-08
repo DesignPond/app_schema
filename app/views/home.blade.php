@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-	
+
+    <!-- Subheader -->
+    @include('partials.subheader')
+
 	<div id="content">
         <div class="container marge-top">
             <div class="row">
@@ -40,11 +43,11 @@
 				                <span class="month">{{ $month }}</span>
 				            </div>
 				            <div class="txt">
-				               		<h5>{{ link_to('schemas/projet/schema/'.$projet['id'], $projet['titre']) }}</h5>
+				               		<h5>{{ link_to('book/'.$projet['id'], $projet['titre']) }}</h5>
 				                <span class="info">
 				                	<strong>{{ $projet['theme']['titre'] }}</strong> | 
-				                		{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }} | 
-					               		{{ link_to('schemas/projet/schema/'.$projet['id'], 'Voir le schéma') }}
+				                		{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}
+					               		{{ link_to('book/'.$projet['id'], 'Voir le schéma') }}
 				                </span>
 				            </div>
 				        </li>
@@ -78,7 +81,7 @@
 
                                             <li>
                                                 <span class="post-content">
-                                                    {{ link_to('schemas/projet/schema/'.$user_projet['id'], $user_projet['titre'] ) }}
+                                                    {{ link_to('book/'.$user_projet['id'], $user_projet['titre'] ) }}
                                                 </span>
                                                 <span class="post-date">{{ $projetdate->format('d/m/Y'); }}</span>
                                             </li>
@@ -87,7 +90,7 @@
 										@endif 
 										
                                         </ul>
-                                        <p>{{ link_to('schemas/user/'. Auth::user()->id , 'Tous vos projets', array( 'class' => 'btn btn-mini btn-primary') ) }}</p>
+                                        <p>{{ link_to('user/'. Auth::user()->id , 'Tous vos projets', array( 'class' => 'btn btn-mini btn-primary') ) }}</p>
                                     </div>
 
                                     <div class="tab-small-post">

@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-			
+
+    <!-- Subheader -->
+    @include('partials.subheader')
+
 	<div id="content">
 	    <div class="container">
 
@@ -41,7 +44,7 @@
                                                 <?php $link = '#'; ?>
                                             @else
                                                 <?php $drop = null; ?>
-                                                <?php $link = ''; //url('schemas/projet/book/'.$liste[$subtheme['id']][0]['id']); ?>
+                                                <?php $link = url('book/'.$liste[$subtheme['id']][0]['id']); ?>
                                             @endif
                                             <a style="background:<?php echo $theme['couleur_secondaire']; ?>;"href="{{ $link }}">
                                                 <span><?php echo $subtheme['titre']; ?></span>
@@ -49,8 +52,8 @@
                                             @if( $drop )
                                             <ul class="dropdown" style="background:<?php echo $theme['couleur_primaire']; ?>;">
                                                 @foreach($liste[$subtheme['id']] as $projet)
-                                                    <?php $type = ( $projet['type'] == 'app' ? 'schema' : 'book'); ?>
-                                                    <li><a href="{{ url('schemas/projet/'.$type.'/'.$projet['id']) }}">{{ $projet['titre'] }}</a></li>
+                                                    <?php $type = ( $projet['type'] == 'app' ? 'compose' : 'book'); ?>
+                                                    <li><a href="{{ url($type.'/'.$projet['id']) }}">{{ $projet['titre'] }}</a></li>
                                                 @endforeach
                                             </ul>
                                             @endif
