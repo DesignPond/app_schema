@@ -205,10 +205,10 @@ class ComposeController extends BaseController {
     {
         if( $this->projet->delete($id) )
         {
-            return Redirect::to('user/'.Auth::user()->id)->with( array('status' => 'success' , 'message' => 'Le projet a été supprimé') );
+            return Redirect::back()->with( array('status' => 'success' , 'message' => 'Le projet a été supprimé') );
         }
 
-        return Redirect::to('user/'.Auth::user()->id)->with( array('status' => 'error' , 'message' => 'Problème avec la suppression') );
+        return Redirect::back()->with( array('status' => 'error' , 'message' => 'Problème avec la suppression') );
     }
 
 }

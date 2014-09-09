@@ -35,10 +35,10 @@ class DbProjet implements ProjetInterface {
 
         if($status)
         {
-            $projets = $projets->where('status', '=', $status);
+            $projets = $projets->whereIn('status', $status);
         }
 
-        return $projets->orderBy('id', 'DESC')->get()->toArray();
+        return $projets->orderBy('theme_id', 'ASC')->get()->toArray();
     }
 	
 	public function projectsByUser($user , $nbr = NULL){
@@ -77,6 +77,19 @@ class DbProjet implements ProjetInterface {
         }
 
         return array( $themes, $sorting);
+    }
+
+    public function arrangeByStatus($projets){
+
+        if(!empty($projets))
+        {
+            foreach($projets as $projet)
+            {
+                $sorting[$projet['status']][] = $projet;
+            }
+        }
+
+        return $sorting;
     }
 
 	/*

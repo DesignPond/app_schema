@@ -17,12 +17,18 @@
                     <li>Email</li>
                 </ul>
             </div>
-            <div class="span11 widget">
+            <div class="span9 widget">
                 <ul>
                     <li>{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</li>
                     <li><a href="mailto:{{ Auth::user()->email }}">{{ Auth::user()->email }}</a></li>
                 </ul>
             </div>
+             <div class="span2">
+                 @if(Auth::user()->hasRole('validate'))
+                    <a href="{{ url('manage') }}" class="btn btn-primary">Gérer les projets</a>
+                 @endif
+             </div>
+
         </div>
 
     </div>

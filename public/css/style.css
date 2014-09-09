@@ -2400,7 +2400,7 @@ i.black {
     line-height: 16px;
     position: relative;
     width: 31%;
-    margin: 0 1% 10px 0;
+    margin: 0 0 10px 0;
     float: left;
     padding: 10px;
 }
@@ -2422,7 +2422,7 @@ i.black {
 
     .gallery .item .itemColor a{
         display: block;
-        padding: 10px 3px;
+        padding: 15px 3px;
     }
 
 
@@ -2508,9 +2508,17 @@ i.black {
 
 .user-gallery .itemInfos h4{
 	margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 2px;
     font-size: 13px;
+    line-height: 14px;
+}
+
+.user-gallery .itemInfos p{
+    font-size: 11px;
     line-height: 15px;
+    margin-bottom: 0;
+    color: #000;
+    font-weight: bold;
 }
 
 .user-gallery h4{
@@ -2558,7 +2566,7 @@ i.black {
 
 .picframe{
     display: block;
-    min-height: 40px;
+    min-height: 50px;
     width: 100%;
 }
 

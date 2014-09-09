@@ -82,20 +82,15 @@ class UserController extends BaseController {
 
     public function manage(){
 
-        $status  = Input::get('status');
-        $status  = ($status ? $status : null);
-
-        $projets = $this->projet->getByStatus($status);
-        list($themes,$sorting) = $this->projet->sortProjectByTheme($projets);
+        $projets = $this->projet->getByStatus(array('submitted', 'revision'));
+        $projets = $this->projet->arrangeByStatus($projets);
         $user    = $this->user->find(Auth::user()->id);
 
         $data = array(
             'titre'     => 'Schémas',
             'soustitre' => 'Gestion',
             'user'      => $user,
-            'projets'   => $projets,
-            'themes'    => $themes,
-            'sorting'   => $sorting
+            'projets'   => $projets
         );
 
         return View::make('users.manage')->with( $data );
@@ -159,12 +154,12 @@ class UserController extends BaseController {
 
         $faker = Faker::create();
 
-        foreach(range(1, 20) as $index)
+        foreach(range(1, 10) as $index)
         {
             \Schema\Compose\Entities\Projet::create([
                 'titre'       => $faker->text(40),
                 'description' => $faker->text(200),
-                'user_id'     => 1,
+                'user_id'     => 2,
                 'categorie_id'=> 1,
                 'theme_id'    => $faker->numberBetween(1,13),
                 'type'        => 'app',
