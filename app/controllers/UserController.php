@@ -2,6 +2,7 @@
 
 use  Schema\User\Repo\UserInterface;
 use  Schema\Compose\Repo\ProjetInterface;
+use Faker\Factory as Faker;
 
 class UserController extends BaseController {
 
@@ -14,7 +15,10 @@ class UserController extends BaseController {
 		$this->user = $user;
 		
 		$this->projet = $projet;
-		
+
+        $this->beforeFilter('auth', array('only' => array('show', 'manage')));
+        $this->beforeFilter('admin', array('only' => array('manage')));
+
 	}
 	
 	/**
@@ -54,28 +58,15 @@ class UserController extends BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{ 
-		if( !Auth::check() )
-		{
-			return Redirect::to('schemas'); 
-		}	
-		            
+	{
+
+        if( Auth::user()->id != $id)
+            return Redirect::to('/');
+
         $user    = $this->user->find($id);
-	    $projets = $this->projet->projectsByUser($id);  
-	    $themes  = array();
-	    $sorting = array();
-	    
-	    if(!empty($projets)){
-		    foreach($projets as $projet)
-		    {
-		    	if( isset($projet['theme']['titre']) )
-		    	{
-			    	$themes[$projet['theme']['id']] = $projet['theme']['titre'];
-			    	
-			    	$sorting[$projet['categorie']['titre']][$projet['theme']['titre']][] = $projet;
-		    	}
-		    }
-	    } 
+	    $projets = $this->projet->projectsByUser($id);
+
+        list($themes,$sorting) = $this->projet->sortProjectByTheme($projets);
         
         $data = array(
         	'titre'     => 'Profil',
@@ -88,6 +79,27 @@ class UserController extends BaseController {
 		
 	    return View::make('users.home')->with( $data );
 	}
+
+    public function manage(){
+
+        $status  = Input::get('status');
+        $status  = ($status ? $status : null);
+
+        $projets = $this->projet->getByStatus($status);
+        list($themes,$sorting) = $this->projet->sortProjectByTheme($projets);
+        $user    = $this->user->find(Auth::user()->id);
+
+        $data = array(
+            'titre'     => 'Schémas',
+            'soustitre' => 'Gestion',
+            'user'      => $user,
+            'projets'   => $projets,
+            'themes'    => $themes,
+            'sorting'   => $sorting
+        );
+
+        return View::make('users.manage')->with( $data );
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -121,5 +133,54 @@ class UserController extends BaseController {
 	{
 		//
 	}
+
+    function getIdInArray($array, $term)
+    {
+        foreach ($array as $key => $value) {
+            if ($value == $term) {
+                return $key;
+            }
+        }
+
+        throw new UnexpectedValueException;
+    }
+    /**
+     * Roles for user
+     *
+     * @return Response
+     */
+    public function roles()
+    {
+        $user = $this->user->find(1);
+
+        if ( $user->hasRole('assign')  ){
+        }
+        //$user->makeEmployee('admin');
+
+        $faker = Faker::create();
+
+        foreach(range(1, 20) as $index)
+        {
+            \Schema\Compose\Entities\Projet::create([
+                'titre'       => $faker->text(40),
+                'description' => $faker->text(200),
+                'user_id'     => 1,
+                'categorie_id'=> 1,
+                'theme_id'    => $faker->numberBetween(1,13),
+                'type'        => 'app',
+                'slug'        => $faker->word,
+                'status'      => $faker->randomElement(array ('actif','pending','submitted','revision')),
+                'subtheme_id' => $faker->numberBetween(1,69)
+            ]);
+        }
+
+        $data = array(
+            'titre'     => 'Profil',
+            'soustitre' => 'Roles',
+            'roles'     => $user
+        );
+
+        return View::make('users.roles')->with( $data );
+    }
 
 }

@@ -20,7 +20,7 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-
+        $user_projets = array();
         $projets  = $this->projet->getLast(3);
 
         if(Auth::check())

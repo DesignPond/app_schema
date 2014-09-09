@@ -20,8 +20,9 @@
     
     <!-- Javascript Files
     ================================================== -->
-   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-   	<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+<!--   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>-->
+    <script src="<?php echo asset('js/jquery.min.js');?>"></script>
+<!--   	<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>-->
    	<script src="<?php echo asset('js/jquery-ui.js');?>"></script>
     <script src="<?php echo asset('js/bootstrap.min.js');?>"></script>
     <script src="<?php echo asset('fancybox/jquery.fancybox.js');?>"></script>

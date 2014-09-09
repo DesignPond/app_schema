@@ -18,10 +18,8 @@ class DbUser implements UserInterface {
 	
 	public function find($id){
 
-		return $this->user->findOrFail($id);
+		return $this->user->with(array('roles'))->findOrFail($id);
 				
 	}
-	
-	
 }
 

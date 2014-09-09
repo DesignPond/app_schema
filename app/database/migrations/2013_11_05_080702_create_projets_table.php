@@ -22,7 +22,7 @@ class CreateProjetsTable extends Migration {
 			$table->integer('subtheme_id');
 			$table->enum('type', array('app', 'pdf'));
 			$table->string('slug');
-			$table->enum('status', array('actif', 'brouillon'))->default('brouillon');
+			$table->enum('status', array('actif','pending','submitted','revision'))->default('pending');
 			$table->timestamps();
 		});
 	}

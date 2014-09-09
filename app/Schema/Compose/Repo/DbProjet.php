@@ -28,17 +28,56 @@ class DbProjet implements ProjetInterface {
 	
 		return $this->projet->whereIn('id', $array )->orderBy('id', 'DESC')->get();
 	}
+
+    public function getByStatus($status = null){
+
+        $projets = $this->projet->with( array('user','categorie','theme') )->where('type','=','app');
+
+        if($status)
+        {
+            $projets = $projets->where('status', '=', $status);
+        }
+
+        return $projets->orderBy('id', 'DESC')->get()->toArray();
+    }
 	
 	public function projectsByUser($user , $nbr = NULL){
-		
+
+        $projets = $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme') )->orderBy('id', 'DESC');
+
 		if($nbr)
 		{
-			return $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme') )->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
+            $projets = $projets->take($nbr);
 		}
 		
-		return $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme') )->orderBy('id', 'DESC')->get()->toArray();
+		return $projets->get()->toArray();
 		
 	}
+
+    /**
+     * Sort project for user by theme
+     *
+     * @return array
+     */
+    public function sortProjectByTheme($projets)
+    {
+        $themes  = array();
+        $sorting = array();
+
+        if(!empty($projets))
+        {
+            foreach($projets as $projet)
+            {
+                if( isset($projet['theme']['titre']) )
+                {
+                    $themes[$projet['theme']['id']] = $projet['theme']['titre'];
+                    $sorting[$projet['categorie']['titre']][$projet['theme']['titre']][] = $projet;
+                }
+            }
+        }
+
+        return array( $themes, $sorting);
+    }
 
 	/*
 	 * Applications functions
@@ -118,14 +157,7 @@ class DbProjet implements ProjetInterface {
 
 		// Create the article
 		$projet = $this->projet->create(array(
-			'titre'       => $data['titre'],
-			'description' => $data['description'],
-			'user_id'     => $data['user_id'],
-			'categorie_id'=> $data['categorie_id'],
-			'theme_id'    => $data['theme_id'],
-			'type'        => $data['type'],
-			'slug'        => $custom->makeSlug($data['titre']),
-			'subtheme_id' => $data['subtheme_id']
+
 		));
 		
 		if( ! $projet )

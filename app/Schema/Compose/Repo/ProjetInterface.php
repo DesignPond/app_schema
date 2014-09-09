@@ -12,6 +12,7 @@ interface ProjetInterface {
 	
 	public function projectsByTheme($id);
 	public function projectsByUser($user,$nbr);
+    public function sortProjectByTheme($projets);
 	public function appByProjet($id);
 	
 	public function isUsers($projet,$user);

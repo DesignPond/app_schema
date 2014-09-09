@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * Session routes
 */
@@ -43,6 +45,9 @@ Route::resource('compose', 'ComposeController');
 /**
  * User routes
  */
+
+Route::get('manage', 'UserController@manage');
+Route::post('manage', 'UserController@manage');
 Route::resource('user', 'UserController');
 
 /**
@@ -59,3 +64,8 @@ Route::group(array('prefix' => 'api'), function()
     Route::resource('arrow', 'ArrowController');
 
 });
+
+/**
+ * TEST routes
+ */
+Route::get('roles', 'UserController@roles');
