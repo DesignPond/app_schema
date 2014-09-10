@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <h3>Projets soumis pour approbation</h3>
+                <h3>Projets actifs</h3>
             </div>
         </div>
         <div class="row">
@@ -33,17 +33,9 @@
 
                                     {{ Form::open(array('method' => 'POST','url' => array('compose/status')))}}
                                         <input type="hidden" value="{{ $projet['id'] }}" name="id">
-                                        <input type="hidden" value="actif" name="status">
-                                        <button class="btn btn-mini option-approuve">Approuver</button>
+                                        <input type="hidden" value="revision" name="status">
+                                        <button class="btn btn-mini option-assign">A réviser</button>
                                     {{ Form::close() }}
-
-                                    @if($status == 'submitted')
-                                        {{ Form::open(array('method' => 'POST','url' => array('compose/status')))}}
-                                            <input type="hidden" value="{{ $projet['id'] }}" name="id">
-                                            <input type="hidden" value="revision" name="status">
-                                            <button class="btn btn-mini option-assign">A reviser</button>
-                                        {{ Form::close() }}
-                                    @endif
 
                                     <a href="{{ url('compose/'.$projet['id'].'/delete') }}"
                                        data-action="Projet"

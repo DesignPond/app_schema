@@ -49,6 +49,8 @@ Route::resource('compose', 'ComposeController');
  */
 
 Route::get('manage', 'UserController@manage');
+Route::get('actifs', 'UserController@actifs');
+Route::get('revision', 'UserController@revision');
 Route::resource('user', 'UserController');
 
 /**

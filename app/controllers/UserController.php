@@ -17,7 +17,7 @@ class UserController extends BaseController {
 		$this->projet = $projet;
 
         $this->beforeFilter('auth', array('only' => array('show', 'manage')));
-        $this->beforeFilter('admin', array('only' => array('manage')));
+        $this->beforeFilter('admin', array('only' => array('manage','actifs','revision')));
 
 	}
 	
@@ -82,7 +82,7 @@ class UserController extends BaseController {
 
     public function manage(){
 
-        $projets = $this->projet->getByStatus(array('revision','submitted'));
+        $projets = $this->projet->getByStatus(array('submitted'));
         $projets = $this->projet->arrangeByStatus($projets);
         $user    = $this->user->find(Auth::user()->id);
 
@@ -95,6 +95,40 @@ class UserController extends BaseController {
 
         return View::make('users.manage')->with( $data );
     }
+
+    public function actifs(){
+
+        $projets = $this->projet->getByStatus(array('actif'));
+        $projets = $this->projet->arrangeByStatus($projets);
+        $user    = $this->user->find(Auth::user()->id);
+
+        $data = array(
+            'titre'     => 'Schémas',
+            'soustitre' => 'Gestion',
+            'user'      => $user,
+            'projets'   => $projets
+        );
+
+        return View::make('users.actifs')->with( $data );
+    }
+
+    public function revision(){
+
+        $projets = $this->projet->getByStatus(array('revision'));
+        $projets = $this->projet->arrangeByStatus($projets);
+        $user    = $this->user->find(Auth::user()->id);
+
+        $data = array(
+            'titre'     => 'Schémas',
+            'soustitre' => 'Gestion',
+            'user'      => $user,
+            'projets'   => $projets
+        );
+
+        return View::make('users.revision')->with( $data );
+    }
+
+
 
 	/**
 	 * Show the form for editing the specified resource.

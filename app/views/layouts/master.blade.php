@@ -85,7 +85,18 @@
 			                    @if ( Auth::check() )
 			                    	
 									<li><a class="<?php echo (Request::is( 'compose/*') ? 'active' : ''); ?>" href="{{ url('compose/create') }}">Composer un schéma</a></li>
-									<li> {{ link_to('user/'.Auth::user()->id, 'Votre profil' , array('class' => Request::is( 'user/*') ? 'active' : '')) }}</li>
+                                    @if( Auth::user()->hasRole('validate') )
+                                        <li><a href="#">Gestion</a>
+                                            <ul>
+                                                <li>{{ link_to('user/'.Auth::user()->id, 'Votre profil' , array('class' => Request::is( 'user/*') ? 'active' : '')) }}
+                                                <li>{{ link_to('manage', 'A approuver', array('class' => '')  ) }}</li>
+                                                <li>{{ link_to('revision', 'En révision', array('class' => '')  ) }}</li>
+                                                <li>{{ link_to('actifs', 'Actifs', array('class' => '')  ) }}</li>
+                                            </ul>
+                                         </li>
+                                    @else
+                                        <li>{{ link_to('user/'.Auth::user()->id, 'Votre profil' , array('class' => Request::is( 'user/*') ? 'active' : '')) }}</li>
+                                    @endif
 
                                 @endif
 
