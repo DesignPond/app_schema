@@ -14,6 +14,7 @@
 
                 <div class="post-content no-space-left">
                     <div class="post-text">
+                        @if( ($isEditable == 'admin') || ($isEditable == 'editor') )
                         <h3 class="text-isEditable">
                             <span data-column="titre" data-id="{{ $projet['id'] }}" class="edit_content">{{ $projet['titre'] }}</span>
                             <i class="icon-edit icon-isEditable"></i>
@@ -22,17 +23,21 @@
                             <span data-column="description" data-id="{{ $projet['id'] }}" class="edit_content">{{ $projet['description'] }}</span>
                             <i class="icon-edit icon-isEditable"></i>
                         </p>
+                        @else
+                            <h3>{{ $projet['titre'] }}</h3>
+                            <p>{{ $projet['description'] }}</p>
+                        @endif
                     </div>
                 </div>
 
                 <div class="post-meta no-space-left">
 
-                    @if($isEditable)
-                    {{ Form::select('theme_id',$themes,$projet['theme']['id'],array('id' => 'theme-edit','data-id' => $projet['id'],'data-column' => 'theme_id' )) }}
-                    <span class="isUpdated" style="display:none;">&nbsp;<i class="icon-check-sign"></i></span>
+                    @if( ($isEditable == 'admin') || ($isEditable == 'editor') )
+                        {{ Form::select('theme_id',$themes,$projet['theme']['id'], array('id' => 'theme-edit','data-id' => $projet['id'],'data-column' => 'theme_id' )) }}
+                        <span class="isUpdated" style="display:none;">&nbsp;<i class="icon-check-sign"></i></span>
                     @else
-                    <span><i class="icon-tag"></i>{{ link_to('theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
-                    <span><i class="icon-tag"></i>{{ link_to('theme/'.$projet['subtheme']['id'], $projet['subtheme']['titre'] ) }}</span>
+                        <span><i class="icon-tag"></i>{{ link_to('theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
+                        <span><i class="icon-tag"></i>{{ link_to('theme/'.$projet['subtheme']['id'], $projet['subtheme']['titre'] ) }}</span>
                     @endif
 
                 </div>
@@ -49,9 +54,11 @@
                         <button data-position="up"    class="btn arrow"><span class="up"></span>Haut</button>
                     </div>
                     <div class="span1 text-right">
+                        @if( ($isEditable == 'admin') )
                         <div class="toggle-soft">
                             <div id="toggle-btn" data-status="{{ $projet['status'] }}" data-id="{{ $projet['id'] }}" class="toggle on"></div>
                         </div>
+                        @endif
                     </div>
                     <div class="span1 text-right">
                         {{ link_to('compose/'.$projet['id'], 'Terminer', array( 'id' => 'save' , 'class' => 'btn btn-primary save') ) }}

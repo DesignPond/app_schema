@@ -89,7 +89,6 @@ Route::filter('csrf', function()
 	}
 });
 
-
 Route::filter('admin', function()
 {
     if (Auth::check()){

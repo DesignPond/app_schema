@@ -119,16 +119,18 @@ class ComposeController extends BaseController {
     public function show($id)
     {
         $projet = $this->projet->appByProjet($id);
-        $height = $this->projet->heightProjet($id);
 
-        $isEditable = FALSE;
-
-        if( Auth::check() )
+        // If the project is not actif and we are not authenticated redirect to main page
+        if( $projet['status'] != 'actif' && !Auth::check() )
         {
-            $isEditable = $this->projet->isUsers($id,Auth::user()->id);
+            return Redirect::to('/');
         }
 
-        $themes  = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
+        // Is the project visible for everyone (actif?) or are we the editor, user or admin
+        $isEditable = $this->projet->isVisible($id);
+
+        $height = $this->projet->heightProjet($id);
+        $themes = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
 
         return View::make('compose.index')->with( array('projet' => $projet , 'height' => $height ,'isEditable' => $isEditable, 'themes' => $themes));
 
@@ -139,12 +141,7 @@ class ComposeController extends BaseController {
         $projet = $this->projet->find($id)->toArray();
         $list   = $this->projet->getAllList();
 
-        $isEditable = null;
-
-        if( Auth::check() )
-        {
-            $isEditable = $this->projet->isUsers($id,Auth::user()->id);
-        }
+        $isEditable = $this->projet->isVisible($id);
 
         $themes  = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
 

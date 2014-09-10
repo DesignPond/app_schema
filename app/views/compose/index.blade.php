@@ -15,29 +15,15 @@
                         <div class="post-content no-space-left">
                             <div class="post-text">
 
-                                @if($isEditable && ($projet['type'] != 'app')) 
-	                                <h3 class="text-isEditable">
-	                                	<span data-column="titre" data-id="{{ $projet['id'] }}" class="edit_content">{{ $projet['titre'] }}</span>
-	                                	<i class="icon-edit icon-isEditable"></i>
-	                                </h3>
-	                                @if( !empty($projet['description']) )
-	                                <p class="text-isEditable">
-	                                	<span data-column="description" data-id="{{ $projet['id'] }}" class="edit_content">{{ $projet['description'] }}</span>
-		                                <i class="icon-edit icon-isEditable"></i>
-	                                </p>
-	                                @endif
-                                @else
-                               		<h3>{{ $projet['titre'] }}</h3> {{ $projet['description'] }}
-                                @endif
-                                
-                                @if($isEditable && ($projet['type'] == 'app'))
-                                {{ link_to('compose/'.$projet['id'].'/edit#projet/'.$projet['id'],'&Eacute;diter le schéma',array('class' => 'btn btn-small btn-primary isEditable')) }}
+                               	<h3>{{ $projet['titre'] }}</h3>
+                                <p>{{ $projet['description'] }}</p>
+
+                                @if( (($isEditable == 'admin') || ($isEditable == 'editor')) && ($projet['type'] == 'app') )
+                                <p>{{ link_to('compose/'.$projet['id'].'/edit#projet/'.$projet['id'],'&Eacute;diter le schéma',array('class' => 'btn btn-small btn-info isEditable')) }}</p>
                                 @endif
  
                             </div>
                         </div>
-
-
 
 						<div id="projet" style="height:{{ $height }}px;" class="projet_width">
 						   	<div id="content-projet">

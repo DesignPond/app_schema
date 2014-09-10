@@ -1425,15 +1425,7 @@ footer {
 }
 
 .post-text{
-	position: relative;
 }
-
-.isEditable{
-	position: absolute;
-	bottom: -20px;
-	right: 0;
-}
-
 
 .uploadFile{
 	border: none;

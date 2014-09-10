@@ -107,6 +107,26 @@ class DbProjet implements ProjetInterface {
 		
 		return FALSE;		
 	}
+
+    public function isVisible($id){
+
+        // Is the user an admin or the editor
+        if (\Auth::check())
+        {
+            if( \Auth::user()->hasRole('validate') )
+            {
+               return 'admin';
+            }
+            else if( $this->isUsers( $id , \Auth::user()->id) )
+            {
+               return 'editor';
+            }
+            else
+            {
+               return 'user';
+            }
+        }
+    }
 	
 	public function appByProjet($id){
 	
@@ -161,7 +181,7 @@ class DbProjet implements ProjetInterface {
 		
 	public function find($id){
 		
-		return $this->projet->with( array('user','theme',) )->findOrFail($id);			
+		return $this->projet->with( array('user','theme','subtheme') )->findOrFail($id);
 	}
 	
 	public function create(array $data){

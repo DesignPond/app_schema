@@ -19,6 +19,7 @@ interface ProjetInterface {
 	public function appByProjet($id);
 	
 	public function isUsers($projet,$user);
+    public function isVisible($id);
 	
 	public function heightProjet($id);
 	
