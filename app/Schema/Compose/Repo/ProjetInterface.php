@@ -20,6 +20,7 @@ interface ProjetInterface {
 	
 	public function isUsers($projet,$user);
     public function isVisible($id);
+    public function status($id,$status);
 	
 	public function heightProjet($id);
 	

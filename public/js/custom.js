@@ -178,7 +178,7 @@ jQuery(document).ready(function() {
 
     }
 
-    var status = jQuery('#toggle-btn').data('status');
+   /* var status = jQuery('#toggle-btn').data('status');
 
     if (status === 'actif')
     {
@@ -224,7 +224,7 @@ jQuery(document).ready(function() {
         });
 
 
-    });
+    });*/
 
     // hover delete schemas in profil
     jQuery(".gallery .item").hover(
@@ -247,6 +247,8 @@ jQuery(document).ready(function() {
         }
         return false;
     });
+
+    jQuery('.popup').tooltip();
 
     // --------------------------------------------------
     // gallery hover
@@ -336,4 +338,3 @@ jQuery(document).ready(function() {
 
 
 });
-

@@ -25,7 +25,7 @@
             </div>
              <div class="span2">
                  @if(Auth::user()->hasRole('validate'))
-                    <a href="{{ url('manage') }}" class="btn btn-primary">Gérer les projets</a>
+                    <a href="{{ url('manage') }}" class="btn btn-info">Gérer les projets</a>
                  @endif
              </div>
 
@@ -41,8 +41,20 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="span12">
+                    <div class="span4">
                         <h3>{{ key($sorting) }}</h3>
+                    </div>
+                    <div class="span8">
+                        <dl class="icones pull-right">
+                            <dt><img src="{{ asset('images/icon/actif.png') }}" alt="icone" /></dt>
+                            <dd>Actif</dd>
+                            <dt><img src="{{ asset('images/icon/pending.png') }}" alt="icone" /></dt>
+                            <dd>Brouillon</dd>
+                            <dt><img src="{{ asset('images/icon/submitted.png') }}" alt="icone" /></dt>
+                            <dd class="big">Soumis pour approbation</dd>
+                            <dt><img src="{{ asset('images/icon/revision.png') }}" alt="icone" /></dt>
+                            <dd>En révision</dd>
+                        </dl>
                     </div>
                 </div>
 
@@ -58,8 +70,8 @@
                             @foreach($projets as $projet)
                                 <!-- gallery item -->
                                 <div class="item">
-                                    <div class="status {{ $projet['status'] }}"></div>
                                     <div class="picframe" style="background:{{ $projet['theme']['couleur_secondaire'] }};">
+                                        <a href="#" class="status {{ $projet['status'] }}"></a>
                                         <span class="itemColor" style="background:{{ $projet['theme']['couleur_primaire'] }};">
                                             <a href="{{ url('compose', array('id' => $projet['id'] ) ) }}">
                                                 <img src="{{ asset('images/icon_projet.png') }}" alt="icone" />
@@ -68,11 +80,21 @@
                                         <span class="itemInfos"><h4>{{ link_to('compose/'.$projet['id'], $projet['titre']) }}</h4></span>
                                     </div>
                                     <div class="optionsProjet">
-                                        <a href="#" class="btn btn-mini option-approuve">Approuver</a>
-                                        <a href="#" class="btn btn-mini option-assign">Assigner</a>
+
+                                        @if($projet['status'] == 'pending' || $projet['status'] == 'revision')
+
+                                            {{ Form::open(array('method' => 'POST','url' => array('compose/status')))}}
+                                                <input type="hidden" value="{{ $projet['id'] }}" name="id">
+                                                <input type="hidden" value="submitted" name="status">
+                                                <button class="btn btn-mini option-assign">Soumettre</button>
+                                            {{ Form::close() }}
+
+                                        @endif
+
                                         <a href="{{ url('compose/'.$projet['id'].'/delete') }}" data-action="Projet" class="deleteAction btn btn-mini option-delete btn-last">
                                             Supprimer
                                         </a>
+
                                     </div>
                                 </div>
                                 <!-- close gallery item -->

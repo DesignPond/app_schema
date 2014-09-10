@@ -40,6 +40,8 @@ Route::resource('subtheme', 'SubthemeController');
 Route::get('compose/{id}/delete', 'ComposeController@destroy');
 Route::get('compose/modal/{id?}', 'ComposeController@modal');
 Route::post('compose/update', 'ComposeController@update');
+Route::post('compose/status', 'ComposeController@status');
+Route::post('compose/assign', 'ComposeController@assign');
 Route::resource('compose', 'ComposeController');
 
 /**

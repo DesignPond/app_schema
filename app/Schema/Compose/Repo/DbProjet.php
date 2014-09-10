@@ -38,7 +38,7 @@ class DbProjet implements ProjetInterface {
             $projets = $projets->whereIn('status', $status);
         }
 
-        return $projets->orderBy('theme_id', 'ASC')->get()->toArray();
+        return $projets->orderBy('status', 'ASC')->orderBy('theme_id', 'ASC')->get()->toArray();
     }
 	
 	public function projectsByUser($user , $nbr = NULL){
@@ -190,7 +190,14 @@ class DbProjet implements ProjetInterface {
 
 		// Create the article
 		$projet = $this->projet->create(array(
-
+            'titre'       => $data['titre'],
+            'description' => $data['description'],
+            'user_id'     => $data['user_id'],
+            'categorie_id'=> $data['categorie_id'],
+            'theme_id'    => $data['theme_id'],
+            'type'        => $data['type'],
+            'slug'        => $custom->makeSlug($data['titre']),
+            'subtheme_id' => $data['subtheme_id']
 		));
 		
 		if( ! $projet )
@@ -227,6 +234,21 @@ class DbProjet implements ProjetInterface {
 		
 		return $projet;
 	}
+
+    public function status($id,$status){
+
+        $projet = $this->projet->find($id);
+
+        if( ! $projet )
+        {
+            return false;
+        }
+
+        $projet->status = $status;
+        $projet->save();
+
+        return $projet;
+    }
 	
 	public function delete($id){
 	

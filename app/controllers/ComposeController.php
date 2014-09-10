@@ -176,6 +176,25 @@ class ComposeController extends BaseController {
     }
 
     /**
+     * Update the status.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function status()
+    {
+        $id     = Input::get('id');
+        $status = Input::get('status');
+
+        $this->projet->status($id,$status);
+
+        $message = ( $status == 'actif' ? 'activé' : 'envoyé en révision' );
+
+        return Redirect::back()->with(array('status' => 'success' , 'message' => 'Le projet à été '.$message) );
+
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @return Response

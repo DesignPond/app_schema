@@ -53,15 +53,8 @@
                         <button data-position="right" class="btn arrow"><span class="right"></span>Droite</button>
                         <button data-position="up"    class="btn arrow"><span class="up"></span>Haut</button>
                     </div>
-                    <div class="span1 text-right">
-                        @if( ($isEditable == 'admin') )
-                        <div class="toggle-soft">
-                            <div id="toggle-btn" data-status="{{ $projet['status'] }}" data-id="{{ $projet['id'] }}" class="toggle on"></div>
-                        </div>
-                        @endif
-                    </div>
-                    <div class="span1 text-right">
-                        {{ link_to('compose/'.$projet['id'], 'Terminer', array( 'id' => 'save' , 'class' => 'btn btn-primary save') ) }}
+                    <div class="span2 text-right">
+                        {{ link_to('compose/'.$projet['id'], 'Terminer', array( 'id' => 'save' , 'class' => 'btn btn-warning save') ) }}
                     </div>
                 </div>
 

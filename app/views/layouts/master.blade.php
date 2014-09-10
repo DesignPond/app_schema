@@ -11,7 +11,7 @@
     <!-- CSS Files
     ================================================== -->
     <link rel="stylesheet" href="<?php echo asset('css/main.css');?>" type="text/css" id="main-css">
-    <link rel="stylesheet" href="<?php echo asset('css/smoothness/jquery-ui-1.10.3.custom.css'); ?>" type="text/css" media="screen" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="<?php echo asset('css/jquery.contextMenu.css'); ?>">
     <link rel="stylesheet" href="<?php echo asset('fancybox/jquery.fancybox.css'); ?>">
     <link rel="stylesheet" href="<?php echo asset('js/vendor/redactor/redactor.css'); ?>">
@@ -20,10 +20,9 @@
     
     <!-- Javascript Files
     ================================================== -->
-<!--   	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>-->
-    <script src="<?php echo asset('js/jquery.min.js');?>"></script>
-<!--   	<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>-->
-   	<script src="<?php echo asset('js/jquery-ui.js');?>"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     <script src="<?php echo asset('js/bootstrap.min.js');?>"></script>
     <script src="<?php echo asset('fancybox/jquery.fancybox.js');?>"></script>
     <script src="<?php echo asset('js/jquery.simple-color.js');?>"></script>

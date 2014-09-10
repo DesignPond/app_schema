@@ -63,18 +63,18 @@ class UserController extends BaseController {
         if( Auth::user()->id != $id)
             return Redirect::to('/');
 
-        $user    = $this->user->find($id);
-	    $projets = $this->projet->projectsByUser($id);
+        $user       = $this->user->find($id);
+	    $projets    = $this->projet->projectsByUser($id);
 
         list($themes,$sorting) = $this->projet->sortProjectByTheme($projets);
         
         $data = array(
-        	'titre'     => 'Profil',
-			'soustitre' => 'Vos informations et schémas',
-			'user'      => $user,
-			'projets'   => $projets,
-			'themes'    => $themes,
-			'sorting'   => $sorting
+        	'titre'      => 'Profil',
+			'soustitre'  => 'Vos informations et schémas',
+			'user'       => $user,
+			'projets'    => $projets,
+			'themes'     => $themes,
+			'sorting'    => $sorting
 		);
 		
 	    return View::make('users.home')->with( $data );
@@ -82,7 +82,7 @@ class UserController extends BaseController {
 
     public function manage(){
 
-        $projets = $this->projet->getByStatus(array('submitted', 'revision'));
+        $projets = $this->projet->getByStatus(array('revision','submitted'));
         $projets = $this->projet->arrangeByStatus($projets);
         $user    = $this->user->find(Auth::user()->id);
 
@@ -151,7 +151,7 @@ class UserController extends BaseController {
         if ( $user->hasRole('assign')  ){
         }
         //$user->makeEmployee('admin');
-
+/*
         $faker = Faker::create();
 
         foreach(range(1, 10) as $index)
@@ -167,7 +167,7 @@ class UserController extends BaseController {
                 'status'      => $faker->randomElement(array ('actif','pending','submitted','revision')),
                 'subtheme_id' => $faker->numberBetween(1,69)
             ]);
-        }
+        }*/
 
         $data = array(
             'titre'     => 'Profil',
