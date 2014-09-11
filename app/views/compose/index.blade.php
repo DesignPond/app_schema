@@ -13,16 +13,17 @@
                     <div class="span12">
 
                         <div class="post-content no-space-left">
+                            @if( (($isEditable == 'admin') || ($isEditable == 'editor')) && ($projet['type'] == 'app') )
+                            <p>{{ link_to('compose/'.$projet['id'].'/edit#projet/'.$projet['id'],'&Eacute;diter le schéma',array('class' => 'btn btn-small btn-info isEditable')) }}</p>
+                            @endif
                             <div class="post-text">
-
                                	<h3>{{ $projet['titre'] }}</h3>
                                 <p>{{ $projet['description'] }}</p>
-
-                                @if( (($isEditable == 'admin') || ($isEditable == 'editor')) && ($projet['type'] == 'app') )
-                                <p>{{ link_to('compose/'.$projet['id'].'/edit#projet/'.$projet['id'],'&Eacute;diter le schéma',array('class' => 'btn btn-small btn-info isEditable')) }}</p>
-                                @endif
- 
                             </div>
+                        </div>
+                        <div class="post-meta no-space-left">
+                            <span><i class="icon-tag"></i>{{ link_to('theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
+                            <span><i class="icon-tag"></i>{{ link_to('theme/'.$projet['subtheme']['id'], $projet['subtheme']['titre'] ) }}</span>
                         </div>
 
 						<div id="projet" style="height:{{ $height }}px;" class="projet_width">

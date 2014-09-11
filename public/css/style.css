@@ -361,9 +361,9 @@ p{
 
         #mainmenu li li a {
             padding: 2px 15px 2px 15px;
-            background: #939fad;
-            border-top: none;
             color: #fff;
+            background: #06274a;
+            border-top: none;
             line-height: 20px;
             width: 140px;
             border-left: none;
@@ -374,9 +374,9 @@ p{
             border-right: none;
         }
 
-        #mainmenu li li a:hover {
-            color: #fff;
-            background: #469159;
+        #mainmenu li li a.active,#mainmenu li li a:hover {
+            background: #8f9ead;
+            color: #06274a;
         }
 
 
@@ -2154,7 +2154,7 @@ i {
     display: inline-block !important;
     float: left;
     margin-right: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 i{
@@ -2416,6 +2416,20 @@ i.black {
         padding: 15px 3px;
     }
 
+    .gallery .item .theme{
+        text-align: left;
+        font-size: 12px;
+        line-height: 15px;
+        margin-bottom: 3px;
+        color: #000;
+    }
+
+    .gallery .item .subtheme{
+        text-align: left;
+        font-size: 12px;
+        line-height: 15px;
+        margin-bottom: 10px;
+}
 
     #gallery .item h4 {
         margin-bottom: 5px;
@@ -2545,7 +2559,7 @@ i.black {
 }
 
 .user-gallery h4{
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .optionsProjet{
@@ -2906,6 +2920,10 @@ header .text-right a
 	color: #0f8817;
 }
 
+
+#content .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+    opacity: 1;
+}
 
 /* -------------------------------------------------- */
 /* social-icons */

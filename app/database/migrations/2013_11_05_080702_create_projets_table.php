@@ -13,6 +13,7 @@ class CreateProjetsTable extends Migration {
 	public function up()
 	{
 		Schema::create('projets', function(Blueprint $table) {
+
 			$table->increments('id');
 			$table->string('titre');
 			$table->text('description');
@@ -24,6 +25,8 @@ class CreateProjetsTable extends Migration {
 			$table->string('slug');
 			$table->enum('status', array('actif','pending','submitted','revision'))->default('pending');
 			$table->timestamps();
+            $table->tinyInteger('deleted');
+
 		});
 	}
 

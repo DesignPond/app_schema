@@ -13,6 +13,11 @@
                     <div class="span12" style="width:95%">
 
                         <div class="post-content no-space-left">
+                            <p>
+                                <a target="_parent" href="{{ url('compose/'.$projet['id'].'/edit#projet/'.$projet['id']) }}" class="btn btn-small btn-info">
+                                    &Eacute;diter le schéma
+                                </a>
+                            </p>
                             <div class="post-text">
                                 <h3>{{ $projet['titre'] }}</h3>
                                 {{ $projet['description'] }}
@@ -20,10 +25,10 @@
                         </div>
                         <div class="post-meta no-space-left"><span><i class="icon-user"></i>
                         	Par: <a href="#">{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}</a></span> 
-                        	<span><i class="icon-tag"></i>{{ link_to('schemas/theme/'.$projet['theme']['id'], $projet['theme']['titre'] ) }}</span>
+                        	<span><i class="icon-tag"></i>{{ $projet['theme']['titre'] }}</span>
+                            <span><i class="icon-tag"></i>{{ $projet['subtheme']['titre'] }}</span>
                         </div>
-                        
-                        @if($projet['type'] == 'app')
+
 						<div id="projet" style="height:{{ $height }}px;" class="projet_width">
   
 						   	<div id="content-projet">
@@ -62,14 +67,6 @@
 						   		
 						   	</div> 	
                         </div>
-                        
-                        @else
-                        
-                        <div id="projet" class="projet_width">
-                        	 <embed src="{{ asset('files/projets/litispendance.pdf') }}" width="1024"  height="750"></embed>
-                        </div>
-                        
-                        @endif
                                                
                     </div>
                 </div>

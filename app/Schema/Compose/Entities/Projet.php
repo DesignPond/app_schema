@@ -4,6 +4,8 @@ use Schema\Common\BaseModel as BaseModel;
 
 class Projet extends BaseModel {
 
+    protected $dates   = array('deleted_at');
+
 	protected $guarded = array('id');
 
     protected static $rules = array(
@@ -23,6 +25,11 @@ class Projet extends BaseModel {
         'theme_id.required'     => 'Le thème est requis',
         'subtheme_id.required'  => 'Le sous thème est requis'
     );
+
+    public function scopeUsed($query)
+    {
+        return $query->where('deleted','=',0);
+    }
 	
 	public function categorie()
     {

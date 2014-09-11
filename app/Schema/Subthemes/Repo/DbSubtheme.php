@@ -84,7 +84,11 @@ class DbSubtheme implements SubthemeInterface {
 
     public function subthemes($categorie){
 
-        $projets = $this->subtheme->where('categorie_id','=',$categorie)->with(array('categorie','theme','projets'))->get();
+        $projets = $this->subtheme->where('categorie_id','=',$categorie)->with(array('categorie','theme','projets' => function($query)
+        {
+            $query->where('projets.deleted','=',0);
+
+        }))->get();
 
         if(!empty($projets)){
 

@@ -16,22 +16,22 @@ class DbProjet implements ProjetInterface {
 	
 	public function getLast($nbr){
 	
-		return $this->projet->with( array('user','theme') )->where('status','=','actif')->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
+		return $this->projet->with( array('user','theme') )->used()->where('status','=','actif')->orderBy('id', 'DESC')->take($nbr)->get()->toArray();
 	}
 		
 	public function projectsByTheme($refTheme){
     	
-    	return $this->projet->where('theme_id', '=', $refTheme)->where('status','=','actif')->orderBy('id', 'DESC')->get()->toArray();
+    	return $this->projet->where('theme_id', '=', $refTheme)->used()->where('status','=','actif')->orderBy('id', 'DESC')->get()->toArray();
 	}
 	
 	public function getListById($array){
 	
-		return $this->projet->whereIn('id', $array )->orderBy('id', 'DESC')->get();
+		return $this->projet->whereIn('id', $array )->used()->orderBy('id', 'DESC')->get();
 	}
 
     public function getByStatus($status = null){
 
-        $projets = $this->projet->with( array('user','categorie','theme') )->where('type','=','app');
+        $projets = $this->projet->with( array('user','categorie','theme','subtheme') )->used()->where('type','=','app');
 
         if($status)
         {
@@ -43,7 +43,7 @@ class DbProjet implements ProjetInterface {
 	
 	public function projectsByUser($user , $nbr = NULL){
 
-        $projets = $this->projet->where('user_id', '=', $user)->with( array('user','categorie','theme') )->orderBy('id', 'DESC');
+        $projets = $this->projet->where('user_id', '=', $user)->used()->with( array('user','categorie','theme','subtheme') )->orderBy('id', 'DESC');
 
 		if($nbr)
 		{
@@ -80,6 +80,8 @@ class DbProjet implements ProjetInterface {
     }
 
     public function arrangeByStatus($projets){
+
+        $sorting = array();
 
         if(!empty($projets))
         {
@@ -130,7 +132,14 @@ class DbProjet implements ProjetInterface {
 	
 	public function appByProjet($id){
 	
-		return $this->projet->where('id', '=', $id)->with('boxe','arrow','user','theme','subtheme')->get()->first()->toArray();
+		$projet = $this->projet->where('id', '=', $id)->used()->with('boxe','arrow','user','theme','subtheme')->get();
+
+        if($projet->isEmpty())
+        {
+            return false;
+        }
+
+        return $projet->first()->toArray();
 	}
 	
 	public function heightProjet($id){
@@ -171,12 +180,12 @@ class DbProjet implements ProjetInterface {
 		
 	public function getAll(){
 		
-		return $this->projet->with( array('theme','subtheme','user') )->get();
+		return $this->projet->used()->with( array('theme','subtheme','user') )->get();
 	}
 	
 	public function getAllList(){
 	
-		return $this->projet->orderBy('id')->lists('titre', 'id');	
+		return $this->projet->used()->orderBy('id')->lists('titre', 'id');
 	}
 		
 	public function find($id){
@@ -254,7 +263,10 @@ class DbProjet implements ProjetInterface {
 	
 		$projet = $this->projet->find($id);
 
-		return $projet->delete();		
+        $projet->deleted = 1;
+        $projet->save();
+
+        return $projet;
 	}
 	
 }

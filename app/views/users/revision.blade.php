@@ -20,15 +20,9 @@
                         @foreach($liste as $projet)
                             <!-- gallery item -->
                             <div class="item">
-                                <div class="picframe" style="background:{{ $projet['theme']['couleur_secondaire'] }};">
-                                    <span class="itemColor" style="background:{{ $projet['theme']['couleur_primaire'] }};">
-                                        <a href="{{ url('compose', array('id' => $projet['id'] ) ) }}"><img src="{{ asset('images/icon_projet.png') }}" alt="icone" /></a>
-                                    </span>
-                                    <span class="itemInfos">
-                                        <h4>{{ link_to('compose/'.$projet['id'], $projet['titre']) }}</h4>
-                                        <p>{{ $projet['user']['prenom'] }} {{ $projet['user']['nom'] }}</p>
-                                    </span>
-                                </div>
+
+                                @include('partials.projet')
+
                                 <div class="optionsProjet">
 
                                     {{ Form::open(array('method' => 'POST','url' => array('compose/status')))}}

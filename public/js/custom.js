@@ -79,12 +79,13 @@ jQuery(document).ready(function() {
             effectspeed: '1000'
         });
     });
+     */
 
     jQuery(".popup_modal").fancybox({
         type: 'iframe',
         minWidth: 1030,
         height: 'auto'
-    });*/
+    });
 
     jQuery('.edit_content').editable( base_url + 'compose/update', {
         type      : 'textarea',
@@ -293,11 +294,7 @@ jQuery(document).ready(function() {
         // filtering gallery
         // --------------------------------------------------
 
-        var $container = jQuery('#gallery');
-        $container.isotope({
-            itemSelector: '.item',
-            filter: '*',
-        });
+
 
         jQuery('#filters a').click(function(){
             var $this = jQuery(this);

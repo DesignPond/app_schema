@@ -24,9 +24,7 @@
                 </ul>
             </div>
              <div class="span2">
-                 @if(Auth::user()->hasRole('validate'))
-                    <a href="{{ url('manage') }}" class="btn btn-info">Gérer les projets</a>
-                 @endif
+
              </div>
 
         </div>
@@ -68,8 +66,10 @@
 
                         @if(!empty($sorted))
                             @foreach($projets as $projet)
+
                                 <!-- gallery item -->
                                 <div class="item">
+
                                     <div class="picframe" style="background:{{ $projet['theme']['couleur_secondaire'] }};">
                                         <a href="#" class="status {{ $projet['status'] }}"></a>
                                         <span class="itemColor" style="background:{{ $projet['theme']['couleur_primaire'] }};">
@@ -77,7 +77,11 @@
                                                 <img src="{{ asset('images/icon_projet.png') }}" alt="icone" />
                                             </a>
                                         </span>
-                                        <span class="itemInfos"><h4>{{ link_to('compose/'.$projet['id'], $projet['titre']) }}</h4></span>
+                                        <span class="itemInfos">
+                                            <h4>{{ link_to('compose/'.$projet['id'], $projet['titre']) }}</h4>
+                                            <p>{{ $projet['subtheme']['titre'] }}</p>
+                                        </span>
+
                                     </div>
                                     <div class="optionsProjet">
 

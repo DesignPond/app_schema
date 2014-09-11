@@ -28,7 +28,6 @@
     <script src="<?php echo asset('js/jquery.simple-color.js');?>"></script>
     <script src="<?php echo asset('js/easing.js');?>"></script>
     <script src="<?php echo asset('js/jquery.ui.totop.js');?>"></script>
-    <script src="<?php echo asset('js/jquery.isotope.min.js');?>"></script>
     <script src="<?php echo asset('js/selectnav.js');?>"></script>
     <script src="<?php echo asset('js/ender.js');?>"></script>
     <script src="<?php echo asset('js/custom.js');?>"></script>

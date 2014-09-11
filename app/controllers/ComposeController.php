@@ -121,7 +121,7 @@ class ComposeController extends BaseController {
         $projet = $this->projet->appByProjet($id);
 
         // If the project is not actif and we are not authenticated redirect to main page
-        if( $projet['status'] != 'actif' && !Auth::check() )
+        if( !$projet || ($projet['status'] != 'actif' && !Auth::check()) )
         {
             return Redirect::to('/');
         }
@@ -133,6 +133,23 @@ class ComposeController extends BaseController {
         $themes = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
 
         return View::make('compose.index')->with( array('projet' => $projet , 'height' => $height ,'isEditable' => $isEditable, 'themes' => $themes));
+
+    }
+
+    /**
+     * Display the projet in modal
+     *
+     * @param  int  $id
+     * @return Response
+     */
+
+    public function modal($id)
+    {
+        $projet = $this->projet->appByProjet($id);
+        $height = $this->projet->heightProjet($id);
+        $themes = $this->theme->drop_theme_by_categorie($projet['categorie_id']);
+
+        return View::make('compose.modal')->with( array('projet' => $projet , 'height' => $height ,'themes' => $themes));
 
     }
 
@@ -188,7 +205,17 @@ class ComposeController extends BaseController {
 
         $this->projet->status($id,$status);
 
-        $message = ( $status == 'actif' ? 'activé' : 'envoyé en révision' );
+        switch ($status) {
+            case 'actif':
+                $message =  "activé";
+                break;
+            case 'submitted':
+                $message =  "soumis pour approbation";
+                break;
+            case 'revision':
+                $message =  "envoyé en révision";
+                break;
+        }
 
         return Redirect::back()->with(array('status' => 'success' , 'message' => 'Le projet à été '.$message) );
 
