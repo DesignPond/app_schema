@@ -69,7 +69,7 @@
 
                                 <!-- gallery item -->
                                 <div class="item">
-
+                                    <p class="subtheme"><i class="icon-tag"></i>{{ $projet['subtheme']['titre'] }}</p>
                                     <div class="picframe" style="background:{{ $projet['theme']['couleur_secondaire'] }};">
                                         <a href="#" class="status {{ $projet['status'] }}"></a>
                                         <span class="itemColor" style="background:{{ $projet['theme']['couleur_primaire'] }};">

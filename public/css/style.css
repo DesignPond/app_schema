@@ -2630,12 +2630,12 @@ i.black {
 }
 
 .optionsProjet .option-assign{
-    color: #f89406;
+    color: #f89406 !important;
     font-weight: bold;
 }
 
 .optionsProjet .option-delete{
-    color: #cd0a0a;
+    color: #cd0a0a !important;
     font-weight: bold;
 }
 
