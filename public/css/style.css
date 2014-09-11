@@ -2638,6 +2638,9 @@ i.black {
     color: #cd0a0a !important;
     font-weight: bold;
 }
+.icon-title-manage{
+    margin-top: -1px;
+}
 
 .picframe{
     display: block;

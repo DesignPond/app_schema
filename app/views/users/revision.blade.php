@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <h3>Projets en révision</h3>
+                <h3><img src="{{ asset('images/icon/revision.png') }}" alt="icone" class="icon-title-manage" /> &nbsp;Projets en révision</h3>
             </div>
         </div>
         <div class="row">

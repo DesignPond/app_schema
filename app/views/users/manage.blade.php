@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <h3>Projets soumis pour approbation</h3>
+                <h3><img src="{{ asset('images/icon/submitted.png') }}" alt="icone" class="icon-title-manage" /> &nbsp;Projets soumis pour approbation</h3>
             </div>
         </div>
         <div class="row">

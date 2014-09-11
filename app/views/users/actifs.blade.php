@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <h3>Projets actifs</h3>
+                <h3><img src="{{ asset('images/icon/actif.png') }}" alt="icone" class="icon-title-manage" /> &nbsp;Projets actifs</h3>
             </div>
         </div>
         <div class="row">
