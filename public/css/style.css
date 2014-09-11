@@ -481,7 +481,7 @@ p{
 	margin-left: 10px;
 	margin-top: 5px;
 	-webkit-border-radius: 3px;
-	border-radius: 3px; 
+	border-radius: 3px;
 }
 
 /* -------------------------------------------------- */
@@ -874,6 +874,7 @@ a.Txt{
         display: none;
         position: absolute;
         margin-left: 1px;
+        padding: 3px 5px;
         border-top: 1px solid #fff;
         -webkit-border-radius: 0px 0px 2px 2px;
         border-radius: 0px 0px 2px 2px;
@@ -885,17 +886,21 @@ a.Txt{
     }
 	
 	.categoriesList li ul li{
-		line-height: 20px;
+		line-height: 15px;
         display: block;
         width: 100%;
+        list-style: square outside none;
+        display: list-item;
+        margin-left: 15px;
         min-width: 123px;
-        padding:3px;
+        padding:3px 0;
         text-align: left;
 	}
 	
 	.categoriesList li ul li a{
         color: #fff;
         display: block;
+        padding:0;
 	}
 
     .categoriesList li ul li a:hover{
@@ -2501,6 +2506,39 @@ i.black {
         .icones dd.big{
             width: 175px;
         }
+
+        .projetRang{
+            border: 1px solid #eee;
+            background: #fff;
+            bottom: 0;
+            display: inline;
+            font-size: 12px;
+            height: 20px;
+            position: absolute;
+            right: 0;
+            text-align: center;
+            width: 28px;
+            border-radius: 2px;
+        }
+
+        .edit_rang_projet{
+            border: 1px solid #eee;
+            background: #fff;
+            font-size: 12px;
+            height: 20px;
+            text-align: center;
+            width: 28px;
+            border-radius: 2px;
+        }
+
+            .edit_rang_projet input[type="submit"]{
+                background: #06274a;
+                color: #fff;
+                border: none;
+                padding: 0 5px;
+                -webkit-border-radius: 1px;
+                border-radius: 1px;
+            }
 
 .pf_text {
     color: #fff;

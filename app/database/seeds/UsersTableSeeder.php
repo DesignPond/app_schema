@@ -20,10 +20,18 @@ class UsersTableSeeder extends Seeder {
 				'prenom'     => 'François',
 				'nom'        => 'Bohnet',
 				'email'      => 'francois.bohnet@unine.ch',
-				'password'   => Hash::make('1234'),
+				'password'   => Hash::make('secret'),
 				'created_at' => date('Y-m-d G:i:s'),
 				'updated_at' => date('Y-m-d G:i:s') 
-			)
+			),
+            array(
+                'prenom'     => 'Luca',
+                'nom'        => 'Melcarne',
+                'email'      => 'luca.melcarne@unine.ch',
+                'password'   => Hash::make('schemas2014'),
+                'created_at' => date('Y-m-d G:i:s'),
+                'updated_at' => date('Y-m-d G:i:s')
+            )
 		);
 
 		// Uncomment the below to run the seeder

@@ -21,11 +21,12 @@ class CreateProjetsTable extends Migration {
 			$table->integer('categorie_id');
 			$table->integer('theme_id');
 			$table->integer('subtheme_id');
+            $table->integer('rang')->default(0);
 			$table->enum('type', array('app', 'pdf'));
 			$table->string('slug');
 			$table->enum('status', array('actif','pending','submitted','revision'))->default('pending');
 			$table->timestamps();
-            $table->tinyInteger('deleted');
+            $table->tinyInteger('deleted')->default(0);
 
 		});
 	}

@@ -185,8 +185,23 @@ class UserController extends BaseController {
         if ( $user->hasRole('assign')  ){
         }
         //$user->makeEmployee('admin');
-/*
+
         $faker = Faker::create();
+
+        foreach(range(1, 10) as $index)
+        {
+            \Schema\Compose\Entities\Projet::create([
+                'titre'       => $faker->text(40),
+                'description' => $faker->text(200),
+                'user_id'     => 1,
+                'categorie_id'=> 1,
+                'theme_id'    => $faker->numberBetween(1,13),
+                'type'        => 'app',
+                'slug'        => $faker->word,
+                'status'      => $faker->randomElement(array ('actif','pending','submitted','revision')),
+                'subtheme_id' => $faker->numberBetween(1,69)
+            ]);
+        }
 
         foreach(range(1, 10) as $index)
         {
@@ -201,7 +216,7 @@ class UserController extends BaseController {
                 'status'      => $faker->randomElement(array ('actif','pending','submitted','revision')),
                 'subtheme_id' => $faker->numberBetween(1,69)
             ]);
-        }*/
+        }
 
         $data = array(
             'titre'     => 'Profil',

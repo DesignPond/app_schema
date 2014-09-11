@@ -100,6 +100,20 @@ jQuery(document).ready(function() {
         }
     });
 
+
+    jQuery('.edit_rang').editable( base_url + 'compose/update', {
+        type      : 'text',
+        submit    : 'OK',
+        indicator : 'Sauvegarde...',
+        cssclass  : 'edit_rang_projet',
+        tooltip   : 'Click to edit...',
+        submitdata : function(value, settings) {
+            var column = $(this).data('column');
+            var id     = $(this).data('id');
+            return {column: column , id : id};
+        }
+    });
+
     // Get all themes for editing in place
     if (jQuery('#theme-edit').length > 0) {
 

@@ -8,8 +8,7 @@ class CategoriesTableSeeder extends Seeder {
 		DB::table('categories')->truncate();
 
 		$categories = array(
-			array( 'titre' => 'Procédure civile'),
-			array( 'titre' => 'Assurances sociales')
+			array( 'titre' => 'Procédure civile')
 		);
 
 		// Uncomment the below to run the seeder
