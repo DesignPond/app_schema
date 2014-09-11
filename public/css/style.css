@@ -2925,6 +2925,25 @@ header .text-right a
     opacity: 1;
 }
 
+#page-notfound{
+    position: relative;
+    margin-top: 30px;
+}
+
+#page-notfound h1{
+    font-size: 120px;
+    font-weight: bold;
+    line-height: 130px;
+    margin-bottom: 30px;
+}
+
+#page-notfound .notfound object{
+    position: absolute;
+    right: 0;
+    top: 130px;
+    text-align: right;
+}
+
 /* -------------------------------------------------- */
 /* social-icons */
 /* -------------------------------------------------- */

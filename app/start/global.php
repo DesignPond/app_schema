@@ -47,7 +47,16 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+
+    if (App::environment('local'))
+    {
+        Log::error($exception);
+    }
+    else
+    {
+        return View::make('404');
+    }
+
 });
 
 App::error(function(Schema\Exceptions\FormValidationException $exception, $code)
